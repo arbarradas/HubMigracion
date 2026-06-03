@@ -197,7 +197,7 @@ h2.subtitulo {
 
 .ancho-contenido,
 main {
-  width: min(1120px, calc(100% - 2.5rem));
+  width: min(1400px, calc(100% - 2rem));
   margin: 0 auto;
 }
 
@@ -324,7 +324,7 @@ p {
   display: inline-block;
   max-width: 920px;
   margin-top: 0.25rem;
-  padding: 1.35rem 1.75rem;
+  padding: 1rem 1.25rem;
   border: 2px solid var(--marco);
   background: var(--panel);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
@@ -723,8 +723,9 @@ main iframe {
     gap: 0.35rem;
   }
 
-  .hero {
-    min-height: min(70vh, 520px);
+  
+  .hero{
+    background-size: cover;
   }
 
   .nav-menu a {
@@ -744,6 +745,13 @@ main iframe {
   font-size:.9rem;
 }
 
+.hero-imagenes img{
+  width:100%;
+  height:420px;
+  object-fit:cover;
+  border-radius:12px;
+}
+
 .podcast-portada{
   width:100%;
   max-width:450px;
@@ -751,12 +759,15 @@ main iframe {
   object-fit:contain;
   display:block;
   margin:auto;
+  border:3px solid var(--linea);
+  border-radius:12px;
+  box-shadow:0 10px 28px rgba(42,34,28,.18);
 }
 
 .podcast-tarjeta{
   display:grid;
-  grid-template-columns:420px 1fr;
-  gap:40px;
+  grid-template-columns:minmax(300px,450px) 1fr;
+  gap:2rem;
   align-items:center;
 }
 
@@ -767,3 +778,8 @@ main iframe {
   }
 
 }
+
+.hero {
+  min-height: clamp(350px, 55vh, 650px);
+}
+
