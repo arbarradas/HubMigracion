@@ -783,5 +783,45 @@ main iframe {
   min-height: clamp(350px, 55vh, 650px);
 }
 
+<section class="seccion-datos">
 
+  <h2>Cartografía de la movilidad estudiantil</h2>
 
+  <img
+    src="img/sankey-migracion.svg"
+    alt="Flujos de movilidad estudiantil"
+    class="viz-svg">
+
+</section>
+
+/* ===================================== */
+/* CARTOGRAFÍA ESTUDIANTIL */
+/* ===================================== */
+
+.svg-wrapper{
+
+  margin-top:2rem;
+
+  background:white;
+
+  border:1px solid var(--linea);
+
+  border-radius:12px;
+
+  overflow:hidden;
+
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+
+}
+
+.svg-interactivo{
+
+  width:100%;
+
+  height:900px;
+
+  border:none;
+
+  display:block;
+
+}
