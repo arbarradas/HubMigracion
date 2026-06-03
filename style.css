@@ -508,14 +508,16 @@ code {
 .podcast-portada-enlace {
   display: block;
   line-height: 0;
+  width: 100;
+  height: 100;
 }
 
 .podcast-portada {
-  width: min(200px, 40vw);
+  width: min(300px, 100vw);
   height: auto;
-  aspect-ratio: 1;
+  aspect-ratio: 6;
   object-fit: cover;
-  border: 2px solid var(--linea);
+  border: 3px solid var(--linea);
   border-radius: 12px;
   box-shadow: 0 10px 28px rgba(42, 34, 28, 0.18);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -527,7 +529,7 @@ code {
 }
 
 .podcast-info .texto {
-  max-width: 65ch;
+  max-width: 80ch;
   margin: 0 0 var(--espacio-md);
 }
 
