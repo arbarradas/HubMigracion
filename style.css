@@ -743,3 +743,27 @@ main iframe {
   margin-top:8px;
   font-size:.9rem;
 }
+
+.podcast-portada{
+  width:100%;
+  max-width:450px;
+  height:auto;
+  object-fit:contain;
+  display:block;
+  margin:auto;
+}
+
+.podcast-tarjeta{
+  display:grid;
+  grid-template-columns:420px 1fr;
+  gap:40px;
+  align-items:center;
+}
+
+@media (max-width:768px){
+
+  .podcast-tarjeta{
+    grid-template-columns:1fr;
+  }
+
+}
