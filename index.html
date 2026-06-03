@@ -151,7 +151,146 @@
               </div>
           </header>
         </div>
-      </section> 
+      </section>
+      
+      <html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización Interactiva Sankey - Cartografía Digital</title>
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+        p {
+            color: #666;
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            max-width: 800px;
+        }
+        .container {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: 90%;
+            max-width: 1000px;
+        }
+        /* Contenedor responsivo para el diagrama */
+        #sankey_chart {
+            width: 100%;
+            height: 500px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Flujo de Estudiantes y Pertenencia a la Comunidad</h2>
+    <p>Visualización interactiva que muestra el origen de los estudiantes, su estatus migratorio dentro de Puebla y su nivel de integración percibido en Campus Puebla.</p>
+
+    <div class="container">
+        <div id="sankey_chart"></div>
+    </div>
+
+    <div class="footer">
+        Desarrollado con Google Charts Sankey Diagram
+    </div>
+
+    <script type="text/javascript">
+        // 1. Inicializar y cargar el paquete 'sankey'
+        google.charts.load('current', {'packages':['sankey']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'De');
+            data.addColumn('string', 'A');
+            data.addColumn('number', 'Cantidad de Estudiantes');
+            
+            // 2. Definición de las conexiones [Origen, Destino, Peso/Cantidad]
+            // Datos extraídos y consolidados de tu muestra de Cartografía Digital
+            data.addRows([
+                // Tramo 1: Estado de Nacimiento -> Tipo de Migración/Estatus
+                ['Puebla', 'Local (Origen Puebla)', 9],
+                ['Veracruz', 'Migración Interna (Foráneo)', 5],
+                ['Morelos', 'Migración Interna (Foráneo)', 4],
+                ['Estado de México', 'Migración Interna (Foráneo)', 3],
+                ['Ciudad de México', 'Migración Interna (Foráneo)', 3],
+                ['Hidalgo', 'Migración Interna (Foráneo)', 2],
+                ['San Luis Potosí', 'Migración Interna (Foráneo)', 1],
+                ['Guerrero', 'Migración Interna (Foráneo)', 2],
+                ['Tabasco', 'Migración Interna (Foráneo)', 1],
+                ['Tamaulipas', 'Migración Interna (Foráneo)', 1],
+                ['Yucatán', 'Migración Interna (Foráneo)', 1],
+                ['Tlaxcala', 'Migración Interna (Foráneo)', 1],
+
+                // Tramo 2: Tipo de Migración -> Sentimiento de Pertenencia Tec
+                ['Local (Origen Puebla)', 'Comunidad Tec: Conforme/De Acuerdo', 6],
+                ['Local (Origen Puebla)', 'Comunidad Tec: Neutro o Desacuerdo', 3],
+                
+                ['Migración Interna (Foráneo)', 'Comunidad Tec: Completamente de Acuerdo', 12],
+                ['Migración Interna (Foráneo)', 'Comunidad Tec: Conforme/De Acuerdo', 9],
+                ['Migración Interna (Foráneo)', 'Comunidad Tec: Neutro o Desacuerdo', 3]
+            ]);
+
+            // 3. Opciones de personalización estética y de interactividad
+            var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f', '#cab2d6', 
+                          #1f78b4', '#33a02c', '#e31a1c', '#ff7f00', '#6a3d9a'];
+                          
+            var options = {
+                sankey: {
+                    node: {
+                        colors: colors,
+                        label: { 
+                            fontName: 'Segoe UI',
+                            fontSize: 14,
+                            color: '#1e293b',
+                            bold: true 
+                        },
+                        interactivity: true, // Permite interacciones al hacer hover
+                        width: 15,
+                        nodePadding: 22
+                    },
+                    link: {
+                        colorMode: 'gradient', // Aplica un degradado suave estético entre nodos
+                        colors: colors
+                    }
+                }
+            };
+
+            // 4. Instanciar y dibujar el diagrama en nuestro div
+            var chart = new google.visualization.Sankey(document.getElementById('sankey_chart'));
+            chart.draw(data, options);
+            
+            // Hacer el gráfico responsivo ante cambios de pantalla
+            window.addEventListener('resize', function() {
+                chart.draw(data, options);
+            });
+        }
+    </script>
+</body>
+</html>
+
 
       <section id="investigacion" class="investigacion-intro seccion-ancla" aria-labelledby="etiqueta-investigacion">
         <div class="ancho-contenido">
