@@ -456,7 +456,7 @@
         <p class="etiqueta">Tu voz en el mapa</p>
         <h2 id="titulo-encuesta" class="subtitulo">¿De dónde nos visitas?</h2>
         <p class="texto puente-narrativo">
-          La migración también se cuenta desde dónde estás. Tus tres respuestas se reflejan en el mapa de voces y ubicaciones.
+          La migración también se cuenta desde dónde estás. Tus tres respuestas se reflejan en el mapa; si quieres, añade una frase breve que otros podrán leer al hacer clic en tu ubicación.
         </p>
 
         <div class="encuesta-panel">
@@ -472,6 +472,21 @@
             <label class="encuesta-campo">
               <span>¿De dónde nos escribes?</span>
               <input type="text" id="visitante-escribe" name="escribe" required autocomplete="country-name" placeholder="Ej. Bruselas, Bélgica">
+            </label>
+            <label class="encuesta-campo encuesta-campo-historia">
+              <span>Tu voz en una frase <em class="encuesta-opcional">(opcional)</em></span>
+              <textarea
+                id="visitante-historia"
+                name="historia"
+                rows="2"
+                maxlength="120"
+                placeholder="Ej. Estudio en Puebla pero escribo desde Europa por un intercambio temporal."
+                aria-describedby="historia-ayuda historia-contador"
+              ></textarea>
+              <span class="encuesta-historia-pie">
+                <span id="historia-ayuda" class="encuesta-historia-ayuda">Aparece en el mapa al hacer clic en tu ubicación (máx. 120 caracteres).</span>
+                <span id="historia-contador" class="encuesta-historia-contador" aria-live="polite">0 / 120</span>
+              </span>
             </label>
             <button type="submit" class="btn btn-correo">Compartir en el mapa</button>
           </form>
@@ -495,12 +510,24 @@
               <span class="mapa-leyenda-item mapa-leyenda-origen">Origen</span>
               <span class="mapa-leyenda-item mapa-leyenda-residencia">Residencia actual</span>
               <span class="mapa-leyenda-item mapa-leyenda-escribe">Desde donde nos escribes</span>
+              <span class="mapa-leyenda-item mapa-leyenda-voz">Voz con historia</span>
             </p>
+          </div>
+          <div class="mapa-visitantes-herramientas">
+            <button type="button" class="btn btn-mapa-filtro" id="mapa-filtro-voces" aria-pressed="false">
+              Mostrar solo voces con historia
+            </button>
+            <p class="texto mapa-api-estado" id="mapa-api-estado" hidden></p>
           </div>
           <div id="mapa-visitantes" class="mapa-visitantes" role="application" aria-label="Mapa interactivo de origen y residencia de visitantes" tabindex="0"></div>
           <p class="texto mapa-visitantes-nota" id="mapa-visitantes-nota">
             Cargando ubicaciones compartidas…
           </p>
+          <aside class="mapa-voces-panel" id="mapa-voces-panel" aria-labelledby="mapa-voces-titulo" hidden>
+            <h4 id="mapa-voces-titulo" class="mapa-voces-titulo">Voces en el mapa</h4>
+            <p class="texto mapa-voces-intro">Haz clic en una frase para centrar el mapa en esa ubicación y leer la historia completa.</p>
+            <ul class="mapa-voces-lista" id="mapa-voces-lista"></ul>
+          </aside>
         </div>
       </div>
     </section>
@@ -551,7 +578,7 @@
             <summary>¿De dónde provienen los datos de migración que se muestran?</summary>
             <div class="faq-respuesta texto">
               <p>
-                Las cifras globales provienen del Instituto de los Mexicanos en el Exterior (SRE) y del Portal de Datos sobre Migración de la OIM. La investigación sobre movilidad estudiantil en Puebla es elaboración propia del equipo del Hub (encuestas, Graph Commons y cartografía). El mapa de visitantes combina respuestas compartidas en el sitio y en tu navegador.
+                Las cifras globales provienen del Instituto de los Mexicanos en el Exterior (SRE) y del Portal de Datos sobre Migración de la OIM. La investigación sobre movilidad estudiantil en Puebla es elaboración propia del equipo del Hub (encuestas, Graph Commons y cartografía). El mapa de visitantes puede usar una hoja de Google (ver <code>apps-script/SETUP-MAPA.md</code>), el archivo <code>datos-visitantes.json</code> y las respuestas de tu navegador; las frases opcionales («voces») se leen al hacer clic en el mapa.
               </p>
               <p>
                 <a href="#datos">Ver datos migratorios</a>
@@ -651,6 +678,7 @@
     </a>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="config-mapa.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

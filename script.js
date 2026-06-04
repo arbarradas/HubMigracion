@@ -182,6 +182,8 @@ const factoresPuebla = [
 
 const CLAVE_VISITAS = "hub-migracion-visitas";
 const CLAVE_ENCUESTA = "hub-migracion-encuesta";
+const MAX_HISTORIA = 120;
+const CACHE_REMOTO_MS = 60000;
 const CLAVE_GEOCACHE = "hub-migracion-geocache";
 const COUNT_API = "https://api.countapi.xyz";
 const NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
@@ -238,6 +240,110 @@ const pasosRecorrido = [
 let mapaVisitantesInstancia = null;
 let capaMarcadoresVisitantes = null;
 let capaRutasVisitantes = null;
+let cacheRemotoVisitantes = null;
+let cacheRemotoTs = 0;
+let filtroSoloVocesMapa = false;
+
+function obtenerMapaApiUrl() {
+  const url = (typeof window !== "undefined" && window.HUB_MAPA_API) || "";
+  return typeof url === "string" ? url.trim() : "";
+}
+
+function mapaApiActiva() {
+  return obtenerMapaApiUrl().length > 0;
+}
+
+function escapeHtml(texto) {
+  return String(texto)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function sanitizarHistoria(texto) {
+  if (!texto) return "";
+  return String(texto).replace(/\s+/g, " ").trim().slice(0, MAX_HISTORIA);
+}
+
+function htmlPopupUbicacion(titulo, lugar, entrada) {
+  const historia = sanitizarHistoria(entrada.historia);
+  let html = `<strong>${escapeHtml(titulo)}</strong><br>${escapeHtml(lugar)}`;
+  if (historia) {
+    html += `<blockquote class="popup-historia">${escapeHtml(historia)}</blockquote>`;
+  }
+  return html;
+}
+
+function entradaTieneHistoria(entrada) {
+  return Boolean(sanitizarHistoria(entrada.historia));
+}
+
+function invalidarCacheRemotoVisitantes() {
+  cacheRemotoVisitantes = null;
+  cacheRemotoTs = 0;
+}
+
+async function cargarVisitantesRemotos() {
+  const url = obtenerMapaApiUrl();
+  if (!url) return [];
+
+  if (cacheRemotoVisitantes && Date.now() - cacheRemotoTs < CACHE_REMOTO_MS) {
+    return cacheRemotoVisitantes;
+  }
+
+  try {
+    const separador = url.includes("?") ? "&" : "?";
+    const respuesta = await fetch(`${url}${separador}_=${Date.now()}`, {
+      headers: { Accept: "application/json" }
+    });
+    if (!respuesta.ok) return [];
+
+    const datos = await respuesta.json();
+    const lista = Array.isArray(datos) ? datos : datos.items || [];
+    cacheRemotoVisitantes = lista;
+    cacheRemotoTs = Date.now();
+    return lista;
+  } catch {
+    return [];
+  }
+}
+
+async function enviarVisitanteRemoto(entrada) {
+  const url = obtenerMapaApiUrl();
+  if (!url) return { ok: false, omitido: true };
+
+  try {
+    const respuesta = await fetch(url, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(entrada)
+    });
+
+    if (!respuesta.ok) return { ok: false, error: "respuesta_no_ok" };
+    return await respuesta.json();
+  } catch (error) {
+    return { ok: false, error: String(error) };
+  }
+}
+
+function actualizarEstadoMapaApi(remotas) {
+  const estado = document.querySelector("#mapa-api-estado");
+  if (!estado) return;
+
+  if (!mapaApiActiva()) {
+    estado.hidden = true;
+    estado.textContent = "";
+    return;
+  }
+
+  estado.hidden = false;
+  estado.textContent =
+    remotas.length > 0
+      ? `Conectado al registro compartido: ${remotas.length} respuesta${remotas.length === 1 ? "" : "s"} desde la hoja del Hub.`
+      : "Registro compartido activo. Las nuevas respuestas se guardan para todo el sitio.";
+}
 
 function initFactoresInteractivo() {
   const contenedor = document.querySelector("#factores-grafica");
@@ -458,26 +564,30 @@ async function cargarVisitantesCompartidos() {
 async function obtenerTodasLasRespuestas() {
   const locales = leerEncuestasLocales();
   const compartidas = await cargarVisitantesCompartidos();
+  const remotas = await cargarVisitantesRemotos();
   const unificadas = new Map();
 
-  [...compartidas, ...locales].forEach((entrada) => {
+  actualizarEstadoMapaApi(remotas);
+
+  [...compartidas, ...remotas, ...locales].forEach((entrada) => {
     unificadas.set(claveEntradaVisitante(entrada), entrada);
   });
 
   return [...unificadas.values()];
 }
 
-function crearIconoMarcador(tipo) {
+function crearIconoMarcador(tipo, conVoz = false) {
   const clases = {
     origen: "marcador-origen",
     residencia: "marcador-residencia",
     escribe: "marcador-escribe"
   };
+  const voz = conVoz ? " marcador-con-voz" : "";
   return L.divIcon({
-    className: `marcador-visitante ${clases[tipo] || clases.residencia}`,
+    className: `marcador-visitante ${clases[tipo] || clases.residencia}${voz}`,
     html: `<span aria-hidden="true"></span>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7]
+    iconSize: conVoz ? [18, 18] : [14, 14],
+    iconAnchor: conVoz ? [9, 9] : [7, 7]
   });
 }
 
@@ -491,7 +601,10 @@ function actualizarNotaMapa(total, conCoordenadas) {
     return;
   }
 
-  nota.textContent = `${conCoordenadas} de ${total} respuesta${total === 1 ? "" : "s"} con al menos una ubicación en el mapa (origen, residencia actual y desde dónde nos escribes). Los datos combinan contribuciones del sitio y de tu navegador.`;
+  const fuentes = mapaApiActiva()
+    ? "hoja compartida del Hub, archivo del sitio y tu navegador"
+    : "archivo del sitio y tu navegador";
+  nota.textContent = `${conCoordenadas} de ${total} respuesta${total === 1 ? "" : "s"} con al menos una ubicación en el mapa. Fuentes: ${fuentes}. Haz clic en un punto para leer la voz, si la compartieron.`;
 }
 
 async function renderizarMapaVisitantes() {
@@ -500,7 +613,10 @@ async function renderizarMapaVisitantes() {
   const contenedor = document.querySelector("#mapa-visitantes");
   if (!contenedor) return;
 
-  const respuestas = await obtenerTodasLasRespuestas();
+  const respuestasTodas = await obtenerTodasLasRespuestas();
+  const respuestas = filtroSoloVocesMapa
+    ? respuestasTodas.filter(entradaTieneHistoria)
+    : respuestasTodas;
 
   if (!mapaVisitantesInstancia) {
     mapaVisitantesInstancia = L.map(contenedor, {
@@ -533,29 +649,35 @@ async function renderizarMapaVisitantes() {
 
     if (tieneOrigen || tieneResidencia || tieneEscribe) conCoordenadas += 1;
 
+    const conVoz = entradaTieneHistoria(entrada);
+
     if (tieneOrigen) {
       const marcadorOrigen = L.marker([entrada.origenLat, entrada.origenLng], {
-        icon: crearIconoMarcador("origen")
+        icon: crearIconoMarcador("origen", conVoz)
       });
-      marcadorOrigen.bindPopup(`<strong>Origen</strong><br>${entrada.origen}`);
+      marcadorOrigen.bindPopup(htmlPopupUbicacion("Origen", entrada.origen, entrada));
       capaMarcadoresVisitantes.addLayer(marcadorOrigen);
       bounds.push([entrada.origenLat, entrada.origenLng]);
     }
 
     if (tieneResidencia) {
       const marcadorResidencia = L.marker([entrada.residenciaLat, entrada.residenciaLng], {
-        icon: crearIconoMarcador("residencia")
+        icon: crearIconoMarcador("residencia", conVoz)
       });
-      marcadorResidencia.bindPopup(`<strong>Residencia actual</strong><br>${entrada.residencia}`);
+      marcadorResidencia.bindPopup(
+        htmlPopupUbicacion("Residencia actual", entrada.residencia, entrada)
+      );
       capaMarcadoresVisitantes.addLayer(marcadorResidencia);
       bounds.push([entrada.residenciaLat, entrada.residenciaLng]);
     }
 
     if (tieneEscribe) {
       const marcadorEscribe = L.marker([entrada.escribeLat, entrada.escribeLng], {
-        icon: crearIconoMarcador("escribe")
+        icon: crearIconoMarcador("escribe", conVoz)
       });
-      marcadorEscribe.bindPopup(`<strong>Desde donde nos escribes</strong><br>${entrada.escribe}`);
+      marcadorEscribe.bindPopup(
+        htmlPopupUbicacion("Desde donde nos escribes", entrada.escribe, entrada)
+      );
       capaMarcadoresVisitantes.addLayer(marcadorEscribe);
       bounds.push([entrada.escribeLat, entrada.escribeLng]);
     }
@@ -591,7 +713,8 @@ async function renderizarMapaVisitantes() {
     }
   });
 
-  actualizarNotaMapa(respuestas.length, conCoordenadas);
+  actualizarNotaMapa(respuestasTodas.length, conCoordenadas);
+  actualizarPanelVoces(respuestasTodas);
 
   if (bounds.length > 0) {
     mapaVisitantesInstancia.fitBounds(bounds, { padding: [36, 36], maxZoom: 10 });
@@ -624,9 +747,88 @@ function pintarEncuestaLocal() {
     .reverse()
     .map((entrada) => {
       const escribe = entrada.escribe || entrada.residencia;
-      return `<li><strong>${entrada.origen}</strong> · reside en ${entrada.residencia} · escribe desde ${escribe}</li>`;
+      const historia = sanitizarHistoria(entrada.historia);
+      const voz = historia ? `<br><em class="encuesta-lista-voz">«${escapeHtml(historia)}»</em>` : "";
+      return `<li><strong>${escapeHtml(entrada.origen)}</strong> · reside en ${escapeHtml(entrada.residencia)} · escribe desde ${escapeHtml(escribe)}${voz}</li>`;
     })
     .join("");
+}
+
+function actualizarPanelVoces(respuestas) {
+  const panel = document.querySelector("#mapa-voces-panel");
+  const lista = document.querySelector("#mapa-voces-lista");
+  if (!panel || !lista) return;
+
+  const conHistoria = respuestas
+    .filter(entradaTieneHistoria)
+    .slice()
+    .reverse()
+    .slice(0, 12);
+
+  if (conHistoria.length === 0) {
+    panel.hidden = true;
+    lista.innerHTML = "";
+    return;
+  }
+
+  panel.hidden = false;
+  lista.innerHTML = conHistoria
+    .map((entrada, indice) => {
+      const historia = sanitizarHistoria(entrada.historia);
+      const escribe = entrada.escribe || entrada.residencia;
+      return `<li>
+        <button type="button" class="mapa-voz-item" data-voz-indice="${indice}" data-voz-lat="${entrada.escribeLat ?? entrada.residenciaLat ?? entrada.origenLat ?? ""}" data-voz-lng="${entrada.escribeLng ?? entrada.residenciaLng ?? entrada.origenLng ?? ""}">
+          <span class="mapa-voz-lugar">${escapeHtml(escribe)}</span>
+          <span class="mapa-voz-frase">«${escapeHtml(historia)}»</span>
+        </button>
+      </li>`;
+    })
+    .join("");
+
+  lista.querySelectorAll(".mapa-voz-item").forEach((boton) => {
+    boton.addEventListener("click", () => {
+      const lat = Number(boton.dataset.vozLat);
+      const lng = Number(boton.dataset.vozLng);
+      if (!mapaVisitantesInstancia || !Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
+      mapaVisitantesInstancia.flyTo([lat, lng], 8, { duration: 0.8 });
+
+      if (!capaMarcadoresVisitantes) return;
+      capaMarcadoresVisitantes.eachLayer((capa) => {
+        const punto = capa.getLatLng?.();
+        if (!punto) return;
+        if (Math.abs(punto.lat - lat) < 0.08 && Math.abs(punto.lng - lng) < 0.08) {
+          capa.openPopup();
+        }
+      });
+    });
+  });
+}
+
+function initMapaVocesControles() {
+  const filtro = document.querySelector("#mapa-filtro-voces");
+  if (!filtro) return;
+
+  filtro.addEventListener("click", async () => {
+    filtroSoloVocesMapa = !filtroSoloVocesMapa;
+    filtro.setAttribute("aria-pressed", String(filtroSoloVocesMapa));
+    filtro.classList.toggle("is-active", filtroSoloVocesMapa);
+    await renderizarMapaVisitantes();
+  });
+}
+
+function initCampoHistoria() {
+  const campo = document.querySelector("#visitante-historia");
+  const contador = document.querySelector("#historia-contador");
+  if (!campo || !contador) return;
+
+  const actualizar = () => {
+    const largo = campo.value.length;
+    contador.textContent = `${largo} / ${MAX_HISTORIA}`;
+  };
+
+  campo.addEventListener("input", actualizar);
+  actualizar();
 }
 
 function initMapaVisitantes() {
@@ -655,6 +857,7 @@ function initEncuestaVisitantes() {
     const origen = document.querySelector("#visitante-origen")?.value.trim();
     const residencia = document.querySelector("#visitante-residencia")?.value.trim();
     const escribe = document.querySelector("#visitante-escribe")?.value.trim();
+    const historia = sanitizarHistoria(document.querySelector("#visitante-historia")?.value);
     const boton = formulario.querySelector('button[type="submit"]');
     const mensaje = document.querySelector("#encuesta-mensaje");
 
@@ -686,22 +889,43 @@ function initEncuestaVisitantes() {
       escribeLng: coordsEscribe?.lng
     };
 
+    if (historia) entrada.historia = historia;
+
     const respuestas = leerEncuestasLocales();
     respuestas.push(entrada);
     localStorage.setItem(CLAVE_ENCUESTA, JSON.stringify(respuestas));
 
+    let remoto = { ok: false, omitido: true };
+    if (mapaApiActiva()) {
+      if (mensaje) mensaje.textContent = "Guardando en el registro compartido del Hub…";
+      remoto = await enviarVisitanteRemoto(entrada);
+      invalidarCacheRemotoVisitantes();
+    }
+
     formulario.reset();
+    const contadorHistoria = document.querySelector("#historia-contador");
+    if (contadorHistoria) contadorHistoria.textContent = `0 / ${MAX_HISTORIA}`;
     pintarEncuestaLocal();
     await renderizarMapaVisitantes();
 
     if (mensaje) {
       const ubicados = [coordsOrigen, coordsResidencia, coordsEscribe].filter(Boolean).length;
-      mensaje.textContent =
+      const base =
         ubicados === 3
-          ? `¡Gracias! Origen, residencia y «desde dónde nos escribes» ya están en el mapa.`
+          ? "¡Gracias! Las tres ubicaciones ya están en el mapa."
           : ubicados > 0
             ? `¡Gracias! ${ubicados} de 3 ubicaciones aparecen en el mapa. Intenta ser más específico (ciudad y país) en las que faltan.`
             : "¡Gracias! Guardamos tu respuesta. No pudimos ubicar los lugares; intenta incluir ciudad y país.";
+
+      const voz = historia ? " Tu frase aparece al hacer clic en los puntos del mapa." : "";
+      const nube =
+        remoto.ok && mapaApiActiva()
+          ? " También quedó registrada para todas las personas que visiten el sitio."
+          : mapaApiActiva() && !remoto.ok
+            ? " No se pudo guardar en la hoja compartida; revisa config-mapa.js o la conexión."
+            : "";
+
+      mensaje.textContent = base + voz + nube;
     }
 
     if (boton) {
@@ -1247,7 +1471,9 @@ initCartografiaInteractiva();
 initFactoresInteractivo();
 initContadorVisitas();
 initEncuestaVisitantes();
+initCampoHistoria();
 initMapaVisitantes();
+initMapaVocesControles();
 initRecorridoGuiado();
 
 
