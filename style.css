@@ -15,6 +15,7 @@
   --espacio-md: 1.75rem;
   --espacio-lg: 3rem;
   --espacio-xl: 4.5rem;
+  --espacio-seccion: clamp(3rem, 6vw, 4.5rem);
   --fz-titulo: clamp(2.25rem, 5vw, 3.25rem);
   --fz-subtitulo: 1.5rem;
   --fz-cuerpo: 1.125rem;
@@ -86,6 +87,37 @@ h2.subtitulo {
 
 .seccion-ancla {
   scroll-margin-top: calc(var(--nav-altura) + 1.25rem);
+}
+
+.seccion-rubro {
+  padding: var(--espacio-seccion) 0;
+}
+
+.seccion-rubro .subtitulo {
+  margin-bottom: var(--espacio-sm);
+}
+
+.texto-flow p + p,
+.texto-flow .texto + .texto,
+.podcast-info .texto + .texto {
+  margin-top: 1.15rem;
+}
+
+.puente-narrativo {
+  max-width: 68ch;
+  margin-bottom: var(--espacio-md);
+  color: var(--muted);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.hub-puente {
+  margin-top: var(--espacio-md);
+  margin-bottom: 0;
+  color: rgba(250, 246, 241, 0.82);
+  border-left: 3px solid rgba(255, 217, 168, 0.55);
+  padding-left: 1rem;
 }
 
 /* —— Barra de navegación fija —— */
@@ -349,12 +381,12 @@ p {
 }
 
 .seccion-datos {
-  padding: var(--espacio-lg) 0;
+  border-top: 1px solid var(--linea);
 }
 
 .datos-fuente {
   max-width: 68ch;
-  margin: var(--espacio-sm) 0 var(--espacio-md);
+  margin: 0 0 var(--espacio-md);
   color: var(--muted);
 }
 
@@ -374,10 +406,9 @@ p {
   line-height: 1.05;
 }
 
-.seccion-oim {
-  padding: var(--espacio-lg) 0 var(--espacio-xl);
+.seccion-oim,
+.seccion-cartografia {
   border-top: 1px solid var(--linea);
-  border-bottom: 1px solid var(--linea);
 }
 
 .oim-embed-contenedor {
@@ -493,17 +524,16 @@ code {
 }
 
 .seccion-podcast {
-  margin: var(--espacio-lg) 0;
-  padding: var(--espacio-lg) 0;
-  border-top: 1px solid var(--linea);
+  border-top: 1px solid rgba(255, 217, 168, 0.22);
+  background: linear-gradient(180deg, rgba(61, 36, 24, 0.04) 0%, transparent 100%);
 }
 
 .podcast-tarjeta {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: minmax(280px, 450px) 1fr;
   gap: var(--espacio-md);
-  align-items: start;
-  margin-top: var(--espacio-md);
+  align-items: center;
+  margin-top: var(--espacio-sm);
 }
 
 .podcast-portada-enlace {
@@ -514,10 +544,11 @@ code {
 }
 
 .podcast-portada {
-  width: min(300px, 100vw);
+  width: 100%;
+  max-width: 450px;
   height: auto;
-  aspect-ratio: 6;
-  object-fit: cover;
+  object-fit: contain;
+  display: block;
   border: 3px solid var(--linea);
   border-radius: 12px;
   box-shadow: 0 10px 28px rgba(42, 34, 28, 0.18);
@@ -530,8 +561,12 @@ code {
 }
 
 .podcast-info .texto {
-  max-width: 80ch;
-  margin: 0 0 var(--espacio-md);
+  max-width: 72ch;
+  margin: 0;
+}
+
+.podcast-info .btn {
+  margin-top: var(--espacio-md);
 }
 
 .btn {
@@ -659,11 +694,95 @@ code {
   display: none;
 }
 
-main iframe {
+main iframe:not(.graphcommons-iframe) {
   display: block;
   margin: var(--espacio-md) 0 var(--espacio-lg);
   border: 1px solid var(--linea);
   border-radius: 8px;
+}
+
+/* —— Investigación + Graph Commons —— */
+.seccion-investigacion {
+  border-top: 1px solid var(--linea);
+  background:
+    linear-gradient(165deg, rgba(242, 230, 218, 0.55) 0%, rgba(232, 213, 196, 0.35) 48%, var(--fondo) 100%);
+}
+
+.investigacion-panel {
+  margin-top: var(--espacio-md);
+  padding: var(--espacio-md);
+  border: 1px solid var(--linea);
+  border-radius: 16px;
+  background: rgba(250, 246, 241, 0.72);
+  box-shadow: 0 10px 32px rgba(42, 34, 28, 0.08);
+}
+
+.investigacion-encabezado {
+  margin-bottom: var(--espacio-md);
+}
+
+.investigacion-texto {
+  max-width: 72ch;
+  margin-top: var(--espacio-md);
+}
+
+.graphcommons-marco {
+  overflow: hidden;
+  border: 1px solid var(--marco);
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+}
+
+.graphcommons-cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--linea);
+  background: linear-gradient(90deg, rgba(139, 74, 47, 0.12), rgba(184, 106, 61, 0.08));
+}
+
+.graphcommons-etiqueta {
+  margin: 0;
+  color: var(--acento);
+  font-size: var(--fz-pequena);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.graphcommons-nota {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fz-pequena);
+}
+
+.graphcommons-contenedor {
+  padding: 0.65rem;
+  background: linear-gradient(180deg, #faf6f1 0%, var(--panel) 100%);
+}
+
+.graphcommons-iframe {
+  display: block;
+  width: 100%;
+  min-height: 520px;
+  height: clamp(420px, 62vh, 640px);
+  border: 1px solid var(--linea);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(42, 34, 28, 0.1);
+}
+
+.investigacion-pie {
+  max-width: 72ch;
+  margin-top: var(--espacio-md);
+}
+
+.investigacion-pie .texto-fuente {
+  margin-bottom: 0.75rem;
 }
 
 @media (max-width: 860px) {
@@ -709,11 +828,6 @@ main iframe {
     grid-template-columns: 1fr;
   }
 
-  .podcast-tarjeta {
-    grid-template-columns: 1fr;
-    justify-items: start;
-  }
-
   .oim-iframe {
     min-height: 400px;
   }
@@ -752,31 +866,19 @@ main iframe {
   border-radius:12px;
 }
 
-.podcast-portada{
-  width:100%;
-  max-width:450px;
-  height:auto;
-  object-fit:contain;
-  display:block;
-  margin:auto;
-  border:3px solid var(--linea);
-  border-radius:12px;
-  box-shadow:0 10px 28px rgba(42,34,28,.18);
-}
-
-.podcast-tarjeta{
-  display:grid;
-  grid-template-columns:minmax(300px,450px) 1fr;
-  gap:2rem;
-  align-items:center;
-}
-
-@media (max-width:768px){
-
-  .podcast-tarjeta{
-    grid-template-columns:1fr;
+@media (max-width: 768px) {
+  .podcast-tarjeta {
+    grid-template-columns: 1fr;
   }
 
+  .graphcommons-iframe {
+    min-height: 400px;
+    height: 420px;
+  }
+
+  .investigacion-panel {
+    padding: var(--espacio-sm);
+  }
 }
 
 .hero {
@@ -889,8 +991,27 @@ main iframe {
 
 /* Participación y enlaces externos */
 .seccion-participacion {
-  padding: var(--espacio-lg) 0;
   border-top: 1px solid var(--linea);
+  background: linear-gradient(180deg, var(--fondo) 0%, rgba(242, 230, 218, 0.65) 100%);
+}
+
+.participacion-contenido {
+  max-width: 72ch;
+}
+
+.participacion-puente {
+  margin-bottom: var(--espacio-md);
+}
+
+.participacion-lema {
+  margin-top: var(--espacio-md);
+  color: var(--acento);
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+}
+
+.btn-participar {
+  margin-top: var(--espacio-md);
 }
 
 .docs-puebla-figura {
