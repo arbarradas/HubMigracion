@@ -107,8 +107,256 @@ const capitulosHistoria = [
   { id: "cartografia-estudiantil", etiqueta: "Cartografía" },
   { id: "proyectos-hub", etiqueta: "Proyectos" },
   { id: "participacion", etiqueta: "Participar" },
+  { id: "encuesta-visitantes", etiqueta: "Tu ubicación" },
   { id: "contacto", etiqueta: "Contacto" }
 ];
+
+const factoresPuebla = [
+  {
+    factor: "Gusto por la ciudad",
+    valor: 5,
+    detalle: "Afinidad con Puebla como lugar de vida, más allá de lo académico."
+  },
+  {
+    factor: "Calidad académica",
+    valor: 5,
+    detalle: "Percepción de una oferta educativa sólida en el campus."
+  },
+  {
+    factor: "Oportunidades universitarias",
+    valor: 4,
+    detalle: "Acceso a programas, redes y experiencias dentro de la institución."
+  },
+  {
+    factor: "Familia y amistades",
+    valor: 3,
+    detalle: "Redes de apoyo cercanas que influyen en la decisión de quedarse."
+  },
+  {
+    factor: "Carrera disponible",
+    valor: 3,
+    detalle: "Oferta de la carrera o trayectoria que buscaban al llegar."
+  },
+  {
+    factor: "Oportunidades laborales",
+    valor: 2,
+    detalle: "Perspectivas de empleo o prácticas en la región."
+  },
+  {
+    factor: "Economía y comodidad",
+    valor: 2,
+    detalle: "Costo de vida y condiciones materiales para permanecer."
+  },
+  {
+    factor: "Otros",
+    valor: 3,
+    detalle: "Motivos adicionales mencionados en respuestas abiertas."
+  }
+];
+
+const CLAVE_VISITAS = "hub-migracion-visitas";
+const CLAVE_ENCUESTA = "hub-migracion-encuesta";
+const COUNT_API = "https://api.countapi.xyz";
+
+function initFactoresInteractivo() {
+  const contenedor = document.querySelector("#factores-grafica");
+  const detalle = document.querySelector("#factores-detalle");
+  const toggle = document.querySelector("#factores-toggle-png");
+  const pngOriginal = document.querySelector("#factores-png-original");
+
+  if (!contenedor || !detalle) return;
+
+  const maxValor = Math.max(...factoresPuebla.map((fila) => fila.valor));
+  let factorFijado = null;
+
+  const resaltar = (fila) => {
+    contenedor.querySelectorAll(".factores-barra").forEach((barra) => {
+      const activa = barra.dataset.factor === fila.factor;
+      barra.classList.toggle("is-active", activa);
+      barra.classList.toggle("is-atenuada", !activa);
+    });
+    detalle.innerHTML = `<strong>${fila.factor}</strong> — ${fila.valor} menciones temáticas. ${fila.detalle}`;
+  };
+
+  const limpiar = () => {
+    if (factorFijado) return;
+    contenedor.querySelectorAll(".factores-barra").forEach((barra) => {
+      barra.classList.remove("is-active", "is-atenuada");
+    });
+    detalle.textContent = "Selecciona un factor para explorar los resultados de la encuesta.";
+  };
+
+  factoresPuebla.forEach((fila) => {
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "factores-barra";
+    item.dataset.factor = fila.factor;
+    item.setAttribute("role", "listitem");
+    item.setAttribute("aria-label", `${fila.factor}: ${fila.valor} menciones`);
+
+    const etiqueta = document.createElement("span");
+    etiqueta.className = "factores-etiqueta";
+    etiqueta.textContent = fila.factor;
+
+    const pista = document.createElement("span");
+    pista.className = "factores-pista";
+    pista.setAttribute("aria-hidden", "true");
+
+    const relleno = document.createElement("span");
+    relleno.className = "factores-relleno";
+    relleno.style.width = `${(fila.valor / maxValor) * 100}%`;
+
+    const valor = document.createElement("span");
+    valor.className = "factores-valor";
+    valor.textContent = String(fila.valor);
+
+    pista.appendChild(relleno);
+    item.append(etiqueta, pista, valor);
+
+    item.addEventListener("mouseenter", () => resaltar(fila));
+    item.addEventListener("focus", () => resaltar(fila));
+    item.addEventListener("mouseleave", limpiar);
+    item.addEventListener("click", () => {
+      factorFijado = factorFijado?.factor === fila.factor ? null : fila;
+      if (factorFijado) {
+        resaltar(fila);
+      } else {
+        contenedor.querySelectorAll(".factores-barra").forEach((barra) => {
+          barra.classList.remove("is-active", "is-atenuada");
+        });
+        detalle.textContent = "Selecciona un factor para explorar los resultados de la encuesta.";
+      }
+    });
+
+    contenedor.appendChild(item);
+  });
+
+  if (toggle && pngOriginal) {
+    toggle.addEventListener("click", () => {
+      const visible = pngOriginal.hidden;
+      pngOriginal.hidden = !visible;
+      toggle.setAttribute("aria-expanded", String(visible));
+      toggle.textContent = visible
+        ? "Ocultar imagen original del estudio"
+        : "Ver imagen original del estudio";
+    });
+  }
+}
+
+function formatearContadorVisitas(valor) {
+  return new Intl.NumberFormat("es-MX").format(valor);
+}
+
+function mostrarContadorVisitas(valor, esAproximado = false) {
+  const contador = document.querySelector("#contador-visitas");
+  const footer = document.querySelector("#footer-visitas");
+  const texto = formatearContadorVisitas(valor);
+  const sufijo = esAproximado ? " (estimado en este dispositivo)" : "";
+
+  if (contador) contador.textContent = texto;
+  if (footer) footer.textContent = ` · ${texto} visitas registradas${sufijo}`;
+}
+
+async function initContadorVisitas() {
+  const yaContada = sessionStorage.getItem("hub-visita-sesion");
+
+  const contarLocal = () => {
+    const actual = Number(localStorage.getItem(CLAVE_VISITAS) || 0) + (yaContada ? 0 : 1);
+    if (!yaContada) {
+      localStorage.setItem(CLAVE_VISITAS, String(actual));
+      sessionStorage.setItem("hub-visita-sesion", "1");
+    }
+    mostrarContadorVisitas(Number(localStorage.getItem(CLAVE_VISITAS) || actual), true);
+  };
+
+  if (yaContada) {
+    try {
+      const respuesta = await fetch(`${COUNT_API}/get/hub-migracion-tec-puebla/visitas`);
+      if (respuesta.ok) {
+        const datos = await respuesta.json();
+        mostrarContadorVisitas(datos.value ?? 0);
+        return;
+      }
+    } catch {
+      /* continúa con respaldo local */
+    }
+    mostrarContadorVisitas(Number(localStorage.getItem(CLAVE_VISITAS) || 1), true);
+    return;
+  }
+
+  try {
+    await fetch(`${COUNT_API}/hit/hub-migracion-tec-puebla/visitas`);
+    const respuesta = await fetch(`${COUNT_API}/get/hub-migracion-tec-puebla/visitas`);
+    if (!respuesta.ok) throw new Error("sin contador remoto");
+    const datos = await respuesta.json();
+    sessionStorage.setItem("hub-visita-sesion", "1");
+    mostrarContadorVisitas(datos.value ?? 1);
+  } catch {
+    contarLocal();
+  }
+}
+
+function leerEncuestasLocales() {
+  try {
+    return JSON.parse(localStorage.getItem(CLAVE_ENCUESTA) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function pintarEncuestaLocal() {
+  const lista = document.querySelector("#encuesta-lista");
+  const mensaje = document.querySelector("#encuesta-mensaje");
+  const respuestas = leerEncuestasLocales();
+
+  if (!lista || !mensaje) return;
+
+  if (respuestas.length === 0) {
+    mensaje.textContent = "Aún no hay respuestas en este navegador. Sé la primera persona en dejar tu huella.";
+    lista.hidden = true;
+    lista.innerHTML = "";
+    return;
+  }
+
+  mensaje.textContent = `${respuestas.length} respuesta${respuestas.length === 1 ? "" : "s"} compartida${respuestas.length === 1 ? "" : "s"} desde este navegador:`;
+  lista.hidden = false;
+  lista.innerHTML = respuestas
+    .slice(-6)
+    .reverse()
+    .map(
+      (entrada) =>
+        `<li><strong>${entrada.origen}</strong> → vive en ${entrada.residencia}</li>`
+    )
+    .join("");
+}
+
+function initEncuestaVisitantes() {
+  const formulario = document.querySelector("#form-visitante");
+  if (!formulario) return;
+
+  pintarEncuestaLocal();
+
+  formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    const origen = document.querySelector("#visitante-origen")?.value.trim();
+    const residencia = document.querySelector("#visitante-residencia")?.value.trim();
+
+    if (!origen || !residencia) return;
+
+    const respuestas = leerEncuestasLocales();
+    respuestas.push({ origen, residencia, fecha: new Date().toISOString() });
+    localStorage.setItem(CLAVE_ENCUESTA, JSON.stringify(respuestas));
+
+    formulario.reset();
+    pintarEncuestaLocal();
+
+    const mensaje = document.querySelector("#encuesta-mensaje");
+    if (mensaje) {
+      mensaje.textContent = `¡Gracias! Registramos tu origen (${origen}) y tu residencia (${residencia}).`;
+    }
+  });
+}
 
 function initProgresoHistoria() {
   const barra = document.querySelector("#progreso-capitulos");
@@ -441,6 +689,9 @@ initProgresoHistoria();
 initContacto();
 initVolverArriba();
 initCartografiaInteractiva();
+initFactoresInteractivo();
+initContadorVisitas();
+initEncuestaVisitantes();
 
 
 

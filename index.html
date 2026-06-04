@@ -29,6 +29,7 @@
           <li><a href="#cartografia-estudiantil" data-nav="cartografia-estudiantil">Cartografía</a></li>
           <li><a href="#proyectos-hub" data-nav="proyectos-hub">Proyectos</a></li>
           <li><a href="#participacion" data-nav="participacion">Participar</a></li>
+          <li><a href="#encuesta-visitantes" data-nav="encuesta-visitantes">Tu ubicación</a></li>
           <li><a href="#contacto" data-nav="contacto">Contacto</a></li>
         </ul>
       </div>
@@ -136,11 +137,11 @@
         </div>
 
         <div class="podcast-reproductor">
-          <p class="podcast-reproductor-etiqueta">Escucha un episodio aquí</p>
+          <p class="podcast-reproductor-etiqueta">Episodio 1 — Javier Moreno Sánchez (Parlamento Europeo)</p>
           <iframe
             class="podcast-embed"
-            src="https://open.spotify.com/embed/show/1GOWpD3yzR7r3ui2EHd2HM?utm_source=generator&theme=0"
-            title="Reproductor embebido — Sociedad Migrante en Spotify"
+            src="https://open.spotify.com/embed/episode/1pZksnI3J2604Y3gl9abbT?utm_source=generator&theme=0"
+            title="Charla con Javier Moreno Sánchez, desde el Parlamento Europeo — Parte 1 — Sociedad Migrante"
             loading="lazy"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             allowfullscreen
@@ -340,15 +341,28 @@
               </div>
             </article>
 
-            <article class="proyecto-tarjeta">
-              <figure class="proyecto-figura">
-                <img src="Factores asociados a permanecer en Puebla.png" alt="Factores asociados a permanecer en Puebla — visualización de datos" loading="lazy">
-              </figure>
+            <article class="proyecto-tarjeta proyecto-tarjeta--factores">
+              <div class="proyecto-figura proyecto-figura--grafica">
+                <div class="factores-interactivo" id="factores-interactivo" aria-labelledby="factores-titulo-grafica">
+                  <p id="factores-titulo-grafica" class="factores-titulo-grafica">Factores asociados a permanecer en Puebla</p>
+                  <p class="factores-subtitulo-grafica">Pasa el cursor o toca una barra para ver el detalle.</p>
+                  <div class="factores-grafica" id="factores-grafica" role="list"></div>
+                  <p class="factores-detalle" id="factores-detalle" aria-live="polite">
+                    Selecciona un factor para explorar los resultados de la encuesta.
+                  </p>
+                  <button type="button" class="factores-toggle-png" id="factores-toggle-png" aria-expanded="false" aria-controls="factores-png-original">
+                    Ver imagen original del estudio
+                  </button>
+                  <figure class="factores-png-original" id="factores-png-original" hidden>
+                    <img src="Factores asociados a permanecer en Puebla.png" alt="Gráfica estática — factores asociados a permanecer en Puebla" loading="lazy">
+                  </figure>
+                </div>
+              </div>
               <div class="proyecto-cuerpo">
                 <h3 class="proyecto-nombre">Factores en Puebla</h3>
-                <p class="proyecto-tipo">Análisis de datos</p>
+                <p class="proyecto-tipo">Análisis de datos interactivo</p>
                 <p class="texto">
-                  Estudio presentado a nivel nacional sobre factores asociados a permanecer en la ciudad, derivado de la investigación sobre movilidad estudiantil.
+                  Agrupación temática derivada de respuestas abiertas de estudiantes que indicaron que permanecerían en Puebla, presentada a nivel nacional.
                 </p>
               </div>
             </article>
@@ -423,6 +437,41 @@
       </div>
     </section>
 
+    <section id="encuesta-visitantes" class="seccion-encuesta seccion-rubro seccion-ancla" aria-labelledby="titulo-encuesta">
+      <div class="ancho-contenido">
+        <p class="etiqueta">Tu voz en el mapa</p>
+        <h2 id="titulo-encuesta" class="subtitulo">¿De dónde nos visitas?</h2>
+        <p class="texto puente-narrativo">
+          La migración también se cuenta desde dónde estás. Comparte tu origen y el lugar desde el que nos lees.
+        </p>
+
+        <div class="encuesta-panel">
+          <form id="form-visitante" class="encuesta-formulario" novalidate>
+            <label class="encuesta-campo">
+              <span>¿Cuál es tu lugar de origen?</span>
+              <input type="text" id="visitante-origen" name="origen" required autocomplete="address-level2" placeholder="Ej. Xalapa, Veracruz">
+            </label>
+            <label class="encuesta-campo">
+              <span>¿En dónde vives? ¿De qué parte del mundo nos escribes?</span>
+              <input type="text" id="visitante-residencia" name="residencia" required autocomplete="country-name" placeholder="Ej. Puebla, México">
+            </label>
+            <button type="submit" class="btn btn-correo">Compartir mi ubicación</button>
+          </form>
+
+          <aside class="encuesta-resumen" aria-live="polite">
+            <p class="encuesta-contador-visitas">
+              <span class="encuesta-contador-etiqueta">Visitas al sitio</span>
+              <strong id="contador-visitas">—</strong>
+            </p>
+            <p class="texto encuesta-mensaje" id="encuesta-mensaje">
+              Aún no hay respuestas en este navegador. Sé la primera persona en dejar tu huella.
+            </p>
+            <ul class="encuesta-lista" id="encuesta-lista" hidden></ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
     <footer id="contacto" class="site-footer seccion-ancla" aria-label="Pie de página: créditos y contacto">
       <div class="ancho-contenido footer-grid">
         <section class="footer-bloque" aria-labelledby="titulo-creditos">
@@ -432,7 +481,9 @@
             Centro-Occidente.
           </p>
           <p class="texto footer-credito">
-            <strong>Dr. Andrés Barradas Gurruchaga</strong><br>
+            <a href="https://www.linkedin.com/in/andresrbg7" target="_blank" rel="noopener noreferrer">
+              <strong>Dr. Andrés Roberto Barradas-Gurruchaga</strong>
+            </a><br>
             Creador del sitio web y coordinador del Hub.
           </p>
         </section>
@@ -459,10 +510,14 @@
             <li><a href="#cartografia-estudiantil">Cartografía</a></li>
             <li><a href="#proyectos-hub">Proyectos</a></li>
             <li><a href="#participacion">Participar</a></li>
+            <li><a href="#encuesta-visitantes">Tu ubicación</a></li>
           </ul>
         </nav>
       </div>
-      <p class="footer-legal texto">© Hub de Migración e Impacto Social — Tec de Monterrey, campus Puebla.</p>
+      <p class="footer-legal texto">
+        © Hub de Migración e Impacto Social — Tec de Monterrey, campus Puebla.
+        <span class="footer-visitas" id="footer-visitas" aria-live="polite"></span>
+      </p>
     </footer>
 
     <a href="#hub" class="btn-volver-arriba" id="btn-arriba" aria-label="Volver arriba" hidden>
