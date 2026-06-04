@@ -25,7 +25,9 @@
           <li><a href="#datos" data-nav="datos">Datos</a></li>
           <li><a href="#migracion-mundial" data-nav="migracion-mundial">Migración mundial</a></li>
           <li><a href="#investigacion" data-nav="investigacion">Investigación</a></li>
+          <li><a href="#cartografia-estudiantil" data-nav="cartografia-estudiantil">Cartografía</a></li>
           <li><a href="#podcast" data-nav="podcast">Podcast</a></li>
+          <li><a href="#participacion" data-nav="participacion">Participar</a></li>
           <li><a href="#contacto" data-nav="contacto">Contacto</a></li>
         </ul>
       </div>
@@ -43,7 +45,8 @@
           <figure>
             <img src="Capaz.png" alt="Proyecto Capaz">
             <figcaption>
-              Pieza elaborada por estudiantes de Comunicación, intervención consensuada de la obra del fotógrafo Jorge Carlos Álvarez.
+              Pieza elaborada por estudiantes de Comunicación, intervención consensuada de la obra del fotógrafo
+              <a href="https://jorgecarlos.com/" target="_blank" rel="noopener noreferrer">Jorge Carlos Álvarez</a>.
             </figcaption>
           </figure>
 </div>        
@@ -154,7 +157,7 @@
       </section>
 
       
-      <section id="cartografia-estudiantil" class="seccion-oim">
+      <section id="cartografia-estudiantil" class="seccion-oim seccion-ancla" aria-labelledby="titulo-cartografia">
 
         <div class="ancho-contenido">
       
@@ -162,20 +165,42 @@
             MOVILIDAD ESTUDIANTIL
           </p>
       
-          <h2 class="subtitulo">
+          <h2 id="titulo-cartografia" class="subtitulo">
             Cartografía de la movilidad estudiantil
           </h2>
           <p class="texto">
             Esta visualización muestra un dendograma lineal que arroja como resultados los estados de procedencia de las y los estudiantes foráneos que respondieron a la encuesta de investigación, sus ciudades de origen y en un tercer grupo de datos: las razones de su movilización con destino a la ciudad de Puebla.
             Con estos datos, se cuenta con información valiosa para la institución, al igual que para la ciudad de Puebla.
           </p>
+          <p class="texto cartog-ayuda">
+            Pasa el cursor o toca un nodo para resaltar sus conexiones. Haz clic para fijar la selección.
+          </p>
+
+          <div class="cartog-controles" aria-label="Controles de la cartografía">
+            <label class="cartog-filtro">
+              <span>Buscar en la cartografía</span>
+              <input type="search" id="cartog-buscar" placeholder="Estado, ciudad o motivo…" autocomplete="off">
+            </label>
+            <button type="button" class="btn btn-cartog-limpiar" id="cartog-limpiar" hidden>Limpiar selección</button>
+          </div>
       
-          <div class="svg-wrapper">      
+          <div class="svg-wrapper" id="cartog-contenedor">
             <object
+              id="cartog-svg"
               data="Cartog.Estudiantes.svg"
               type="image/svg+xml"
-              class="svg-interactivo">
+              class="svg-interactivo"
+              aria-label="Dendograma interactivo de movilidad estudiantil: estados, ciudades de origen y motivos de llegada a Puebla">
             </object>
+          </div>
+
+          <div id="cartog-tooltip" class="cartog-tooltip" role="status" aria-live="polite" hidden></div>
+
+          <aside id="cartog-detalle" class="cartog-detalle" aria-live="polite">
+            <p class="cartog-detalle-placeholder texto">
+              Selecciona un nodo en la visualización para ver su nombre, columna (estado, ciudad o motivo) y conexiones relacionadas.
+            </p>
+          </aside>
         </div>
       </section>
       
@@ -224,43 +249,57 @@
     </main>
 
 
-  <div class="hero-contenido">
-  <p>
-            <strong>¿Cómo puedes participar?</strong>
+    <section id="participacion" class="seccion-participacion seccion-ancla" aria-labelledby="titulo-participacion">
+      <div class="hero-contenido ancho-contenido">
+        <h2 id="titulo-participacion" class="subtitulo">¿Cómo puedes participar?</h2>
+        <div class="texto">
+          <p>
+            De este Hub han surgido proyectos cinematográficos que han sido exhibidos en México y el extranjero, estudios de análisis de datos presentados a nivel nacional, al igual que participaciones en Conferencias internacionales en Suiza o Turquía, como el cortometraje: <strong>Cuando vuelvas.</strong>
           </p>
-<div class="texto">
-  <p>
-  De este Hub han surgido proyectos cinematográficos que han sido exhibidos en México y el extranjero, estudios de análisis de datos presentados a nivel nacional, al igual que participaciones en Conferencias internacionales en Suiza o Turquía, como el cortometraje: <strong>Cuando vuelvas.</strong></p>
-<img
-src="CuandoVuelvas_DocsPue2025.2.png"
-width="200"
-height="200"
->
-</p> </div>
+          <figure class="docs-puebla-figura">
+            <a
+              class="docs-puebla-enlace"
+              href="https://docsmx.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Cuando vuelvas — selección oficial Docs Puebla 2025 (abre docsmx.org)"
+            >
+              <img
+                src="CuandoVuelvas_DocsPue2025.2.png"
+                alt="Cartel de selección oficial Fragmentos Universitarios 2025 — Docs Puebla, con el cortometraje Cuando vuelvas del Tec de Monterrey"
+                class="docs-puebla-imagen"
+                loading="lazy"
+                width="640"
+                height="640"
+              >
+            </a>
+            <figcaption class="texto">
+              Selección oficial Fragmentos Universitarios 2025 —
+              <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">Docs Puebla</a>
+            </figcaption>
+          </figure>
+        </div>
 
-<div class="texto">
-<p>
-            <strong>Todos somos migrantes</strong>
-            </p>
-            </div>
+        <div class="texto">
+          <p><strong>Todos somos migrantes</strong></p>
+        </div>
 
-<div class="texto">
-  <p>
+        <div class="texto">
+          <p>
             ¡Súmate a los esfuerzos del Hub de Migración e Impacto Social!
-            Desd el Hub, se trabaja en pro del ODS 10 Reducción de la desigualdad con base en proyectos académicos de inmersión e impacto
-            social.
+            Desde el Hub, se trabaja en pro del ODS 10 Reducción de la desigualdad con base en proyectos académicos de inmersión e impacto social.
           </p>
-          </div>
+        </div>
 
-          <div>
-            <p>
-            <strong>Contáctanos</strong>
-            </p>
-            <p>Escribe con una propuesta de proyecto académico que impacte en nuestra Sociedad y particularmente, en el subgrupo de personas en movimiento.
+        <div class="texto">
+          <p><strong>Contáctanos</strong></p>
+          <p>
+            Escribe con una propuesta de proyecto académico que impacte en nuestra Sociedad y particularmente, en el subgrupo de personas en movimiento.
             ¡Te esperamos!
           </p>
+        </div>
       </div>
-          </div>
+    </section>
 
     <footer id="contacto" class="site-footer seccion-ancla" aria-label="Pie de página: créditos y contacto">
       <div class="ancho-contenido footer-grid">
@@ -292,9 +331,11 @@ height="200"
           <ul class="footer-enlaces">
             <li><a href="#hub">El Hub</a></li>
             <li><a href="#datos">Datos</a></li>
-            <li><a href="#academia-tec">Academia Tec</a></li>
+            <li><a href="#investigacion">Investigación</a></li>
+            <li><a href="#cartografia-estudiantil">Cartografía</a></li>
             <li><a href="#migracion-mundial">Migración mundial</a></li>
             <li><a href="#podcast">Podcast</a></li>
+            <li><a href="#participacion">Participar</a></li>
           </ul>
         </nav>
       </div>

@@ -783,45 +783,197 @@ main iframe {
   min-height: clamp(350px, 55vh, 650px);
 }
 
-<section class="seccion-datos">
-
-  <h2>Cartografía de la movilidad estudiantil</h2>
-
-  <img
-    src="img/sankey-migracion.svg"
-    alt="Flujos de movilidad estudiantil"
-    class="viz-svg">
-
-</section>
-
 /* ===================================== */
 /* CARTOGRAFÍA ESTUDIANTIL */
 /* ===================================== */
 
-.svg-wrapper{
-
-  margin-top:2rem;
-
-  background:white;
-
-  border:1px solid var(--linea);
-
-  border-radius:12px;
-
-  overflow:hidden;
-
-  box-shadow:0 6px 20px rgba(0,0,0,.08);
-
+.cartog-ayuda {
+  max-width: 68ch;
+  margin-top: var(--espacio-sm);
+  color: var(--muted);
+  font-size: var(--fz-pequena);
 }
 
-.svg-interactivo{
+.cartog-controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-sm);
+  align-items: flex-end;
+  margin: var(--espacio-md) 0 var(--espacio-sm);
+}
 
-  width:100%;
+.cartog-filtro {
+  display: grid;
+  gap: 0.35rem;
+  flex: 1 1 220px;
+  font-size: var(--fz-pequena);
+  font-weight: 600;
+  color: var(--muted);
+}
 
-  height:900px;
+.cartog-filtro input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--texto);
+  font: inherit;
+}
 
-  border:none;
+.cartog-filtro input:focus {
+  outline: 2px solid var(--acento-2);
+  outline-offset: 2px;
+}
 
-  display:block;
+.btn-cartog-limpiar {
+  background: var(--panel);
+  color: var(--acento);
+  border: 1px solid var(--linea);
+}
 
+.svg-wrapper {
+  margin-top: var(--espacio-sm);
+  background: white;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.svg-interactivo {
+  width: 100%;
+  min-width: 720px;
+  height: auto;
+  min-height: 520px;
+  aspect-ratio: 1005 / 600;
+  border: none;
+  display: block;
+}
+
+.cartog-tooltip {
+  margin-top: var(--espacio-sm);
+  padding: 0.55rem 0.85rem;
+  border-radius: 8px;
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  color: var(--texto);
+  font-size: var(--fz-pequena);
+  font-weight: 600;
+}
+
+.cartog-detalle {
+  margin-top: var(--espacio-md);
+  padding: var(--espacio-md);
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+.cartog-detalle-titulo {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.cartog-detalle-nota {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: var(--fz-pequena);
+}
+
+.cartog-detalle-placeholder {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Participación y enlaces externos */
+.seccion-participacion {
+  padding: var(--espacio-lg) 0;
+  border-top: 1px solid var(--linea);
+}
+
+.docs-puebla-figura {
+  margin: var(--espacio-md) 0 0;
+}
+
+.docs-puebla-enlace {
+  display: inline-block;
+  line-height: 0;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.docs-puebla-enlace:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(42, 34, 28, 0.18);
+}
+
+.docs-puebla-imagen {
+  width: min(420px, 100%);
+  height: auto;
+  border: 3px solid var(--linea);
+  border-radius: 12px;
+}
+
+.docs-puebla-figura figcaption {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-size: var(--fz-pequena);
+}
+
+.hero-imagenes figcaption a,
+.docs-puebla-figura a,
+.texto a:not(.btn) {
+  color: var(--acento);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.hero-imagenes figcaption a:hover,
+.docs-puebla-figura a:hover,
+.texto a:not(.btn):hover {
+  color: var(--acento-2);
+}
+
+@media (max-width: 760px) {
+  .hero-imagenes {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-imagenes img {
+    height: auto;
+    max-height: 320px;
+  }
+
+  .svg-interactivo {
+    min-width: 640px;
+    min-height: 380px;
+  }
+
+  .nav-marca {
+    white-space: normal;
+    font-size: 0.95rem;
+    line-height: 1.25;
+    max-width: calc(100% - 3rem);
+  }
+
+  .curul-contenedor .oim-iframe {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ancho-contenido,
+  main,
+  .hero-contenido,
+  .nav-hub-inner {
+    width: calc(100% - 1.25rem);
+  }
+
+  .svg-interactivo {
+    min-width: 560px;
+    min-height: 340px;
+  }
 }
