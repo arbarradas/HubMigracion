@@ -36,6 +36,7 @@
           <li><a href="#proyectos-hub" data-nav="proyectos-hub">Proyectos</a></li>
           <li><a href="#participacion" data-nav="participacion">Participar</a></li>
           <li><a href="#encuesta-visitantes" data-nav="encuesta-visitantes">Tu ubicación</a></li>
+          <li><a href="#faq" data-nav="faq">FAQ</a></li>
           <li><a href="#contacto" data-nav="contacto">Contacto</a></li>
         </ul>
       </div>
@@ -167,17 +168,17 @@
           Estimaciones del Instituto de los Mexicanos en el Exterior (SRE). El corredor México–Estados Unidos
           es considerado el más numeroso del mundo, de acuerdo con datos de la OIM y la ONU (UN DESA, 2024).
         </p>
-        <div class="panel-resumen panel-migracion">
+        <div class="panel-resumen panel-migracion" id="panel-migracion-contadores">
           <article>
-            <span id="migrantes-eua" class="dato-destacado">11,654,000</span>
+            <span id="migrantes-eua" class="dato-destacado" data-contador="11654000">0</span>
             <p class="texto">Estados Unidos</p>
           </article>
           <article>
-            <span id="migrantes-europa" class="dato-destacado">103,814</span>
+            <span id="migrantes-europa" class="dato-destacado" data-contador="103814">0</span>
             <p class="texto">Europa</p>
           </article>
           <article>
-            <span id="migrantes-asia" class="dato-destacado">11,180</span>
+            <span id="migrantes-asia" class="dato-destacado" data-contador="11180">0</span>
             <p class="texto">Asia</p>
           </article>
         </div>
@@ -279,6 +280,13 @@
           </p>
 
           <div class="cartog-controles" aria-label="Controles de la cartografía">
+            <div class="cartog-filtros-columna" role="group" aria-label="Filtrar por columna del dendograma">
+              <span class="cartog-filtros-etiqueta">Ver columna</span>
+              <button type="button" class="cartog-filtro-btn is-active" data-filtro-columna="todos">Todo</button>
+              <button type="button" class="cartog-filtro-btn" data-filtro-columna="estados">Estados</button>
+              <button type="button" class="cartog-filtro-btn" data-filtro-columna="ciudades">Ciudades</button>
+              <button type="button" class="cartog-filtro-btn" data-filtro-columna="motivos">Motivos</button>
+            </div>
             <label class="cartog-filtro">
               <span>Buscar en la cartografía</span>
               <input type="search" id="cartog-buscar" placeholder="Estado, ciudad o motivo…" autocomplete="off">
@@ -448,20 +456,24 @@
         <p class="etiqueta">Tu voz en el mapa</p>
         <h2 id="titulo-encuesta" class="subtitulo">¿De dónde nos visitas?</h2>
         <p class="texto puente-narrativo">
-          La migración también se cuenta desde dónde estás. Comparte tu origen y el lugar desde el que nos lees.
+          La migración también se cuenta desde dónde estás. Tus tres respuestas se reflejan en el mapa de voces y ubicaciones.
         </p>
 
         <div class="encuesta-panel">
           <form id="form-visitante" class="encuesta-formulario" novalidate>
             <label class="encuesta-campo">
               <span>¿Cuál es tu lugar de origen?</span>
-              <input type="text" id="visitante-origen" name="origen" required autocomplete="address-level2" placeholder="Ej. Xalapa, Veracruz">
+              <input type="text" id="visitante-origen" name="origen" required autocomplete="address-level2" placeholder="Ej. Xalapa, Veracruz, México">
             </label>
             <label class="encuesta-campo">
-              <span>¿En dónde vives? ¿De qué parte del mundo nos escribes?</span>
-              <input type="text" id="visitante-residencia" name="residencia" required autocomplete="country-name" placeholder="Ej. Puebla, México">
+              <span>¿En dónde resides actualmente?</span>
+              <input type="text" id="visitante-residencia" name="residencia" required autocomplete="address-level1" placeholder="Ej. Puebla, México">
             </label>
-            <button type="submit" class="btn btn-correo">Compartir mi ubicación</button>
+            <label class="encuesta-campo">
+              <span>¿De dónde nos escribes?</span>
+              <input type="text" id="visitante-escribe" name="escribe" required autocomplete="country-name" placeholder="Ej. Bruselas, Bélgica">
+            </label>
+            <button type="submit" class="btn btn-correo">Compartir en el mapa</button>
           </form>
 
           <aside class="encuesta-resumen" aria-live="polite">
@@ -481,7 +493,8 @@
             <h3 class="subtitulo mapa-visitantes-titulo">Mapa de voces y ubicaciones</h3>
             <p class="texto mapa-visitantes-leyenda">
               <span class="mapa-leyenda-item mapa-leyenda-origen">Origen</span>
-              <span class="mapa-leyenda-item mapa-leyenda-residencia">Donde vives / nos escribes</span>
+              <span class="mapa-leyenda-item mapa-leyenda-residencia">Residencia actual</span>
+              <span class="mapa-leyenda-item mapa-leyenda-escribe">Desde donde nos escribes</span>
             </p>
           </div>
           <div id="mapa-visitantes" class="mapa-visitantes" role="application" aria-label="Mapa interactivo de origen y residencia de visitantes" tabindex="0"></div>
