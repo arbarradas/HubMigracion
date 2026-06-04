@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -21,6 +22,11 @@
           <span class="nav-toggle-bar" aria-hidden="true"></span>
         </button>
         <ul id="nav-menu" class="nav-menu">
+          <li class="nav-item-recorrido">
+            <button type="button" class="btn btn-recorrido-nav" id="btn-iniciar-recorrido">
+              Iniciar recorrido
+            </button>
+          </li>
           <li><a href="#hub" data-nav="hub">El Hub</a></li>
           <li><a href="#podcast" data-nav="podcast">Podcast</a></li>
           <li><a href="#datos" data-nav="datos">Datos</a></li>
@@ -469,8 +475,42 @@
             <ul class="encuesta-lista" id="encuesta-lista" hidden></ul>
           </aside>
         </div>
+
+        <div class="mapa-visitantes-bloque">
+          <div class="mapa-visitantes-cabecera">
+            <h3 class="subtitulo mapa-visitantes-titulo">Mapa de voces y ubicaciones</h3>
+            <p class="texto mapa-visitantes-leyenda">
+              <span class="mapa-leyenda-item mapa-leyenda-origen">Origen</span>
+              <span class="mapa-leyenda-item mapa-leyenda-residencia">Donde vives / nos escribes</span>
+            </p>
+          </div>
+          <div id="mapa-visitantes" class="mapa-visitantes" role="application" aria-label="Mapa interactivo de origen y residencia de visitantes" tabindex="0"></div>
+          <p class="texto mapa-visitantes-nota" id="mapa-visitantes-nota">
+            Cargando ubicaciones compartidas…
+          </p>
+        </div>
       </div>
     </section>
+
+    <div id="recorrido-overlay" class="recorrido-overlay" hidden>
+      <div
+        id="recorrido-dialogo"
+        class="recorrido-dialogo"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="recorrido-titulo"
+        aria-describedby="recorrido-texto"
+      >
+        <p class="recorrido-paso" id="recorrido-paso">Paso 1 de 9</p>
+        <h2 id="recorrido-titulo" class="subtitulo recorrido-titulo">Recorrido por el Hub</h2>
+        <p id="recorrido-texto" class="texto recorrido-texto"></p>
+        <div class="recorrido-acciones">
+          <button type="button" class="btn btn-recorrido-sec" id="recorrido-anterior" disabled>Anterior</button>
+          <button type="button" class="btn btn-correo" id="recorrido-siguiente">Siguiente</button>
+          <button type="button" class="btn btn-recorrido-sec" id="recorrido-cerrar">Salir del recorrido</button>
+        </div>
+      </div>
+    </div>
 
     <footer id="contacto" class="site-footer seccion-ancla" aria-label="Pie de página: créditos y contacto">
       <div class="ancho-contenido footer-grid">
@@ -524,6 +564,7 @@
       <span aria-hidden="true">↑</span>
     </a>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="script.js"></script>
   </body>
 </html>

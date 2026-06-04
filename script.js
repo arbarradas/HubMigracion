@@ -156,7 +156,61 @@ const factoresPuebla = [
 
 const CLAVE_VISITAS = "hub-migracion-visitas";
 const CLAVE_ENCUESTA = "hub-migracion-encuesta";
+const CLAVE_GEOCACHE = "hub-migracion-geocache";
 const COUNT_API = "https://api.countapi.xyz";
+const NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
+
+const pasosRecorrido = [
+  {
+    id: "hub",
+    titulo: "El Hub de Migración",
+    texto: "Este es el punto de partida: qué es el Hub, quiénes lo impulsan y cómo se articula con la OIM y el campus Puebla."
+  },
+  {
+    id: "podcast",
+    titulo: "Primero, las voces",
+    texto: "Escucha el episodio con Javier Moreno Sánchez desde el Parlamento Europeo. La migración se narra antes de medirla con cifras."
+  },
+  {
+    id: "datos",
+    titulo: "Datos para reflexionar",
+    texto: "Estas cifras del IME/SRE dimensionan la migración mexicana en el exterior y preparan el contexto global."
+  },
+  {
+    id: "migracion-mundial",
+    titulo: "Migración en el mundo",
+    texto: "Explora el mapa de la OIM para comparar stocks migratorios a escala planetaria."
+  },
+  {
+    id: "investigacion",
+    titulo: "Investigación en Puebla",
+    texto: "Revisa el estudio sobre movilidad estudiantil y el grafo interactivo de factores en Graph Commons."
+  },
+  {
+    id: "cartografia-estudiantil",
+    titulo: "Cartografía estudiantil",
+    texto: "Interactúa con el dendograma: estados, ciudades de origen y motivos de llegada a Puebla."
+  },
+  {
+    id: "proyectos-hub",
+    titulo: "Proyectos con impacto",
+    texto: "Capaz, cine, análisis de datos y presencia internacional con la OIM y la GMMA."
+  },
+  {
+    id: "participacion",
+    titulo: "Tu participación",
+    texto: "El recorrido cierra con una invitación: puedes proponer proyectos y sumarte al Hub."
+  },
+  {
+    id: "encuesta-visitantes",
+    titulo: "Tu ubicación en el mapa",
+    texto: "Comparte de dónde eres y desde dónde nos lees. Tu respuesta aparecerá en el mapa de visitantes."
+  }
+];
+
+let mapaVisitantesInstancia = null;
+let capaMarcadoresVisitantes = null;
+let capaRutasVisitantes = null;
 
 function initFactoresInteractivo() {
   const contenedor = document.querySelector("#factores-grafica");
@@ -296,12 +350,181 @@ async function initContadorVisitas() {
   }
 }
 
+function leerGeocache() {
+  try {
+    return JSON.parse(localStorage.getItem(CLAVE_GEOCACHE) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function guardarGeocache(cache) {
+  localStorage.setItem(CLAVE_GEOCACHE, JSON.stringify(cache));
+}
+
+async function geocodificarLugar(texto) {
+  const consulta = texto.trim();
+  if (!consulta) return null;
+
+  const cache = leerGeocache();
+  if (cache[consulta]) return cache[consulta];
+
+  const url = new URL(NOMINATIM_API);
+  url.searchParams.set("q", consulta);
+  url.searchParams.set("format", "json");
+  url.searchParams.set("limit", "1");
+
+  const respuesta = await fetch(url.toString(), {
+    headers: { Accept: "application/json" }
+  });
+
+  if (!respuesta.ok) return null;
+
+  const resultados = await respuesta.json();
+  if (!Array.isArray(resultados) || resultados.length === 0) return null;
+
+  const coords = {
+    lat: Number(resultados[0].lat),
+    lng: Number(resultados[0].lon)
+  };
+
+  cache[consulta] = coords;
+  guardarGeocache(cache);
+  return coords;
+}
+
+function claveEntradaVisitante(entrada) {
+  return `${entrada.origen}|${entrada.residencia}|${entrada.fecha || ""}`;
+}
+
 function leerEncuestasLocales() {
   try {
     return JSON.parse(localStorage.getItem(CLAVE_ENCUESTA) || "[]");
   } catch {
     return [];
   }
+}
+
+async function cargarVisitantesCompartidos() {
+  try {
+    const respuesta = await fetch("datos-visitantes.json", { cache: "no-store" });
+    if (!respuesta.ok) return [];
+    const datos = await respuesta.json();
+    return Array.isArray(datos) ? datos : [];
+  } catch {
+    return [];
+  }
+}
+
+async function obtenerTodasLasRespuestas() {
+  const locales = leerEncuestasLocales();
+  const compartidas = await cargarVisitantesCompartidos();
+  const unificadas = new Map();
+
+  [...compartidas, ...locales].forEach((entrada) => {
+    unificadas.set(claveEntradaVisitante(entrada), entrada);
+  });
+
+  return [...unificadas.values()];
+}
+
+function crearIconoMarcador(tipo) {
+  const clase = tipo === "origen" ? "marcador-origen" : "marcador-residencia";
+  return L.divIcon({
+    className: `marcador-visitante ${clase}`,
+    html: `<span aria-hidden="true"></span>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
+  });
+}
+
+function actualizarNotaMapa(total, conCoordenadas) {
+  const nota = document.querySelector("#mapa-visitantes-nota");
+  if (!nota) return;
+
+  if (total === 0) {
+    nota.textContent =
+      "Aún no hay ubicaciones en el mapa. Sé la primera persona en compartir tu origen y residencia.";
+    return;
+  }
+
+  nota.textContent = `${conCoordenadas} de ${total} respuesta${total === 1 ? "" : "s"} con ubicación en el mapa (origen y residencia). Los datos combinan contribuciones del sitio y de tu navegador.`;
+}
+
+async function renderizarMapaVisitantes() {
+  if (typeof L === "undefined") return;
+
+  const contenedor = document.querySelector("#mapa-visitantes");
+  if (!contenedor) return;
+
+  const respuestas = await obtenerTodasLasRespuestas();
+
+  if (!mapaVisitantesInstancia) {
+    mapaVisitantesInstancia = L.map(contenedor, {
+      scrollWheelZoom: true,
+      worldCopyJump: true
+    }).setView([19.04, -98.2], 5);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(mapaVisitantesInstancia);
+
+    capaMarcadoresVisitantes = L.layerGroup().addTo(mapaVisitantesInstancia);
+    capaRutasVisitantes = L.layerGroup().addTo(mapaVisitantesInstancia);
+  }
+
+  capaMarcadoresVisitantes.clearLayers();
+  capaRutasVisitantes.clearLayers();
+
+  const bounds = [];
+  let conCoordenadas = 0;
+
+  respuestas.forEach((entrada) => {
+    const tieneOrigen =
+      typeof entrada.origenLat === "number" && typeof entrada.origenLng === "number";
+    const tieneResidencia =
+      typeof entrada.residenciaLat === "number" && typeof entrada.residenciaLng === "number";
+
+    if (tieneOrigen) {
+      const marcadorOrigen = L.marker([entrada.origenLat, entrada.origenLng], {
+        icon: crearIconoMarcador("origen")
+      });
+      marcadorOrigen.bindPopup(`<strong>Origen</strong><br>${entrada.origen}`);
+      capaMarcadoresVisitantes.addLayer(marcadorOrigen);
+      bounds.push([entrada.origenLat, entrada.origenLng]);
+    }
+
+    if (tieneResidencia) {
+      const marcadorResidencia = L.marker([entrada.residenciaLat, entrada.residenciaLng], {
+        icon: crearIconoMarcador("residencia")
+      });
+      marcadorResidencia.bindPopup(`<strong>Residencia</strong><br>${entrada.residencia}`);
+      capaMarcadoresVisitantes.addLayer(marcadorResidencia);
+      bounds.push([entrada.residenciaLat, entrada.residenciaLng]);
+    }
+
+    if (tieneOrigen && tieneResidencia) {
+      conCoordenadas += 1;
+      const linea = L.polyline(
+        [
+          [entrada.origenLat, entrada.origenLng],
+          [entrada.residenciaLat, entrada.residenciaLng]
+        ],
+        { color: "#8b4a2f", weight: 2, opacity: 0.45, dashArray: "6 6" }
+      );
+      capaRutasVisitantes.addLayer(linea);
+    }
+  });
+
+  actualizarNotaMapa(respuestas.length, conCoordenadas);
+
+  if (bounds.length > 0) {
+    mapaVisitantesInstancia.fitBounds(bounds, { padding: [36, 36], maxZoom: 10 });
+  } else {
+    mapaVisitantesInstancia.setView([19.04, -98.2], 5);
+  }
+
+  setTimeout(() => mapaVisitantesInstancia.invalidateSize(), 120);
 }
 
 function pintarEncuestaLocal() {
@@ -312,13 +535,14 @@ function pintarEncuestaLocal() {
   if (!lista || !mensaje) return;
 
   if (respuestas.length === 0) {
-    mensaje.textContent = "Aún no hay respuestas en este navegador. Sé la primera persona en dejar tu huella.";
+    mensaje.textContent =
+      "Aún no hay respuestas en este navegador. Sé la primera persona en dejar tu huella en el mapa.";
     lista.hidden = true;
     lista.innerHTML = "";
     return;
   }
 
-  mensaje.textContent = `${respuestas.length} respuesta${respuestas.length === 1 ? "" : "s"} compartida${respuestas.length === 1 ? "" : "s"} desde este navegador:`;
+  mensaje.textContent = `${respuestas.length} respuesta${respuestas.length === 1 ? "" : "s"} en este navegador (también en el mapa):`;
   lista.hidden = false;
   lista.innerHTML = respuestas
     .slice(-6)
@@ -330,30 +554,191 @@ function pintarEncuestaLocal() {
     .join("");
 }
 
+function initMapaVisitantes() {
+  if (typeof L === "undefined") {
+    const nota = document.querySelector("#mapa-visitantes-nota");
+    if (nota) nota.textContent = "El mapa no pudo cargarse. Revisa tu conexión e intenta de nuevo.";
+    return;
+  }
+
+  renderizarMapaVisitantes();
+  window.addEventListener("resize", () => {
+    if (mapaVisitantesInstancia) mapaVisitantesInstancia.invalidateSize();
+  });
+}
+
 function initEncuestaVisitantes() {
   const formulario = document.querySelector("#form-visitante");
   if (!formulario) return;
 
   pintarEncuestaLocal();
+  renderizarMapaVisitantes();
 
-  formulario.addEventListener("submit", (evento) => {
+  formulario.addEventListener("submit", async (evento) => {
     evento.preventDefault();
 
     const origen = document.querySelector("#visitante-origen")?.value.trim();
     const residencia = document.querySelector("#visitante-residencia")?.value.trim();
+    const boton = formulario.querySelector('button[type="submit"]');
+    const mensaje = document.querySelector("#encuesta-mensaje");
 
     if (!origen || !residencia) return;
 
+    if (boton) {
+      boton.disabled = true;
+      boton.textContent = "Ubicando en el mapa…";
+    }
+    if (mensaje) mensaje.textContent = "Geocodificando tu origen y residencia…";
+
+    const [coordsOrigen, coordsResidencia] = await Promise.all([
+      geocodificarLugar(origen),
+      geocodificarLugar(residencia)
+    ]);
+
+    const entrada = {
+      id: Date.now(),
+      origen,
+      residencia,
+      fecha: new Date().toISOString(),
+      origenLat: coordsOrigen?.lat,
+      origenLng: coordsOrigen?.lng,
+      residenciaLat: coordsResidencia?.lat,
+      residenciaLng: coordsResidencia?.lng
+    };
+
     const respuestas = leerEncuestasLocales();
-    respuestas.push({ origen, residencia, fecha: new Date().toISOString() });
+    respuestas.push(entrada);
     localStorage.setItem(CLAVE_ENCUESTA, JSON.stringify(respuestas));
 
     formulario.reset();
     pintarEncuestaLocal();
+    await renderizarMapaVisitantes();
 
-    const mensaje = document.querySelector("#encuesta-mensaje");
     if (mensaje) {
-      mensaje.textContent = `¡Gracias! Registramos tu origen (${origen}) y tu residencia (${residencia}).`;
+      const enMapa = coordsOrigen && coordsResidencia;
+      mensaje.textContent = enMapa
+        ? `¡Gracias! Tu origen (${origen}) y tu residencia (${residencia}) ya están en el mapa.`
+        : `¡Gracias! Guardamos tu respuesta. No pudimos ubicar algún lugar en el mapa; intenta ser más específico (ciudad y país).`;
+    }
+
+    if (boton) {
+      boton.disabled = false;
+      boton.textContent = "Compartir mi ubicación";
+    }
+  });
+}
+
+function initRecorridoGuiado() {
+  const overlay = document.querySelector("#recorrido-overlay");
+  const dialogo = document.querySelector("#recorrido-dialogo");
+  const titulo = document.querySelector("#recorrido-titulo");
+  const texto = document.querySelector("#recorrido-texto");
+  const paso = document.querySelector("#recorrido-paso");
+  const btnIniciar = document.querySelector("#btn-iniciar-recorrido");
+  const btnAnterior = document.querySelector("#recorrido-anterior");
+  const btnSiguiente = document.querySelector("#recorrido-siguiente");
+  const btnCerrar = document.querySelector("#recorrido-cerrar");
+  const nav = document.querySelector(".nav-hub");
+  const menu = document.querySelector("#nav-menu");
+
+  if (!overlay || !dialogo || !btnIniciar || pasosRecorrido.length === 0) return;
+
+  let indiceActual = 0;
+  let recorridoActivo = false;
+
+  const cerrarMenuNav = () => {
+    if (menu) menu.classList.remove("is-open");
+    const toggle = document.querySelector(".nav-toggle");
+    if (toggle) {
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Abrir menú de navegación");
+    }
+  };
+
+  const limpiarResaltadoRecorrido = () => {
+    document.querySelectorAll(".recorrido-seccion-activa").forEach((seccion) => {
+      seccion.classList.remove("recorrido-seccion-activa");
+    });
+  };
+
+  const irAPaso = (indice) => {
+    indiceActual = Math.max(0, Math.min(indice, pasosRecorrido.length - 1));
+    const pasoActual = pasosRecorrido[indiceActual];
+    const seccion = document.querySelector(`#${pasoActual.id}`);
+
+    limpiarResaltadoRecorrido();
+    if (seccion) {
+      seccion.classList.add("recorrido-seccion-activa");
+      const offset = (nav?.offsetHeight || 0) + 72;
+      const top = seccion.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+
+    if (titulo) titulo.textContent = pasoActual.titulo;
+    if (texto) texto.textContent = pasoActual.texto;
+    if (paso) paso.textContent = `Paso ${indiceActual + 1} de ${pasosRecorrido.length}`;
+
+    if (btnAnterior) btnAnterior.disabled = indiceActual === 0;
+    if (btnSiguiente) {
+      btnSiguiente.textContent =
+        indiceActual === pasosRecorrido.length - 1 ? "Finalizar recorrido" : "Siguiente";
+    }
+
+    if (pasoActual.id === "encuesta-visitantes" && mapaVisitantesInstancia) {
+      setTimeout(() => mapaVisitantesInstancia.invalidateSize(), 400);
+    }
+  };
+
+  const abrirRecorrido = () => {
+    recorridoActivo = true;
+    overlay.hidden = false;
+    cerrarMenuNav();
+    indiceActual = 0;
+    irAPaso(0);
+    dialogo.focus();
+  };
+
+  const cerrarRecorrido = () => {
+    recorridoActivo = false;
+    overlay.hidden = true;
+    limpiarResaltadoRecorrido();
+    btnIniciar.focus();
+  };
+
+  btnIniciar.addEventListener("click", abrirRecorrido);
+
+  btnAnterior?.addEventListener("click", () => {
+    if (indiceActual > 0) irAPaso(indiceActual - 1);
+  });
+
+  btnSiguiente?.addEventListener("click", () => {
+    if (indiceActual < pasosRecorrido.length - 1) {
+      irAPaso(indiceActual + 1);
+    } else {
+      cerrarRecorrido();
+    }
+  });
+
+  btnCerrar?.addEventListener("click", cerrarRecorrido);
+
+  overlay.addEventListener("click", (evento) => {
+    if (evento.target === overlay) cerrarRecorrido();
+  });
+
+  document.addEventListener("keydown", (evento) => {
+    if (!recorridoActivo) return;
+    if (evento.key === "Escape") {
+      evento.preventDefault();
+      cerrarRecorrido();
+    }
+    if (evento.key === "ArrowRight") {
+      evento.preventDefault();
+      if (indiceActual < pasosRecorrido.length - 1) irAPaso(indiceActual + 1);
+      else cerrarRecorrido();
+    }
+    if (evento.key === "ArrowLeft" && indiceActual > 0) {
+      evento.preventDefault();
+      irAPaso(indiceActual - 1);
     }
   });
 }
@@ -692,6 +1077,8 @@ initCartografiaInteractiva();
 initFactoresInteractivo();
 initContadorVisitas();
 initEncuestaVisitantes();
+initMapaVisitantes();
+initRecorridoGuiado();
 
 
 
