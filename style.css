@@ -961,6 +961,15 @@ main iframe:not(.graphcommons-iframe) {
     grid-template-columns: 1fr;
   }
 
+  .proyecto-internacional {
+    grid-template-columns: 1fr;
+  }
+
+  .proyecto-internacional-marca {
+    min-width: 0;
+    width: fit-content;
+  }
+
   .graphcommons-iframe {
     min-height: 400px;
     height: 420px;
@@ -1129,7 +1138,7 @@ main iframe:not(.graphcommons-iframe) {
 
 .proyectos-galeria {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--espacio-md);
   margin-top: var(--espacio-md);
 }
@@ -1188,6 +1197,85 @@ main iframe:not(.graphcommons-iframe) {
   margin: 0;
   font-size: var(--fz-pequena);
   line-height: 1.55;
+}
+
+.proyecto-internacional {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--espacio-md);
+  align-items: start;
+  margin-top: var(--espacio-lg);
+  padding: var(--espacio-md);
+  border: 1px solid var(--marco);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(250, 246, 241, 0.95) 0%, rgba(242, 230, 218, 0.85) 100%);
+  box-shadow: 0 8px 24px rgba(42, 34, 28, 0.08);
+}
+
+.proyecto-internacional-marca {
+  display: grid;
+  place-items: center;
+  min-width: 5.5rem;
+  padding: var(--espacio-sm);
+  border-radius: 12px;
+  background: linear-gradient(165deg, #3d2418 0%, var(--acento) 100%);
+}
+
+.proyecto-internacional-sigla {
+  color: #ffd9a8;
+  font-size: var(--fz-pequena);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.proyecto-internacional-contenido .proyecto-nombre {
+  font-size: 1.25rem;
+}
+
+.proyecto-internacional-contenido .texto {
+  font-size: var(--fz-cuerpo);
+}
+
+.proyecto-enlaces {
+  margin: var(--espacio-sm) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.proyecto-enlaces li + li {
+  margin-top: 0.5rem;
+}
+
+.proyecto-enlaces a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--acento);
+  font-size: var(--fz-pequena);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.proyecto-enlaces a::before {
+  content: "→";
+  color: var(--acento-2);
+}
+
+.proyecto-enlaces a:hover {
+  color: var(--acento-2);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.proyecto-internacional-contenido a:not(.btn) {
+  color: var(--acento);
+  font-weight: 600;
+}
+
+.proyecto-internacional-contenido a:not(.btn):hover {
+  color: var(--acento-2);
 }
 
 .docs-puebla-figura {
