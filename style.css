@@ -1034,6 +1034,44 @@ main iframe:not(.graphcommons-iframe) {
   margin: var(--espacio-md) 0 var(--espacio-sm);
 }
 
+.cartog-filtros-columna {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1 1 100%;
+}
+
+.cartog-filtros-etiqueta {
+  font-size: var(--fz-pequena);
+  font-weight: 600;
+  color: var(--muted);
+  margin-right: 0.25rem;
+}
+
+.cartog-filtro-btn {
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--acento);
+  font: inherit;
+  font-size: var(--fz-pequena);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.cartog-filtro-btn:hover {
+  background: #faf6f1;
+}
+
+.cartog-filtro-btn.is-active {
+  background: var(--acento);
+  color: #fff5e8;
+  border-color: var(--acento);
+}
+
 .cartog-filtro {
   display: grid;
   gap: 0.35rem;
@@ -1612,6 +1650,11 @@ main iframe:not(.graphcommons-iframe) {
   box-shadow: 0 0 0 2px #1f5f85;
 }
 
+.mapa-leyenda-escribe::before {
+  background: #4db892;
+  box-shadow: 0 0 0 2px #2d8a6e;
+}
+
 .mapa-visitantes {
   width: 100%;
   height: clamp(320px, 52vh, 480px);
@@ -1649,6 +1692,10 @@ main iframe:not(.graphcommons-iframe) {
 
 .marcador-residencia span {
   background: #3d8ec4;
+}
+
+.marcador-escribe span {
+  background: #4db892;
 }
 
 .leaflet-popup-content {
@@ -1741,6 +1788,90 @@ main iframe:not(.graphcommons-iframe) {
   outline: 3px solid rgba(255, 217, 168, 0.75);
   outline-offset: 6px;
   border-radius: 4px;
+}
+
+.recorrido-resumen[hidden] {
+  display: none;
+}
+
+.recorrido-resumen-lista {
+  margin: 0 0 var(--espacio-md);
+  padding-left: 1.25rem;
+  color: var(--muted);
+}
+
+.recorrido-resumen-lista a {
+  color: var(--acento);
+  font-weight: 600;
+}
+
+.recorrido-resumen-lista a:hover {
+  color: var(--acento-2);
+}
+
+/* —— FAQ —— */
+.seccion-faq {
+  padding: var(--espacio-xl) 0;
+  background: linear-gradient(180deg, #faf6f1 0%, #f3ebe3 100%);
+  border-top: 1px solid var(--linea);
+}
+
+.faq-indice {
+  margin: var(--espacio-md) 0;
+  padding: var(--espacio-sm) var(--espacio-md);
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+.faq-indice-titulo {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--acento);
+}
+
+.faq-indice ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.faq-indice a {
+  color: var(--acento);
+  font-weight: 600;
+}
+
+.faq-lista {
+  display: grid;
+  gap: var(--espacio-sm);
+  margin-top: var(--espacio-md);
+}
+
+.faq-item {
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.faq-item summary {
+  padding: var(--espacio-sm) var(--espacio-md);
+  font-weight: 700;
+  color: var(--acento);
+  cursor: pointer;
+  list-style-position: outside;
+}
+
+.faq-item summary:hover {
+  background: #faf6f1;
+}
+
+.faq-respuesta {
+  padding: 0 var(--espacio-md) var(--espacio-md);
+  border-top: 1px solid var(--linea);
+}
+
+.faq-respuesta p {
+  margin: 0.65rem 0 0;
 }
 
 .docs-puebla-figura {

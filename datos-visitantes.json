@@ -2,19 +2,25 @@
   {
     "origen": "Xalapa, Veracruz, México",
     "residencia": "Puebla, México",
+    "escribe": "Puebla, México",
     "origenLat": 19.5438,
     "origenLng": -96.9102,
     "residenciaLat": 19.0414,
     "residenciaLng": -98.2063,
+    "escribeLat": 19.0414,
+    "escribeLng": -98.2063,
     "fecha": "2025-02-01T12:00:00.000Z"
   },
   {
     "origen": "Ciudad de México, México",
-    "residencia": "Bruselas, Bélgica",
+    "residencia": "Puebla, México",
+    "escribe": "Bruselas, Bélgica",
     "origenLat": 19.4326,
     "origenLng": -99.1332,
-    "residenciaLat": 50.8476,
-    "residenciaLng": 4.3572,
+    "residenciaLat": 19.0414,
+    "residenciaLng": -98.2063,
+    "escribeLat": 50.8476,
+    "escribeLng": 4.3572,
     "fecha": "2025-02-15T12:00:00.000Z"
   }
 ]

@@ -20,17 +20,42 @@ function formatearNumero(numero) {
   return new Intl.NumberFormat("es-MX").format(numero);
 }
 
-function actualizarPanelMigracion() {
-  const destinos = {
-    "migrantes-eua": datosMigracion[0].valor,
-    "migrantes-europa": datosMigracion[1].valor,
-    "migrantes-asia": datosMigracion[2].valor
+function initContadoresAnimados() {
+  const panel = document.querySelector("#panel-migracion-contadores");
+  if (!panel) return;
+
+  const contadores = panel.querySelectorAll("[data-contador]");
+  if (contadores.length === 0) return;
+
+  let animados = false;
+
+  const animarContador = (elemento) => {
+    const destino = Number(elemento.dataset.contador);
+    if (!destino || Number.isNaN(destino)) return;
+
+    const duracion = 1800;
+    const inicio = performance.now();
+
+    const tick = (ahora) => {
+      const progreso = Math.min(1, (ahora - inicio) / duracion);
+      const ease = 1 - Math.pow(1 - progreso, 3);
+      elemento.textContent = formatearNumero(Math.round(destino * ease));
+      if (progreso < 1) requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
   };
 
-  Object.entries(destinos).forEach(([id, valor]) => {
-    const elemento = document.querySelector(`#${id}`);
-    if (elemento) elemento.textContent = formatearNumero(valor);
-  });
+  const observador = new IntersectionObserver(
+    (entradas) => {
+      if (!entradas.some((entrada) => entrada.isIntersecting) || animados) return;
+      animados = true;
+      contadores.forEach(animarContador);
+    },
+    { threshold: 0.35 }
+  );
+
+  observador.observe(panel);
 }
 
 function escribirLectura() {
@@ -108,6 +133,7 @@ const capitulosHistoria = [
   { id: "proyectos-hub", etiqueta: "Proyectos" },
   { id: "participacion", etiqueta: "Participar" },
   { id: "encuesta-visitantes", etiqueta: "Tu ubicación" },
+  { id: "faq", etiqueta: "FAQ" },
   { id: "contacto", etiqueta: "Contacto" }
 ];
 
@@ -203,8 +229,9 @@ const pasosRecorrido = [
   },
   {
     id: "encuesta-visitantes",
-    titulo: "Tu ubicación en el mapa",
-    texto: "Comparte de dónde eres y desde dónde nos lees. Tu respuesta aparecerá en el mapa de visitantes."
+    titulo: "Voces y ubicaciones",
+    texto:
+      "Responde tres preguntas: tu lugar de origen, dónde resides actualmente y desde dónde nos escribes. Las tres ubicaciones se reflejan en el mapa."
   }
 ];
 
@@ -394,7 +421,19 @@ async function geocodificarLugar(texto) {
 }
 
 function claveEntradaVisitante(entrada) {
-  return `${entrada.origen}|${entrada.residencia}|${entrada.fecha || ""}`;
+  const escribe = entrada.escribe || entrada.residencia || "";
+  return `${entrada.origen}|${entrada.residencia}|${escribe}|${entrada.fecha || ""}`;
+}
+
+function normalizarEntradaVisitante(entrada) {
+  const escribe = entrada.escribe || entrada.residencia || "";
+  const tieneEscribePropio = Boolean(entrada.escribe);
+  return {
+    ...entrada,
+    escribe,
+    escribeLat: tieneEscribePropio ? entrada.escribeLat : entrada.escribeLat ?? entrada.residenciaLat,
+    escribeLng: tieneEscribePropio ? entrada.escribeLng : entrada.escribeLng ?? entrada.residenciaLng
+  };
 }
 
 function leerEncuestasLocales() {
@@ -429,9 +468,13 @@ async function obtenerTodasLasRespuestas() {
 }
 
 function crearIconoMarcador(tipo) {
-  const clase = tipo === "origen" ? "marcador-origen" : "marcador-residencia";
+  const clases = {
+    origen: "marcador-origen",
+    residencia: "marcador-residencia",
+    escribe: "marcador-escribe"
+  };
   return L.divIcon({
-    className: `marcador-visitante ${clase}`,
+    className: `marcador-visitante ${clases[tipo] || clases.residencia}`,
     html: `<span aria-hidden="true"></span>`,
     iconSize: [14, 14],
     iconAnchor: [7, 7]
@@ -444,11 +487,11 @@ function actualizarNotaMapa(total, conCoordenadas) {
 
   if (total === 0) {
     nota.textContent =
-      "Aún no hay ubicaciones en el mapa. Sé la primera persona en compartir tu origen y residencia.";
+      "Aún no hay ubicaciones en el mapa. Sé la primera persona en compartir origen, residencia y desde dónde nos escribes.";
     return;
   }
 
-  nota.textContent = `${conCoordenadas} de ${total} respuesta${total === 1 ? "" : "s"} con ubicación en el mapa (origen y residencia). Los datos combinan contribuciones del sitio y de tu navegador.`;
+  nota.textContent = `${conCoordenadas} de ${total} respuesta${total === 1 ? "" : "s"} con al menos una ubicación en el mapa (origen, residencia actual y desde dónde nos escribes). Los datos combinan contribuciones del sitio y de tu navegador.`;
 }
 
 async function renderizarMapaVisitantes() {
@@ -479,11 +522,16 @@ async function renderizarMapaVisitantes() {
   const bounds = [];
   let conCoordenadas = 0;
 
-  respuestas.forEach((entrada) => {
+  respuestas.forEach((entradaCruda) => {
+    const entrada = normalizarEntradaVisitante(entradaCruda);
     const tieneOrigen =
       typeof entrada.origenLat === "number" && typeof entrada.origenLng === "number";
     const tieneResidencia =
       typeof entrada.residenciaLat === "number" && typeof entrada.residenciaLng === "number";
+    const tieneEscribe =
+      typeof entrada.escribeLat === "number" && typeof entrada.escribeLng === "number";
+
+    if (tieneOrigen || tieneResidencia || tieneEscribe) conCoordenadas += 1;
 
     if (tieneOrigen) {
       const marcadorOrigen = L.marker([entrada.origenLat, entrada.origenLng], {
@@ -498,21 +546,48 @@ async function renderizarMapaVisitantes() {
       const marcadorResidencia = L.marker([entrada.residenciaLat, entrada.residenciaLng], {
         icon: crearIconoMarcador("residencia")
       });
-      marcadorResidencia.bindPopup(`<strong>Residencia</strong><br>${entrada.residencia}`);
+      marcadorResidencia.bindPopup(`<strong>Residencia actual</strong><br>${entrada.residencia}`);
       capaMarcadoresVisitantes.addLayer(marcadorResidencia);
       bounds.push([entrada.residenciaLat, entrada.residenciaLng]);
     }
 
+    if (tieneEscribe) {
+      const marcadorEscribe = L.marker([entrada.escribeLat, entrada.escribeLng], {
+        icon: crearIconoMarcador("escribe")
+      });
+      marcadorEscribe.bindPopup(`<strong>Desde donde nos escribes</strong><br>${entrada.escribe}`);
+      capaMarcadoresVisitantes.addLayer(marcadorEscribe);
+      bounds.push([entrada.escribeLat, entrada.escribeLng]);
+    }
+
+    const agregarLinea = (desde, hasta, opciones) => {
+      if (!desde || !hasta) return;
+      if (desde[0] === hasta[0] && desde[1] === hasta[1]) return;
+      capaRutasVisitantes.addLayer(L.polyline([desde, hasta], opciones));
+    };
+
     if (tieneOrigen && tieneResidencia) {
-      conCoordenadas += 1;
-      const linea = L.polyline(
-        [
-          [entrada.origenLat, entrada.origenLng],
-          [entrada.residenciaLat, entrada.residenciaLng]
-        ],
+      agregarLinea(
+        [entrada.origenLat, entrada.origenLng],
+        [entrada.residenciaLat, entrada.residenciaLng],
         { color: "#8b4a2f", weight: 2, opacity: 0.45, dashArray: "6 6" }
       );
-      capaRutasVisitantes.addLayer(linea);
+    }
+
+    if (tieneOrigen && tieneEscribe) {
+      agregarLinea(
+        [entrada.origenLat, entrada.origenLng],
+        [entrada.escribeLat, entrada.escribeLng],
+        { color: "#2d8a6e", weight: 2, opacity: 0.38, dashArray: "4 8" }
+      );
+    }
+
+    if (tieneResidencia && tieneEscribe) {
+      agregarLinea(
+        [entrada.residenciaLat, entrada.residenciaLng],
+        [entrada.escribeLat, entrada.escribeLng],
+        { color: "#5a7a94", weight: 1.5, opacity: 0.32, dashArray: "3 6" }
+      );
     }
   });
 
@@ -547,10 +622,10 @@ function pintarEncuestaLocal() {
   lista.innerHTML = respuestas
     .slice(-6)
     .reverse()
-    .map(
-      (entrada) =>
-        `<li><strong>${entrada.origen}</strong> → vive en ${entrada.residencia}</li>`
-    )
+    .map((entrada) => {
+      const escribe = entrada.escribe || entrada.residencia;
+      return `<li><strong>${entrada.origen}</strong> · reside en ${entrada.residencia} · escribe desde ${escribe}</li>`;
+    })
     .join("");
 }
 
@@ -579,31 +654,36 @@ function initEncuestaVisitantes() {
 
     const origen = document.querySelector("#visitante-origen")?.value.trim();
     const residencia = document.querySelector("#visitante-residencia")?.value.trim();
+    const escribe = document.querySelector("#visitante-escribe")?.value.trim();
     const boton = formulario.querySelector('button[type="submit"]');
     const mensaje = document.querySelector("#encuesta-mensaje");
 
-    if (!origen || !residencia) return;
+    if (!origen || !residencia || !escribe) return;
 
     if (boton) {
       boton.disabled = true;
       boton.textContent = "Ubicando en el mapa…";
     }
-    if (mensaje) mensaje.textContent = "Geocodificando tu origen y residencia…";
+    if (mensaje) mensaje.textContent = "Geocodificando las tres ubicaciones…";
 
-    const [coordsOrigen, coordsResidencia] = await Promise.all([
+    const [coordsOrigen, coordsResidencia, coordsEscribe] = await Promise.all([
       geocodificarLugar(origen),
-      geocodificarLugar(residencia)
+      geocodificarLugar(residencia),
+      geocodificarLugar(escribe)
     ]);
 
     const entrada = {
       id: Date.now(),
       origen,
       residencia,
+      escribe,
       fecha: new Date().toISOString(),
       origenLat: coordsOrigen?.lat,
       origenLng: coordsOrigen?.lng,
       residenciaLat: coordsResidencia?.lat,
-      residenciaLng: coordsResidencia?.lng
+      residenciaLng: coordsResidencia?.lng,
+      escribeLat: coordsEscribe?.lat,
+      escribeLng: coordsEscribe?.lng
     };
 
     const respuestas = leerEncuestasLocales();
@@ -615,15 +695,18 @@ function initEncuestaVisitantes() {
     await renderizarMapaVisitantes();
 
     if (mensaje) {
-      const enMapa = coordsOrigen && coordsResidencia;
-      mensaje.textContent = enMapa
-        ? `¡Gracias! Tu origen (${origen}) y tu residencia (${residencia}) ya están en el mapa.`
-        : `¡Gracias! Guardamos tu respuesta. No pudimos ubicar algún lugar en el mapa; intenta ser más específico (ciudad y país).`;
+      const ubicados = [coordsOrigen, coordsResidencia, coordsEscribe].filter(Boolean).length;
+      mensaje.textContent =
+        ubicados === 3
+          ? `¡Gracias! Origen, residencia y «desde dónde nos escribes» ya están en el mapa.`
+          : ubicados > 0
+            ? `¡Gracias! ${ubicados} de 3 ubicaciones aparecen en el mapa. Intenta ser más específico (ciudad y país) en las que faltan.`
+            : "¡Gracias! Guardamos tu respuesta. No pudimos ubicar los lugares; intenta incluir ciudad y país.";
     }
 
     if (boton) {
       boton.disabled = false;
-      boton.textContent = "Compartir mi ubicación";
+      boton.textContent = "Compartir en el mapa";
     }
   });
 }
@@ -631,6 +714,10 @@ function initEncuestaVisitantes() {
 function initRecorridoGuiado() {
   const overlay = document.querySelector("#recorrido-overlay");
   const dialogo = document.querySelector("#recorrido-dialogo");
+  const pasoContenido = document.querySelector("#recorrido-paso-contenido");
+  const resumenPanel = document.querySelector("#recorrido-resumen");
+  const resumenLista = document.querySelector("#recorrido-resumen-lista");
+  const resumenMapa = document.querySelector("#recorrido-resumen-mapa");
   const titulo = document.querySelector("#recorrido-titulo");
   const texto = document.querySelector("#recorrido-texto");
   const paso = document.querySelector("#recorrido-paso");
@@ -638,6 +725,7 @@ function initRecorridoGuiado() {
   const btnAnterior = document.querySelector("#recorrido-anterior");
   const btnSiguiente = document.querySelector("#recorrido-siguiente");
   const btnCerrar = document.querySelector("#recorrido-cerrar");
+  const btnCerrarResumen = document.querySelector("#recorrido-cerrar-resumen");
   const nav = document.querySelector(".nav-hub");
   const menu = document.querySelector("#nav-menu");
 
@@ -645,6 +733,30 @@ function initRecorridoGuiado() {
 
   let indiceActual = 0;
   let recorridoActivo = false;
+
+  const reiniciarDialogoRecorrido = () => {
+    if (pasoContenido) pasoContenido.hidden = false;
+    if (resumenPanel) resumenPanel.hidden = true;
+  };
+
+  const mostrarResumenRecorrido = () => {
+    limpiarResaltadoRecorrido();
+    if (pasoContenido) pasoContenido.hidden = true;
+    if (resumenPanel) resumenPanel.hidden = false;
+
+    if (resumenLista) {
+      resumenLista.innerHTML = pasosRecorrido
+        .map((pasoRecorrido) => `<li><a href="#${pasoRecorrido.id}">${pasoRecorrido.titulo}</a></li>`)
+        .join("");
+    }
+
+    const tieneRespuesta = leerEncuestasLocales().length > 0;
+    if (resumenMapa) {
+      resumenMapa.textContent = tieneRespuesta
+        ? "Ya compartiste tus tres ubicaciones en este navegador. Puedes revisarlas en el mapa."
+        : "¿Quieres sumar tu voz? Comparte origen, residencia y desde dónde nos escribes en el mapa de visitantes.";
+    }
+  };
 
   const cerrarMenuNav = () => {
     if (menu) menu.classList.remove("is-open");
@@ -693,6 +805,7 @@ function initRecorridoGuiado() {
     recorridoActivo = true;
     overlay.hidden = false;
     cerrarMenuNav();
+    reiniciarDialogoRecorrido();
     indiceActual = 0;
     irAPaso(0);
     dialogo.focus();
@@ -701,6 +814,7 @@ function initRecorridoGuiado() {
   const cerrarRecorrido = () => {
     recorridoActivo = false;
     overlay.hidden = true;
+    reiniciarDialogoRecorrido();
     limpiarResaltadoRecorrido();
     btnIniciar.focus();
   };
@@ -715,11 +829,12 @@ function initRecorridoGuiado() {
     if (indiceActual < pasosRecorrido.length - 1) {
       irAPaso(indiceActual + 1);
     } else {
-      cerrarRecorrido();
+      mostrarResumenRecorrido();
     }
   });
 
   btnCerrar?.addEventListener("click", cerrarRecorrido);
+  btnCerrarResumen?.addEventListener("click", cerrarRecorrido);
 
   overlay.addEventListener("click", (evento) => {
     if (evento.target === overlay) cerrarRecorrido();
@@ -851,6 +966,13 @@ function columnaDeNodo(x) {
   return "Motivo de movilización";
 }
 
+function tipoColumnaFiltro(columna) {
+  if (columna === "Estado de procedencia") return "estados";
+  if (columna === "Ciudad de origen") return "ciudades";
+  if (columna === "Motivo de movilización") return "motivos";
+  return "origen";
+}
+
 function initCartografiaInteractiva() {
   const objeto = document.querySelector("#cartog-svg");
   const tooltip = document.querySelector("#cartog-tooltip");
@@ -862,6 +984,8 @@ function initCartografiaInteractiva() {
   let nodos = [];
   let enlaces = [];
   let seleccionFijada = null;
+  let filtroColumnaActivo = "todos";
+  const botonesFiltroColumna = [...document.querySelectorAll("[data-filtro-columna]")];
 
   const estilosSvg = `
     #links path { transition: stroke 0.2s ease, stroke-width 0.2s ease, opacity 0.2s ease; }
@@ -874,7 +998,35 @@ function initCartografiaInteractiva() {
     .cartog-enlace-resaltado { stroke: #8b4a2f !important; stroke-width: 2.5px !important; opacity: 1 !important; }
     .cartog-enlace-atenuado { opacity: 0.08; }
     .cartog-coincidencia-busqueda .nodo-circulo { stroke: #b86a3d; stroke-width: 2px; }
+    .cartog-filtro-visible { opacity: 1 !important; }
+    path.cartog-filtro-visible { opacity: 0.55 !important; }
   `;
+
+  const aplicarFiltroColumna = () => {
+    if (nodos.length === 0) return;
+
+    nodos.forEach((nodo) => {
+      const tipo = tipoColumnaFiltro(nodo.columna);
+      const visible = filtroColumnaActivo === "todos" || tipo === filtroColumnaActivo;
+      nodo.grupo.classList.toggle("cartog-atenuado", !visible);
+      nodo.grupo.classList.toggle("cartog-filtro-visible", visible);
+    });
+
+    enlaces.forEach((enlace) => {
+      const nodoOrigen = nodos.find((nodo) => coordenadasCoinciden(enlace.origen, nodo.coords));
+      const nodoDestino = nodos.find((nodo) => coordenadasCoinciden(enlace.destino, nodo.coords));
+      const visibleOrigen =
+        nodoOrigen &&
+        (filtroColumnaActivo === "todos" || tipoColumnaFiltro(nodoOrigen.columna) === filtroColumnaActivo);
+      const visibleDestino =
+        nodoDestino &&
+        (filtroColumnaActivo === "todos" || tipoColumnaFiltro(nodoDestino.columna) === filtroColumnaActivo);
+      const visible = filtroColumnaActivo === "todos" || visibleOrigen || visibleDestino;
+
+      enlace.path.classList.toggle("cartog-enlace-atenuado", !visible);
+      enlace.path.classList.toggle("cartog-filtro-visible", visible);
+    });
+  };
 
   const prepararNodos = (svgDoc) => {
     nodos = [...svgDoc.querySelectorAll("#nodes > g")].map((grupo) => {
@@ -920,12 +1072,13 @@ function initCartografiaInteractiva() {
 
   const limpiarResaltado = () => {
     nodos.forEach(({ grupo }) => {
-      grupo.classList.remove("cartog-atenuado", "cartog-resaltado", "cartog-coincidencia-busqueda");
+      grupo.classList.remove("cartog-atenuado", "cartog-resaltado", "cartog-coincidencia-busqueda", "cartog-filtro-visible");
     });
     enlaces.forEach(({ path }) => {
-      path.classList.remove("cartog-enlace-resaltado", "cartog-enlace-atenuado");
+      path.classList.remove("cartog-enlace-resaltado", "cartog-enlace-atenuado", "cartog-filtro-visible");
     });
     tooltip.hidden = true;
+    if (filtroColumnaActivo !== "todos") aplicarFiltroColumna();
   };
 
   const mostrarDetalle = (nodo, fijado = false) => {
@@ -1024,6 +1177,7 @@ function initCartografiaInteractiva() {
 
     if (!consulta) {
       nodos.forEach(({ grupo }) => grupo.classList.remove("cartog-coincidencia-busqueda", "cartog-atenuado"));
+      aplicarFiltroColumna();
       return;
     }
 
@@ -1057,18 +1211,34 @@ function initCartografiaInteractiva() {
     });
   }
 
+  botonesFiltroColumna.forEach((boton) => {
+    boton.addEventListener("click", () => {
+      filtroColumnaActivo = boton.dataset.filtroColumna || "todos";
+      botonesFiltroColumna.forEach((item) => {
+        item.classList.toggle("is-active", item === boton);
+      });
+      seleccionFijada = null;
+      if (limpiar) limpiar.hidden = true;
+      if (buscar) buscar.value = "";
+      limpiarResaltado();
+      aplicarFiltroColumna();
+      detalle.innerHTML = `<p class="cartog-detalle-placeholder texto">Filtro activo: <strong>${boton.textContent}</strong>. Selecciona un nodo para ver detalle.</p>`;
+    });
+  });
+
   const iniciar = () => {
     const svgDoc = objeto.contentDocument;
     if (!svgDoc) return;
     activarSvg(svgDoc);
+    aplicarFiltroColumna();
   };
 
   if (objeto.contentDocument) iniciar();
   objeto.addEventListener("load", iniciar);
 }
 
-actualizarPanelMigracion();
 escribirLectura();
+initContadoresAnimados();
 initNavegacion();
 initProgresoHistoria();
 initContacto();

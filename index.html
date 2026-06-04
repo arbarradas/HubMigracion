@@ -505,6 +505,65 @@
       </div>
     </section>
 
+    <section id="faq" class="seccion-faq seccion-rubro seccion-ancla" aria-labelledby="titulo-faq">
+      <div class="ancho-contenido">
+        <p class="etiqueta">Ayuda</p>
+        <h2 id="titulo-faq" class="subtitulo">Preguntas frecuentes (FAQ)</h2>
+        <p class="texto puente-narrativo">
+          Respuestas breves a las dudas más comunes sobre el Hub, sus datos y cómo participar.
+        </p>
+
+        <nav class="faq-indice" aria-label="Índice de preguntas frecuentes">
+          <h3 class="faq-indice-titulo">En esta sección</h3>
+          <ul>
+            <li><a href="#faq-que-es">¿Qué es el Hub de Migración e Impacto Social?</a></li>
+            <li><a href="#faq-participar">¿Cómo puedo participar en el Hub?</a></li>
+            <li><a href="#faq-datos">¿De dónde provienen los datos del sitio?</a></li>
+          </ul>
+        </nav>
+
+        <div class="faq-lista">
+          <details id="faq-que-es" class="faq-item" open>
+            <summary>¿Qué es el Hub de Migración e Impacto Social?</summary>
+            <div class="faq-respuesta texto">
+              <p>
+                Es una iniciativa académica del Tecnológico de Monterrey, campus Puebla, inaugurada en febrero de 2025 para estudiar la migración con enfoque humano, ético y de impacto social. Articula investigación, divulgación (como el podcast <em>Sociedad Migrante</em>), visualización de datos y proyectos con la OIM y la GMMA.
+              </p>
+              <p><a href="#hub">Ir al inicio del Hub</a></p>
+            </div>
+          </details>
+
+          <details id="faq-participar" class="faq-item">
+            <summary>¿Cómo puedo participar en el Hub?</summary>
+            <div class="faq-respuesta texto">
+              <p>
+                Puedes proponer un proyecto académico, colaborar en investigación sobre movilidad estudiantil, difundir los contenidos del sitio o sumar tu voz en el mapa de ubicaciones. Escríbenos desde la sección de contacto.
+              </p>
+              <p>
+                <a href="#participacion">Ir a «¿Cómo puedes participar?»</a>
+                ·
+                <a href="#contacto">Contactar al Hub</a>
+              </p>
+            </div>
+          </details>
+
+          <details id="faq-datos" class="faq-item">
+            <summary>¿De dónde provienen los datos de migración que se muestran?</summary>
+            <div class="faq-respuesta texto">
+              <p>
+                Las cifras globales provienen del Instituto de los Mexicanos en el Exterior (SRE) y del Portal de Datos sobre Migración de la OIM. La investigación sobre movilidad estudiantil en Puebla es elaboración propia del equipo del Hub (encuestas, Graph Commons y cartografía). El mapa de visitantes combina respuestas compartidas en el sitio y en tu navegador.
+              </p>
+              <p>
+                <a href="#datos">Ver datos migratorios</a>
+                ·
+                <a href="#investigacion">Ver investigación</a>
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <div id="recorrido-overlay" class="recorrido-overlay" hidden>
       <div
         id="recorrido-dialogo"
@@ -514,13 +573,26 @@
         aria-labelledby="recorrido-titulo"
         aria-describedby="recorrido-texto"
       >
-        <p class="recorrido-paso" id="recorrido-paso">Paso 1 de 9</p>
-        <h2 id="recorrido-titulo" class="subtitulo recorrido-titulo">Recorrido por el Hub</h2>
-        <p id="recorrido-texto" class="texto recorrido-texto"></p>
-        <div class="recorrido-acciones">
-          <button type="button" class="btn btn-recorrido-sec" id="recorrido-anterior" disabled>Anterior</button>
-          <button type="button" class="btn btn-correo" id="recorrido-siguiente">Siguiente</button>
-          <button type="button" class="btn btn-recorrido-sec" id="recorrido-cerrar">Salir del recorrido</button>
+        <div id="recorrido-paso-contenido">
+          <p class="recorrido-paso" id="recorrido-paso">Paso 1 de 9</p>
+          <h2 id="recorrido-titulo" class="subtitulo recorrido-titulo">Recorrido por el Hub</h2>
+          <p id="recorrido-texto" class="texto recorrido-texto"></p>
+          <div class="recorrido-acciones" id="recorrido-acciones">
+            <button type="button" class="btn btn-recorrido-sec" id="recorrido-anterior" disabled>Anterior</button>
+            <button type="button" class="btn btn-correo" id="recorrido-siguiente">Siguiente</button>
+            <button type="button" class="btn btn-recorrido-sec" id="recorrido-cerrar">Salir del recorrido</button>
+          </div>
+        </div>
+
+        <div id="recorrido-resumen" class="recorrido-resumen" hidden>
+          <h2 class="subtitulo">Resumen de tu recorrido</h2>
+          <p class="texto">Completaste la ruta por el Hub. Estos son los capítulos que visitaste:</p>
+          <ul class="recorrido-resumen-lista" id="recorrido-resumen-lista"></ul>
+          <p class="texto" id="recorrido-resumen-mapa"></p>
+          <div class="recorrido-acciones">
+            <a class="btn btn-correo" href="#encuesta-visitantes" id="recorrido-ir-mapa">Ver mapa de voces</a>
+            <button type="button" class="btn btn-recorrido-sec" id="recorrido-cerrar-resumen">Cerrar</button>
+          </div>
         </div>
       </div>
     </div>
@@ -564,6 +636,7 @@
             <li><a href="#proyectos-hub">Proyectos</a></li>
             <li><a href="#participacion">Participar</a></li>
             <li><a href="#encuesta-visitantes">Tu ubicación</a></li>
+            <li><a href="#faq">FAQ</a></li>
           </ul>
         </nav>
       </div>
