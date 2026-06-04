@@ -8,6 +8,7 @@
   --acento: #8b4a2f;
   --acento-2: #b86a3d;
   --nav-altura: 3.75rem;
+  --progreso-altura: 0.28rem;
   --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
   --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
   --espacio-xs: 0.5rem;
@@ -28,12 +29,12 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--nav-altura) + 1.25rem);
+  scroll-padding-top: calc(var(--nav-altura) + var(--progreso-altura) + 1.25rem);
 }
 
 body {
   margin: 0;
-  padding-top: var(--nav-altura);
+  padding-top: calc(var(--nav-altura) + var(--progreso-altura));
   background: var(--fondo);
   color: var(--texto);
   font-family: var(--font-sans);
@@ -86,7 +87,61 @@ h2.subtitulo {
 }
 
 .seccion-ancla {
-  scroll-margin-top: calc(var(--nav-altura) + 1.25rem);
+  scroll-margin-top: calc(var(--nav-altura) + var(--progreso-altura) + 1.25rem);
+}
+
+/* —— Barra de progreso narrativo —— */
+.progreso-capitulos {
+  position: fixed;
+  top: var(--nav-altura);
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: var(--progreso-altura);
+  background: rgba(201, 168, 138, 0.35);
+}
+
+.progreso-capitulos-relleno {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--acento) 0%, var(--acento-2) 55%, #ffd9a8 100%);
+  transition: width 0.12s ease-out;
+}
+
+.progreso-capitulos-segmentos {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+}
+
+.progreso-segmento {
+  flex: 1;
+  border-right: 1px solid rgba(42, 34, 28, 0.08);
+}
+
+.progreso-segmento:last-child {
+  border-right: none;
+}
+
+.progreso-segmento.is-pasado {
+  background: rgba(139, 74, 47, 0.12);
+}
+
+.progreso-segmento.is-active {
+  box-shadow: inset 0 -2px 0 #ffd9a8;
+}
+
+.progreso-capitulo-actual {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .seccion-rubro {
@@ -569,6 +624,33 @@ code {
   margin-top: var(--espacio-md);
 }
 
+.podcast-reproductor {
+  margin-top: var(--espacio-lg);
+  padding: var(--espacio-md);
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: 0 8px 24px rgba(42, 34, 28, 0.08);
+}
+
+.podcast-reproductor-etiqueta {
+  margin: 0 0 var(--espacio-sm);
+  color: var(--acento);
+  font-size: var(--fz-pequena);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.podcast-embed {
+  display: block;
+  width: 100%;
+  height: 352px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -871,6 +953,14 @@ main iframe:not(.graphcommons-iframe) {
     grid-template-columns: 1fr;
   }
 
+  .podcast-embed {
+    height: 280px;
+  }
+
+  .proyectos-galeria {
+    grid-template-columns: 1fr;
+  }
+
   .graphcommons-iframe {
     min-height: 400px;
     height: 420px;
@@ -1012,6 +1102,92 @@ main iframe:not(.graphcommons-iframe) {
 
 .btn-participar {
   margin-top: var(--espacio-md);
+}
+
+.participacion-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-sm);
+  margin-top: var(--espacio-md);
+}
+
+.btn-proyectos {
+  background: var(--panel);
+  color: var(--acento);
+  border: 1px solid var(--linea);
+}
+
+.btn-proyectos:hover {
+  background: #faf6f1;
+}
+
+/* —— Proyectos del Hub —— */
+.seccion-proyectos {
+  border-top: 1px solid var(--linea);
+  background: linear-gradient(180deg, rgba(242, 230, 218, 0.45) 0%, var(--fondo) 100%);
+}
+
+.proyectos-galeria {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-md);
+  margin-top: var(--espacio-md);
+}
+
+.proyecto-tarjeta {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  background: rgba(250, 246, 241, 0.9);
+  box-shadow: 0 8px 22px rgba(42, 34, 28, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.proyecto-tarjeta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(42, 34, 28, 0.12);
+}
+
+.proyecto-figura {
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--panel);
+}
+
+.proyecto-figura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.proyecto-cuerpo {
+  padding: var(--espacio-sm) var(--espacio-md) var(--espacio-md);
+}
+
+.proyecto-nombre {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--acento);
+}
+
+.proyecto-tipo {
+  margin: 0 0 0.65rem;
+  color: var(--muted);
+  font-size: var(--fz-pequena);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.proyecto-cuerpo .texto {
+  margin: 0;
+  font-size: var(--fz-pequena);
+  line-height: 1.55;
 }
 
 .docs-puebla-figura {

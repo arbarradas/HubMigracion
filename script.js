@@ -80,7 +80,7 @@ function initNavegacion() {
   });
 
   const marcarActivo = () => {
-    const offset = window.scrollY + nav.offsetHeight + 48;
+    const offset = window.scrollY + nav.offsetHeight + 56;
     let activa = secciones[0].id;
 
     secciones.forEach((seccion) => {
@@ -90,10 +90,72 @@ function initNavegacion() {
     enlaces.forEach((enlace) => {
       enlace.classList.toggle("is-active", enlace.dataset.nav === activa);
     });
+
+    return activa;
   };
 
   marcarActivo();
   window.addEventListener("scroll", marcarActivo, { passive: true });
+}
+
+const capitulosHistoria = [
+  { id: "hub", etiqueta: "El Hub" },
+  { id: "podcast", etiqueta: "Podcast" },
+  { id: "datos", etiqueta: "Datos" },
+  { id: "migracion-mundial", etiqueta: "Migración mundial" },
+  { id: "investigacion", etiqueta: "Investigación" },
+  { id: "cartografia-estudiantil", etiqueta: "Cartografía" },
+  { id: "proyectos-hub", etiqueta: "Proyectos" },
+  { id: "participacion", etiqueta: "Participar" },
+  { id: "contacto", etiqueta: "Contacto" }
+];
+
+function initProgresoHistoria() {
+  const barra = document.querySelector("#progreso-capitulos");
+  const relleno = document.querySelector("#progreso-relleno");
+  const segmentos = document.querySelector("#progreso-segmentos");
+  const etiqueta = document.querySelector("#progreso-etiqueta");
+  const nav = document.querySelector(".nav-hub");
+
+  if (!barra || !relleno || !segmentos || !etiqueta || !nav) return;
+
+  capitulosHistoria.forEach((capitulo) => {
+    const marca = document.createElement("span");
+    marca.className = "progreso-segmento";
+    marca.dataset.capitulo = capitulo.id;
+    marca.title = capitulo.etiqueta;
+    segmentos.appendChild(marca);
+  });
+
+  const marcas = [...segmentos.querySelectorAll(".progreso-segmento")];
+
+  const actualizarProgreso = () => {
+    const inicio = document.querySelector("#hub")?.offsetTop ?? 0;
+    const fin = document.documentElement.scrollHeight - window.innerHeight;
+    const avance = fin > inicio ? Math.min(100, Math.max(0, ((window.scrollY - inicio) / (fin - inicio)) * 100)) : 0;
+
+    relleno.style.width = `${avance}%`;
+    barra.setAttribute("aria-valuenow", String(Math.round(avance)));
+
+    const offset = window.scrollY + nav.offsetHeight + 56;
+    let indiceActivo = 0;
+
+    capitulosHistoria.forEach((capitulo, indice) => {
+      const seccion = document.querySelector(`#${capitulo.id}`);
+      if (seccion && seccion.offsetTop <= offset) indiceActivo = indice;
+    });
+
+    marcas.forEach((marca, indice) => {
+      marca.classList.toggle("is-active", indice === indiceActivo);
+      marca.classList.toggle("is-pasado", indice < indiceActivo);
+    });
+
+    etiqueta.textContent = `Capítulo: ${capitulosHistoria[indiceActivo].etiqueta}`;
+  };
+
+  actualizarProgreso();
+  window.addEventListener("scroll", actualizarProgreso, { passive: true });
+  window.addEventListener("resize", actualizarProgreso, { passive: true });
 }
 
 function initContacto() {
@@ -375,6 +437,7 @@ function initCartografiaInteractiva() {
 actualizarPanelMigracion();
 escribirLectura();
 initNavegacion();
+initProgresoHistoria();
 initContacto();
 initVolverArriba();
 initCartografiaInteractiva();

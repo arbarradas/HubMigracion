@@ -27,11 +27,26 @@
           <li><a href="#migracion-mundial" data-nav="migracion-mundial">Migración mundial</a></li>
           <li><a href="#investigacion" data-nav="investigacion">Investigación</a></li>
           <li><a href="#cartografia-estudiantil" data-nav="cartografia-estudiantil">Cartografía</a></li>
+          <li><a href="#proyectos-hub" data-nav="proyectos-hub">Proyectos</a></li>
           <li><a href="#participacion" data-nav="participacion">Participar</a></li>
           <li><a href="#contacto" data-nav="contacto">Contacto</a></li>
         </ul>
       </div>
     </nav>
+
+    <div
+      class="progreso-capitulos"
+      id="progreso-capitulos"
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      aria-label="Progreso del recorrido por el Hub"
+    >
+      <div class="progreso-capitulos-relleno" id="progreso-relleno"></div>
+      <div class="progreso-capitulos-segmentos" id="progreso-segmentos" aria-hidden="true"></div>
+    </div>
+    <p class="progreso-capitulo-actual" id="progreso-etiqueta" aria-live="polite">Capítulo: El Hub</p>
 
     <section id="hub" class="hub-presentacion seccion-ancla" aria-labelledby="hub-titulo-principal">
       <div class="hero-contenido">
@@ -75,7 +90,7 @@
             <span class="hub-pilares">* Comunicación * Ética * Investigación docente * Sentido Humano</span>
           </p>
           <p class="puente-narrativo hub-puente">
-            Este sitio recorre una historia en capítulos: primero las voces, luego el contexto global, después la investigación en Puebla y, al final, una invitación a sumarte.
+            Este sitio recorre una historia en capítulos: voces, contexto global, investigación en Puebla, proyectos con impacto y, al final, una invitación a sumarte.
           </p>
         </div>
       </div>
@@ -118,6 +133,18 @@
               Escuchar «Sociedad Migrante» en Spotify
             </a>
           </div>
+        </div>
+
+        <div class="podcast-reproductor">
+          <p class="podcast-reproductor-etiqueta">Escucha un episodio aquí</p>
+          <iframe
+            class="podcast-embed"
+            src="https://open.spotify.com/embed/show/1GOWpD3yzR7r3ui2EHd2HM?utm_source=generator&theme=0"
+            title="Reproductor embebido — Sociedad Migrante en Spotify"
+            loading="lazy"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </section>
@@ -271,6 +298,74 @@
           </aside>
         </div>
       </section>
+
+      <section id="proyectos-hub" class="seccion-proyectos seccion-rubro seccion-ancla" aria-labelledby="titulo-proyectos">
+        <div class="ancho-contenido">
+          <p class="etiqueta">Impacto</p>
+          <h2 id="titulo-proyectos" class="subtitulo">Proyectos del Hub</h2>
+          <p class="texto puente-narrativo">
+            La investigación y la divulgación se materializan en obras, análisis y presencia internacional. Estos proyectos muestran cómo el Hub transforma datos y voces en impacto social.
+          </p>
+
+          <div class="proyectos-galeria">
+            <article class="proyecto-tarjeta">
+              <figure class="proyecto-figura">
+                <img src="Capaz.png" alt="Proyecto Capaz — intervención visual sobre migración" loading="lazy">
+              </figure>
+              <div class="proyecto-cuerpo">
+                <h3 class="proyecto-nombre">Capaz</h3>
+                <p class="proyecto-tipo">Comunicación visual</p>
+                <p class="texto">
+                  Pieza consensuada con estudiantes de Comunicación, en diálogo con la obra de
+                  <a href="https://jorgecarlos.com/" target="_blank" rel="noopener noreferrer">Jorge Carlos Álvarez</a>.
+                </p>
+              </div>
+            </article>
+
+            <article class="proyecto-tarjeta">
+              <figure class="proyecto-figura">
+                <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">
+                  <img src="CuandoVuelvas_DocsPue2025.2.png" alt="Cuando vuelvas — selección Docs Puebla 2025" loading="lazy">
+                </a>
+              </figure>
+              <div class="proyecto-cuerpo">
+                <h3 class="proyecto-nombre">Cuando vuelvas</h3>
+                <p class="proyecto-tipo">Cine · Docs Puebla 2025</p>
+                <p class="texto">
+                  Cortometraje exhibido en México y el extranjero; selección oficial Fragmentos Universitarios en
+                  <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">Docs Puebla</a>.
+                </p>
+              </div>
+            </article>
+
+            <article class="proyecto-tarjeta">
+              <figure class="proyecto-figura">
+                <img src="Factores asociados a permanecer en Puebla.png" alt="Factores asociados a permanecer en Puebla — visualización de datos" loading="lazy">
+              </figure>
+              <div class="proyecto-cuerpo">
+                <h3 class="proyecto-nombre">Factores en Puebla</h3>
+                <p class="proyecto-tipo">Análisis de datos</p>
+                <p class="texto">
+                  Estudio presentado a nivel nacional sobre factores asociados a permanecer en la ciudad, derivado de la investigación sobre movilidad estudiantil.
+                </p>
+              </div>
+            </article>
+
+            <article class="proyecto-tarjeta">
+              <figure class="proyecto-figura">
+                <img src="Japón.Taiko2.JPG" alt="Participación del Hub en actividad cultural internacional" loading="lazy">
+              </figure>
+              <div class="proyecto-cuerpo">
+                <h3 class="proyecto-nombre">Presencia internacional</h3>
+                <p class="proyecto-tipo">Conferencias · Suiza · Turquía</p>
+                <p class="texto">
+                  El Hub ha participado en espacios académicos globales, conectando la migración estudiantil en Puebla con conversaciones internacionales.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
       
     </main>
 
@@ -279,34 +374,12 @@
         <p class="etiqueta">Tu lugar en la historia</p>
         <h2 id="titulo-participacion" class="subtitulo">¿Cómo puedes participar?</h2>
         <p class="texto puente-narrativo participacion-puente">
-          Has recorrido voces, datos e investigación. Ahora puedes formar parte de esta red: proponer un proyecto, difundir o colaborar desde tu disciplina.
+          Has recorrido voces, datos, investigación y proyectos con impacto. Ahora puedes formar parte de esta red: proponer una idea, difundir o colaborar desde tu disciplina.
         </p>
         <div class="texto-flow">
           <p class="texto">
-            De este Hub han surgido proyectos cinematográficos exhibidos en México y el extranjero, estudios de análisis de datos presentados a nivel nacional y participaciones en conferencias internacionales en Suiza o Turquía, como el cortometraje <strong>Cuando vuelvas.</strong>
+            Los proyectos del Hub — desde piezas visuales y cortometrajes hasta estudios de datos y conferencias internacionales — nacieron de colaboraciones abiertas. El siguiente puede llevar tu firma.
           </p>
-          <figure class="docs-puebla-figura">
-            <a
-              class="docs-puebla-enlace"
-              href="https://docsmx.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Cuando vuelvas — selección oficial Docs Puebla 2025 (abre docsmx.org)"
-            >
-              <img
-                src="CuandoVuelvas_DocsPue2025.2.png"
-                alt="Cartel de selección oficial Fragmentos Universitarios 2025 — Docs Puebla, con el cortometraje Cuando vuelvas del Tec de Monterrey"
-                class="docs-puebla-imagen"
-                loading="lazy"
-                width="640"
-                height="640"
-              >
-            </a>
-            <figcaption class="texto">
-              Selección oficial Fragmentos Universitarios 2025 —
-              <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">Docs Puebla</a>
-            </figcaption>
-          </figure>
           <p class="texto participacion-lema"><strong>Todos somos migrantes.</strong></p>
           <p class="texto">
             ¡Súmate a los esfuerzos del Hub de Migración e Impacto Social!
@@ -316,7 +389,10 @@
             <strong>Contáctanos.</strong>
             Escribe con una propuesta de proyecto académico que impacte en nuestra sociedad y, en particular, en el subgrupo de personas en movimiento. ¡Te esperamos!
           </p>
-          <a class="btn btn-correo btn-participar" href="#contacto">Ir a contacto</a>
+          <div class="participacion-acciones">
+            <a class="btn btn-correo btn-participar" href="#contacto">Ir a contacto</a>
+            <a class="btn btn-proyectos" href="#proyectos-hub">Ver proyectos del Hub</a>
+          </div>
         </div>
       </div>
     </section>
@@ -355,6 +431,7 @@
             <li><a href="#migracion-mundial">Migración mundial</a></li>
             <li><a href="#investigacion">Investigación</a></li>
             <li><a href="#cartografia-estudiantil">Cartografía</a></li>
+            <li><a href="#proyectos-hub">Proyectos</a></li>
             <li><a href="#participacion">Participar</a></li>
           </ul>
         </nav>
