@@ -1,31 +1,31 @@
 :root,
 [data-paleta="institucional"] {
-  --fondo: #f4f4f6;
-  --texto: #1c1c28;
-  --muted: #5c5c6e;
-  --linea: #c8c8d4;
+  --fondo: #f7f8fb;
+  --texto: #1a2340;
+  --muted: #5a6478;
+  --linea: #d4dae8;
   --panel: #ffffff;
-  --marco: #215c9e;
-  --acento: #215c9e;
-  --acento-2: #3d7ec4;
-  --nav-fondo: rgba(33, 92, 158, 0.96);
-  --nav-texto: rgba(244, 244, 246, 0.92);
+  --marco: #2a428c;
+  --acento: #2a428c;
+  --acento-2: #4a72b5;
+  --nav-fondo: rgba(21, 45, 90, 0.97);
+  --nav-texto: rgba(247, 248, 251, 0.93);
   --nav-marca: #ffffff;
-  --nav-hover: rgba(255, 255, 255, 0.14);
-  --nav-activo: rgba(255, 255, 255, 0.22);
-  --progreso-fondo: rgba(200, 200, 212, 0.45);
-  --sombra: rgba(28, 28, 40, 0.08);
-  --sombra-fuerte: rgba(28, 28, 40, 0.14);
-  --hub-fondo: linear-gradient(165deg, #0d3a6e 0%, #215c9e 48%, #3d7ec4 100%);
-  --hub-texto: #f4f4f6;
+  --nav-hover: rgba(255, 255, 255, 0.12);
+  --nav-activo: rgba(255, 255, 255, 0.2);
+  --progreso-fondo: rgba(212, 218, 232, 0.55);
+  --sombra: rgba(26, 35, 64, 0.07);
+  --sombra-fuerte: rgba(26, 35, 64, 0.12);
+  --hub-fondo: linear-gradient(165deg, #152d5a 0%, #2a428c 50%, #3d5f9a 100%);
+  --hub-texto: #f7f8fb;
   --hub-acento: #ffffff;
-  --hub-acento-suave: rgba(255, 255, 255, 0.88);
-  --seccion-panel: #eef2f8;
-  --seccion-clara: #f4f4f6;
-  --mapa-origen: #215c9e;
-  --mapa-residencia: #3d7ec4;
-  --mapa-escribe: #1a8a6a;
-  --mapa-voz: #6b4c9e;
+  --hub-acento-suave: rgba(247, 248, 251, 0.9);
+  --seccion-panel: #eef2f9;
+  --seccion-clara: #f7f8fb;
+  --mapa-origen: #2a428c;
+  --mapa-residencia: #4a72b5;
+  --mapa-escribe: #2d7a62;
+  --mapa-voz: #5c4d8a;
   --nav-altura: 3.75rem;
   --progreso-altura: 0.28rem;
   --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
@@ -402,7 +402,7 @@ h2.subtitulo {
 }
 
 .muestra-institucional {
-  background: linear-gradient(135deg, #215c9e 0%, #f4f4f6 100%);
+  background: linear-gradient(135deg, #152d5a 0%, #2a428c 55%, #eef2f9 100%);
 }
 
 .ciudadania-oim-bloque {
@@ -685,7 +685,7 @@ p {
 .ciudadania-region-card--destacada {
   border-color: var(--marco);
   background: var(--panel);
-  box-shadow: inset 0 0 0 1px rgba(33, 92, 158, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(42, 66, 140, 0.14);
 }
 
 .ciudadania-region-nombre {
@@ -2027,7 +2027,7 @@ main iframe:not(.graphcommons-iframe) {
 }
 
 .marcador-con-voz span {
-  box-shadow: 0 0 0 3px rgba(33, 92, 158, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 3px rgba(42, 66, 140, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .encuesta-campo {
