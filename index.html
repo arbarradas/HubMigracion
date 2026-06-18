@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-paleta="tierra">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <a class="saltar-contenido" href="#hub">Saltar al contenido principal</a>
+    <a class="saltar-contenido" href="#hub" data-i18n="skip">Saltar al contenido principal</a>
 
     <nav class="nav-hub" aria-label="Navegación principal del Hub">
       <div class="nav-hub-inner">
-        <a class="nav-marca" href="#hub">Hub de Migración e Impacto Social</a>
+        <a class="nav-marca" href="#hub" data-i18n="nav.brand">Hub de Migración e Impacto Social</a>
         <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú de navegación">
           <span class="nav-toggle-bar" aria-hidden="true"></span>
           <span class="nav-toggle-bar" aria-hidden="true"></span>
@@ -23,21 +23,42 @@
         </button>
         <ul id="nav-menu" class="nav-menu">
           <li class="nav-item-recorrido">
-            <button type="button" class="btn btn-recorrido-nav" id="btn-iniciar-recorrido">
+            <button type="button" class="btn btn-recorrido-nav" id="btn-iniciar-recorrido" data-i18n="nav.tour">
               Iniciar recorrido
             </button>
           </li>
-          <li><a href="#hub" data-nav="hub">El Hub</a></li>
-          <li><a href="#podcast" data-nav="podcast">Podcast</a></li>
-          <li><a href="#datos" data-nav="datos">Datos</a></li>
-          <li><a href="#migracion-mundial" data-nav="migracion-mundial">Migración mundial</a></li>
-          <li><a href="#investigacion" data-nav="investigacion">Investigación</a></li>
-          <li><a href="#cartografia-estudiantil" data-nav="cartografia-estudiantil">Cartografía</a></li>
-          <li><a href="#proyectos-hub" data-nav="proyectos-hub">Proyectos</a></li>
-          <li><a href="#participacion" data-nav="participacion">Participar</a></li>
-          <li><a href="#encuesta-visitantes" data-nav="encuesta-visitantes">Tu ubicación</a></li>
-          <li><a href="#faq" data-nav="faq">FAQ</a></li>
-          <li><a href="#contacto" data-nav="contacto">Contacto</a></li>
+          <li><a href="#hub" data-nav="hub" data-i18n="nav.hub">El Hub</a></li>
+          <li><a href="#creacion-contenidos" data-nav="creacion-contenidos" data-i18n="nav.creacion">Creación de contenidos</a></li>
+          <li><a href="#ciudadania-global" data-nav="ciudadania-global" data-i18n="nav.ciudadania">Ciudadanía global</a></li>
+          <li><a href="#investigacion" data-nav="investigacion" data-i18n="nav.investigacion">Investigación</a></li>
+          <li><a href="#storytelling" data-nav="storytelling" data-i18n="nav.storytelling">Storytelling</a></li>
+          <li><a href="#participacion" data-nav="participacion" data-i18n="nav.participar">Participar</a></li>
+          <li><a href="#encuesta-visitantes" data-nav="encuesta-visitantes" data-i18n="nav.ubicacion">Tu ubicación</a></li>
+          <li><a href="#faq" data-nav="faq" data-i18n="nav.faq">FAQ</a></li>
+          <li><a href="#contacto" data-nav="contacto" data-i18n="nav.contacto">Contacto</a></li>
+          <li class="nav-item-preferencias">
+            <div class="nav-preferencias" role="group" aria-label="Preferencias de visualización">
+              <div id="selector-idioma" class="selector-idioma" role="group" aria-label="Idioma">
+                <button type="button" class="btn-idioma is-active" data-lang="es" aria-pressed="true" title="Español" aria-label="Español">
+                  <span class="bandera" aria-hidden="true">🇲🇽</span>
+                </button>
+                <button type="button" class="btn-idioma" data-lang="en" aria-pressed="false" title="English" aria-label="English">
+                  <span class="bandera" aria-hidden="true">🇺🇸</span>
+                </button>
+              </div>
+              <div id="selector-paleta" class="selector-paleta" role="group" aria-label="Paleta de color">
+                <button type="button" class="btn-paleta is-active" data-paleta="tierra" aria-pressed="true" title="Paleta tierra" aria-label="Paleta tierra">
+                  <span class="muestra-paleta muestra-tierra" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn-paleta" data-paleta="oceano" aria-pressed="false" title="Paleta océano" aria-label="Paleta océano">
+                  <span class="muestra-paleta muestra-oceano" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn-paleta" data-paleta="institucional" aria-pressed="false" title="Paleta institucional" aria-label="Paleta institucional">
+                  <span class="muestra-paleta muestra-institucional" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </nav>
@@ -49,6 +70,7 @@
       aria-valuemin="0"
       aria-valuemax="100"
       aria-valuenow="0"
+      data-i18n-aria="progress.label"
       aria-label="Progreso del recorrido por el Hub"
     >
       <div class="progreso-capitulos-relleno" id="progreso-relleno"></div>
@@ -59,57 +81,45 @@
     <section id="hub" class="hub-presentacion seccion-ancla" aria-labelledby="hub-titulo-principal">
       <div class="hero-contenido">
         <h1 id="hub-titulo-principal" class="hub-titulo-principal titulo-grande">
-          <span class="hub-titulo-linea">HUB DE MIGRACIÓN E IMPACTO SOCIAL</span>
-          <span class="hub-titulo-campus subtitulo">¿Qué es el Hub de Migración e Impacto Social?</span>
+          <span class="hub-titulo-linea" data-i18n="hub.title">HUB DE MIGRACIÓN E IMPACTO SOCIAL</span>
+          <span class="hub-titulo-campus subtitulo" data-i18n="hub.subtitle">¿Qué es el Hub de Migración e Impacto Social?</span>
         </h1>
-        
-        <div class="hero-imagenes">
 
-          <figure>
-            <img src="Capaz.png" alt="Proyecto Capaz">
-            <figcaption>
-              Pieza de la muestra museográfica en el Centro Cultural San Roque (Puebla), elaborada por estudiantes de Comunicación en diálogo con la obra del fotógrafo
-              <a href="https://jorgecarlos.com/" target="_blank" rel="noopener noreferrer">Jorge Carlos Álvarez</a>.
-            </figcaption>
-          </figure>
-</div>        
+        <div class="curul-contenedor">
+          <iframe
+            class="oim-iframe"
+            src="https://mediatik.com.mx/inauguran-en-el-tec-de-monterrey-puebla-un-centro-para-el-estudio-de-la-migracion/"
+            title="Inauguración Hub de Migración"
+            loading="lazy">
+          </iframe>
+          <p class="fuente" data-i18n="hub.source">
+            Fuente: Portal de noticias Mediatik
+          </p>
+        </div>
 
-<div class="curul-contenedor">
-
-  <iframe
-    class="oim-iframe"
-    src="https://mediatik.com.mx/inauguran-en-el-tec-de-monterrey-puebla-un-centro-para-el-estudio-de-la-migracion/"
-    title="Inauguración Hub de Migración"
-    loading="lazy">
-  </iframe>
-  <p class="fuente">
-    Fuente: Portal de noticias Mediatik
-  </p>
-</div>
-      
         <div class="hub-descripcion texto-flow">
           <p>
-            <span class="hub-titulo-campus subtitulo">Arranque</span>
-            Desde su inauguración en febrero de 2025, se han fortalecido colaboraciones con socios formadores como la Organización internacional para las Migraciones (OIM) y Samuel Kishi, director de cine y embajador de buena voluntad de dicha Organización.
+            <span class="hub-titulo-campus subtitulo" data-i18n="hub.arranque">Arranque</span>
+            <span data-i18n="hub.p1">Desde su inauguración en febrero de 2025, se han fortalecido colaboraciones con socios formadores como la Organización internacional para las Migraciones (OIM) y Samuel Kishi, director de cine y embajador de buena voluntad de dicha Organización.</span>
           </p>
           <p>
-            <strong>Áreas Estratégicas del Hub de Migración e Impacto Social</strong>
-            Se plantean 4 pilares alrededor de los cuales tiene acción esta iniciativa académica:
-            <span class="hub-pilares">* Comunicación * Ética * Investigación docente * Sentido Humano</span>
+            <strong data-i18n="hub.p2.title">Áreas Estratégicas del Hub de Migración e Impacto Social</strong>
+            <span data-i18n="hub.p2.body">Se plantean 4 pilares alrededor de los cuales tiene acción esta iniciativa académica:</span>
+            <span class="hub-pilares" data-i18n="hub.pilares">* Comunicación * Ética * Investigación docente * Sentido Humano</span>
           </p>
-          <p class="puente-narrativo hub-puente">
+          <p class="puente-narrativo hub-puente" data-i18n="hub.puente">
             Este sitio recorre una historia en capítulos: voces, contexto global, investigación en Puebla, proyectos con impacto y, al final, una invitación a sumarte.
           </p>
         </div>
       </div>
     </section>
 
-    <section id="podcast" class="seccion-podcast seccion-rubro seccion-ancla" aria-labelledby="titulo-podcast">
+    <section id="creacion-contenidos" class="seccion-podcast seccion-rubro seccion-ancla" aria-labelledby="titulo-creacion">
       <div class="ancho-contenido">
-        <p class="etiqueta">Podcast</p>
-        <h2 id="titulo-podcast" class="subtitulo">Primero, escuchemos: ¿qué hay de la divulgación?</h2>
-        <p class="texto puente-narrativo">
-          La migración no se entiende solo con cifras. <em>Sociedad Migrante</em> acerca testimonios, debates y miradas desde distintos países para situar el fenómeno con rostro y voz humana.
+        <p class="etiqueta" data-i18n="creacion.label">Creación de contenidos</p>
+        <h2 id="titulo-creacion" class="subtitulo" data-i18n="creacion.title">Primero, escuchemos: ¿qué hay de la divulgación?</h2>
+        <p class="texto puente-narrativo" data-i18n="creacion.puente">
+          La migración no se entiende solo con cifras. Sociedad Migrante acerca testimonios, debates y miradas desde distintos países para situar el fenómeno con rostro y voz humana.
         </p>
         <div class="podcast-tarjeta">
           <a
@@ -125,18 +135,18 @@
             >
           </a>
           <div class="podcast-info texto-flow">
-            <p class="texto">
+            <p class="texto" data-i18n="creacion.p1">
               Es muy importante dar a conocer avances y proyectos académicos, así como escuchar las voces que nos representan como ciudadanía a nivel mundial.
             </p>
-            <p class="texto">
-              Sociedad Migrante aborda la migración desde una perspectiva humana y global, con la participación de estudiantes e invitadxs especiales.
-              La primera temporada incluye entrevistas a eurodiputadxs desde el <em>Parlamento Europeo</em> en Bruselas, Bélgica.
+            <p class="texto" data-i18n="creacion.p2">
+              Sociedad Migrante aborda la migración desde una perspectiva humana y global, con la participación de estudiantes e invitadxs especiales. La primera temporada incluye entrevistas a eurodiputadxs desde el Parlamento Europeo en Bruselas, Bélgica.
             </p>
             <a
               class="btn btn-spotify"
               href="https://open.spotify.com/show/1GOWpD3yzR7r3ui2EHd2HM"
               target="_blank"
               rel="noopener noreferrer"
+              data-i18n="creacion.spotify"
             >
               Escuchar «Sociedad Migrante» en Spotify
             </a>
@@ -144,7 +154,7 @@
         </div>
 
         <div class="podcast-reproductor">
-          <p class="podcast-reproductor-etiqueta">Episodio 1 — Javier Moreno Sánchez (Parlamento Europeo)</p>
+          <p class="podcast-reproductor-etiqueta" data-i18n="creacion.episode">Episodio 1 — Javier Moreno Sánchez (Parlamento Europeo)</p>
           <iframe
             class="podcast-embed"
             src="https://open.spotify.com/embed/episode/1pZksnI3J2604Y3gl9abbT?utm_source=generator&theme=0"
@@ -157,90 +167,122 @@
       </div>
     </section>
 
-    <section id="datos" class="seccion-datos seccion-rubro seccion-ancla" aria-labelledby="titulo-datos">
+    <section id="ciudadania-global" class="seccion-datos seccion-rubro seccion-ancla" aria-labelledby="titulo-ciudadania">
       <div class="ancho-contenido">
-        <p class="etiqueta">Datos para reflexionar</p>
-        <h2 id="titulo-datos" class="subtitulo">¿Qué está pasando en el mundo?</h2>
-        <p class="texto puente-narrativo">
+        <p class="etiqueta" data-i18n="ciudadania.label">Ciudadanía global</p>
+        <h2 id="titulo-ciudadania" class="subtitulo" data-i18n="ciudadania.title">¿Qué está pasando en el mundo?</h2>
+        <p class="texto puente-narrativo" data-i18n="ciudadania.puente">
           Con esas voces en mente, estas cifras ayudan a dimensionar la magnitud de la migración mexicana en el exterior.
         </p>
-        <p class="texto datos-fuente">
-          Estimaciones del Instituto de los Mexicanos en el Exterior (SRE). El corredor México–Estados Unidos
-          es considerado el más numeroso del mundo, de acuerdo con datos de la OIM y la ONU (UN DESA, 2024).
+        <p class="texto datos-fuente" data-i18n="ciudadania.fuente">
+          Estimaciones del Instituto de los Mexicanos en el Exterior (SRE). El corredor México–Estados Unidos es considerado el más numeroso del mundo, de acuerdo con datos de la OIM y la ONU (UN DESA, 2024).
         </p>
         <div class="panel-resumen panel-migracion" id="panel-migracion-contadores">
           <article>
             <span id="migrantes-eua" class="dato-destacado" data-contador="11654000">0</span>
-            <p class="texto">Estados Unidos</p>
+            <p class="texto" data-i18n="ciudadania.usa">Estados Unidos</p>
           </article>
           <article>
             <span id="migrantes-europa" class="dato-destacado" data-contador="103814">0</span>
-            <p class="texto">Europa</p>
+            <p class="texto" data-i18n="ciudadania.europe">Europa</p>
           </article>
           <article>
             <span id="migrantes-asia" class="dato-destacado" data-contador="11180">0</span>
-            <p class="texto">Asia</p>
+            <p class="texto" data-i18n="ciudadania.asia">Asia</p>
           </article>
         </div>
-      </div>
-    </section>
 
-    <main>
-      <section id="migracion-mundial" class="seccion-oim seccion-rubro seccion-ancla" aria-labelledby="titulo-migracion-mundial">
-        <div class="ancho-contenido">
-          <p class="etiqueta">Migración mundial</p>
-          <h2 id="titulo-migracion-mundial" class="subtitulo">Migración internacional — Portal de Datos OIM</h2>
-          <p class="texto puente-narrativo">
+        <div class="ciudadania-oim-bloque">
+          <h3 class="subtitulo ciudadania-oim-titulo" data-i18n="ciudadania.oim.title">Migración internacional — Portal de Datos OIM</h3>
+          <p class="texto puente-narrativo" data-i18n="ciudadania.oim.puente">
             Ampliamos la mirada: la migración es un fenómeno planetario. Este mapa permite comparar flujos y stocks a escala global.
           </p>
-          <p class="texto">
-            Mapa interactivo del Portal de Datos sobre Migración (GMDAC / OIM), con indicadores de stocks
-            migratorios internacionales comparables a nivel global y regional.
+          <p class="texto" data-i18n="ciudadania.oim.body">
+            Mapa interactivo del Portal de Datos sobre Migración (GMDAC / OIM), con indicadores de stocks migratorios internacionales comparables a nivel global y regional.
           </p>
           <div class="oim-embed-contenedor">
             <iframe
               class="oim-iframe"
+              id="oim-map-iframe"
               src="https://www.migrationdataportal.org/es/embed-map"
               title="Mapa interactivo de migración — Organización Internacional para las Migraciones"
               loading="lazy"
               allowfullscreen
             ></iframe>
           </div>
-          <p class="texto texto-fuente">
+          <p class="texto texto-fuente" data-i18n="ciudadania.oim.source" data-i18n-html="true">
             Fuente:
             <a href="https://www.migrationdataportal.org/es" target="_blank" rel="noopener noreferrer">Portal de Datos sobre Migración (OIM)</a>
             ·
             <a href="https://worldmigrationreport.iom.int/what-we-do/world-migration-report-2024/chapter-2/international-migrants-numbers-and-trends" target="_blank" rel="noopener noreferrer">Informe sobre las Migraciones en el Mundo 2024</a>.
           </p>
         </div>
-      </section>
 
+        <aside class="proyecto-internacional ciudadania-internacional" aria-labelledby="titulo-internacional">
+          <div class="proyecto-internacional-marca" aria-hidden="true">
+            <span class="proyecto-internacional-sigla">OIM · GMMA</span>
+          </div>
+          <div class="proyecto-internacional-contenido texto-flow">
+            <h3 id="titulo-internacional" class="proyecto-nombre" data-i18n="ciudadania.int.title">Presencia internacional</h3>
+            <p class="proyecto-tipo" data-i18n="ciudadania.int.type">Conferencias · Suiza · Turquía</p>
+            <p class="texto" data-i18n="ciudadania.int.p1" data-i18n-html="true">
+              El Hub y su equipo académico han participado en espacios internacionales vinculados con la
+              <a href="https://www.iom.int/" target="_blank" rel="noopener noreferrer">Organización Internacional para las Migraciones (OIM)</a>
+              y la
+              <a href="https://www.mediamigrationacademy.org/about" target="_blank" rel="noopener noreferrer">Global Migration Media Academy (GMMA)</a>,
+              iniciativa de la OIM para una cobertura mediática ética y humana sobre migración.
+            </p>
+            <p class="texto" data-i18n="ciudadania.int.p2">
+              Desde 2023, el campus Puebla colabora con la OIM México en talleres, cursos y formación dentro del marco GMMA — vínculo que culminó en la inauguración del Hub en febrero de 2025, con la participación del embajador de buena voluntad de la OIM en México, Samuel Kishi.
+            </p>
+            <ul class="proyecto-enlaces">
+              <li>
+                <a href="https://www.mediamigrationacademy.org/blog/migration-and-social-impact-hub" target="_blank" rel="noopener noreferrer">
+                  GMMA — Inauguración del Hub de Migración e Impacto Social
+                </a>
+              </li>
+              <li>
+                <a href="https://www.iom.int/news/global-migration-media-academy-brings-students-communications-professionals-together-address-ethical-coverage-migration" target="_blank" rel="noopener noreferrer">
+                  OIM — Global Migration Media Academy
+                </a>
+              </li>
+              <li>
+                <a href="https://conecta.tec.mx/es/noticias/puebla/institucion/narrativa-en-corto-alumnos-de-tec-puebla-analizan-fenomeno-migratorio" target="_blank" rel="noopener noreferrer">
+                  Tec de Monterrey — Colaboración académica con la OIM
+                </a>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <main>
       <section id="investigacion" class="seccion-investigacion seccion-rubro seccion-ancla" aria-labelledby="titulo-investigacion">
         <div class="ancho-contenido">
-          <p id="etiqueta-investigacion" class="etiqueta">Investigación</p>
-          <h2 id="titulo-investigacion" class="subtitulo">¿Qué estamos haciendo al respecto?</h2>
-          <p class="texto puente-narrativo">
+          <p id="etiqueta-investigacion" class="etiqueta" data-i18n="investigacion.label">Investigación</p>
+          <h2 id="titulo-investigacion" class="subtitulo" data-i18n="investigacion.title">¿Qué estamos haciendo al respecto?</h2>
+          <p class="texto puente-narrativo" data-i18n="investigacion.puente">
             Desde el campus Puebla, el Hub convierte la pregunta global en evidencia local: encuestas, grafos y cartografías que describen la movilidad estudiantil.
           </p>
 
           <div class="investigacion-panel">
             <div class="investigacion-encabezado">
               <div class="marco-titulo">
-                <h3 class="titulo-estudio subtitulo">Migración: movilidad estudiantil en el Tec de Monterrey campus Puebla</h3>
+                <h3 class="titulo-estudio subtitulo" data-i18n="investigacion.study">Migración: movilidad estudiantil en el Tec de Monterrey campus Puebla</h3>
               </div>
               <div class="texto-flow investigacion-texto">
-                <p><strong>Una aproximación a la movilidad estudiantil en el Tec de Monterrey.</strong></p>
-                <p>
-                  Recientemente se realizó una investigación coordinada por el Dr. Barradas-Gurruchaga en la que participaron la Mtra. Villa Maciel y la Dra. Castaño Echeverri.
-                  Se generaron datos que permiten acercarse al fenómeno de la migración estudiantil, a través de encuestas aplicadas a una muestra del estudiantado.
+                <p data-i18n="investigacion.study.p1"><strong>Una aproximación a la movilidad estudiantil en el Tec de Monterrey.</strong></p>
+                <p data-i18n="investigacion.study.p2">
+                  Recientemente se realizó una investigación coordinada por el Dr. Barradas-Gurruchaga en la que participaron la Mtra. Villa Maciel y la Dra. Castaño Echeverri. Se generaron datos que permiten acercarse al fenómeno de la migración estudiantil, a través de encuestas aplicadas a una muestra del estudiantado.
                 </p>
               </div>
             </div>
 
             <div class="graphcommons-marco">
               <div class="graphcommons-cabecera">
-                <p class="graphcommons-etiqueta">Grafo interactivo de factores</p>
-                <p class="graphcommons-nota">Explora nodos y relaciones · Graph Commons</p>
+                <p class="graphcommons-etiqueta" data-i18n="investigacion.graph.label">Grafo interactivo de factores</p>
+                <p class="graphcommons-nota" data-i18n="investigacion.graph.note">Explora nodos y relaciones · Graph Commons</p>
               </div>
               <div class="graphcommons-contenedor">
                 <iframe
@@ -254,72 +296,88 @@
             </div>
 
             <div class="investigacion-pie texto-flow">
-              <p class="texto texto-fuente">Fuente: Elaboración propia.</p>
-              <p class="texto">
+              <p class="texto texto-fuente" data-i18n="investigacion.graph.source">Fuente: Elaboración propia.</p>
+              <p class="texto" data-i18n="investigacion.graph.body">
                 En esta visualización se aprecian algunos de los factores más relevantes que impulsan la movilización de personas jóvenes (estudiantes) en su llegada a la ciudad de Puebla.
               </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      
-      <section id="cartografia-estudiantil" class="seccion-cartografia seccion-rubro seccion-ancla" aria-labelledby="titulo-cartografia">
-        <div class="ancho-contenido">
-          <p class="etiqueta">Movilidad estudiantil</p>
-          <h2 id="titulo-cartografia" class="subtitulo">Cartografía de la movilidad estudiantil</h2>
-          <p class="texto puente-narrativo">
-            Los mismos datos cobran forma en un dendograma: estados, ciudades de origen y motivos de llegada a Puebla, listos para explorar.
-          </p>
-          <p class="texto">
-            Esta visualización muestra un dendograma lineal con los estados de procedencia de las y los estudiantes foráneos que respondieron a la encuesta, sus ciudades de origen y las razones de su movilización con destino a la ciudad de Puebla.
-            Con estos datos se cuenta con información valiosa para la institución y para la ciudad.
-          </p>
-          <p class="texto cartog-ayuda">
-            Pasa el cursor o toca un nodo para resaltar sus conexiones. Haz clic para fijar la selección.
-          </p>
-
-          <div class="cartog-controles" aria-label="Controles de la cartografía">
-            <div class="cartog-filtros-columna" role="group" aria-label="Filtrar por columna del dendograma">
-              <span class="cartog-filtros-etiqueta">Ver columna</span>
-              <button type="button" class="cartog-filtro-btn is-active" data-filtro-columna="todos">Todo</button>
-              <button type="button" class="cartog-filtro-btn" data-filtro-columna="estados">Estados</button>
-              <button type="button" class="cartog-filtro-btn" data-filtro-columna="ciudades">Ciudades</button>
-              <button type="button" class="cartog-filtro-btn" data-filtro-columna="motivos">Motivos</button>
-            </div>
-            <label class="cartog-filtro">
-              <span>Buscar en la cartografía</span>
-              <input type="search" id="cartog-buscar" placeholder="Estado, ciudad o motivo…" autocomplete="off">
-            </label>
-            <button type="button" class="btn btn-cartog-limpiar" id="cartog-limpiar" hidden>Limpiar selección</button>
-          </div>
-      
-          <div class="svg-wrapper" id="cartog-contenedor">
-            <object
-              id="cartog-svg"
-              data="Cartog.Estudiantes.svg"
-              type="image/svg+xml"
-              class="svg-interactivo"
-              aria-label="Dendograma interactivo de movilidad estudiantil: estados, ciudades de origen y motivos de llegada a Puebla">
-            </object>
-          </div>
-
-          <div id="cartog-tooltip" class="cartog-tooltip" role="status" aria-live="polite" hidden></div>
-
-          <aside id="cartog-detalle" class="cartog-detalle" aria-live="polite">
-            <p class="cartog-detalle-placeholder texto">
-              Selecciona un nodo en la visualización para ver su nombre, columna (estado, ciudad o motivo) y conexiones relacionadas.
+          <div class="investigacion-cartografia-bloque">
+            <p class="etiqueta" data-i18n="investigacion.carto.label">Movilidad estudiantil</p>
+            <h3 class="subtitulo" data-i18n="investigacion.carto.title">Cartografía de la movilidad estudiantil</h3>
+            <p class="texto puente-narrativo" data-i18n="investigacion.carto.puente">
+              Los mismos datos cobran forma en un dendograma: estados, ciudades de origen y motivos de llegada a Puebla, listos para explorar.
             </p>
-          </aside>
+            <p class="texto" data-i18n="investigacion.carto.body">
+              Esta visualización muestra un dendograma lineal con los estados de procedencia de las y los estudiantes foráneos que respondieron a la encuesta, sus ciudades de origen y las razones de su movilización con destino a la ciudad de Puebla. Con estos datos se cuenta con información valiosa para la institución y para la ciudad.
+            </p>
+            <p class="texto cartog-ayuda" data-i18n="investigacion.carto.help">
+              Pasa el cursor o toca un nodo para resaltar sus conexiones. Haz clic para fijar la selección.
+            </p>
+
+            <div class="cartog-controles" aria-label="Controles de la cartografía">
+              <div class="cartog-filtros-columna" role="group" aria-label="Filtrar por columna del dendograma">
+                <span class="cartog-filtros-etiqueta" data-i18n="investigacion.carto.filter">Ver columna</span>
+                <button type="button" class="cartog-filtro-btn is-active" data-filtro-columna="todos" data-i18n="investigacion.carto.all">Todo</button>
+                <button type="button" class="cartog-filtro-btn" data-filtro-columna="estados" data-i18n="investigacion.carto.states">Estados</button>
+                <button type="button" class="cartog-filtro-btn" data-filtro-columna="ciudades" data-i18n="investigacion.carto.cities">Ciudades</button>
+                <button type="button" class="cartog-filtro-btn" data-filtro-columna="motivos" data-i18n="investigacion.carto.motives">Motivos</button>
+              </div>
+              <label class="cartog-filtro">
+                <span data-i18n="investigacion.carto.search">Buscar en la cartografía</span>
+                <input type="search" id="cartog-buscar" data-i18n-placeholder="investigacion.carto.search.ph" placeholder="Estado, ciudad o motivo…" autocomplete="off">
+              </label>
+              <button type="button" class="btn btn-cartog-limpiar" id="cartog-limpiar" hidden data-i18n="investigacion.carto.clear">Limpiar selección</button>
+            </div>
+
+            <div class="svg-wrapper" id="cartog-contenedor">
+              <object
+                id="cartog-svg"
+                data="Cartog.Estudiantes.svg"
+                type="image/svg+xml"
+                class="svg-interactivo"
+                aria-label="Dendograma interactivo de movilidad estudiantil: estados, ciudades de origen y motivos de llegada a Puebla">
+              </object>
+            </div>
+
+            <div id="cartog-tooltip" class="cartog-tooltip" role="status" aria-live="polite" hidden></div>
+
+            <aside id="cartog-detalle" class="cartog-detalle" aria-live="polite">
+              <p class="cartog-detalle-placeholder texto" data-i18n="investigacion.carto.detail">
+                Selecciona un nodo en la visualización para ver su nombre, columna (estado, ciudad o motivo) y conexiones relacionadas.
+              </p>
+            </aside>
+          </div>
+
+          <div class="investigacion-factores-bloque">
+            <div class="factores-interactivo" id="factores-interactivo" aria-labelledby="factores-titulo-grafica">
+              <p id="factores-titulo-grafica" class="factores-titulo-grafica" data-i18n="investigacion.factores.title">Factores asociados a permanecer en Puebla</p>
+              <p class="factores-subtitulo-grafica" data-i18n="investigacion.factores.sub">Pasa el cursor o toca una barra para ver el detalle.</p>
+              <div class="factores-grafica" id="factores-grafica" role="list"></div>
+              <p class="factores-detalle" id="factores-detalle" aria-live="polite" data-i18n="investigacion.factores.hint">
+                Selecciona un factor para explorar los resultados de la encuesta.
+              </p>
+              <p class="texto investigacion-factores-desc" data-i18n="investigacion.factores.desc">
+                Agrupación temática derivada de respuestas abiertas de estudiantes que indicaron que permanecerían en Puebla, presentada a nivel nacional.
+              </p>
+              <button type="button" class="factores-toggle-png" id="factores-toggle-png" aria-expanded="false" aria-controls="factores-png-original" data-i18n="investigacion.factores.toggle">
+                Ver imagen original del estudio
+              </button>
+              <figure class="factores-png-original" id="factores-png-original" hidden>
+                <img src="Factores asociados a permanecer en Puebla.png" alt="Gráfica estática — factores asociados a permanecer en Puebla" loading="lazy">
+              </figure>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section id="proyectos-hub" class="seccion-proyectos seccion-rubro seccion-ancla" aria-labelledby="titulo-proyectos">
+      <section id="storytelling" class="seccion-proyectos seccion-rubro seccion-ancla" aria-labelledby="titulo-storytelling">
         <div class="ancho-contenido">
-          <p class="etiqueta">Impacto</p>
-          <h2 id="titulo-proyectos" class="subtitulo">Proyectos del Hub</h2>
-          <p class="texto puente-narrativo">
-            La investigación y la divulgación se materializan en obras, análisis y presencia internacional. Estos proyectos muestran cómo el Hub transforma datos y voces en impacto social.
+          <p class="etiqueta" data-i18n="storytelling.label">Storytelling</p>
+          <h2 id="titulo-storytelling" class="subtitulo" data-i18n="storytelling.title">Proyectos del Hub</h2>
+          <p class="texto puente-narrativo" data-i18n="storytelling.puente">
+            La investigación y la divulgación se materializan en obras y análisis. Estos proyectos muestran cómo el Hub transforma datos y voces en narrativas con impacto social.
           </p>
 
           <div class="proyectos-galeria">
@@ -328,9 +386,9 @@
                 <img src="Capaz.png" alt="Proyecto Capaz — pieza de la muestra museográfica sobre migración" loading="lazy">
               </figure>
               <div class="proyecto-cuerpo">
-                <h3 class="proyecto-nombre">Capaz</h3>
-                <p class="proyecto-tipo">Muestra museográfica</p>
-                <p class="texto">
+                <h3 class="proyecto-nombre" data-i18n="storytelling.capaz.name">Capaz</h3>
+                <p class="proyecto-tipo" data-i18n="storytelling.capaz.type">Muestra museográfica</p>
+                <p class="texto" data-i18n="storytelling.capaz.body" data-i18n-html="true">
                   Pieza integrada a una exposición museográfica presentada en el
                   <strong>Centro Cultural San Roque</strong>, en la ciudad de Puebla.
                   Elaborada con estudiantes de Comunicación, en diálogo con la obra de
@@ -346,106 +404,40 @@
                 </a>
               </figure>
               <div class="proyecto-cuerpo">
-                <h3 class="proyecto-nombre">Cuando vuelvas</h3>
-                <p class="proyecto-tipo">Cine · Docs Puebla 2025</p>
-                <p class="texto">
+                <h3 class="proyecto-nombre" data-i18n="storytelling.cuando.name">Cuando vuelvas</h3>
+                <p class="proyecto-tipo" data-i18n="storytelling.cuando.type">Cine · Docs Puebla 2025</p>
+                <p class="texto" data-i18n="storytelling.cuando.body" data-i18n-html="true">
                   Cortometraje exhibido en México y el extranjero; selección oficial Fragmentos Universitarios en
                   <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">Docs Puebla</a>.
                 </p>
               </div>
             </article>
-
-            <article class="proyecto-tarjeta proyecto-tarjeta--factores">
-              <div class="proyecto-figura proyecto-figura--grafica">
-                <div class="factores-interactivo" id="factores-interactivo" aria-labelledby="factores-titulo-grafica">
-                  <p id="factores-titulo-grafica" class="factores-titulo-grafica">Factores asociados a permanecer en Puebla</p>
-                  <p class="factores-subtitulo-grafica">Pasa el cursor o toca una barra para ver el detalle.</p>
-                  <div class="factores-grafica" id="factores-grafica" role="list"></div>
-                  <p class="factores-detalle" id="factores-detalle" aria-live="polite">
-                    Selecciona un factor para explorar los resultados de la encuesta.
-                  </p>
-                  <button type="button" class="factores-toggle-png" id="factores-toggle-png" aria-expanded="false" aria-controls="factores-png-original">
-                    Ver imagen original del estudio
-                  </button>
-                  <figure class="factores-png-original" id="factores-png-original" hidden>
-                    <img src="Factores asociados a permanecer en Puebla.png" alt="Gráfica estática — factores asociados a permanecer en Puebla" loading="lazy">
-                  </figure>
-                </div>
-              </div>
-              <div class="proyecto-cuerpo">
-                <h3 class="proyecto-nombre">Factores en Puebla</h3>
-                <p class="proyecto-tipo">Análisis de datos interactivo</p>
-                <p class="texto">
-                  Agrupación temática derivada de respuestas abiertas de estudiantes que indicaron que permanecerían en Puebla, presentada a nivel nacional.
-                </p>
-              </div>
-            </article>
           </div>
-
-          <aside class="proyecto-internacional" aria-labelledby="titulo-internacional">
-            <div class="proyecto-internacional-marca" aria-hidden="true">
-              <span class="proyecto-internacional-sigla">OIM · GMMA</span>
-            </div>
-            <div class="proyecto-internacional-contenido texto-flow">
-              <h3 id="titulo-internacional" class="proyecto-nombre">Presencia internacional</h3>
-              <p class="proyecto-tipo">Conferencias · Suiza · Turquía</p>
-              <p class="texto">
-                El Hub y su equipo académico han participado en espacios internacionales vinculados con la
-                <a href="https://www.iom.int/" target="_blank" rel="noopener noreferrer">Organización Internacional para las Migraciones (OIM)</a>
-                y la
-                <a href="https://www.mediamigrationacademy.org/about" target="_blank" rel="noopener noreferrer">Global Migration Media Academy (GMMA)</a>,
-                iniciativa de la OIM para una cobertura mediática ética y humana sobre migración.
-              </p>
-              <p class="texto">
-                Desde 2023, el campus Puebla colabora con la OIM México en talleres, cursos y formación dentro del marco GMMA — vínculo que culminó en la inauguración del Hub en febrero de 2025, con la participación del embajador de buena voluntad de la OIM en México, Samuel Kishi.
-              </p>
-              <ul class="proyecto-enlaces">
-                <li>
-                  <a href="https://www.mediamigrationacademy.org/blog/migration-and-social-impact-hub" target="_blank" rel="noopener noreferrer">
-                    GMMA — Inauguración del Hub de Migración e Impacto Social
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.iom.int/news/global-migration-media-academy-brings-students-communications-professionals-together-address-ethical-coverage-migration" target="_blank" rel="noopener noreferrer">
-                    OIM — Global Migration Media Academy
-                  </a>
-                </li>
-                <li>
-                  <a href="https://conecta.tec.mx/es/noticias/puebla/institucion/narrativa-en-corto-alumnos-de-tec-puebla-analizan-fenomeno-migratorio" target="_blank" rel="noopener noreferrer">
-                    Tec de Monterrey — Colaboración académica con la OIM
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </aside>
         </div>
       </section>
-      
     </main>
 
     <section id="participacion" class="seccion-participacion seccion-rubro seccion-ancla" aria-labelledby="titulo-participacion">
       <div class="ancho-contenido participacion-contenido">
-        <p class="etiqueta">Tu lugar en la historia</p>
-        <h2 id="titulo-participacion" class="subtitulo">¿Cómo puedes participar?</h2>
-        <p class="texto puente-narrativo participacion-puente">
+        <p class="etiqueta" data-i18n="participacion.label">Tu lugar en la historia</p>
+        <h2 id="titulo-participacion" class="subtitulo" data-i18n="participacion.title">¿Cómo puedes participar?</h2>
+        <p class="texto puente-narrativo participacion-puente" data-i18n="participacion.puente">
           Has recorrido voces, datos, investigación y proyectos con impacto. Ahora puedes formar parte de esta red: proponer una idea, difundir o colaborar desde tu disciplina.
         </p>
         <div class="texto-flow">
-          <p class="texto">
+          <p class="texto" data-i18n="participacion.p1">
             Los proyectos del Hub — desde piezas visuales y cortometrajes hasta estudios de datos y conferencias internacionales — nacieron de colaboraciones abiertas. El siguiente puede llevar tu firma.
           </p>
-          <p class="texto participacion-lema"><strong>Todos somos migrantes.</strong></p>
-          <p class="texto">
-            ¡Súmate a los esfuerzos del Hub de Migración e Impacto Social!
-            Desde el Hub se trabaja en pro del ODS 10 — Reducción de la desigualdad — con proyectos académicos de inmersión e impacto social.
+          <p class="texto participacion-lema"><strong data-i18n="participacion.lema">Todos somos migrantes.</strong></p>
+          <p class="texto" data-i18n="participacion.p2">
+            ¡Súmate a los esfuerzos del Hub de Migración e Impacto Social! Desde el Hub se trabaja en pro del ODS 10 — Reducción de la desigualdad — con proyectos académicos de inmersión e impacto social.
           </p>
-          <p class="texto">
-            <strong>Contáctanos.</strong>
-            Escribe con una propuesta de proyecto académico que impacte en nuestra sociedad y, en particular, en el subgrupo de personas en movimiento. ¡Te esperamos!
+          <p class="texto" data-i18n="participacion.p3">
+            Contáctanos. Escribe con una propuesta de proyecto académico que impacte en nuestra sociedad y, en particular, en el subgrupo de personas en movimiento. ¡Te esperamos!
           </p>
           <div class="participacion-acciones">
-            <a class="btn btn-correo btn-participar" href="#contacto">Ir a contacto</a>
-            <a class="btn btn-proyectos" href="#proyectos-hub">Ver proyectos del Hub</a>
+            <a class="btn btn-correo btn-participar" href="#contacto" data-i18n="participacion.contact">Ir a contacto</a>
+            <a class="btn btn-proyectos" href="#storytelling" data-i18n="participacion.projects">Ver proyectos del Hub</a>
           </div>
         </div>
       </div>
@@ -453,50 +445,51 @@
 
     <section id="encuesta-visitantes" class="seccion-encuesta seccion-rubro seccion-ancla" aria-labelledby="titulo-encuesta">
       <div class="ancho-contenido">
-        <p class="etiqueta">Tu voz en el mapa</p>
-        <h2 id="titulo-encuesta" class="subtitulo">¿De dónde nos visitas?</h2>
-        <p class="texto puente-narrativo">
+        <p class="etiqueta" data-i18n="encuesta.label">Tu voz en el mapa</p>
+        <h2 id="titulo-encuesta" class="subtitulo" data-i18n="encuesta.title">¿De dónde nos visitas?</h2>
+        <p class="texto puente-narrativo" data-i18n="encuesta.puente">
           La migración también se cuenta desde dónde estás. Tus tres respuestas se reflejan en el mapa; si quieres, añade una frase breve que otros podrán leer al hacer clic en tu ubicación.
         </p>
 
         <div class="encuesta-panel">
           <form id="form-visitante" class="encuesta-formulario" novalidate>
             <label class="encuesta-campo">
-              <span>¿Cuál es tu lugar de origen?</span>
-              <input type="text" id="visitante-origen" name="origen" required autocomplete="address-level2" placeholder="Ej. Xalapa, Veracruz, México">
+              <span data-i18n="encuesta.origin">¿Cuál es tu lugar de origen?</span>
+              <input type="text" id="visitante-origen" name="origen" required autocomplete="address-level2" data-i18n-placeholder="encuesta.origin.ph" placeholder="Ej. Xalapa, Veracruz, México">
             </label>
             <label class="encuesta-campo">
-              <span>¿En dónde resides actualmente?</span>
-              <input type="text" id="visitante-residencia" name="residencia" required autocomplete="address-level1" placeholder="Ej. Puebla, México">
+              <span data-i18n="encuesta.residence">¿En dónde resides actualmente?</span>
+              <input type="text" id="visitante-residencia" name="residencia" required autocomplete="address-level1" data-i18n-placeholder="encuesta.residence.ph" placeholder="Ej. Puebla, México">
             </label>
             <label class="encuesta-campo">
-              <span>¿De dónde nos escribes?</span>
-              <input type="text" id="visitante-escribe" name="escribe" required autocomplete="country-name" placeholder="Ej. Bruselas, Bélgica">
+              <span data-i18n="encuesta.write">¿De dónde nos escribes?</span>
+              <input type="text" id="visitante-escribe" name="escribe" required autocomplete="country-name" data-i18n-placeholder="encuesta.write.ph" placeholder="Ej. Bruselas, Bélgica">
             </label>
             <label class="encuesta-campo encuesta-campo-historia">
-              <span>Tu voz en una frase <em class="encuesta-opcional">(opcional)</em></span>
+              <span data-i18n="encuesta.story">Tu voz en una frase (opcional)</span>
               <textarea
                 id="visitante-historia"
                 name="historia"
                 rows="2"
                 maxlength="120"
+                data-i18n-placeholder="encuesta.story.ph"
                 placeholder="Ej. Estudio en Puebla pero escribo desde Europa por un intercambio temporal."
                 aria-describedby="historia-ayuda historia-contador"
               ></textarea>
               <span class="encuesta-historia-pie">
-                <span id="historia-ayuda" class="encuesta-historia-ayuda">Aparece en el mapa al hacer clic en tu ubicación (máx. 120 caracteres).</span>
+                <span id="historia-ayuda" class="encuesta-historia-ayuda" data-i18n="encuesta.story.help">Aparece en el mapa al hacer clic en tu ubicación (máx. 120 caracteres).</span>
                 <span id="historia-contador" class="encuesta-historia-contador" aria-live="polite">0 / 120</span>
               </span>
             </label>
-            <button type="submit" class="btn btn-correo">Compartir en el mapa</button>
+            <button type="submit" class="btn btn-correo" data-i18n="encuesta.submit">Compartir en el mapa</button>
           </form>
 
           <aside class="encuesta-resumen" aria-live="polite">
             <p class="encuesta-contador-visitas">
-              <span class="encuesta-contador-etiqueta">Visitas al sitio</span>
+              <span class="encuesta-contador-etiqueta" data-i18n="encuesta.visits">Visitas al sitio</span>
               <strong id="contador-visitas">—</strong>
             </p>
-            <p class="texto encuesta-mensaje" id="encuesta-mensaje">
+            <p class="texto encuesta-mensaje" id="encuesta-mensaje" data-i18n="encuesta.empty">
               Aún no hay respuestas en este navegador. Sé la primera persona en dejar tu huella.
             </p>
             <ul class="encuesta-lista" id="encuesta-lista" hidden></ul>
@@ -505,27 +498,27 @@
 
         <div class="mapa-visitantes-bloque">
           <div class="mapa-visitantes-cabecera">
-            <h3 class="subtitulo mapa-visitantes-titulo">Mapa de voces y ubicaciones</h3>
+            <h3 class="subtitulo mapa-visitantes-titulo" data-i18n="encuesta.map.title">Mapa de voces y ubicaciones</h3>
             <p class="texto mapa-visitantes-leyenda">
-              <span class="mapa-leyenda-item mapa-leyenda-origen">Origen</span>
-              <span class="mapa-leyenda-item mapa-leyenda-residencia">Residencia actual</span>
-              <span class="mapa-leyenda-item mapa-leyenda-escribe">Desde donde nos escribes</span>
-              <span class="mapa-leyenda-item mapa-leyenda-voz">Voz con historia</span>
+              <span class="mapa-leyenda-item mapa-leyenda-origen" data-i18n="encuesta.map.origin">Origen</span>
+              <span class="mapa-leyenda-item mapa-leyenda-residencia" data-i18n="encuesta.map.residence">Residencia actual</span>
+              <span class="mapa-leyenda-item mapa-leyenda-escribe" data-i18n="encuesta.map.write">Desde donde nos escribes</span>
+              <span class="mapa-leyenda-item mapa-leyenda-voz" data-i18n="encuesta.map.voice">Voz con historia</span>
             </p>
           </div>
           <div class="mapa-visitantes-herramientas">
-            <button type="button" class="btn btn-mapa-filtro" id="mapa-filtro-voces" aria-pressed="false">
+            <button type="button" class="btn btn-mapa-filtro" id="mapa-filtro-voces" aria-pressed="false" data-i18n="encuesta.map.filter">
               Mostrar solo voces con historia
             </button>
             <p class="texto mapa-api-estado" id="mapa-api-estado" hidden></p>
           </div>
           <div id="mapa-visitantes" class="mapa-visitantes" role="application" aria-label="Mapa interactivo de origen y residencia de visitantes" tabindex="0"></div>
-          <p class="texto mapa-visitantes-nota" id="mapa-visitantes-nota">
+          <p class="texto mapa-visitantes-nota" id="mapa-visitantes-nota" data-i18n="encuesta.map.loading">
             Cargando ubicaciones compartidas…
           </p>
           <aside class="mapa-voces-panel" id="mapa-voces-panel" aria-labelledby="mapa-voces-titulo" hidden>
-            <h4 id="mapa-voces-titulo" class="mapa-voces-titulo">Voces en el mapa</h4>
-            <p class="texto mapa-voces-intro">Haz clic en una frase para centrar el mapa en esa ubicación y leer la historia completa.</p>
+            <h4 id="mapa-voces-titulo" class="mapa-voces-titulo" data-i18n="encuesta.voices.title">Voces en el mapa</h4>
+            <p class="texto mapa-voces-intro" data-i18n="encuesta.voices.intro">Haz clic en una frase para centrar el mapa en esa ubicación y leer la historia completa.</p>
             <ul class="mapa-voces-lista" id="mapa-voces-lista"></ul>
           </aside>
         </div>
@@ -534,56 +527,56 @@
 
     <section id="faq" class="seccion-faq seccion-rubro seccion-ancla" aria-labelledby="titulo-faq">
       <div class="ancho-contenido">
-        <p class="etiqueta">Ayuda</p>
-        <h2 id="titulo-faq" class="subtitulo">Preguntas frecuentes (FAQ)</h2>
-        <p class="texto puente-narrativo">
+        <p class="etiqueta" data-i18n="faq.label">Ayuda</p>
+        <h2 id="titulo-faq" class="subtitulo" data-i18n="faq.title">Preguntas frecuentes (FAQ)</h2>
+        <p class="texto puente-narrativo" data-i18n="faq.puente">
           Respuestas breves a las dudas más comunes sobre el Hub, sus datos y cómo participar.
         </p>
 
         <nav class="faq-indice" aria-label="Índice de preguntas frecuentes">
-          <h3 class="faq-indice-titulo">En esta sección</h3>
+          <h3 class="faq-indice-titulo" data-i18n="faq.index">En esta sección</h3>
           <ul>
-            <li><a href="#faq-que-es">¿Qué es el Hub de Migración e Impacto Social?</a></li>
-            <li><a href="#faq-participar">¿Cómo puedo participar en el Hub?</a></li>
-            <li><a href="#faq-datos">¿De dónde provienen los datos del sitio?</a></li>
+            <li><a href="#faq-que-es" data-i18n="faq.q1">¿Qué es el Hub de Migración e Impacto Social?</a></li>
+            <li><a href="#faq-participar" data-i18n="faq.q2">¿Cómo puedo participar en el Hub?</a></li>
+            <li><a href="#faq-datos" data-i18n="faq.q3">¿De dónde provienen los datos del sitio?</a></li>
           </ul>
         </nav>
 
         <div class="faq-lista">
           <details id="faq-que-es" class="faq-item" open>
-            <summary>¿Qué es el Hub de Migración e Impacto Social?</summary>
+            <summary data-i18n="faq.q1">¿Qué es el Hub de Migración e Impacto Social?</summary>
             <div class="faq-respuesta texto">
-              <p>
-                Es una iniciativa académica del Tecnológico de Monterrey, campus Puebla, inaugurada en febrero de 2025 para estudiar la migración con enfoque humano, ético y de impacto social. Articula investigación, divulgación (como el podcast <em>Sociedad Migrante</em>), visualización de datos y proyectos con la OIM y la GMMA.
+              <p data-i18n="faq.a1">
+                Es una iniciativa académica del Tecnológico de Monterrey, campus Puebla, inaugurada en febrero de 2025 para estudiar la migración con enfoque humano, ético y de impacto social. Articula investigación, divulgación (como el podcast Sociedad Migrante), visualización de datos y proyectos con la OIM y la GMMA.
               </p>
-              <p><a href="#hub">Ir al inicio del Hub</a></p>
+              <p><a href="#hub" data-i18n="faq.a1.link">Ir al inicio del Hub</a></p>
             </div>
           </details>
 
           <details id="faq-participar" class="faq-item">
-            <summary>¿Cómo puedo participar en el Hub?</summary>
+            <summary data-i18n="faq.q2">¿Cómo puedo participar en el Hub?</summary>
             <div class="faq-respuesta texto">
-              <p>
+              <p data-i18n="faq.a2">
                 Puedes proponer un proyecto académico, colaborar en investigación sobre movilidad estudiantil, difundir los contenidos del sitio o sumar tu voz en el mapa de ubicaciones. Escríbenos desde la sección de contacto.
               </p>
               <p>
-                <a href="#participacion">Ir a «¿Cómo puedes participar?»</a>
+                <a href="#participacion" data-i18n="faq.a2.link1">Ir a «¿Cómo puedes participar?»</a>
                 ·
-                <a href="#contacto">Contactar al Hub</a>
+                <a href="#contacto" data-i18n="faq.a2.link2">Contactar al Hub</a>
               </p>
             </div>
           </details>
 
           <details id="faq-datos" class="faq-item">
-            <summary>¿De dónde provienen los datos de migración que se muestran?</summary>
+            <summary data-i18n="faq.q3">¿De dónde provienen los datos de migración que se muestran?</summary>
             <div class="faq-respuesta texto">
-              <p>
-                Las cifras globales provienen del Instituto de los Mexicanos en el Exterior (SRE) y del Portal de Datos sobre Migración de la OIM. La investigación sobre movilidad estudiantil en Puebla es elaboración propia del equipo del Hub (encuestas, Graph Commons y cartografía). El mapa de visitantes puede usar una hoja de Google (ver <code>apps-script/SETUP-MAPA.md</code>), el archivo <code>datos-visitantes.json</code> y las respuestas de tu navegador; las frases opcionales («voces») se leen al hacer clic en el mapa.
+              <p data-i18n="faq.a3">
+                Las cifras globales provienen del Instituto de los Mexicanos en el Exterior (SRE) y del Portal de Datos sobre Migración de la OIM. La investigación sobre movilidad estudiantil en Puebla es elaboración propia del equipo del Hub (encuestas, Graph Commons y cartografía). El mapa de visitantes puede usar una hoja de Google (ver apps-script/SETUP-MAPA.md), el archivo datos-visitantes.json y las respuestas de tu navegador; las frases opcionales («voces») se leen al hacer clic en el mapa.
               </p>
               <p>
-                <a href="#datos">Ver datos migratorios</a>
+                <a href="#ciudadania-global" data-i18n="faq.a3.link1">Ver ciudadanía global</a>
                 ·
-                <a href="#investigacion">Ver investigación</a>
+                <a href="#investigacion" data-i18n="faq.a3.link2">Ver investigación</a>
               </p>
             </div>
           </details>
@@ -601,24 +594,24 @@
         aria-describedby="recorrido-texto"
       >
         <div id="recorrido-paso-contenido">
-          <p class="recorrido-paso" id="recorrido-paso">Paso 1 de 9</p>
+          <p class="recorrido-paso" id="recorrido-paso">Paso 1 de 7</p>
           <h2 id="recorrido-titulo" class="subtitulo recorrido-titulo">Recorrido por el Hub</h2>
           <p id="recorrido-texto" class="texto recorrido-texto"></p>
           <div class="recorrido-acciones" id="recorrido-acciones">
-            <button type="button" class="btn btn-recorrido-sec" id="recorrido-anterior" disabled>Anterior</button>
-            <button type="button" class="btn btn-correo" id="recorrido-siguiente">Siguiente</button>
-            <button type="button" class="btn btn-recorrido-sec" id="recorrido-cerrar">Salir del recorrido</button>
+            <button type="button" class="btn btn-recorrido-sec" id="recorrido-anterior" disabled data-i18n="tour.prev">Anterior</button>
+            <button type="button" class="btn btn-correo" id="recorrido-siguiente" data-i18n="tour.next">Siguiente</button>
+            <button type="button" class="btn btn-recorrido-sec" id="recorrido-cerrar" data-i18n="tour.exit">Salir del recorrido</button>
           </div>
         </div>
 
         <div id="recorrido-resumen" class="recorrido-resumen" hidden>
-          <h2 class="subtitulo">Resumen de tu recorrido</h2>
-          <p class="texto">Completaste la ruta por el Hub. Estos son los capítulos que visitaste:</p>
+          <h2 class="subtitulo" data-i18n="tour.summary.title">Resumen de tu recorrido</h2>
+          <p class="texto" data-i18n="tour.summary.body">Completaste la ruta por el Hub. Estos son los capítulos que visitaste:</p>
           <ul class="recorrido-resumen-lista" id="recorrido-resumen-lista"></ul>
           <p class="texto" id="recorrido-resumen-mapa"></p>
           <div class="recorrido-acciones">
-            <a class="btn btn-correo" href="#encuesta-visitantes" id="recorrido-ir-mapa">Ver mapa de voces</a>
-            <button type="button" class="btn btn-recorrido-sec" id="recorrido-cerrar-resumen">Cerrar</button>
+            <a class="btn btn-correo" href="#encuesta-visitantes" id="recorrido-ir-mapa" data-i18n="tour.summary.viewmap">Ver mapa de voces</a>
+            <button type="button" class="btn btn-recorrido-sec" id="recorrido-cerrar-resumen" data-i18n="tour.summary.close">Cerrar</button>
           </div>
         </div>
       </div>
@@ -627,58 +620,56 @@
     <footer id="contacto" class="site-footer seccion-ancla" aria-label="Pie de página: créditos y contacto">
       <div class="ancho-contenido footer-grid">
         <section class="footer-bloque" aria-labelledby="titulo-creditos">
-          <h2 id="titulo-creditos" class="subtitulo">Créditos del Hub</h2>
-          <p class="texto">
-            Hub de Migración e Impacto Social — Tecnológico de Monterrey, campus Puebla y Región
-            Centro-Occidente.
+          <h2 id="titulo-creditos" class="subtitulo" data-i18n="footer.credits">Créditos del Hub</h2>
+          <p class="texto" data-i18n="footer.credits.body">
+            Hub de Migración e Impacto Social — Tecnológico de Monterrey, campus Puebla y Región Centro-Occidente.
           </p>
           <p class="texto footer-credito">
             <a href="https://www.linkedin.com/in/andresrbg7" target="_blank" rel="noopener noreferrer">
               <strong>Dr. Andrés Roberto Barradas-Gurruchaga</strong>
             </a><br>
-            Creador del sitio web y coordinador del Hub.
+            <span data-i18n="footer.credits.role">Creador del sitio web y coordinador del Hub.</span>
           </p>
         </section>
 
         <section class="footer-bloque" aria-labelledby="titulo-pie-contacto">
-          <h2 id="titulo-pie-contacto" class="subtitulo">Contactar</h2>
+          <h2 id="titulo-pie-contacto" class="subtitulo" data-i18n="footer.contact">Contactar</h2>
           <p class="texto">
-            ¿Deseas colaborar, integrar un proyecto o conocer más sobre el Hub?
-            <p>Escríbenos por correo.</p>
+            <span data-i18n="footer.contact.body">¿Deseas colaborar, integrar un proyecto o conocer más sobre el Hub?</span>
+            <span data-i18n="footer.contact.write">Escríbenos por correo.</span>
           </p>
-          <button type="button" class="btn btn-correo" id="btn-contacto">
+          <button type="button" class="btn btn-correo" id="btn-contacto" data-i18n="footer.contact.btn">
             Enviar correo electrónico
           </button>
         </section>
 
         <nav class="footer-bloque footer-mapa" aria-label="Mapa del sitio">
-          <h2 class="subtitulo">En esta página</h2>
+          <h2 class="subtitulo" data-i18n="footer.sitemap">En esta página</h2>
           <ul class="footer-enlaces">
-            <li><a href="#hub">El Hub</a></li>
-            <li><a href="#podcast">Podcast</a></li>
-            <li><a href="#datos">Datos</a></li>
-            <li><a href="#migracion-mundial">Migración mundial</a></li>
-            <li><a href="#investigacion">Investigación</a></li>
-            <li><a href="#cartografia-estudiantil">Cartografía</a></li>
-            <li><a href="#proyectos-hub">Proyectos</a></li>
-            <li><a href="#participacion">Participar</a></li>
-            <li><a href="#encuesta-visitantes">Tu ubicación</a></li>
-            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#hub" data-i18n="nav.hub">El Hub</a></li>
+            <li><a href="#creacion-contenidos" data-i18n="nav.creacion">Creación de contenidos</a></li>
+            <li><a href="#ciudadania-global" data-i18n="nav.ciudadania">Ciudadanía global</a></li>
+            <li><a href="#investigacion" data-i18n="nav.investigacion">Investigación</a></li>
+            <li><a href="#storytelling" data-i18n="nav.storytelling">Storytelling</a></li>
+            <li><a href="#participacion" data-i18n="nav.participar">Participar</a></li>
+            <li><a href="#encuesta-visitantes" data-i18n="nav.ubicacion">Tu ubicación</a></li>
+            <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
           </ul>
         </nav>
       </div>
       <p class="footer-legal texto">
-        © Hub de Migración e Impacto Social — Tec de Monterrey, campus Puebla.
+        <span data-i18n="footer.legal">© Hub de Migración e Impacto Social — Tec de Monterrey, campus Puebla.</span>
         <span class="footer-visitas" id="footer-visitas" aria-live="polite"></span>
       </p>
     </footer>
 
-    <a href="#hub" class="btn-volver-arriba" id="btn-arriba" aria-label="Volver arriba" hidden>
+    <a href="#hub" class="btn-volver-arriba" id="btn-arriba" data-i18n-aria="back.top" aria-label="Volver arriba" hidden>
       <span aria-hidden="true">↑</span>
     </a>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="config-mapa.js"></script>
+    <script src="i18n.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

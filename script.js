@@ -16,8 +16,16 @@ const datosMigracion = [
   }
 ];
 
+function t(clave, vars) {
+  return window.HubI18n?.t(clave, vars) ?? clave;
+}
+
+function localeActual() {
+  return window.HubI18n?.getIdioma() === "en" ? "en-US" : "es-MX";
+}
+
 function formatearNumero(numero) {
-  return new Intl.NumberFormat("es-MX").format(numero);
+  return new Intl.NumberFormat(localeActual()).format(numero);
 }
 
 function initContadoresAnimados() {
@@ -124,60 +132,26 @@ function initNavegacion() {
 }
 
 const capitulosHistoria = [
-  { id: "hub", etiqueta: "El Hub" },
-  { id: "podcast", etiqueta: "Podcast" },
-  { id: "datos", etiqueta: "Datos" },
-  { id: "migracion-mundial", etiqueta: "Migración mundial" },
-  { id: "investigacion", etiqueta: "Investigación" },
-  { id: "cartografia-estudiantil", etiqueta: "Cartografía" },
-  { id: "proyectos-hub", etiqueta: "Proyectos" },
-  { id: "participacion", etiqueta: "Participar" },
-  { id: "encuesta-visitantes", etiqueta: "Tu ubicación" },
-  { id: "faq", etiqueta: "FAQ" },
-  { id: "contacto", etiqueta: "Contacto" }
+  { id: "hub", key: "cap.hub" },
+  { id: "creacion-contenidos", key: "cap.creacion" },
+  { id: "ciudadania-global", key: "cap.ciudadania" },
+  { id: "investigacion", key: "cap.investigacion" },
+  { id: "storytelling", key: "cap.storytelling" },
+  { id: "participacion", key: "cap.participar" },
+  { id: "encuesta-visitantes", key: "cap.ubicacion" },
+  { id: "faq", key: "cap.faq" },
+  { id: "contacto", key: "cap.contacto" }
 ];
 
 const factoresPuebla = [
-  {
-    factor: "Gusto por la ciudad",
-    valor: 5,
-    detalle: "Afinidad con Puebla como lugar de vida, más allá de lo académico."
-  },
-  {
-    factor: "Calidad académica",
-    valor: 5,
-    detalle: "Percepción de una oferta educativa sólida en el campus."
-  },
-  {
-    factor: "Oportunidades universitarias",
-    valor: 4,
-    detalle: "Acceso a programas, redes y experiencias dentro de la institución."
-  },
-  {
-    factor: "Familia y amistades",
-    valor: 3,
-    detalle: "Redes de apoyo cercanas que influyen en la decisión de quedarse."
-  },
-  {
-    factor: "Carrera disponible",
-    valor: 3,
-    detalle: "Oferta de la carrera o trayectoria que buscaban al llegar."
-  },
-  {
-    factor: "Oportunidades laborales",
-    valor: 2,
-    detalle: "Perspectivas de empleo o prácticas en la región."
-  },
-  {
-    factor: "Economía y comodidad",
-    valor: 2,
-    detalle: "Costo de vida y condiciones materiales para permanecer."
-  },
-  {
-    factor: "Otros",
-    valor: 3,
-    detalle: "Motivos adicionales mencionados en respuestas abiertas."
-  }
+  { id: "gusto", valor: 5 },
+  { id: "academica", valor: 5 },
+  { id: "oportunidades", valor: 4 },
+  { id: "familia", valor: 3 },
+  { id: "carrera", valor: 3 },
+  { id: "laboral", valor: 2 },
+  { id: "economia", valor: 2 },
+  { id: "otros", valor: 3 }
 ];
 
 const CLAVE_VISITAS = "hub-migracion-visitas";
@@ -189,51 +163,16 @@ const COUNT_API = "https://api.countapi.xyz";
 const NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
 
 const pasosRecorrido = [
-  {
-    id: "hub",
-    titulo: "El Hub de Migración",
-    texto: "Este es el punto de partida: qué es el Hub, quiénes lo impulsan y cómo se articula con la OIM y el campus Puebla."
-  },
-  {
-    id: "podcast",
-    titulo: "Primero, las voces",
-    texto: "Escucha el episodio con Javier Moreno Sánchez desde el Parlamento Europeo. La migración se narra antes de medirla con cifras."
-  },
-  {
-    id: "datos",
-    titulo: "Datos para reflexionar",
-    texto: "Estas cifras del IME/SRE dimensionan la migración mexicana en el exterior y preparan el contexto global."
-  },
-  {
-    id: "migracion-mundial",
-    titulo: "Migración en el mundo",
-    texto: "Explora el mapa de la OIM para comparar stocks migratorios a escala planetaria."
-  },
-  {
-    id: "investigacion",
-    titulo: "Investigación en Puebla",
-    texto: "Revisa el estudio sobre movilidad estudiantil y el grafo interactivo de factores en Graph Commons."
-  },
-  {
-    id: "cartografia-estudiantil",
-    titulo: "Cartografía estudiantil",
-    texto: "Interactúa con el dendograma: estados, ciudades de origen y motivos de llegada a Puebla."
-  },
-  {
-    id: "proyectos-hub",
-    titulo: "Proyectos con impacto",
-    texto: "Capaz, cine, análisis de datos y presencia internacional con la OIM y la GMMA."
-  },
-  {
-    id: "participacion",
-    titulo: "Tu participación",
-    texto: "El recorrido cierra con una invitación: puedes proponer proyectos y sumarte al Hub."
-  },
+  { id: "hub", tituloKey: "tour.hub.title", textoKey: "tour.hub.text" },
+  { id: "creacion-contenidos", tituloKey: "tour.creacion.title", textoKey: "tour.creacion.text" },
+  { id: "ciudadania-global", tituloKey: "tour.ciudadania.title", textoKey: "tour.ciudadania.text" },
+  { id: "investigacion", tituloKey: "tour.investigacion.title", textoKey: "tour.investigacion.text" },
+  { id: "storytelling", tituloKey: "tour.storytelling.title", textoKey: "tour.storytelling.text" },
+  { id: "participacion", tituloKey: "tour.participacion.title", textoKey: "tour.participacion.text" },
   {
     id: "encuesta-visitantes",
-    titulo: "Voces y ubicaciones",
-    texto:
-      "Responde tres preguntas: tu lugar de origen, dónde resides actualmente y desde dónde nos escribes. Las tres ubicaciones se reflejan en el mapa."
+    tituloKey: "tour.encuesta.title",
+    textoKey: "tour.encuesta.text"
   }
 ];
 
@@ -345,6 +284,14 @@ function actualizarEstadoMapaApi(remotas) {
       : "Registro compartido activo. Las nuevas respuestas se guardan para todo el sitio.";
 }
 
+function factorEtiqueta(fila) {
+  return t(`factor.${fila.id}`);
+}
+
+function factorDetalle(fila) {
+  return t(`factor.${fila.id}.d`);
+}
+
 function initFactoresInteractivo() {
   const contenedor = document.querySelector("#factores-grafica");
   const detalle = document.querySelector("#factores-detalle");
@@ -353,16 +300,18 @@ function initFactoresInteractivo() {
 
   if (!contenedor || !detalle) return;
 
+  contenedor.innerHTML = "";
   const maxValor = Math.max(...factoresPuebla.map((fila) => fila.valor));
   let factorFijado = null;
 
   const resaltar = (fila) => {
+    const etiqueta = factorEtiqueta(fila);
     contenedor.querySelectorAll(".factores-barra").forEach((barra) => {
-      const activa = barra.dataset.factor === fila.factor;
+      const activa = barra.dataset.factorId === fila.id;
       barra.classList.toggle("is-active", activa);
       barra.classList.toggle("is-atenuada", !activa);
     });
-    detalle.innerHTML = `<strong>${fila.factor}</strong> — ${fila.valor} menciones temáticas. ${fila.detalle}`;
+    detalle.innerHTML = `<strong>${etiqueta}</strong> — ${t("factor.menciones", { n: fila.valor })} ${factorDetalle(fila)}`;
   };
 
   const limpiar = () => {
@@ -370,20 +319,21 @@ function initFactoresInteractivo() {
     contenedor.querySelectorAll(".factores-barra").forEach((barra) => {
       barra.classList.remove("is-active", "is-atenuada");
     });
-    detalle.textContent = "Selecciona un factor para explorar los resultados de la encuesta.";
+    detalle.textContent = t("investigacion.factores.hint");
   };
 
   factoresPuebla.forEach((fila) => {
+    const etiqueta = factorEtiqueta(fila);
     const item = document.createElement("button");
     item.type = "button";
     item.className = "factores-barra";
-    item.dataset.factor = fila.factor;
+    item.dataset.factorId = fila.id;
     item.setAttribute("role", "listitem");
-    item.setAttribute("aria-label", `${fila.factor}: ${fila.valor} menciones`);
+    item.setAttribute("aria-label", `${etiqueta}: ${fila.valor}`);
 
-    const etiqueta = document.createElement("span");
-    etiqueta.className = "factores-etiqueta";
-    etiqueta.textContent = fila.factor;
+    const etiquetaEl = document.createElement("span");
+    etiquetaEl.className = "factores-etiqueta";
+    etiquetaEl.textContent = etiqueta;
 
     const pista = document.createElement("span");
     pista.className = "factores-pista";
@@ -398,40 +348,41 @@ function initFactoresInteractivo() {
     valor.textContent = String(fila.valor);
 
     pista.appendChild(relleno);
-    item.append(etiqueta, pista, valor);
+    item.append(etiquetaEl, pista, valor);
 
     item.addEventListener("mouseenter", () => resaltar(fila));
     item.addEventListener("focus", () => resaltar(fila));
     item.addEventListener("mouseleave", limpiar);
     item.addEventListener("click", () => {
-      factorFijado = factorFijado?.factor === fila.factor ? null : fila;
+      factorFijado = factorFijado?.id === fila.id ? null : fila;
       if (factorFijado) {
         resaltar(fila);
       } else {
         contenedor.querySelectorAll(".factores-barra").forEach((barra) => {
           barra.classList.remove("is-active", "is-atenuada");
         });
-        detalle.textContent = "Selecciona un factor para explorar los resultados de la encuesta.";
+        detalle.textContent = t("investigacion.factores.hint");
       }
     });
 
     contenedor.appendChild(item);
   });
 
-  if (toggle && pngOriginal) {
+  if (toggle && pngOriginal && !toggle.dataset.bound) {
+    toggle.dataset.bound = "1";
     toggle.addEventListener("click", () => {
       const visible = pngOriginal.hidden;
       pngOriginal.hidden = !visible;
       toggle.setAttribute("aria-expanded", String(visible));
       toggle.textContent = visible
-        ? "Ocultar imagen original del estudio"
-        : "Ver imagen original del estudio";
+        ? t("investigacion.factores.toggle.hide")
+        : t("investigacion.factores.toggle");
     });
   }
 }
 
 function formatearContadorVisitas(valor) {
-  return new Intl.NumberFormat("es-MX").format(valor);
+  return new Intl.NumberFormat(localeActual()).format(valor);
 }
 
 function mostrarContadorVisitas(valor, esAproximado = false) {
@@ -733,14 +684,13 @@ function pintarEncuestaLocal() {
   if (!lista || !mensaje) return;
 
   if (respuestas.length === 0) {
-    mensaje.textContent =
-      "Aún no hay respuestas en este navegador. Sé la primera persona en dejar tu huella en el mapa.";
+    mensaje.textContent = t("encuesta.empty");
     lista.hidden = true;
     lista.innerHTML = "";
     return;
   }
 
-  mensaje.textContent = `${respuestas.length} respuesta${respuestas.length === 1 ? "" : "s"} en este navegador (también en el mapa):`;
+  mensaje.textContent = t("encuesta.responses", { n: respuestas.length });
   lista.hidden = false;
   lista.innerHTML = respuestas
     .slice(-6)
@@ -749,7 +699,7 @@ function pintarEncuestaLocal() {
       const escribe = entrada.escribe || entrada.residencia;
       const historia = sanitizarHistoria(entrada.historia);
       const voz = historia ? `<br><em class="encuesta-lista-voz">«${escapeHtml(historia)}»</em>` : "";
-      return `<li><strong>${escapeHtml(entrada.origen)}</strong> · reside en ${escapeHtml(entrada.residencia)} · escribe desde ${escapeHtml(escribe)}${voz}</li>`;
+      return `<li><strong>${escapeHtml(entrada.origen)}</strong> · ${t("encuesta.residence.in")} ${escapeHtml(entrada.residencia)} · ${t("encuesta.write.from")} ${escapeHtml(escribe)}${voz}</li>`;
     })
     .join("");
 }
@@ -970,15 +920,15 @@ function initRecorridoGuiado() {
 
     if (resumenLista) {
       resumenLista.innerHTML = pasosRecorrido
-        .map((pasoRecorrido) => `<li><a href="#${pasoRecorrido.id}">${pasoRecorrido.titulo}</a></li>`)
+        .map((pasoRecorrido) => `<li><a href="#${pasoRecorrido.id}">${t(pasoRecorrido.tituloKey)}</a></li>`)
         .join("");
     }
 
     const tieneRespuesta = leerEncuestasLocales().length > 0;
     if (resumenMapa) {
       resumenMapa.textContent = tieneRespuesta
-        ? "Ya compartiste tus tres ubicaciones en este navegador. Puedes revisarlas en el mapa."
-        : "¿Quieres sumar tu voz? Comparte origen, residencia y desde dónde nos escribes en el mapa de visitantes.";
+        ? t("tour.summary.map")
+        : t("tour.summary.map.empty");
     }
   };
 
@@ -1010,15 +960,24 @@ function initRecorridoGuiado() {
       window.scrollTo({ top, behavior: "smooth" });
     }
 
-    if (titulo) titulo.textContent = pasoActual.titulo;
-    if (texto) texto.textContent = pasoActual.texto;
-    if (paso) paso.textContent = `Paso ${indiceActual + 1} de ${pasosRecorrido.length}`;
+    if (titulo) titulo.textContent = t(pasoActual.tituloKey);
+    if (texto) texto.textContent = t(pasoActual.textoKey);
+    if (paso) {
+      paso.textContent = t("tour.step", {
+        current: indiceActual + 1,
+        total: pasosRecorrido.length
+      });
+    }
 
-    if (btnAnterior) btnAnterior.disabled = indiceActual === 0;
+    if (btnAnterior) {
+      btnAnterior.disabled = indiceActual === 0;
+      btnAnterior.textContent = t("tour.prev");
+    }
     if (btnSiguiente) {
       btnSiguiente.textContent =
-        indiceActual === pasosRecorrido.length - 1 ? "Finalizar recorrido" : "Siguiente";
+        indiceActual === pasosRecorrido.length - 1 ? t("tour.finish") : t("tour.next");
     }
+    if (btnCerrar) btnCerrar.textContent = t("tour.exit");
 
     if (pasoActual.id === "encuesta-visitantes" && mapaVisitantesInstancia) {
       setTimeout(() => mapaVisitantesInstancia.invalidateSize(), 400);
@@ -1095,13 +1054,17 @@ function initProgresoHistoria() {
     const marca = document.createElement("span");
     marca.className = "progreso-segmento";
     marca.dataset.capitulo = capitulo.id;
-    marca.title = capitulo.etiqueta;
+    marca.dataset.capituloKey = capitulo.key;
+    marca.title = t(capitulo.key);
     segmentos.appendChild(marca);
   });
 
   const marcas = [...segmentos.querySelectorAll(".progreso-segmento")];
 
   const actualizarProgreso = () => {
+    marcas.forEach((marca) => {
+      if (marca.dataset.capituloKey) marca.title = t(marca.dataset.capituloKey);
+    });
     const inicio = document.querySelector("#hub")?.offsetTop ?? 0;
     const fin = document.documentElement.scrollHeight - window.innerHeight;
     const avance = fin > inicio ? Math.min(100, Math.max(0, ((window.scrollY - inicio) / (fin - inicio)) * 100)) : 0;
@@ -1122,8 +1085,10 @@ function initProgresoHistoria() {
       marca.classList.toggle("is-pasado", indice < indiceActivo);
     });
 
-    etiqueta.textContent = `Capítulo: ${capitulosHistoria[indiceActivo].etiqueta}`;
+    etiqueta.textContent = t("progress.chapter", { name: t(capitulosHistoria[indiceActivo].key) });
   };
+
+  window.actualizarProgresoHistoria = actualizarProgreso;
 
   actualizarProgreso();
   window.addEventListener("scroll", actualizarProgreso, { passive: true });
@@ -1461,6 +1426,51 @@ function initCartografiaInteractiva() {
   objeto.addEventListener("load", iniciar);
 }
 
+function initPaleta() {
+  const CLAVE_PALETA = "hub-paleta";
+  const raiz = document.documentElement;
+  const guardada = localStorage.getItem(CLAVE_PALETA) || "tierra";
+  raiz.dataset.paleta = guardada;
+
+  const contenedor = document.querySelector("#selector-paleta");
+  if (!contenedor) return;
+
+  const marcar = (paleta) => {
+    contenedor.querySelectorAll(".btn-paleta").forEach((btn) => {
+      const activa = btn.dataset.paleta === paleta;
+      btn.classList.toggle("is-active", activa);
+      btn.setAttribute("aria-pressed", String(activa));
+    });
+  };
+
+  marcar(guardada);
+
+  contenedor.querySelectorAll(".btn-paleta").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const paleta = btn.dataset.paleta;
+      raiz.dataset.paleta = paleta;
+      localStorage.setItem(CLAVE_PALETA, paleta);
+      marcar(paleta);
+    });
+  });
+}
+
+function actualizarIframeOim() {
+  const iframe = document.querySelector("#oim-map-iframe");
+  if (!iframe) return;
+  const idioma = window.HubI18n?.getIdioma() === "en" ? "en" : "es";
+  iframe.src = `https://www.migrationdataportal.org/${idioma}/embed-map`;
+}
+
+function initCambioIdioma() {
+  window.addEventListener("hub:idioma", () => {
+    initFactoresInteractivo();
+    pintarEncuestaLocal();
+    actualizarIframeOim();
+    window.actualizarProgresoHistoria?.();
+  });
+}
+
 escribirLectura();
 initContadoresAnimados();
 initNavegacion();
@@ -1475,6 +1485,9 @@ initCampoHistoria();
 initMapaVisitantes();
 initMapaVocesControles();
 initRecorridoGuiado();
+initPaleta();
+initCambioIdioma();
+actualizarIframeOim();
 
 
 
