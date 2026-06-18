@@ -163,19 +163,47 @@
         <p class="texto datos-fuente" data-i18n="ciudadania.fuente">
           Estimaciones del Instituto de los Mexicanos en el Exterior (SRE). El corredor México–Estados Unidos es considerado el más numeroso del mundo, de acuerdo con datos de la OIM y la ONU (UN DESA, 2024).
         </p>
-        <div class="panel-resumen panel-migracion" id="panel-migracion-contadores">
-          <article>
-            <span id="migrantes-eua" class="dato-destacado" data-contador="11654000">0</span>
-            <p class="texto" data-i18n="ciudadania.usa">Estados Unidos</p>
-          </article>
-          <article>
-            <span id="migrantes-europa" class="dato-destacado" data-contador="103814">0</span>
-            <p class="texto" data-i18n="ciudadania.europe">Europa</p>
-          </article>
-          <article>
-            <span id="migrantes-asia" class="dato-destacado" data-contador="11180">0</span>
-            <p class="texto" data-i18n="ciudadania.asia">Asia</p>
-          </article>
+
+        <div class="ciudadania-datos-panel">
+          <div class="ciudadania-total-resumen" aria-live="polite">
+            <p class="ciudadania-total-etiqueta" data-i18n="ciudadania.total.label">Mexicanas y mexicanos registrados en el exterior</p>
+            <p id="migrantes-total" class="ciudadania-total-numero">—</p>
+            <p class="ciudadania-total-nota" data-i18n="ciudadania.total.nota">Suma estimada por región · IME/SRE</p>
+          </div>
+
+          <div class="panel-resumen panel-migracion" id="panel-migracion-contadores">
+            <article class="ciudadania-region-card ciudadania-region-card--destacada">
+              <span id="migrantes-eua" class="dato-destacado" data-contador="11654000" data-region="usa">0</span>
+              <p class="texto ciudadania-region-nombre" data-i18n="ciudadania.usa">Estados Unidos</p>
+              <div class="ciudadania-barra" role="presentation" aria-hidden="true">
+                <span class="ciudadania-barra-relleno" data-barra-region="usa"></span>
+              </div>
+              <p class="ciudadania-region-pct" data-pct-region="usa"></p>
+              <p class="ciudadania-region-nota" data-i18n="ciudadania.usa.nota">Corredor México–Estados Unidos: el más numeroso del mundo (OIM/ONU).</p>
+            </article>
+            <article class="ciudadania-region-card">
+              <span id="migrantes-europa" class="dato-destacado" data-contador="103814" data-region="europa">0</span>
+              <p class="texto ciudadania-region-nombre" data-i18n="ciudadania.europe">Europa</p>
+              <div class="ciudadania-barra" role="presentation" aria-hidden="true">
+                <span class="ciudadania-barra-relleno" data-barra-region="europa"></span>
+              </div>
+              <p class="ciudadania-region-pct" data-pct-region="europa"></p>
+              <p class="ciudadania-region-nota" data-i18n="ciudadania.europe.nota">Registro de connacionales en Europa (IME/SRE).</p>
+            </article>
+            <article class="ciudadania-region-card">
+              <span id="migrantes-asia" class="dato-destacado" data-contador="11180" data-region="asia">0</span>
+              <p class="texto ciudadania-region-nombre" data-i18n="ciudadania.asia">Asia</p>
+              <div class="ciudadania-barra" role="presentation" aria-hidden="true">
+                <span class="ciudadania-barra-relleno" data-barra-region="asia"></span>
+              </div>
+              <p class="ciudadania-region-pct" data-pct-region="asia"></p>
+              <p class="ciudadania-region-nota" data-i18n="ciudadania.asia.nota">Mexicanas y mexicanos residentes en Asia (IME/SRE).</p>
+            </article>
+          </div>
+
+          <p class="ciudadania-contexto texto" data-i18n="ciudadania.contexto">
+            Estas cifras sitúan la migración mexicana en un contexto planetario: la gran mayoría de quienes viven fuera del país lo hace al norte; Europa y Asia representan comunidades más pequeñas pero crecientes, visibles en la diversidad de la ciudadanía global.
+          </p>
         </div>
 
         <div class="ciudadania-oim-bloque">

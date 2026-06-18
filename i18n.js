@@ -58,6 +58,14 @@
       "ciudadania.usa": "Estados Unidos",
       "ciudadania.europe": "Europa",
       "ciudadania.asia": "Asia",
+      "ciudadania.total.label": "Mexicanas y mexicanos registrados en el exterior",
+      "ciudadania.total.nota": "Suma estimada por región · IME/SRE",
+      "ciudadania.region.pct": "≈ {pct} % del total",
+      "ciudadania.usa.nota": "Corredor México–Estados Unidos: el más numeroso del mundo (OIM/ONU).",
+      "ciudadania.europe.nota": "Registro de connacionales en Europa (IME/SRE).",
+      "ciudadania.asia.nota": "Mexicanas y mexicanos residentes en Asia (IME/SRE).",
+      "ciudadania.contexto":
+        "Estas cifras sitúan la migración mexicana en un contexto planetario: la gran mayoría de quienes viven fuera del país lo hace al norte; Europa y Asia representan comunidades más pequeñas pero crecientes, visibles en la diversidad de la ciudadanía global.",
       "ciudadania.oim.title": "Migración internacional — Portal de Datos OIM",
       "ciudadania.oim.puente":
         "Ampliamos la mirada: la migración es un fenómeno planetario. Este mapa permite comparar flujos y stocks a escala global.",
@@ -296,6 +304,14 @@
       "ciudadania.usa": "United States",
       "ciudadania.europe": "Europe",
       "ciudadania.asia": "Asia",
+      "ciudadania.total.label": "Mexicans registered abroad",
+      "ciudadania.total.nota": "Estimated sum by region · IME/SRE",
+      "ciudadania.region.pct": "≈ {pct}% of total",
+      "ciudadania.usa.nota": "Mexico–United States corridor: the largest in the world (IOM/UN).",
+      "ciudadania.europe.nota": "Registry of nationals in Europe (IME/SRE).",
+      "ciudadania.asia.nota": "Mexicans residing in Asia (IME/SRE).",
+      "ciudadania.contexto":
+        "These figures place Mexican migration in a planetary context: the vast majority of those living abroad do so in the north; Europe and Asia represent smaller but growing communities, visible in the diversity of global citizenship.",
       "ciudadania.oim.title": "International migration — IOM Data Portal",
       "ciudadania.oim.puente":
         "We broaden the view: migration is a planetary phenomenon. This map allows comparing flows and stocks at a global scale.",

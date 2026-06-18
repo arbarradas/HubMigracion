@@ -35,6 +35,36 @@ function initContadoresAnimados() {
   const contadores = panel.querySelectorAll("[data-contador]");
   if (contadores.length === 0) return;
 
+  const totalMigracion = datosMigracion.reduce((suma, fila) => suma + fila.valor, 0);
+  const totalEl = document.querySelector("#migrantes-total");
+
+  const formatearPorcentaje = (valor) => {
+    const pct = (valor / totalMigracion) * 100;
+    return new Intl.NumberFormat(localeActual(), {
+      minimumFractionDigits: pct >= 10 ? 1 : 2,
+      maximumFractionDigits: pct >= 10 ? 1 : 2
+    }).format(pct);
+  };
+
+  const actualizarMetricasCiudadania = () => {
+    if (totalEl) totalEl.textContent = formatearNumero(totalMigracion);
+
+    contadores.forEach((elemento) => {
+      const valor = Number(elemento.dataset.contador);
+      const region = elemento.dataset.region;
+      if (!region || !valor) return;
+
+      const pct = formatearPorcentaje(valor);
+      const pctEl = panel.querySelector(`[data-pct-region="${region}"]`);
+      const barraEl = panel.querySelector(`[data-barra-region="${region}"]`);
+
+      if (pctEl) pctEl.textContent = t("ciudadania.region.pct", { pct });
+      if (barraEl) barraEl.style.width = `${(valor / totalMigracion) * 100}%`;
+    });
+  };
+
+  actualizarMetricasCiudadania();
+
   let animados = false;
 
   const animarContador = (elemento) => {
@@ -64,6 +94,7 @@ function initContadoresAnimados() {
   );
 
   observador.observe(panel);
+  window.actualizarMetricasCiudadania = actualizarMetricasCiudadania;
 }
 
 function escribirLectura() {
@@ -1468,6 +1499,7 @@ function initCambioIdioma() {
     pintarEncuestaLocal();
     actualizarIframeOim();
     window.actualizarProgresoHistoria?.();
+    window.actualizarMetricasCiudadania?.();
   });
 }
 
