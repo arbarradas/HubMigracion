@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-paleta="tierra">
+<html lang="es" data-paleta="institucional">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,14 +47,11 @@
                 </button>
               </div>
               <div id="selector-paleta" class="selector-paleta" role="group" aria-label="Paleta de color">
-                <button type="button" class="btn-paleta is-active" data-paleta="tierra" aria-pressed="true" title="Paleta tierra" aria-label="Paleta tierra">
-                  <span class="muestra-paleta muestra-tierra" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn-paleta" data-paleta="oceano" aria-pressed="false" title="Paleta océano" aria-label="Paleta océano">
-                  <span class="muestra-paleta muestra-oceano" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn-paleta" data-paleta="institucional" aria-pressed="false" title="Paleta institucional" aria-label="Paleta institucional">
+                <button type="button" class="btn-paleta is-active" data-paleta="institucional" aria-pressed="true" title="Paleta institucional" data-i18n-aria="nav.palette.institutional" aria-label="Paleta institucional">
                   <span class="muestra-paleta muestra-institucional" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn-paleta" data-paleta="accesibilidad" aria-pressed="false" title="Alto contraste" data-i18n-aria="nav.palette.accessibility" aria-label="Alto contraste para mejor lectura">
+                  <span class="btn-paleta-icono" aria-hidden="true">Aa</span>
                 </button>
               </div>
             </div>
@@ -114,7 +111,7 @@
       </div>
     </section>
 
-    <section id="creacion-contenidos" class="seccion-podcast seccion-rubro seccion-ancla" aria-labelledby="titulo-creacion">
+    <section id="creacion-contenidos" class="seccion-podcast seccion-rubro seccion-rubro--panel seccion-ancla" aria-labelledby="titulo-creacion">
       <div class="ancho-contenido">
         <p class="etiqueta" data-i18n="creacion.label">Creación de contenidos</p>
         <h2 id="titulo-creacion" class="subtitulo" data-i18n="creacion.title">Primero, escuchemos: ¿qué hay de la divulgación?</h2>
@@ -153,7 +150,7 @@
       </div>
     </section>
 
-    <section id="ciudadania-global" class="seccion-datos seccion-rubro seccion-ancla" aria-labelledby="titulo-ciudadania">
+    <section id="ciudadania-global" class="seccion-datos seccion-rubro seccion-rubro--clara seccion-ancla" aria-labelledby="titulo-ciudadania">
       <div class="ancho-contenido">
         <p class="etiqueta" data-i18n="ciudadania.label">Ciudadanía global</p>
         <h2 id="titulo-ciudadania" class="subtitulo" data-i18n="ciudadania.title">¿Qué está pasando en el mundo?</h2>
@@ -272,7 +269,7 @@
     </section>
 
     <main>
-      <section id="investigacion" class="seccion-investigacion seccion-rubro seccion-ancla" aria-labelledby="titulo-investigacion">
+      <section id="investigacion" class="seccion-investigacion seccion-rubro seccion-rubro--panel seccion-ancla" aria-labelledby="titulo-investigacion">
         <div class="ancho-contenido">
           <p id="etiqueta-investigacion" class="etiqueta" data-i18n="investigacion.label">Investigación</p>
           <h2 id="titulo-investigacion" class="subtitulo" data-i18n="investigacion.title">¿Qué estamos haciendo al respecto?</h2>
@@ -386,7 +383,7 @@
         </div>
       </section>
 
-      <section id="storytelling" class="seccion-proyectos seccion-rubro seccion-ancla" aria-labelledby="titulo-storytelling">
+      <section id="storytelling" class="seccion-proyectos seccion-rubro seccion-rubro--clara seccion-ancla" aria-labelledby="titulo-storytelling">
         <div class="ancho-contenido">
           <p class="etiqueta" data-i18n="storytelling.label">Storytelling</p>
           <h2 id="titulo-storytelling" class="subtitulo" data-i18n="storytelling.title">Proyectos del Hub</h2>
@@ -431,115 +428,137 @@
       </section>
     </main>
 
-    <section id="participacion" class="seccion-participacion seccion-rubro seccion-ancla" aria-labelledby="titulo-participacion">
-      <div class="ancho-contenido participacion-contenido">
-        <p class="etiqueta" data-i18n="participacion.label">Tu lugar en la historia</p>
-        <h2 id="titulo-participacion" class="subtitulo" data-i18n="participacion.title">¿Cómo puedes participar?</h2>
-        <p class="texto puente-narrativo participacion-puente" data-i18n="participacion.puente">
-          Has recorrido voces, datos, investigación y proyectos con impacto. Ahora puedes formar parte de esta red: proponer una idea, difundir o colaborar desde tu disciplina.
-        </p>
-        <div class="texto-flow">
-          <p class="texto" data-i18n="participacion.p1">
-            Los proyectos del Hub — desde piezas visuales y cortometrajes hasta estudios de datos y conferencias internacionales — nacieron de colaboraciones abiertas. El siguiente puede llevar tu firma.
-          </p>
-          <p class="texto participacion-lema"><strong data-i18n="participacion.lema">Todos somos migrantes.</strong></p>
-          <p class="texto" data-i18n="participacion.p2">
-            ¡Súmate a los esfuerzos del Hub de Migración e Impacto Social! Desde el Hub se trabaja en pro del ODS 10 — Reducción de la desigualdad — con proyectos académicos de inmersión e impacto social.
-          </p>
-          <p class="texto" data-i18n="participacion.p3">
-            Contáctanos. Escribe con una propuesta de proyecto académico que impacte en nuestra sociedad y, en particular, en el subgrupo de personas en movimiento. ¡Te esperamos!
-          </p>
-          <div class="participacion-acciones">
-            <a class="btn btn-correo btn-participar" href="#contacto" data-i18n="participacion.contact">Ir a contacto</a>
-            <a class="btn btn-proyectos" href="#storytelling" data-i18n="participacion.projects">Ver proyectos del Hub</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="encuesta-visitantes" class="seccion-encuesta seccion-rubro seccion-ancla" aria-labelledby="titulo-encuesta">
+    <section id="participacion" class="seccion-participacion seccion-rubro seccion-rubro--panel seccion-ancla" aria-labelledby="titulo-participacion">
       <div class="ancho-contenido">
-        <p class="etiqueta" data-i18n="encuesta.label">Tu voz en el mapa</p>
-        <h2 id="titulo-encuesta" class="subtitulo" data-i18n="encuesta.title">¿De dónde nos visitas?</h2>
-        <p class="texto puente-narrativo" data-i18n="encuesta.puente">
-          La migración también se cuenta desde dónde estás. Tus tres respuestas se reflejan en el mapa; si quieres, añade una frase breve que otros podrán leer al hacer clic en tu ubicación.
-        </p>
-
-        <div class="encuesta-panel">
-          <form id="form-visitante" class="encuesta-formulario" novalidate>
-            <label class="encuesta-campo">
-              <span data-i18n="encuesta.origin">¿Cuál es tu lugar de origen?</span>
-              <input type="text" id="visitante-origen" name="origen" required autocomplete="address-level2" data-i18n-placeholder="encuesta.origin.ph" placeholder="Ej. Xalapa, Veracruz, México">
-            </label>
-            <label class="encuesta-campo">
-              <span data-i18n="encuesta.residence">¿En dónde resides actualmente?</span>
-              <input type="text" id="visitante-residencia" name="residencia" required autocomplete="address-level1" data-i18n-placeholder="encuesta.residence.ph" placeholder="Ej. Puebla, México">
-            </label>
-            <label class="encuesta-campo">
-              <span data-i18n="encuesta.write">¿De dónde nos escribes?</span>
-              <input type="text" id="visitante-escribe" name="escribe" required autocomplete="country-name" data-i18n-placeholder="encuesta.write.ph" placeholder="Ej. Bruselas, Bélgica">
-            </label>
-            <label class="encuesta-campo encuesta-campo-historia">
-              <span data-i18n="encuesta.story">Tu voz en una frase (opcional)</span>
-              <textarea
-                id="visitante-historia"
-                name="historia"
-                rows="2"
-                maxlength="120"
-                data-i18n-placeholder="encuesta.story.ph"
-                placeholder="Ej. Estudio en Puebla pero escribo desde Europa por un intercambio temporal."
-                aria-describedby="historia-ayuda historia-contador"
-              ></textarea>
-              <span class="encuesta-historia-pie">
-                <span id="historia-ayuda" class="encuesta-historia-ayuda" data-i18n="encuesta.story.help">Aparece en el mapa al hacer clic en tu ubicación (máx. 120 caracteres).</span>
-                <span id="historia-contador" class="encuesta-historia-contador" aria-live="polite">0 / 120</span>
-              </span>
-            </label>
-            <button type="submit" class="btn btn-correo" data-i18n="encuesta.submit">Compartir en el mapa</button>
-          </form>
-
-          <aside class="encuesta-resumen" aria-live="polite">
-            <p class="encuesta-contador-visitas">
-              <span class="encuesta-contador-etiqueta" data-i18n="encuesta.visits">Visitas al sitio</span>
-              <strong id="contador-visitas">—</strong>
-            </p>
-            <p class="texto encuesta-mensaje" id="encuesta-mensaje" data-i18n="encuesta.empty">
-              Aún no hay respuestas en este navegador. Sé la primera persona en dejar tu huella.
-            </p>
-            <ul class="encuesta-lista" id="encuesta-lista" hidden></ul>
-          </aside>
-        </div>
-
-        <div class="mapa-visitantes-bloque">
-          <div class="mapa-visitantes-cabecera">
-            <h3 class="subtitulo mapa-visitantes-titulo" data-i18n="encuesta.map.title">Mapa de voces y ubicaciones</h3>
-            <p class="texto mapa-visitantes-leyenda">
-              <span class="mapa-leyenda-item mapa-leyenda-origen" data-i18n="encuesta.map.origin">Origen</span>
-              <span class="mapa-leyenda-item mapa-leyenda-residencia" data-i18n="encuesta.map.residence">Residencia actual</span>
-              <span class="mapa-leyenda-item mapa-leyenda-escribe" data-i18n="encuesta.map.write">Desde donde nos escribes</span>
-              <span class="mapa-leyenda-item mapa-leyenda-voz" data-i18n="encuesta.map.voice">Voz con historia</span>
-            </p>
-          </div>
-          <div class="mapa-visitantes-herramientas">
-            <button type="button" class="btn btn-mapa-filtro" id="mapa-filtro-voces" aria-pressed="false" data-i18n="encuesta.map.filter">
-              Mostrar solo voces con historia
-            </button>
-            <p class="texto mapa-api-estado" id="mapa-api-estado" hidden></p>
-          </div>
-          <div id="mapa-visitantes" class="mapa-visitantes" role="application" aria-label="Mapa interactivo de origen y residencia de visitantes" tabindex="0"></div>
-          <p class="texto mapa-visitantes-nota" id="mapa-visitantes-nota" data-i18n="encuesta.map.loading">
-            Cargando ubicaciones compartidas…
+        <header class="seccion-cabecera">
+          <p class="etiqueta" data-i18n="participacion.label">Tu lugar en la historia</p>
+          <h2 id="titulo-participacion" class="subtitulo" data-i18n="participacion.title">¿Cómo puedes participar?</h2>
+          <p class="texto puente-narrativo participacion-puente" data-i18n="participacion.puente">
+            Has recorrido voces, datos, investigación y proyectos con impacto. Ahora puedes formar parte de esta red: proponer una idea, difundir o colaborar desde tu disciplina.
           </p>
-          <aside class="mapa-voces-panel" id="mapa-voces-panel" aria-labelledby="mapa-voces-titulo" hidden>
-            <h4 id="mapa-voces-titulo" class="mapa-voces-titulo" data-i18n="encuesta.voices.title">Voces en el mapa</h4>
-            <p class="texto mapa-voces-intro" data-i18n="encuesta.voices.intro">Haz clic en una frase para centrar el mapa en esa ubicación y leer la historia completa.</p>
-            <ul class="mapa-voces-lista" id="mapa-voces-lista"></ul>
+        </header>
+
+        <div class="participacion-layout">
+          <div class="participacion-main texto-flow">
+            <p class="texto" data-i18n="participacion.p1">
+              Los proyectos del Hub — desde piezas visuales y cortometrajes hasta estudios de datos y conferencias internacionales — nacieron de colaboraciones abiertas. El siguiente puede llevar tu firma.
+            </p>
+            <p class="texto" data-i18n="participacion.p2">
+              ¡Súmate a los esfuerzos del Hub de Migración e Impacto Social! Desde el Hub se trabaja en pro del ODS 10 — Reducción de la desigualdad — con proyectos académicos de inmersión e impacto social.
+            </p>
+            <p class="texto" data-i18n="participacion.p3">
+              Contáctanos. Escribe con una propuesta de proyecto académico que impacte en nuestra sociedad y, en particular, en el subgrupo de personas en movimiento. ¡Te esperamos!
+            </p>
+          </div>
+
+          <aside class="participacion-aside" aria-label="Invitación a participar">
+            <blockquote class="participacion-lema-card">
+              <p data-i18n="participacion.lema">Todos somos migrantes.</p>
+            </blockquote>
+            <div class="participacion-acciones">
+              <a class="btn btn-correo btn-participar" href="#contacto" data-i18n="participacion.contact">Ir a contacto</a>
+              <a class="btn btn-proyectos" href="#storytelling" data-i18n="participacion.projects">Ver proyectos del Hub</a>
+            </div>
           </aside>
         </div>
       </div>
     </section>
 
-    <section id="faq" class="seccion-faq seccion-rubro seccion-ancla" aria-labelledby="titulo-faq">
+    <section id="encuesta-visitantes" class="seccion-encuesta seccion-rubro seccion-rubro--clara seccion-ancla" aria-labelledby="titulo-encuesta">
+      <div class="ancho-contenido">
+        <header class="seccion-cabecera">
+          <p class="etiqueta" data-i18n="encuesta.label">Tu voz en el mapa</p>
+          <h2 id="titulo-encuesta" class="subtitulo" data-i18n="encuesta.title">¿De dónde nos visitas?</h2>
+          <p class="texto puente-narrativo" data-i18n="encuesta.puente">
+            La migración también se cuenta desde dónde estás. Tus tres respuestas se reflejan en el mapa; si quieres, añade una frase breve que otros podrán leer al hacer clic en tu ubicación.
+          </p>
+        </header>
+
+        <div class="encuesta-layout">
+          <div class="encuesta-panel">
+            <form id="form-visitante" class="encuesta-formulario" novalidate>
+              <label class="encuesta-campo">
+                <span data-i18n="encuesta.origin">¿Cuál es tu lugar de origen?</span>
+                <input type="text" id="visitante-origen" name="origen" required autocomplete="address-level2" data-i18n-placeholder="encuesta.origin.ph" placeholder="Ej. Xalapa, Veracruz, México">
+              </label>
+              <label class="encuesta-campo">
+                <span data-i18n="encuesta.residence">¿En dónde resides actualmente?</span>
+                <input type="text" id="visitante-residencia" name="residencia" required autocomplete="address-level1" data-i18n-placeholder="encuesta.residence.ph" placeholder="Ej. Puebla, México">
+              </label>
+              <label class="encuesta-campo">
+                <span data-i18n="encuesta.write">¿De dónde nos escribes?</span>
+                <input type="text" id="visitante-escribe" name="escribe" required autocomplete="country-name" data-i18n-placeholder="encuesta.write.ph" placeholder="Ej. Bruselas, Bélgica">
+              </label>
+              <label class="encuesta-campo encuesta-campo-historia">
+                <span data-i18n="encuesta.story">Tu voz en una frase (opcional)</span>
+                <textarea
+                  id="visitante-historia"
+                  name="historia"
+                  rows="2"
+                  maxlength="120"
+                  data-i18n-placeholder="encuesta.story.ph"
+                  placeholder="Ej. Estudio en Puebla pero escribo desde Europa por un intercambio temporal."
+                  aria-describedby="historia-ayuda historia-contador"
+                ></textarea>
+                <span class="encuesta-historia-pie">
+                  <span id="historia-ayuda" class="encuesta-historia-ayuda" data-i18n="encuesta.story.help">Aparece en el mapa al hacer clic en tu ubicación (máx. 120 caracteres).</span>
+                  <span id="historia-contador" class="encuesta-historia-contador" aria-live="polite">0 / 120</span>
+                </span>
+              </label>
+              <button type="submit" class="btn btn-correo encuesta-btn-enviar" data-i18n="encuesta.submit">Compartir en el mapa</button>
+            </form>
+
+            <aside class="encuesta-resumen" aria-live="polite">
+              <p class="encuesta-contador-visitas">
+                <span class="encuesta-contador-etiqueta" data-i18n="encuesta.visits">Visitas al sitio</span>
+                <strong id="contador-visitas">—</strong>
+              </p>
+              <p class="texto encuesta-mensaje" id="encuesta-mensaje" data-i18n="encuesta.empty">
+                Aún no hay respuestas en este navegador. Sé la primera persona en dejar tu huella.
+              </p>
+              <ul class="encuesta-lista" id="encuesta-lista" hidden></ul>
+            </aside>
+          </div>
+
+          <div class="encuesta-mapa-zona">
+            <div class="mapa-visitantes-bloque">
+              <div class="mapa-visitantes-cabecera">
+                <h3 class="subtitulo mapa-visitantes-titulo" data-i18n="encuesta.map.title">Mapa de voces y ubicaciones</h3>
+                <div class="mapa-visitantes-herramientas">
+                  <button type="button" class="btn btn-mapa-filtro" id="mapa-filtro-voces" aria-pressed="false" data-i18n="encuesta.map.filter">
+                    Mostrar solo voces con historia
+                  </button>
+                  <p class="texto mapa-api-estado" id="mapa-api-estado" hidden></p>
+                </div>
+              </div>
+
+              <div class="mapa-leyenda-grid">
+                <span class="mapa-leyenda-item mapa-leyenda-origen" data-i18n="encuesta.map.origin">Origen</span>
+                <span class="mapa-leyenda-item mapa-leyenda-residencia" data-i18n="encuesta.map.residence">Residencia actual</span>
+                <span class="mapa-leyenda-item mapa-leyenda-escribe" data-i18n="encuesta.map.write">Desde donde nos escribes</span>
+                <span class="mapa-leyenda-item mapa-leyenda-voz" data-i18n="encuesta.map.voice">Voz con historia</span>
+              </div>
+
+              <div class="mapa-visitantes-grid">
+                <div class="mapa-visitantes-col">
+                  <div id="mapa-visitantes" class="mapa-visitantes" role="application" aria-label="Mapa interactivo de origen y residencia de visitantes" tabindex="0"></div>
+                  <p class="texto mapa-visitantes-nota" id="mapa-visitantes-nota" data-i18n="encuesta.map.loading">
+                    Cargando ubicaciones compartidas…
+                  </p>
+                </div>
+                <aside class="mapa-voces-panel" id="mapa-voces-panel" aria-labelledby="mapa-voces-titulo" hidden>
+                  <h4 id="mapa-voces-titulo" class="mapa-voces-titulo" data-i18n="encuesta.voices.title">Voces en el mapa</h4>
+                  <p class="texto mapa-voces-intro" data-i18n="encuesta.voices.intro">Haz clic en una frase para centrar el mapa en esa ubicación y leer la historia completa.</p>
+                  <ul class="mapa-voces-lista" id="mapa-voces-lista"></ul>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="seccion-faq seccion-rubro seccion-rubro--panel seccion-ancla" aria-labelledby="titulo-faq">
       <div class="ancho-contenido">
         <p class="etiqueta" data-i18n="faq.label">Ayuda</p>
         <h2 id="titulo-faq" class="subtitulo" data-i18n="faq.title">Preguntas frecuentes (FAQ)</h2>
