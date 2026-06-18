@@ -430,7 +430,7 @@ h2.subtitulo {
   padding: var(--espacio-md);
   border: 1px solid var(--linea);
   border-radius: 14px;
-  background: rgba(250, 246, 241, 0.65);
+  background: var(--panel);
 }
 
 .investigacion-factores-desc {
@@ -1167,9 +1167,9 @@ main iframe:not(.graphcommons-iframe) {
     align-items: stretch;
     min-width: 14rem;
     padding: var(--espacio-xs);
-    border: 1px solid rgba(255, 217, 168, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 8px;
-    background: rgba(42, 34, 28, 0.98);
+    background: var(--nav-fondo);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
   }
 
@@ -1196,6 +1196,22 @@ main iframe:not(.graphcommons-iframe) {
   .footer-grid {
     grid-template-columns: 1fr;
     gap: var(--espacio-md);
+  }
+
+  .participacion-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .encuesta-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .mapa-visitantes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mapa-leyenda-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -2035,17 +2051,6 @@ main iframe:not(.graphcommons-iframe) {
 .encuesta-campo input:focus {
   outline: 2px solid var(--acento-2);
   outline-offset: 2px;
-}
-
-.encuesta-resumen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--espacio-md);
-  border: 1px solid var(--linea);
-  border-left: 4px solid var(--acento);
-  background: var(--seccion-panel);
-  border-radius: 10px;
 }
 
 .encuesta-contador-visitas {

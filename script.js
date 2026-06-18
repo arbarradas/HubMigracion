@@ -1460,7 +1460,9 @@ function initCartografiaInteractiva() {
 function initPaleta() {
   const CLAVE_PALETA = "hub-paleta";
   const raiz = document.documentElement;
-  const guardada = localStorage.getItem(CLAVE_PALETA) || "tierra";
+  const LEGACY = new Set(["tierra", "oceano"]);
+  let guardada = localStorage.getItem(CLAVE_PALETA) || "institucional";
+  if (LEGACY.has(guardada)) guardada = "institucional";
   raiz.dataset.paleta = guardada;
 
   const contenedor = document.querySelector("#selector-paleta");
