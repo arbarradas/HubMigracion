@@ -528,6 +528,17 @@ main {
   font-weight: 700;
 }
 
+.hub-descripcion a {
+  color: var(--hub-acento-suave);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.hub-descripcion a:hover {
+  color: var(--hub-acento);
+}
+
 .hub-pilares {
   display: block;
   margin-top: 0.5rem;
@@ -1685,6 +1696,50 @@ main iframe:not(.graphcommons-iframe) {
 
 .proyecto-internacional-contenido a:not(.btn):hover {
   color: var(--acento-2);
+}
+
+.historias-storytelling {
+  margin-top: var(--espacio-xl);
+  padding-top: var(--espacio-lg);
+  border-top: 1px solid var(--marco);
+}
+
+.historias-storytelling .subtitulo {
+  margin-top: 0.35rem;
+}
+
+.tarjeta-recurso {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--espacio-md);
+  align-items: start;
+  margin-top: var(--espacio-md);
+  padding: var(--espacio-md);
+  border: 1px solid var(--marco);
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: 0 8px 24px var(--sombra);
+}
+
+.tarjeta-recurso-marca {
+  display: grid;
+  place-items: center;
+  min-width: 5.5rem;
+  padding: var(--espacio-sm);
+  border-radius: 12px;
+  background: var(--hub-fondo);
+}
+
+.tarjeta-recurso-sigla {
+  color: var(--hub-acento);
+  font-size: var(--fz-pequena);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+.tarjeta-recurso-cuerpo .btn {
+  margin-top: var(--espacio-sm);
 }
 
 .proyecto-tarjeta--factores {
