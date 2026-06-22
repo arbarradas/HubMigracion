@@ -151,8 +151,22 @@ function initNavegacion() {
       if (seccion.offsetTop <= offset) activa = seccion.id;
     });
 
+    const mapaNav = {
+      hub: "hub",
+      "ciudadania-global": "datos",
+      historias: "historias",
+      storytelling: "historias",
+      aprendizajes: "aprendizajes",
+      investigacion: "investigacion",
+      participacion: "participacion",
+      "encuesta-visitantes": "participacion",
+      faq: "participacion",
+      contacto: "participacion"
+    };
+    const navKey = mapaNav[activa] || activa;
+
     enlaces.forEach((enlace) => {
-      enlace.classList.toggle("is-active", enlace.dataset.nav === activa);
+      enlace.classList.toggle("is-active", enlace.dataset.nav === navKey);
     });
 
     return activa;
@@ -164,14 +178,14 @@ function initNavegacion() {
 
 const capitulosHistoria = [
   { id: "hub", key: "cap.hub" },
-  { id: "creacion-contenidos", key: "cap.creacion" },
-  { id: "ciudadania-global", key: "cap.ciudadania" },
+  { id: "ciudadania-global", key: "cap.datos" },
+  { id: "historias", key: "cap.historias" },
+  { id: "aprendizajes", key: "cap.aprendizajes" },
   { id: "investigacion", key: "cap.investigacion" },
-  { id: "storytelling", key: "cap.storytelling" },
-  { id: "participacion", key: "cap.participar" },
-  { id: "encuesta-visitantes", key: "cap.ubicacion" },
-  { id: "faq", key: "cap.faq" },
-  { id: "contacto", key: "cap.contacto" }
+  { id: "participacion", key: "cap.participacion" },
+  { id: "encuesta-visitantes", key: "cap.participacion" },
+  { id: "faq", key: "cap.participacion" },
+  { id: "contacto", key: "cap.participacion" }
 ];
 
 const factoresPuebla = [
@@ -195,10 +209,10 @@ const NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
 
 const pasosRecorrido = [
   { id: "hub", tituloKey: "tour.hub.title", textoKey: "tour.hub.text" },
-  { id: "creacion-contenidos", tituloKey: "tour.creacion.title", textoKey: "tour.creacion.text" },
-  { id: "ciudadania-global", tituloKey: "tour.ciudadania.title", textoKey: "tour.ciudadania.text" },
+  { id: "ciudadania-global", tituloKey: "tour.datos.title", textoKey: "tour.datos.text" },
+  { id: "historias", tituloKey: "tour.historias.title", textoKey: "tour.historias.text" },
+  { id: "aprendizajes", tituloKey: "tour.aprendizajes.title", textoKey: "tour.aprendizajes.text" },
   { id: "investigacion", tituloKey: "tour.investigacion.title", textoKey: "tour.investigacion.text" },
-  { id: "storytelling", tituloKey: "tour.storytelling.title", textoKey: "tour.storytelling.text" },
   { id: "participacion", tituloKey: "tour.participacion.title", textoKey: "tour.participacion.text" },
   {
     id: "encuesta-visitantes",
