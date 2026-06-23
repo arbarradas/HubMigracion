@@ -82,17 +82,67 @@
         <div class="hub-descripcion texto-flow">
           <p>
             <span class="hub-titulo-campus subtitulo" data-i18n="hub.arranque">Arranque</span>
-            <span data-i18n="hub.p1" data-i18n-html="true">Desde su <a href="https://mediatik.com.mx/inauguran-en-el-tec-de-monterrey-puebla-un-centro-para-el-estudio-de-la-migracion/" target="_blank" rel="noopener noreferrer">inauguración en febrero de 2025</a>, se han fortalecido colaboraciones con socios formadores como la Organización internacional para las Migraciones (OIM) y Samuel Kishi, director de cine y embajador de buena voluntad de dicha Organización.</span>
+            <span data-i18n="hub.p0">El Hub nació como una iniciativa de la Escuela de Humanidades y Educación del Tecnológico de Monterrey, campus Puebla. Dispone de un espacio físico de encuentro desde el cual, como punto de partida, se gestionan, proyectan y generan proyectos académicos de impacto social abocados al estudio de las movilizaciones de personas.</span>
           </p>
+          <p data-i18n="hub.p1" data-i18n-html="true">Desde su <a href="https://mediatik.com.mx/inauguran-en-el-tec-de-monterrey-puebla-un-centro-para-el-estudio-de-la-migracion/" target="_blank" rel="noopener noreferrer">inauguración en febrero de 2025</a>, se han fortalecido colaboraciones con socios formadores como la Organización internacional para las Migraciones (OIM) y Samuel Kishi, director de cine y embajador de buena voluntad de dicha Organización.</p>
           <p>
             <strong data-i18n="hub.p2.title">Áreas Estratégicas del Hub de Migración e Impacto Social</strong>
             <span data-i18n="hub.p2.body">Se plantean 4 pilares alrededor de los cuales tiene acción esta iniciativa académica:</span>
             <span class="hub-pilares" data-i18n="hub.pilares">* Comunicación * Ética * Investigación docente * Sentido Humano</span>
           </p>
           <p class="puente-narrativo hub-puente" data-i18n="hub.puente">
-            Este sitio recorre una historia en capítulos: voces, contexto global, investigación en Puebla, proyectos con impacto y, al final, una invitación a sumarte.
+            Este sitio recorre una historia en capítulos: qué es el Hub, datos y mapas, voces y narrativas, recursos educativos, investigación en Puebla y, al final, una invitación a participar.
           </p>
         </div>
+
+        <nav class="hub-mapa-capitulos" aria-labelledby="hub-mapa-titulo">
+          <h2 id="hub-mapa-titulo" class="hub-mapa-titulo" data-i18n="navmap.title">Explora por capítulos</h2>
+          <p class="hub-mapa-ayuda" data-i18n="navmap.hint">Salta directo al tema que te interese; también puedes usar el índice flotante en cualquier momento.</p>
+          <ul class="hub-mapa-grid">
+            <li>
+              <a href="#hub" class="hub-mapa-tarjeta" data-capitulo="hub">
+                <span class="hub-mapa-num" aria-hidden="true">1</span>
+                <span class="hub-mapa-nombre" data-i18n="nav.hub">Qué es el Hub</span>
+                <span class="hub-mapa-desc" data-i18n="navmap.hub.desc">Origen, espacio físico y pilares</span>
+              </a>
+            </li>
+            <li>
+              <a href="#ciudadania-global" class="hub-mapa-tarjeta" data-capitulo="ciudadania-global">
+                <span class="hub-mapa-num" aria-hidden="true">2</span>
+                <span class="hub-mapa-nombre" data-i18n="nav.datos">Datos</span>
+                <span class="hub-mapa-desc" data-i18n="navmap.datos.desc">Cifras, mapas OIM y contexto global</span>
+              </a>
+            </li>
+            <li>
+              <a href="#historias" class="hub-mapa-tarjeta" data-capitulo="historias">
+                <span class="hub-mapa-num" aria-hidden="true">3</span>
+                <span class="hub-mapa-nombre" data-i18n="nav.historias">Historias</span>
+                <span class="hub-mapa-desc" data-i18n="navmap.historias.desc">Podcast, divulgación y proyectos narrativos</span>
+              </a>
+            </li>
+            <li>
+              <a href="#aprendizajes" class="hub-mapa-tarjeta" data-capitulo="aprendizajes">
+                <span class="hub-mapa-num" aria-hidden="true">4</span>
+                <span class="hub-mapa-nombre" data-i18n="nav.aprendizajes">Aprendizajes</span>
+                <span class="hub-mapa-desc" data-i18n="navmap.aprendizajes.desc">Recursos educativos y glosario OIM</span>
+              </a>
+            </li>
+            <li>
+              <a href="#investigacion" class="hub-mapa-tarjeta" data-capitulo="investigacion">
+                <span class="hub-mapa-num" aria-hidden="true">5</span>
+                <span class="hub-mapa-nombre" data-i18n="nav.investigacion">Investigación</span>
+                <span class="hub-mapa-desc" data-i18n="navmap.investigacion.desc">Estudios, grafos y cartografías</span>
+              </a>
+            </li>
+            <li>
+              <a href="#participacion" class="hub-mapa-tarjeta" data-capitulo="participacion">
+                <span class="hub-mapa-num" aria-hidden="true">6</span>
+                <span class="hub-mapa-nombre" data-i18n="nav.participacion">Participación</span>
+                <span class="hub-mapa-desc" data-i18n="navmap.participacion.desc">Sumarte, mapa de voces y contacto</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </section>
 
@@ -709,6 +759,26 @@
         <span class="footer-visitas" id="footer-visitas" aria-live="polite"></span>
       </p>
     </footer>
+
+    <button type="button" class="btn-indice-flotante" id="btn-indice" aria-haspopup="dialog" aria-controls="dialogo-indice" aria-expanded="false" data-i18n="indice.open">
+      Índice
+    </button>
+
+    <dialog id="dialogo-indice" class="dialogo-indice" aria-labelledby="indice-titulo">
+      <div class="dialogo-indice-inner">
+        <header class="dialogo-indice-cabecera">
+          <h2 id="indice-titulo" class="subtitulo" data-i18n="indice.title">Ir a un capítulo</h2>
+          <button type="button" class="dialogo-indice-cerrar" id="indice-cerrar" data-i18n-aria="indice.close" aria-label="Cerrar índice">
+            <span aria-hidden="true">×</span>
+          </button>
+        </header>
+        <p class="texto dialogo-indice-ayuda" data-i18n="indice.hint">Elige una sección para ir directo, sin recorrer toda la página.</p>
+        <ul class="indice-lista" id="indice-lista"></ul>
+        <div class="dialogo-indice-acciones">
+          <button type="button" class="btn btn-recorrido-nav" id="indice-iniciar-recorrido" data-i18n="nav.tour">Iniciar recorrido</button>
+        </div>
+      </div>
+    </dialog>
 
     <a href="#hub" class="btn-volver-arriba" id="btn-arriba" data-i18n-aria="back.top" aria-label="Volver arriba" hidden>
       <span aria-hidden="true">↑</span>

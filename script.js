@@ -151,19 +151,8 @@ function initNavegacion() {
       if (seccion.offsetTop <= offset) activa = seccion.id;
     });
 
-    const mapaNav = {
-      hub: "hub",
-      "ciudadania-global": "datos",
-      historias: "historias",
-      storytelling: "historias",
-      aprendizajes: "aprendizajes",
-      investigacion: "investigacion",
-      participacion: "participacion",
-      "encuesta-visitantes": "participacion",
-      faq: "participacion",
-      contacto: "participacion"
-    };
-    const navKey = mapaNav[activa] || activa;
+    const mapaNavLocal = mapaNav;
+    const navKey = mapaNavLocal[activa] || activa;
 
     enlaces.forEach((enlace) => {
       enlace.classList.toggle("is-active", enlace.dataset.nav === navKey);
@@ -182,11 +171,65 @@ const capitulosHistoria = [
   { id: "historias", key: "cap.historias" },
   { id: "aprendizajes", key: "cap.aprendizajes" },
   { id: "investigacion", key: "cap.investigacion" },
-  { id: "participacion", key: "cap.participacion" },
-  { id: "encuesta-visitantes", key: "cap.participacion" },
-  { id: "faq", key: "cap.participacion" },
-  { id: "contacto", key: "cap.participacion" }
+  { id: "participacion", key: "cap.participacion" }
 ];
+
+const mapaSeccionCapitulo = {
+  hub: "hub",
+  "ciudadania-global": "ciudadania-global",
+  historias: "historias",
+  storytelling: "historias",
+  aprendizajes: "aprendizajes",
+  investigacion: "investigacion",
+  participacion: "participacion",
+  "encuesta-visitantes": "participacion",
+  faq: "participacion",
+  contacto: "participacion"
+};
+
+const mapaNav = {
+  hub: "hub",
+  "ciudadania-global": "datos",
+  historias: "historias",
+  storytelling: "historias",
+  aprendizajes: "aprendizajes",
+  investigacion: "investigacion",
+  participacion: "participacion",
+  "encuesta-visitantes": "participacion",
+  faq: "participacion",
+  contacto: "participacion"
+};
+
+function prefiereMovimientoReducido() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function irASeccion(id) {
+  const seccion = document.getElementById(id);
+  if (!seccion) return;
+
+  seccion.scrollIntoView({
+    behavior: prefiereMovimientoReducido() ? "auto" : "smooth",
+    block: "start"
+  });
+
+  if (history.replaceState) {
+    history.replaceState(null, "", `#${id}`);
+  } else {
+    location.hash = id;
+  }
+}
+
+function obtenerCapituloDesdeScroll(offset) {
+  const secciones = [...document.querySelectorAll(".seccion-ancla")];
+  let activa = secciones[0]?.id ?? "hub";
+
+  secciones.forEach((seccion) => {
+    if (seccion.offsetTop <= offset) activa = seccion.id;
+  });
+
+  return mapaSeccionCapitulo[activa] || activa;
+}
 
 const factoresPuebla = [
   { id: "gusto", valor: 5 },
@@ -1096,11 +1139,14 @@ function initProgresoHistoria() {
   if (!barra || !relleno || !segmentos || !etiqueta || !nav) return;
 
   capitulosHistoria.forEach((capitulo) => {
-    const marca = document.createElement("span");
+    const marca = document.createElement("button");
+    marca.type = "button";
     marca.className = "progreso-segmento";
     marca.dataset.capitulo = capitulo.id;
     marca.dataset.capituloKey = capitulo.key;
     marca.title = t(capitulo.key);
+    marca.setAttribute("aria-label", t(capitulo.key));
+    marca.addEventListener("click", () => irASeccion(capitulo.id));
     segmentos.appendChild(marca);
   });
 
@@ -1118,12 +1164,9 @@ function initProgresoHistoria() {
     barra.setAttribute("aria-valuenow", String(Math.round(avance)));
 
     const offset = window.scrollY + nav.offsetHeight + 56;
-    let indiceActivo = 0;
-
-    capitulosHistoria.forEach((capitulo, indice) => {
-      const seccion = document.querySelector(`#${capitulo.id}`);
-      if (seccion && seccion.offsetTop <= offset) indiceActivo = indice;
-    });
+    const capituloActivo = obtenerCapituloDesdeScroll(offset);
+    let indiceActivo = capitulosHistoria.findIndex((capitulo) => capitulo.id === capituloActivo);
+    if (indiceActivo < 0) indiceActivo = 0;
 
     marcas.forEach((marca, indice) => {
       marca.classList.toggle("is-active", indice === indiceActivo);
@@ -1138,6 +1181,84 @@ function initProgresoHistoria() {
   actualizarProgreso();
   window.addEventListener("scroll", actualizarProgreso, { passive: true });
   window.addEventListener("resize", actualizarProgreso, { passive: true });
+}
+
+function initNavegacionCapitulos() {
+  document.addEventListener("click", (evento) => {
+    const enlace = evento.target.closest('a[href^="#"]');
+    if (!enlace) return;
+
+    const destino = enlace.getAttribute("href");
+    if (!destino || destino === "#") return;
+
+    const id = destino.slice(1);
+    if (!document.getElementById(id)) return;
+
+    evento.preventDefault();
+    irASeccion(id);
+  });
+}
+
+function initIndiceFlotante() {
+  const boton = document.querySelector("#btn-indice");
+  const dialogo = document.querySelector("#dialogo-indice");
+  const cerrar = document.querySelector("#indice-cerrar");
+  const lista = document.querySelector("#indice-lista");
+  const btnRecorrido = document.querySelector("#indice-iniciar-recorrido");
+  const btnRecorridoNav = document.querySelector("#btn-iniciar-recorrido");
+
+  if (!boton || !dialogo || !lista) return;
+
+  const renderLista = () => {
+    lista.innerHTML = capitulosHistoria
+      .map(
+        (capitulo, indice) => `
+        <li>
+          <button type="button" class="indice-item" data-capitulo="${capitulo.id}">
+            <span class="indice-item-num" aria-hidden="true">${indice + 1}</span>
+            <span class="indice-item-texto">
+              <span class="indice-item-nombre">${t(capitulo.key)}</span>
+              <span class="indice-item-desc">${t(`navmap.${capitulo.id === "ciudadania-global" ? "datos" : capitulo.id}.desc`)}</span>
+            </span>
+          </button>
+        </li>`
+      )
+      .join("");
+  };
+
+  renderLista();
+
+  const abrir = () => {
+    renderLista();
+    dialogo.showModal();
+    boton.setAttribute("aria-expanded", "true");
+  };
+
+  const cerrarDialogo = () => {
+    dialogo.close();
+    boton.setAttribute("aria-expanded", "false");
+  };
+
+  boton.addEventListener("click", abrir);
+  cerrar?.addEventListener("click", cerrarDialogo);
+  dialogo.addEventListener("click", (evento) => {
+    if (evento.target === dialogo) cerrarDialogo();
+  });
+  dialogo.addEventListener("close", () => boton.setAttribute("aria-expanded", "false"));
+
+  lista.addEventListener("click", (evento) => {
+    const item = evento.target.closest(".indice-item");
+    if (!item) return;
+    cerrarDialogo();
+    irASeccion(item.dataset.capitulo);
+  });
+
+  btnRecorrido?.addEventListener("click", () => {
+    cerrarDialogo();
+    btnRecorridoNav?.click();
+  });
+
+  window.addEventListener("hub:idioma", renderLista);
 }
 
 function initContacto() {
@@ -1522,6 +1643,8 @@ function initCambioIdioma() {
 escribirLectura();
 initContadoresAnimados();
 initNavegacion();
+initNavegacionCapitulos();
+initIndiceFlotante();
 initProgresoHistoria();
 initContacto();
 initVolverArriba();
