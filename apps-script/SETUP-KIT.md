@@ -1,4 +1,8 @@
-# Guía: registros del kit OIM con Google Sheets
+# Guía: registros del kit OIM con Google Sheets (Apps Script)
+
+> **Recomendado para la cuenta `barradas.andres@gmail.com`:** usa primero la guía más simple  
+> **`SETUP-GOOGLE-FORM.md`** (Google Form + Sheet, sin código).  
+> Esta guía es la **opción B** si prefieres Apps Script con respuesta JSON.
 
 Conecta el formulario de acceso del **Kit de divulgación** (glosario, Portal de Datos OIM, Informe Mundial 2024) con una hoja de Google para medir quién usa los materiales y con qué fin.
 

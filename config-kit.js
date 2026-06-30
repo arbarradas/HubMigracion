@@ -1,6 +1,26 @@
 /**
- * URL del Web App de Google Apps Script para registros del kit OIM.
- * Ver apps-script/SETUP-KIT.md. Déjala vacía para guardar solo en el navegador.
- * Ejemplo: window.HUB_KIT_API = "https://script.google.com/macros/s/XXXX/exec";
+ * Registro del kit OIM — Google Form vinculado a Google Sheets (recomendado).
+ * Guía paso a paso: apps-script/SETUP-GOOGLE-FORM.md
+ * Cuenta sugerida: barradas.andres@gmail.com
+ *
+ * Cuando crees el Form, pega aquí la URL formResponse y los entry.XXXXX
+ * del enlace previo (Obtener enlace previo en Google Forms).
+ */
+window.HUB_KIT_FORM = {
+  action: "",
+  entries: {
+    nombre: "",
+    email: "",
+    motivo: "",
+    fecha: "",
+    origen: "",
+    id: "",
+    motivoCodigo: ""
+  }
+};
+
+/**
+ * Alternativa: Web App de Apps Script (ver apps-script/SETUP-KIT.md).
+ * Déjala vacía si usas solo Google Form.
  */
 window.HUB_KIT_API = "";

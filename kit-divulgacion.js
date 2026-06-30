@@ -25,12 +25,32 @@
 
   if (!form || !panelEnlaces) return;
 
+  const obtenerKitFormConfig = () => {
+    const cfg = typeof window !== "undefined" ? window.HUB_KIT_FORM : null;
+    return cfg && typeof cfg === "object" ? cfg : null;
+  };
+
+  const kitFormActivo = () => {
+    const cfg = obtenerKitFormConfig();
+    const action = String(cfg?.action || "").trim();
+    const entries = cfg?.entries || {};
+    return Boolean(
+      action.includes("docs.google.com/forms") &&
+        action.endsWith("/formResponse") &&
+        entries.nombre &&
+        entries.email &&
+        entries.motivo
+    );
+  };
+
   const obtenerKitApiUrl = () => {
     const url = (typeof window !== "undefined" && window.HUB_KIT_API) || "";
     return typeof url === "string" ? url.trim() : "";
   };
 
   const kitApiActiva = () => obtenerKitApiUrl().length > 0;
+
+  const repositorioRemotoActivo = () => kitFormActivo() || kitApiActiva();
 
   const ocultarError = () => {
     if (!mensajeError) return;
@@ -74,7 +94,38 @@
     }
   };
 
-  async function enviarRegistroRemoto(entrada) {
+  async function enviarRegistroGoogleForm(entrada) {
+    if (!kitFormActivo()) return { ok: true, omitido: true };
+
+    const cfg = obtenerKitFormConfig();
+    const entries = cfg.entries;
+    const params = new URLSearchParams();
+
+    params.set(entries.nombre, entrada.nombre);
+    params.set(entries.email, entrada.email);
+    params.set(entries.motivo, entrada.motivoEtiqueta || MOTIVOS[entrada.motivo] || entrada.motivo);
+    if (entries.fecha) params.set(entries.fecha, entrada.fecha);
+    if (entries.origen) params.set(entries.origen, entrada.origen);
+    if (entries.id) params.set(entries.id, entrada.id);
+    if (entries.motivoCodigo) params.set(entries.motivoCodigo, entrada.motivo);
+
+    try {
+      await fetch(cfg.action.trim(), {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+        body: params.toString()
+      });
+      return { ok: true, via: "google-form" };
+    } catch {
+      return {
+        ok: false,
+        error: "No se pudo enviar el registro a Google Forms. Revisa tu conexión e inténtalo de nuevo."
+      };
+    }
+  }
+
+  async function enviarRegistroAppsScript(entrada) {
     const url = obtenerKitApiUrl();
     if (!url) return { ok: true, omitido: true };
 
@@ -89,10 +140,16 @@
         return { ok: false, error: "No se pudo conectar con el registro del Hub." };
       }
       const datos = await respuesta.json();
-      return datos && datos.ok ? { ok: true } : { ok: false, error: datos?.error || "Registro rechazado." };
+      return datos && datos.ok ? { ok: true, via: "apps-script" } : { ok: false, error: datos?.error || "Registro rechazado." };
     } catch {
       return { ok: false, error: "Error de red al enviar el registro. Intenta de nuevo." };
     }
+  }
+
+  async function enviarRegistroRemoto(entrada) {
+    const formulario = await enviarRegistroGoogleForm(entrada);
+    if (!formulario.omitido) return formulario;
+    return enviarRegistroAppsScript(entrada);
   }
 
   const accesoPrevio = leerAcceso();
@@ -126,7 +183,7 @@
 
     if (btnSubmit) {
       btnSubmit.disabled = true;
-      btnSubmit.textContent = kitApiActiva() ? "Enviando registro…" : "Habilitando acceso…";
+      btnSubmit.textContent = repositorioRemotoActivo() ? "Enviando registro…" : "Habilitando acceso…";
     }
 
     const remoto = await enviarRegistroRemoto(entrada);
