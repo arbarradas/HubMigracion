@@ -39,11 +39,13 @@ body {
   --espacio-md: 1.75rem;
   --espacio-lg: 3rem;
   --espacio-xl: 4.5rem;
-  --espacio-seccion: clamp(3.5rem, 7vw, 5.5rem);
-  --fz-titulo: clamp(2.25rem, 5vw, 3.25rem);
-  --fz-subtitulo: 1.5rem;
-  --fz-cuerpo: 1.125rem;
-  --fz-pequena: 0.9375rem;
+  --espacio-seccion: clamp(2.5rem, 5vw, 4rem);
+  --fz-titulo: clamp(1.85rem, 4vw, 2.75rem);
+  --fz-subtitulo: clamp(1.2rem, 2.5vw, 1.4rem);
+  --fz-cuerpo: 1rem;
+  --fz-pequena: 0.875rem;
+  --fz-etiqueta: 0.8125rem;
+  --fz-dato-region: clamp(1.35rem, 3vw, 1.85rem);
 }
 
 [data-paleta="accesibilidad"] {
@@ -237,8 +239,8 @@ h2.subtitulo {
 
 .seccion-cabecera {
   max-width: 72ch;
-  margin-bottom: var(--espacio-lg);
-  padding-bottom: var(--espacio-md);
+  margin-bottom: var(--espacio-md);
+  padding-bottom: var(--espacio-sm);
   border-bottom: 1px solid var(--linea);
 }
 
@@ -268,9 +270,9 @@ h2.subtitulo {
   max-width: 68ch;
   margin-bottom: var(--espacio-md);
   color: var(--muted);
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  line-height: 1.55;
+  font-family: var(--font-sans);
+  font-size: var(--fz-cuerpo);
+  line-height: 1.6;
 }
 
 .hub-puente {
@@ -535,7 +537,7 @@ main {
 }
 
 .hub-descripcion p {
-  margin: 0 0 var(--espacio-md);
+  margin: 0 0 var(--espacio-sm);
 }
 
 .hub-descripcion p:last-child {
@@ -871,10 +873,11 @@ main {
 }
 
 .etiqueta {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.5rem;
   color: var(--acento-2);
-  font-size: var(--fz-pequena);
-  font-weight: 800;
+  font-family: var(--font-sans);
+  font-size: var(--fz-etiqueta);
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -951,7 +954,7 @@ p {
   margin: 0;
   color: var(--acento);
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
   line-height: 1.05;
 }
 
@@ -964,7 +967,17 @@ p {
 .ciudadania-region-card {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.25rem;
+  padding: 0.85rem;
+}
+
+.ciudadania-region-card .dato-destacado {
+  font-size: var(--fz-dato-region);
+  line-height: 1.1;
+}
+
+.ciudadania-region-nombre {
+  font-size: var(--fz-pequena);
 }
 
 .ciudadania-region-card--destacada {
@@ -1036,7 +1049,7 @@ p {
   display: block;
   color: var(--acento);
   font-family: var(--font-serif);
-  font-size: var(--fz-titulo);
+  font-size: var(--fz-dato-region);
   line-height: 1.05;
 }
 
@@ -1047,17 +1060,51 @@ p {
 
 .oim-embed-contenedor {
   margin: var(--espacio-md) 0;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid var(--linea);
   border-radius: 10px;
   background: var(--panel);
+  position: relative;
+  isolation: isolate;
+}
+
+.oim-embed-cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-sm);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--espacio-sm) var(--espacio-md);
+  border-bottom: 1px solid var(--linea);
+  background: var(--seccion-panel);
+}
+
+.oim-embed-ayuda {
+  flex: 1 1 16rem;
+  margin: 0;
+  font-size: var(--fz-pequena);
+  color: var(--muted);
+}
+
+.btn-oim-externo {
+  flex-shrink: 0;
+  font-size: var(--fz-pequena);
+  padding: 0.5rem 0.9rem;
 }
 
 .oim-iframe {
   display: block;
   width: 100%;
-  min-height: 520px;
+  min-height: clamp(520px, 72vh, 720px);
+  height: clamp(520px, 72vh, 720px);
   border: 0;
+  pointer-events: auto;
+}
+
+.oim-recursos-bloque {
+  margin-top: var(--espacio-lg);
+  padding-top: var(--espacio-md);
+  border-top: 1px solid var(--linea);
 }
 
 .texto-fuente a {
@@ -1070,22 +1117,22 @@ p {
 }
 
 .panel-resumen article {
-  min-height: 132px;
-  padding: 1.2rem;
+  min-height: auto;
+  padding: 0.85rem;
   border: 1px solid var(--linea);
   border-radius: 8px;
   background: var(--panel);
 }
 
 .panel-migracion article {
-  min-height: 168px;
+  min-height: auto;
 }
 
 .panel-resumen span {
   display: block;
   color: var(--acento);
   font-family: var(--font-serif);
-  font-size: var(--fz-titulo);
+  font-size: var(--fz-dato-region);
   line-height: 1;
 }
 
@@ -1176,8 +1223,9 @@ code {
 }
 
 .podcast-reproductor {
-  margin-top: var(--espacio-lg);
-  padding: var(--espacio-md);
+  max-width: 42rem;
+  margin-top: var(--espacio-md);
+  padding: var(--espacio-sm) var(--espacio-md);
   border: 1px solid var(--linea);
   border-radius: 14px;
   background: var(--panel);
@@ -1187,8 +1235,8 @@ code {
 .podcast-reproductor-etiqueta {
   margin: 0 0 var(--espacio-sm);
   color: var(--acento);
-  font-size: var(--fz-pequena);
-  font-weight: 800;
+  font-size: var(--fz-etiqueta);
+  font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -1196,10 +1244,27 @@ code {
 .podcast-embed {
   display: block;
   width: 100%;
-  height: 352px;
+  max-width: 100%;
+  height: 232px;
   border: 0;
   border-radius: 12px;
   background: transparent;
+}
+
+.historias-storytelling--primero {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.historias-podcast-bloque {
+  margin-top: var(--espacio-lg);
+  padding-top: var(--espacio-md);
+  border-top: 1px solid var(--linea);
+}
+
+.historias-podcast-puente {
+  margin-bottom: var(--espacio-sm);
 }
 
 .btn {
@@ -1361,13 +1426,83 @@ main iframe:not(.graphcommons-iframe) {
     linear-gradient(165deg, rgba(242, 230, 218, 0.55) 0%, rgba(232, 213, 196, 0.35) 48%, var(--fondo) 100%);
 }
 
-.investigacion-panel {
-  margin-top: var(--espacio-md);
-  padding: var(--espacio-md);
+/* —— Investigación compacta con pestañas —— */
+.investigacion-intro {
+  max-width: 72ch;
+  margin-bottom: var(--espacio-md);
+}
+
+.investigacion-tabs {
+  margin-top: var(--espacio-sm);
   border: 1px solid var(--linea);
-  border-radius: 16px;
-  background: rgba(250, 246, 241, 0.72);
-  box-shadow: 0 10px 32px rgba(42, 34, 28, 0.08);
+  border-radius: 14px;
+  background: var(--panel);
+  overflow: hidden;
+  box-shadow: 0 8px 24px var(--sombra);
+}
+
+.investigacion-tabs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: var(--espacio-sm);
+  border-bottom: 1px solid var(--linea);
+  background: var(--seccion-panel);
+}
+
+.investigacion-tab-btn {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--acento);
+  font-family: var(--font-sans);
+  font-size: var(--fz-pequena);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.investigacion-tab-btn:hover {
+  background: #faf6f1;
+}
+
+.investigacion-tab-btn.is-active {
+  background: var(--acento);
+  color: #fff;
+  border-color: var(--acento);
+}
+
+.investigacion-tab-panel {
+  padding: var(--espacio-md);
+}
+
+.investigacion-tab-panel[hidden] {
+  display: none;
+}
+
+.investigacion-tab-panel .graphcommons-iframe {
+  min-height: clamp(360px, 55vh, 520px);
+  height: clamp(360px, 55vh, 520px);
+}
+
+.participacion-encuesta {
+  margin-top: var(--espacio-lg);
+  padding-top: var(--espacio-md);
+  border-top: 1px solid var(--linea);
+}
+
+.participacion-encuesta-cabecera {
+  max-width: 68ch;
+  margin-bottom: var(--espacio-md);
+}
+
+.participacion-encuesta-cabecera .subtitulo {
+  margin-bottom: var(--espacio-sm);
+}
+
+.participacion-encuesta .puente-narrativo {
+  margin-bottom: 0;
 }
 
 .investigacion-encabezado {
@@ -1599,7 +1734,13 @@ main iframe:not(.graphcommons-iframe) {
 
 @media (max-width: 768px) {
   .podcast-embed {
-    height: 280px;
+    height: min(232px, 55vw);
+    min-height: 152px;
+  }
+
+  .oim-iframe {
+    min-height: clamp(420px, 65vh, 600px);
+    height: clamp(420px, 65vh, 600px);
   }
 
   .proyectos-galeria {
@@ -1651,8 +1792,8 @@ main iframe:not(.graphcommons-iframe) {
     height: 420px;
   }
 
-  .investigacion-panel {
-    padding: var(--espacio-sm);
+  .investigacion-tabs {
+    padding: 0;
   }
 }
 
@@ -2025,9 +2166,9 @@ main iframe:not(.graphcommons-iframe) {
 }
 
 .historias-storytelling {
-  margin-top: var(--espacio-xl);
-  padding-top: var(--espacio-lg);
-  border-top: 1px solid var(--marco);
+  margin-top: var(--espacio-lg);
+  padding-top: var(--espacio-md);
+  border-top: 1px solid var(--linea);
 }
 
 .historias-storytelling .subtitulo {
@@ -2877,7 +3018,13 @@ main iframe:not(.graphcommons-iframe) {
 
   .oim-iframe,
   .graphcommons-iframe {
-    min-height: clamp(280px, 52vw, 480px);
+    min-height: clamp(300px, 50vh, 480px);
+    height: clamp(300px, 50vh, 480px);
+  }
+
+  .investigacion-tab-panel .graphcommons-iframe {
+    min-height: clamp(300px, 48vh, 420px);
+    height: clamp(300px, 48vh, 420px);
   }
 
   .btn-indice-flotante,

@@ -167,9 +167,8 @@ function initNavegacion() {
 
 const capitulosHistoria = [
   { id: "hub", key: "cap.hub" },
-  { id: "ciudadania-global", key: "cap.datos" },
+  { id: "ciudadania-global", key: "cap.oim" },
   { id: "historias", key: "cap.historias" },
-  { id: "aprendizajes", key: "cap.aprendizajes" },
   { id: "investigacion", key: "cap.investigacion" },
   { id: "participacion", key: "cap.participacion" }
 ];
@@ -179,24 +178,20 @@ const mapaSeccionCapitulo = {
   "ciudadania-global": "ciudadania-global",
   historias: "historias",
   storytelling: "historias",
-  aprendizajes: "aprendizajes",
   investigacion: "investigacion",
   participacion: "participacion",
   "encuesta-visitantes": "participacion",
-  faq: "participacion",
   contacto: "participacion"
 };
 
 const mapaNav = {
   hub: "hub",
-  "ciudadania-global": "datos",
+  "ciudadania-global": "oim",
   historias: "historias",
   storytelling: "historias",
-  aprendizajes: "aprendizajes",
   investigacion: "investigacion",
   participacion: "participacion",
   "encuesta-visitantes": "participacion",
-  faq: "participacion",
   contacto: "participacion"
 };
 
@@ -252,9 +247,8 @@ const NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
 
 const pasosRecorrido = [
   { id: "hub", tituloKey: "tour.hub.title", textoKey: "tour.hub.text" },
-  { id: "ciudadania-global", tituloKey: "tour.datos.title", textoKey: "tour.datos.text" },
+  { id: "ciudadania-global", tituloKey: "tour.oim.title", textoKey: "tour.oim.text" },
   { id: "historias", tituloKey: "tour.historias.title", textoKey: "tour.historias.text" },
-  { id: "aprendizajes", tituloKey: "tour.aprendizajes.title", textoKey: "tour.aprendizajes.text" },
   { id: "investigacion", tituloKey: "tour.investigacion.title", textoKey: "tour.investigacion.text" },
   { id: "participacion", tituloKey: "tour.participacion.title", textoKey: "tour.participacion.text" },
   {
@@ -1218,7 +1212,7 @@ function initIndiceFlotante() {
             <span class="indice-item-num" aria-hidden="true">${indice + 1}</span>
             <span class="indice-item-texto">
               <span class="indice-item-nombre">${t(capitulo.key)}</span>
-              <span class="indice-item-desc">${t(`navmap.${capitulo.id === "ciudadania-global" ? "datos" : capitulo.id}.desc`)}</span>
+              <span class="indice-item-desc">${t(`navmap.${capitulo.id === "ciudadania-global" ? "oim" : capitulo.id}.desc`)}</span>
             </span>
           </button>
         </li>`
@@ -1625,9 +1619,37 @@ function initPaleta() {
 
 function actualizarIframeOim() {
   const iframe = document.querySelector("#oim-map-iframe");
-  if (!iframe) return;
+  const enlace = document.querySelector("#oim-portal-externo");
   const idioma = window.HubI18n?.getIdioma() === "en" ? "en" : "es";
-  iframe.src = `https://www.migrationdataportal.org/${idioma}/embed-map`;
+  if (iframe) iframe.src = `https://www.migrationdataportal.org/${idioma}/embed-map`;
+  if (enlace) enlace.href = `https://www.migrationdataportal.org/${idioma}`;
+}
+
+function initInvestigacionTabs() {
+  const contenedor = document.querySelector("#investigacion-tabs");
+  if (!contenedor) return;
+
+  const botones = [...contenedor.querySelectorAll(".investigacion-tab-btn")];
+  const paneles = [...contenedor.querySelectorAll(".investigacion-tab-panel")];
+
+  const activar = (id) => {
+    botones.forEach((btn) => {
+      const activo = btn.dataset.tab === id;
+      btn.classList.toggle("is-active", activo);
+      btn.setAttribute("aria-selected", String(activo));
+    });
+    paneles.forEach((panel) => {
+      const activo = panel.dataset.panel === id;
+      panel.classList.toggle("is-active", activo);
+      panel.hidden = !activo;
+    });
+    if (id === "carto") window.redimensionarCartografia?.();
+    if (id === "factores") window.redimensionarFactores?.();
+  };
+
+  botones.forEach((btn) => {
+    btn.addEventListener("click", () => activar(btn.dataset.tab));
+  });
 }
 
 function initCambioIdioma() {
@@ -1657,6 +1679,7 @@ initMapaVisitantes();
 initMapaVocesControles();
 initRecorridoGuiado();
 initPaleta();
+initInvestigacionTabs();
 initCambioIdioma();
 actualizarIframeOim();
 
