@@ -1625,6 +1625,22 @@ function actualizarIframeOim() {
   if (enlace) enlace.href = `https://www.migrationdataportal.org/${idioma}`;
 }
 
+function initKitDivulgacion() {
+  const btnPdf = document.querySelector("#btn-kit-pdf");
+  if (!btnPdf) return;
+  btnPdf.addEventListener("click", () => {
+    const ventana = window.open("kit-divulgacion.html", "_blank");
+    if (!ventana) {
+      window.location.href = "kit-divulgacion.html";
+      return;
+    }
+    ventana.addEventListener("load", () => {
+      ventana.focus();
+      ventana.print();
+    });
+  });
+}
+
 function initInvestigacionTabs() {
   const contenedor = document.querySelector("#investigacion-tabs");
   if (!contenedor) return;
@@ -1680,6 +1696,7 @@ initMapaVocesControles();
 initRecorridoGuiado();
 initPaleta();
 initInvestigacionTabs();
+initKitDivulgacion();
 initCambioIdioma();
 actualizarIframeOim();
 

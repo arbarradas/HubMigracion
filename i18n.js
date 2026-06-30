@@ -27,7 +27,7 @@
       "hub.source": "Fuente: Portal de noticias Mediatik",
       "hub.arranque": "Arranque",
       "hub.p0":
-        "Iniciativa de la Escuela de Humanidades y Educación del Tec de Monterrey, campus Puebla: un espacio de encuentro para proyectos académicos de impacto social sobre movilidad humana.",
+        'Iniciativa de la <a href="https://tec.mx/es/ehe" target="_blank" rel="noopener noreferrer">Escuela de Humanidades y Educación</a> del Tec de Monterrey, campus Puebla: un espacio de encuentro para proyectos académicos de impacto social sobre movilidad humana.',
       "hub.p1":
         'Desde su <a href="https://mediatik.com.mx/inauguran-en-el-tec-de-monterrey-puebla-un-centro-para-el-estudio-de-la-migracion/" target="_blank" rel="noopener noreferrer">inauguración en febrero de 2025</a>, colabora con la OIM y Samuel Kishi, embajador de buena voluntad de la Organización.',
       "hub.p2.title": "Cuatro pilares estratégicos",
@@ -150,6 +150,11 @@
       "aprendizajes.glossary.body":
         "La Organización Internacional para las Migraciones mantiene un glosario en línea con definiciones acordadas internacionalmente sobre migración, asilo, trata de personas y términos afines — útil para alinear el lenguaje en aulas, medios y política pública.",
       "aprendizajes.glossary.link": "Consultar el glosario en línea de la OIM",
+      "kit.title": "Kit de divulgación",
+      "kit.body":
+        "Paquete descargable con infografía de cifras IME/SRE, enlaces al glosario y al Portal de Datos OIM, y contexto del Hub como socio formador de la GMMA. Ideal para aulas, medios y organizaciones.",
+      "kit.open": "Abrir kit de divulgación",
+      "kit.pdf": "Guardar como PDF",
       "participacion.label": "Tu lugar en la historia",
       "participacion.title": "¿Cómo puedes participar?",
       "participacion.puente":
@@ -210,7 +215,7 @@
       "faq.a3.link2": "Ver investigación",
       "footer.credits": "Créditos del Hub",
       "footer.credits.body":
-        "Hub de Migración e Impacto Social — Tecnológico de Monterrey, campus Puebla y Región Centro-Occidente.",
+        'Hub de Migración e Impacto Social — Tecnológico de Monterrey, campus Puebla y Región Centro-Occidente. Iniciativa de la <a href="https://tec.mx/es/ehe" target="_blank" rel="noopener noreferrer">Escuela de Humanidades y Educación</a>.',
       "footer.credits.role": "Creador del sitio web y coordinador del Hub.",
       "footer.contact": "Contactar",
       "footer.contact.body": "¿Deseas colaborar, integrar un proyecto o conocer más sobre el Hub?",
@@ -218,6 +223,7 @@
       "footer.contact.btn": "Enviar correo electrónico",
       "footer.sitemap": "En esta página",
       "footer.sublink.map": "Tu voz en el mapa",
+      "footer.sublink.kit": "Kit de divulgación",
       "footer.legal": "© Hub de Migración e Impacto Social — Tec de Monterrey, campus Puebla.",
       "back.top": "Volver arriba",
       "cap.hub": "Qué es el Hub",
@@ -290,7 +296,7 @@
       "hub.source": "Source: Mediatik news portal",
       "hub.arranque": "Launch",
       "hub.p0":
-        "An initiative of the School of Humanities and Education at Tec de Monterrey, Puebla campus: a meeting space for academic projects with social impact on human mobility.",
+        'An initiative of the <a href="https://tec.mx/en/our-faculty/ehe" target="_blank" rel="noopener noreferrer">School of Humanities and Education</a> at Tec de Monterrey, Puebla campus: a meeting space for academic projects with social impact on human mobility.',
       "hub.p1":
         'Since its <a href="https://mediatik.com.mx/inauguran-en-el-tec-de-monterrey-puebla-un-centro-para-el-estudio-de-la-migracion/" target="_blank" rel="noopener noreferrer">inauguration in February 2025</a>, it collaborates with IOM and Samuel Kishi, Goodwill Ambassador of the Organization.',
       "hub.p2.title": "Four strategic pillars",
@@ -413,6 +419,11 @@
       "aprendizajes.glossary.body":
         "The International Organization for Migration maintains an online glossary with internationally agreed definitions on migration, asylum, human trafficking, and related terms — useful for aligning language in classrooms, media, and public policy.",
       "aprendizajes.glossary.link": "Browse the IOM online glossary",
+      "kit.title": "Outreach kit",
+      "kit.body":
+        "Downloadable package with IME/SRE figure infographic, links to the glossary and IOM Data Portal, and context on the Hub as a GMMA training partner. Ideal for classrooms, media, and organizations.",
+      "kit.open": "Open outreach kit",
+      "kit.pdf": "Save as PDF",
       "participacion.label": "Your place in the story",
       "participacion.title": "How can you participate?",
       "participacion.puente":
@@ -473,7 +484,7 @@
       "faq.a3.link2": "View research",
       "footer.credits": "Hub credits",
       "footer.credits.body":
-        "Migration and Social Impact Hub — Tecnológico de Monterrey, Puebla campus and Central-Western Region.",
+        'Migration and Social Impact Hub — Tecnológico de Monterrey, Puebla campus and Central-Western Region. An initiative of the <a href="https://tec.mx/en/our-faculty/ehe" target="_blank" rel="noopener noreferrer">School of Humanities and Education</a>.',
       "footer.credits.role": "Website creator and Hub coordinator.",
       "footer.contact": "Contact",
       "footer.contact.body": "Would you like to collaborate, integrate a project, or learn more about the Hub?",
@@ -481,6 +492,7 @@
       "footer.contact.btn": "Send email",
       "footer.sitemap": "On this page",
       "footer.sublink.map": "Your voice on the map",
+      "footer.sublink.kit": "Outreach kit",
       "footer.legal": "© Migration and Social Impact Hub — Tec de Monterrey, Puebla campus.",
       "back.top": "Back to top",
       "cap.hub": "What is the Hub",

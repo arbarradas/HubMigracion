@@ -1107,6 +1107,21 @@ p {
   border-top: 1px solid var(--linea);
 }
 
+.oim-recursos-bloque .tarjeta-recurso + .tarjeta-recurso {
+  margin-top: var(--espacio-md);
+}
+
+.kit-acciones-sitio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-sm);
+  margin-top: var(--espacio-sm);
+}
+
+.kit-acciones-sitio .btn {
+  margin-top: 0;
+}
+
 .texto-fuente a {
   color: var(--acento);
   font-weight: 600;
@@ -1343,6 +1358,17 @@ code {
 
 .site-footer .texto {
   color: var(--hub-acento-suave);
+}
+
+.site-footer .texto a {
+  color: var(--hub-acento);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.site-footer .texto a:hover {
+  color: #ffffff;
 }
 
 .footer-credito strong {

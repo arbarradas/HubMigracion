@@ -1,0 +1,327 @@
+/* Kit de divulgación — Hub de Migración e Impacto Social */
+:root {
+  --kit-azul: #152d5a;
+  --kit-azul-medio: #2a428c;
+  --kit-acento: #4a72b5;
+  --kit-texto: #1a2340;
+  --kit-muted: #5a6478;
+  --kit-linea: #d4dae8;
+  --kit-fondo: #f7f8fb;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--kit-fondo);
+  color: var(--kit-texto);
+  font-family: var(--font-sans);
+  font-size: 11pt;
+  line-height: 1.55;
+}
+
+.kit-pagina {
+  width: min(210mm, 100%);
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 2rem;
+  background: #fff;
+}
+
+.kit-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--kit-linea);
+  border-radius: 10px;
+  background: var(--kit-fondo);
+}
+
+.kit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--kit-azul-medio);
+  color: #fff;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.kit-btn:hover {
+  background: var(--kit-azul);
+}
+
+.kit-btn-sec {
+  background: #fff;
+  color: var(--kit-azul-medio);
+  border: 1px solid var(--kit-linea);
+}
+
+.kit-cabecera {
+  padding: 1.5rem 1.25rem;
+  border-radius: 12px;
+  background: linear-gradient(165deg, var(--kit-azul) 0%, var(--kit-azul-medio) 100%);
+  color: #f7f8fb;
+}
+
+.kit-etiqueta {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.kit-titulo {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  line-height: 1.15;
+}
+
+.kit-subtitulo {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+  color: rgba(247, 248, 251, 0.92);
+}
+
+.kit-seccion {
+  margin-top: 1.35rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--kit-linea);
+}
+
+.kit-seccion h2 {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--kit-azul-medio);
+}
+
+.kit-seccion p {
+  margin: 0 0 0.65rem;
+  color: var(--kit-muted);
+}
+
+.kit-seccion p:last-child {
+  margin-bottom: 0;
+}
+
+.kit-pilares {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kit-pilar {
+  padding: 0.55rem 0.45rem;
+  border: 1px solid var(--kit-linea);
+  border-radius: 8px;
+  background: var(--kit-fondo);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--kit-azul-medio);
+}
+
+.kit-infografia {
+  margin-top: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--kit-linea);
+  border-radius: 12px;
+  background: var(--kit-fondo);
+}
+
+.kit-total {
+  text-align: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--kit-linea);
+}
+
+.kit-total-num {
+  margin: 0.15rem 0;
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--kit-azul-medio);
+  line-height: 1.1;
+}
+
+.kit-total-etiq {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--kit-muted);
+}
+
+.kit-barra-item {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr 3.5rem;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.55rem;
+}
+
+.kit-barra-item:last-child {
+  margin-bottom: 0;
+}
+
+.kit-barra-etiq {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--kit-texto);
+}
+
+.kit-barra-pista {
+  height: 0.65rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dde3ef;
+}
+
+.kit-barra-relleno {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--kit-azul-medio), var(--kit-acento));
+}
+
+.kit-barra-valor {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--kit-azul-medio);
+  text-align: right;
+}
+
+.kit-enlaces {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kit-enlaces a {
+  display: block;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--kit-linea);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--kit-azul-medio);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.kit-socio {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: start;
+  margin-top: 0.75rem;
+  padding: 0.85rem;
+  border: 1px solid var(--kit-azul-medio);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.kit-socio-marca {
+  display: grid;
+  place-items: center;
+  min-width: 4.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: linear-gradient(165deg, var(--kit-azul) 0%, var(--kit-azul-medio) 100%);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.kit-pie {
+  margin-top: 1.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--kit-linea);
+  font-size: 0.75rem;
+  color: var(--kit-muted);
+  text-align: center;
+}
+
+.kit-fuente {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  color: var(--kit-muted);
+}
+
+@media (max-width: 600px) {
+  .kit-pilares {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kit-barra-item {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .kit-barra-valor {
+    text-align: left;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    font-size: 10pt;
+  }
+
+  .kit-pagina {
+    width: 100%;
+    padding: 0;
+  }
+
+  .kit-acciones {
+    display: none;
+  }
+
+  .kit-seccion {
+    break-inside: avoid;
+  }
+
+  .kit-infografia,
+  .kit-socio {
+    break-inside: avoid;
+  }
+
+  a {
+    color: var(--kit-texto);
+    text-decoration: none;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.7em;
+    font-weight: 400;
+    word-break: break-all;
+  }
+}
