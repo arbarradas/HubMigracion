@@ -33,12 +33,14 @@
       "hub.p2.title": "Cuatro pilares estratégicos",
       "hub.p2.body": " — Comunicación, ética, investigación docente y sentido humano.",
       "hub.puente":
-        "Este sitio recorre el Hub en capítulos: quiénes somos, datos OIM, historias, investigación en Puebla y una invitación a participar.",
+        "Este sitio recorre el Hub en capítulos: quiénes somos, historias, datos OIM, investigación en Puebla y una invitación a participar.",
       "navmap.title": "Explora por capítulos",
       "navmap.hint": "Salta directo al tema que te interese; también puedes usar el índice flotante en cualquier momento.",
       "navmap.hub.desc": "Origen, espacio físico y pilares",
-      "navmap.oim.desc": "Cifras, mapas, glosario y recursos OIM",
+      "navmap.oim.desc": "Cifras, mapas y alianza institucional",
       "navmap.historias.desc": "Proyectos narrativos, podcast y divulgación",
+      "oim.vinculacion":
+        "Desde hace más de tres años, el campus Puebla del Tec de Monterrey colabora con la OIM en talleres, formación y proyectos de divulgación. Esta alianza se sustenta en un convenio marco entre el Tecnológico de Monterrey y la Organización Internacional para las Migraciones.",
       "navmap.investigacion.desc": "Estudios, grafos y cartografías",
       "navmap.participacion.desc": "Sumarte, mapa de voces y contacto",
       "indice.open": "Índice",
@@ -51,11 +53,8 @@
       "creacion.label": "Creación de contenidos",
       "creacion.title": "Primero, escuchemos: ¿qué hay de la divulgación?",
       "creacion.puente":
-        "La migración no se entiende solo con cifras. Sociedad Migrante acerca testimonios y debates desde distintos países para situar el fenómeno con rostro y voz humana.",
-      "creacion.p2":
-        "Sociedad Migrante aborda la migración desde una perspectiva humana y global, con estudiantes e invitadxs especiales. La primera temporada incluye entrevistas a eurodiputadxs desde el Parlamento Europeo en Bruselas.",
-      "creacion.spotify": "Escuchar «Sociedad Migrante» en Spotify",
-      "creacion.episode": "Episodio 1 — Javier Moreno Sánchez (Parlamento Europeo)",
+        "Sociedad Migrante acerca testimonios y debates desde distintos países para situar la migración con rostro y voz humana.",
+      "creacion.episode": "Episodio 1 — Javier Moreno Sánchez",
       "ciudadania.label": "Ciudadanía global",
       "ciudadania.title": "¿Qué está pasando en el mundo?",
       "ciudadania.puente":
@@ -133,7 +132,7 @@
       "storytelling.label": "Proyectos narrativos",
       "storytelling.title": "Proyectos del Hub",
       "storytelling.puente":
-        "La investigación y la divulgación se materializan en obras y análisis. Estos proyectos muestran cómo el Hub transforma datos y voces en narrativas con impacto social.",
+        "La investigación y la divulgación se materializan en obras, podcast y narrativas con impacto social.",
       "storytelling.capaz.name": "Capaz",
       "storytelling.capaz.type": "Muestra museográfica",
       "storytelling.capaz.body":
@@ -142,7 +141,7 @@
       "storytelling.cuando.type": "Cine · Docs Puebla 2025",
       "storytelling.cuando.body":
         'Cortometraje exhibido en México y el extranjero; selección oficial Fragmentos Universitarios en <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">Docs Puebla</a>.',
-      "aprendizajes.label": "Aprendizajes",
+      "aprendizajes.label": "Recursos",
       "aprendizajes.title": "Recursos educativos",
       "aprendizajes.puente":
         "Conceptos precisos ayudan a leer datos, noticias y políticas migratorias con rigor. Estos materiales apoyan el trabajo docente y la divulgación del Hub.",
@@ -223,6 +222,7 @@
       "footer.contact.btn": "Enviar correo electrónico",
       "footer.sitemap": "En esta página",
       "footer.sublink.map": "Tu voz en el mapa",
+      "footer.sublink.resources": "Recursos educativos",
       "footer.sublink.kit": "Kit de divulgación",
       "footer.legal": "© Hub de Migración e Impacto Social — Tec de Monterrey, campus Puebla.",
       "back.top": "Volver arriba",
@@ -302,12 +302,14 @@
       "hub.p2.title": "Four strategic pillars",
       "hub.p2.body": " — Communication, ethics, faculty research, and human sense.",
       "hub.puente":
-        "This site tours the Hub in chapters: who we are, IOM data, stories, research in Puebla, and an invitation to participate.",
+        "This site tours the Hub in chapters: who we are, stories, IOM data, research in Puebla, and an invitation to participate.",
       "navmap.title": "Explore by chapter",
       "navmap.hint": "Jump straight to the topic you need; you can also open the floating index at any time.",
       "navmap.hub.desc": "Origin, physical space, and pillars",
-      "navmap.oim.desc": "Figures, maps, glossary, and IOM resources",
+      "navmap.oim.desc": "Figures, maps, and institutional alliance",
       "navmap.historias.desc": "Narrative projects, podcast, and outreach",
+      "oim.vinculacion":
+        "For more than three years, the Tec de Monterrey Puebla campus has collaborated with IOM on workshops, training, and outreach projects. This alliance is supported by a framework agreement between Tecnológico de Monterrey and the International Organization for Migration.",
       "navmap.investigacion.desc": "Studies, graphs, and cartographies",
       "navmap.participacion.desc": "Join in, voice map, and contact",
       "indice.open": "Index",
@@ -320,11 +322,9 @@
       "creacion.label": "Content creation",
       "creacion.title": "First, let's listen: what about outreach?",
       "creacion.puente":
-        "Migration cannot be understood through numbers alone. Sociedad Migrante brings testimonies and debates from different countries to place the phenomenon with a human face and voice.",
-      "creacion.p2":
-        "Sociedad Migrante addresses migration from a human and global perspective, with students and special guests. The first season includes interviews with members of the European Parliament in Brussels.",
-      "creacion.spotify": "Listen to «Sociedad Migrante» on Spotify",
-      "creacion.episode": "Episode 1 — Javier Moreno Sánchez (European Parliament)",
+        "Sociedad Migrante brings testimonies and debates from different countries to place migration with a human face and voice.",
+      "creacion.episode": "Episode 1 — Javier Moreno Sánchez",
+      "creacion.spotify": "Listen on Spotify",
       "ciudadania.label": "Global citizenship",
       "ciudadania.title": "What is happening in the world?",
       "ciudadania.puente":
@@ -402,7 +402,7 @@
       "storytelling.label": "Narrative projects",
       "storytelling.title": "Hub projects",
       "storytelling.puente":
-        "Research and outreach materialize in works and analyses. These projects show how the Hub transforms data and voices into narratives with social impact.",
+        "Research and outreach materialize in works, podcasts, and narratives with social impact.",
       "storytelling.capaz.name": "Capaz",
       "storytelling.capaz.type": "Museum exhibition",
       "storytelling.capaz.body":
@@ -411,7 +411,7 @@
       "storytelling.cuando.type": "Film · Docs Puebla 2025",
       "storytelling.cuando.body":
         'Short film screened in Mexico and abroad; official selection at Fragmentos Universitarios in <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">Docs Puebla</a>.',
-      "aprendizajes.label": "Learning",
+      "aprendizajes.label": "Resources",
       "aprendizajes.title": "Educational resources",
       "aprendizajes.puente":
         "Precise concepts help read data, news, and migration policies with rigor. These materials support teaching and the Hub's outreach.",
@@ -492,6 +492,7 @@
       "footer.contact.btn": "Send email",
       "footer.sitemap": "On this page",
       "footer.sublink.map": "Your voice on the map",
+      "footer.sublink.resources": "Educational resources",
       "footer.sublink.kit": "Outreach kit",
       "footer.legal": "© Migration and Social Impact Hub — Tec de Monterrey, Puebla campus.",
       "back.top": "Back to top",

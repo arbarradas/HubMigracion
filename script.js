@@ -167,14 +167,15 @@ function initNavegacion() {
 
 const capitulosHistoria = [
   { id: "hub", key: "cap.hub" },
-  { id: "ciudadania-global", key: "cap.oim" },
   { id: "historias", key: "cap.historias" },
+  { id: "ciudadania-global", key: "cap.oim" },
   { id: "investigacion", key: "cap.investigacion" },
   { id: "participacion", key: "cap.participacion" }
 ];
 
 const mapaSeccionCapitulo = {
   hub: "hub",
+  "recursos-educativos": "hub",
   "ciudadania-global": "ciudadania-global",
   historias: "historias",
   storytelling: "historias",
@@ -186,6 +187,7 @@ const mapaSeccionCapitulo = {
 
 const mapaNav = {
   hub: "hub",
+  "recursos-educativos": "hub",
   "ciudadania-global": "oim",
   historias: "historias",
   storytelling: "historias",
@@ -247,8 +249,8 @@ const NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
 
 const pasosRecorrido = [
   { id: "hub", tituloKey: "tour.hub.title", textoKey: "tour.hub.text" },
-  { id: "ciudadania-global", tituloKey: "tour.oim.title", textoKey: "tour.oim.text" },
   { id: "historias", tituloKey: "tour.historias.title", textoKey: "tour.historias.text" },
+  { id: "ciudadania-global", tituloKey: "tour.oim.title", textoKey: "tour.oim.text" },
   { id: "investigacion", tituloKey: "tour.investigacion.title", textoKey: "tour.investigacion.text" },
   { id: "participacion", tituloKey: "tour.participacion.title", textoKey: "tour.participacion.text" },
   {

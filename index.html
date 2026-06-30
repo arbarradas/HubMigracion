@@ -28,8 +28,8 @@
             </button>
           </li>
           <li><a href="#hub" data-nav="hub" data-i18n="nav.hub">Qué es el Hub</a></li>
-          <li><a href="#ciudadania-global" data-nav="oim" data-i18n="nav.oim">OIM</a></li>
           <li><a href="#historias" data-nav="historias" data-i18n="nav.historias">Historias</a></li>
+          <li><a href="#ciudadania-global" data-nav="oim" data-i18n="nav.oim">OIM</a></li>
           <li><a href="#investigacion" data-nav="investigacion" data-i18n="nav.investigacion">Investigación</a></li>
           <li><a href="#participacion" data-nav="participacion" data-i18n="nav.participacion">Participación</a></li>
           <li class="nav-item-preferencias">
@@ -102,17 +102,17 @@
               </a>
             </li>
             <li>
-              <a href="#ciudadania-global" class="hub-mapa-tarjeta" data-capitulo="ciudadania-global">
+              <a href="#historias" class="hub-mapa-tarjeta" data-capitulo="historias">
                 <span class="hub-mapa-num" aria-hidden="true">2</span>
-                <span class="hub-mapa-nombre" data-i18n="nav.oim">OIM</span>
-                <span class="hub-mapa-desc" data-i18n="navmap.oim.desc">Cifras, mapas, glosario y recursos OIM</span>
+                <span class="hub-mapa-nombre" data-i18n="nav.historias">Historias</span>
+                <span class="hub-mapa-desc" data-i18n="navmap.historias.desc">Proyectos narrativos, podcast y divulgación</span>
               </a>
             </li>
             <li>
-              <a href="#historias" class="hub-mapa-tarjeta" data-capitulo="historias">
+              <a href="#ciudadania-global" class="hub-mapa-tarjeta" data-capitulo="ciudadania-global">
                 <span class="hub-mapa-num" aria-hidden="true">3</span>
-                <span class="hub-mapa-nombre" data-i18n="nav.historias">Historias</span>
-                <span class="hub-mapa-desc" data-i18n="navmap.historias.desc">Proyectos narrativos, podcast y divulgación</span>
+                <span class="hub-mapa-nombre" data-i18n="nav.oim">OIM</span>
+                <span class="hub-mapa-desc" data-i18n="navmap.oim.desc">Cifras, mapas y alianza institucional</span>
               </a>
             </li>
             <li>
@@ -134,10 +134,141 @@
       </div>
     </section>
 
+    <section id="recursos-educativos" class="seccion-recursos seccion-rubro seccion-rubro--clara seccion-ancla" aria-labelledby="titulo-recursos-educativos">
+      <div class="ancho-contenido">
+        <p class="etiqueta" data-i18n="aprendizajes.label">Recursos</p>
+        <h2 id="titulo-recursos-educativos" class="subtitulo" data-i18n="aprendizajes.title">Recursos educativos</h2>
+        <p class="texto puente-narrativo" data-i18n="aprendizajes.puente">
+          Conceptos precisos ayudan a leer datos, noticias y políticas migratorias con rigor. Estos materiales apoyan el trabajo docente y la divulgación del Hub.
+        </p>
+
+        <div class="recursos-grid">
+          <article class="glosario-oim tarjeta-recurso">
+            <div class="tarjeta-recurso-marca" aria-hidden="true">
+              <span class="tarjeta-recurso-sigla">OIM</span>
+            </div>
+            <div class="tarjeta-recurso-cuerpo texto-flow">
+              <h3 class="proyecto-nombre" data-i18n="aprendizajes.glossary.title">Glosario de migración (OIM)</h3>
+              <p class="texto" data-i18n="aprendizajes.glossary.body">
+                La Organización Internacional para las Migraciones mantiene un glosario en línea con definiciones acordadas internacionalmente sobre migración, asilo, trata de personas y términos afines — útil para alinear el lenguaje en aulas, medios y política pública.
+              </p>
+              <a
+                class="btn btn-correo"
+                href="https://www.iom.int/key-migration-terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n="aprendizajes.glossary.link"
+              >
+                Consultar el glosario en línea de la OIM
+              </a>
+            </div>
+          </article>
+
+          <article class="kit-divulgacion tarjeta-recurso" aria-labelledby="titulo-kit-divulgacion">
+            <div class="tarjeta-recurso-marca" aria-hidden="true">
+              <span class="tarjeta-recurso-sigla">KIT</span>
+            </div>
+            <div class="tarjeta-recurso-cuerpo texto-flow">
+              <h3 id="titulo-kit-divulgacion" class="proyecto-nombre" data-i18n="kit.title">Kit de divulgación</h3>
+              <p class="texto" data-i18n="kit.body">
+                Paquete descargable con infografía de cifras IME/SRE, enlaces al glosario y al Portal de Datos OIM, y contexto del Hub como socio formador de la GMMA. Ideal para aulas, medios y organizaciones.
+              </p>
+              <div class="kit-acciones-sitio">
+                <a
+                  class="btn btn-correo"
+                  href="kit-divulgacion.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-i18n="kit.open"
+                >Abrir kit de divulgación</a>
+                <button type="button" class="btn btn-proyectos" id="btn-kit-pdf" data-i18n="kit.pdf">Guardar como PDF</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="historias" class="seccion-podcast seccion-rubro seccion-rubro--panel seccion-ancla" aria-labelledby="titulo-historias">
+      <div class="ancho-contenido">
+        <p class="etiqueta" data-i18n="historias.label">Historias</p>
+        <h2 id="titulo-historias" class="subtitulo" data-i18n="storytelling.title">Proyectos del Hub</h2>
+        <p class="texto puente-narrativo" data-i18n="storytelling.puente">
+          La investigación y la divulgación se materializan en obras, podcast y narrativas con impacto social.
+        </p>
+
+        <div id="storytelling" class="historias-tres-columnas">
+          <article class="historia-columna proyecto-tarjeta">
+            <figure class="proyecto-figura">
+              <img src="Capaz.png" alt="Proyecto Capaz — pieza de la muestra museográfica sobre migración" loading="lazy">
+            </figure>
+            <div class="proyecto-cuerpo">
+              <h3 class="proyecto-nombre" data-i18n="storytelling.capaz.name">Capaz</h3>
+              <p class="proyecto-tipo" data-i18n="storytelling.capaz.type">Muestra museográfica</p>
+              <p class="texto" data-i18n="storytelling.capaz.body" data-i18n-html="true">
+                Pieza integrada a una exposición museográfica presentada en el
+                <strong>Centro Cultural San Roque</strong>, en la ciudad de Puebla.
+                Elaborada con estudiantes de Comunicación, en diálogo con la obra de
+                <a href="https://jorgecarlos.com/" target="_blank" rel="noopener noreferrer">Jorge Carlos Álvarez</a>.
+              </p>
+            </div>
+          </article>
+
+          <article class="historia-columna proyecto-tarjeta">
+            <figure class="proyecto-figura">
+              <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">
+                <img src="CuandoVuelvas_DocsPue2025.2.png" alt="Cuando vuelvas — selección Docs Puebla 2025" loading="lazy">
+              </a>
+            </figure>
+            <div class="proyecto-cuerpo">
+              <h3 class="proyecto-nombre" data-i18n="storytelling.cuando.name">Cuando vuelvas</h3>
+              <p class="proyecto-tipo" data-i18n="storytelling.cuando.type">Cine · Docs Puebla 2025</p>
+              <p class="texto" data-i18n="storytelling.cuando.body" data-i18n-html="true">
+                Cortometraje exhibido en México y el extranjero; selección oficial Fragmentos Universitarios en
+                <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">Docs Puebla</a>.
+              </p>
+            </div>
+          </article>
+
+          <article class="historia-columna historia-columna--podcast proyecto-tarjeta">
+            <div class="proyecto-cuerpo historia-podcast-cuerpo">
+              <h3 class="proyecto-nombre" data-i18n="historias.title">Divulgación, podcast y narrativas</h3>
+              <p class="proyecto-tipo" data-i18n="creacion.episode">Episodio 1 — Javier Moreno Sánchez</p>
+              <p class="texto" data-i18n="creacion.puente">
+                Sociedad Migrante acerca testimonios y debates desde distintos países para situar la migración con rostro y voz humana.
+              </p>
+              <a
+                class="btn btn-spotify"
+                href="https://open.spotify.com/show/1GOWpD3yzR7r3ui2EHd2HM"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n="creacion.spotify"
+              >
+                Escuchar en Spotify
+              </a>
+              <div class="podcast-reproductor podcast-reproductor--columna">
+                <iframe
+                  class="podcast-embed"
+                  src="https://open.spotify.com/embed/episode/1pZksnI3J2604Y3gl9abbT?utm_source=generator&theme=0"
+                  title="Charla con Javier Moreno Sánchez — Sociedad Migrante"
+                  loading="lazy"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="ciudadania-global" class="seccion-datos seccion-rubro seccion-rubro--clara seccion-ancla" aria-labelledby="titulo-ciudadania">
       <div class="ancho-contenido">
         <p class="etiqueta" data-i18n="oim.label">OIM</p>
         <h2 id="titulo-ciudadania" class="subtitulo" data-i18n="ciudadania.title">¿Qué está pasando en el mundo?</h2>
+        <p class="texto oim-vinculacion" data-i18n="oim.vinculacion">
+          Desde hace más de tres años, el campus Puebla del Tec de Monterrey colabora con la OIM en talleres, formación y proyectos de divulgación. Esta alianza se sustenta en un convenio marco entre el Tecnológico de Monterrey y la Organización Internacional para las Migraciones.
+        </p>
         <p class="texto puente-narrativo" data-i18n="ciudadania.puente">
           Para dimensionar el fenómeno, estas cifras sitúan la migración mexicana en un contexto global antes de escuchar voces y narrativas.
         </p>
@@ -226,56 +357,6 @@
           </p>
         </div>
 
-        <div class="oim-recursos-bloque" id="recursos-oim" aria-labelledby="titulo-recursos-oim">
-          <h3 id="titulo-recursos-oim" class="subtitulo" data-i18n="aprendizajes.title">Recursos educativos</h3>
-          <p class="texto puente-narrativo" data-i18n="aprendizajes.puente">
-            Conceptos precisos ayudan a leer datos, noticias y políticas migratorias con rigor. Estos materiales apoyan el trabajo docente y la divulgación del Hub.
-          </p>
-
-          <article class="glosario-oim tarjeta-recurso">
-            <div class="tarjeta-recurso-marca" aria-hidden="true">
-              <span class="tarjeta-recurso-sigla">OIM</span>
-            </div>
-            <div class="tarjeta-recurso-cuerpo texto-flow">
-              <h4 class="proyecto-nombre" data-i18n="aprendizajes.glossary.title">Glosario de migración (OIM)</h4>
-              <p class="texto" data-i18n="aprendizajes.glossary.body">
-                La Organización Internacional para las Migraciones mantiene un glosario en línea con definiciones acordadas internacionalmente sobre migración, asilo, trata de personas y términos afines — útil para alinear el lenguaje en aulas, medios y política pública.
-              </p>
-              <a
-                class="btn btn-correo"
-                href="https://www.iom.int/key-migration-terms"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-i18n="aprendizajes.glossary.link"
-              >
-                Consultar el glosario en línea de la OIM
-              </a>
-            </div>
-          </article>
-
-          <article class="kit-divulgacion tarjeta-recurso" aria-labelledby="titulo-kit-divulgacion">
-            <div class="tarjeta-recurso-marca" aria-hidden="true">
-              <span class="tarjeta-recurso-sigla">KIT</span>
-            </div>
-            <div class="tarjeta-recurso-cuerpo texto-flow">
-              <h4 id="titulo-kit-divulgacion" class="proyecto-nombre" data-i18n="kit.title">Kit de divulgación</h4>
-              <p class="texto" data-i18n="kit.body">
-                Paquete descargable con infografía de cifras IME/SRE, enlaces al glosario y al Portal de Datos OIM, y contexto del Hub como socio formador de la GMMA. Ideal para aulas, medios y organizaciones.
-              </p>
-              <div class="kit-acciones-sitio">
-                <a
-                  class="btn btn-correo"
-                  href="kit-divulgacion.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-i18n="kit.open"
-                >Abrir kit de divulgación</a>
-                <button type="button" class="btn btn-proyectos" id="btn-kit-pdf" data-i18n="kit.pdf">Guardar como PDF</button>
-              </div>
-            </div>
-          </article>
-        </div>
-
         <aside class="proyecto-internacional ciudadania-internacional" aria-labelledby="titulo-internacional">
           <div class="proyecto-internacional-marca" aria-hidden="true">
             <span class="proyecto-internacional-sigla">OIM · GMMA</span>
@@ -312,87 +393,6 @@
             </ul>
           </div>
         </aside>
-      </div>
-    </section>
-
-    <section id="historias" class="seccion-podcast seccion-rubro seccion-rubro--panel seccion-ancla" aria-labelledby="titulo-historias">
-      <div class="ancho-contenido">
-        <p class="etiqueta" data-i18n="historias.label">Historias</p>
-
-        <div id="storytelling" class="historias-storytelling historias-storytelling--primero" aria-labelledby="titulo-storytelling">
-          <p class="etiqueta" data-i18n="storytelling.label">Proyectos narrativos</p>
-          <h2 id="titulo-storytelling" class="subtitulo" data-i18n="storytelling.title">Proyectos del Hub</h2>
-          <p class="texto puente-narrativo" data-i18n="storytelling.puente">
-            La investigación y la divulgación se materializan en obras y análisis. Estos proyectos muestran cómo el Hub transforma datos y voces en narrativas con impacto social.
-          </p>
-
-          <div class="proyectos-galeria">
-            <article class="proyecto-tarjeta">
-              <figure class="proyecto-figura">
-                <img src="Capaz.png" alt="Proyecto Capaz — pieza de la muestra museográfica sobre migración" loading="lazy">
-              </figure>
-              <div class="proyecto-cuerpo">
-                <h3 class="proyecto-nombre" data-i18n="storytelling.capaz.name">Capaz</h3>
-                <p class="proyecto-tipo" data-i18n="storytelling.capaz.type">Muestra museográfica</p>
-                <p class="texto" data-i18n="storytelling.capaz.body" data-i18n-html="true">
-                  Pieza integrada a una exposición museográfica presentada en el
-                  <strong>Centro Cultural San Roque</strong>, en la ciudad de Puebla.
-                  Elaborada con estudiantes de Comunicación, en diálogo con la obra de
-                  <a href="https://jorgecarlos.com/" target="_blank" rel="noopener noreferrer">Jorge Carlos Álvarez</a>.
-                </p>
-              </div>
-            </article>
-
-            <article class="proyecto-tarjeta">
-              <figure class="proyecto-figura">
-                <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">
-                  <img src="CuandoVuelvas_DocsPue2025.2.png" alt="Cuando vuelvas — selección Docs Puebla 2025" loading="lazy">
-                </a>
-              </figure>
-              <div class="proyecto-cuerpo">
-                <h3 class="proyecto-nombre" data-i18n="storytelling.cuando.name">Cuando vuelvas</h3>
-                <p class="proyecto-tipo" data-i18n="storytelling.cuando.type">Cine · Docs Puebla 2025</p>
-                <p class="texto" data-i18n="storytelling.cuando.body" data-i18n-html="true">
-                  Cortometraje exhibido en México y el extranjero; selección oficial Fragmentos Universitarios en
-                  <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">Docs Puebla</a>.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <div class="historias-podcast-bloque" aria-labelledby="titulo-historias">
-          <h2 id="titulo-historias" class="subtitulo" data-i18n="historias.title">Divulgación, podcast y narrativas</h2>
-          <p class="texto puente-narrativo historias-podcast-puente" data-i18n="creacion.puente">
-            La migración no se entiende solo con cifras. Sociedad Migrante acerca testimonios y debates desde distintos países para situar el fenómeno con rostro y voz humana.
-          </p>
-          <div class="podcast-contenido texto-flow">
-            <p class="texto" data-i18n="creacion.p2">
-              Sociedad Migrante aborda la migración desde una perspectiva humana y global, con estudiantes e invitadxs especiales. La primera temporada incluye entrevistas a eurodiputadxs desde el Parlamento Europeo en Bruselas.
-            </p>
-            <a
-              class="btn btn-spotify"
-              href="https://open.spotify.com/show/1GOWpD3yzR7r3ui2EHd2HM"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-i18n="creacion.spotify"
-            >
-              Escuchar «Sociedad Migrante» en Spotify
-            </a>
-          </div>
-
-          <div class="podcast-reproductor">
-            <p class="podcast-reproductor-etiqueta" data-i18n="creacion.episode">Episodio 1 — Javier Moreno Sánchez (Parlamento Europeo)</p>
-            <iframe
-              class="podcast-embed"
-              src="https://open.spotify.com/embed/episode/1pZksnI3J2604Y3gl9abbT?utm_source=generator&theme=0"
-              title="Charla con Javier Moreno Sánchez, desde el Parlamento Europeo — Parte 1 — Sociedad Migrante"
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -700,8 +700,9 @@
           <h2 class="subtitulo" data-i18n="footer.sitemap">En esta página</h2>
           <ul class="footer-enlaces">
             <li><a href="#hub" data-i18n="nav.hub">Qué es el Hub</a></li>
-            <li><a href="#ciudadania-global" data-i18n="nav.oim">OIM</a></li>
+            <li><a href="#recursos-educativos" data-i18n="footer.sublink.resources">Recursos educativos</a></li>
             <li><a href="#historias" data-i18n="nav.historias">Historias</a></li>
+            <li><a href="#ciudadania-global" data-i18n="nav.oim">OIM</a></li>
             <li><a href="#investigacion" data-i18n="nav.investigacion">Investigación</a></li>
             <li><a href="#participacion" data-i18n="nav.participacion">Participación</a></li>
             <li><a href="#encuesta-visitantes" data-i18n="footer.sublink.map">Tu voz en el mapa</a></li>
