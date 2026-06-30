@@ -42,7 +42,7 @@
       "oim.vinculacion":
         "Desde hace más de tres años, el campus Puebla del Tec de Monterrey colabora con la OIM en talleres, formación y proyectos de divulgación. Esta alianza se sustenta en un convenio marco entre el Tecnológico de Monterrey y la Organización Internacional para las Migraciones.",
       "navmap.investigacion.desc": "Estudios, grafos y cartografías",
-      "navmap.participacion.desc": "Sumarte, mapa de voces y contacto",
+      "navmap.participacion.desc": "Mapa de voces y ubicaciones de visitantes",
       "indice.open": "Índice",
       "indice.title": "Ir a un capítulo",
       "indice.hint": "Elige una sección para ir directo, sin recorrer toda la página.",
@@ -151,7 +151,7 @@
       "aprendizajes.glossary.link": "Consultar el glosario en línea de la OIM",
       "kit.title": "Kit de divulgación",
       "kit.body":
-        "Paquete descargable con infografía de cifras IME/SRE, enlaces al glosario y al Portal de Datos OIM, y contexto del Hub como socio formador de la GMMA. Ideal para aulas, medios y organizaciones.",
+        "Paquete descargable con infografía de cifras IME/SRE, acceso registrado al glosario, al Portal de Datos OIM y al Informe Mundial 2024, y contexto del Hub como socio formador de la GMMA. Ideal para aulas, medios y organizaciones.",
       "kit.open": "Abrir kit de divulgación",
       "kit.pdf": "Guardar como PDF",
       "participacion.label": "Tu lugar en la historia",
@@ -268,7 +268,7 @@
       "tour.investigacion.title": "Investigación en Puebla",
       "tour.investigacion.text": "Estudio sobre movilidad estudiantil, grafo interactivo, cartografía y factores para permanecer en Puebla.",
       "tour.participacion.title": "Participación",
-      "tour.participacion.text": "El recorrido cierra con una invitación: puedes proponer proyectos y sumarte al Hub.",
+      "tour.participacion.text": "El recorrido cierra con el mapa de voces: comparte tu origen, residencia y una frase opcional.",
       "tour.encuesta.title": "Voces y ubicaciones",
       "tour.encuesta.text": "Responde tres preguntas: tu lugar de origen, dónde resides actualmente y desde dónde nos escribes. Las tres ubicaciones se reflejan en el mapa.",
       "encuesta.responses": "{n} respuesta(s) en este navegador (también en el mapa):",
@@ -311,7 +311,7 @@
       "oim.vinculacion":
         "For more than three years, the Tec de Monterrey Puebla campus has collaborated with IOM on workshops, training, and outreach projects. This alliance is supported by a framework agreement between Tecnológico de Monterrey and the International Organization for Migration.",
       "navmap.investigacion.desc": "Studies, graphs, and cartographies",
-      "navmap.participacion.desc": "Join in, voice map, and contact",
+      "navmap.participacion.desc": "Visitor voice map and locations",
       "indice.open": "Index",
       "indice.title": "Go to a chapter",
       "indice.hint": "Pick a section to jump there without scrolling the whole page.",
@@ -421,7 +421,7 @@
       "aprendizajes.glossary.link": "Browse the IOM online glossary",
       "kit.title": "Outreach kit",
       "kit.body":
-        "Downloadable package with IME/SRE figure infographic, links to the glossary and IOM Data Portal, and context on the Hub as a GMMA training partner. Ideal for classrooms, media, and organizations.",
+        "Downloadable package with IME/SRE figure infographic, registered access to the glossary, IOM Data Portal and World Migration Report 2024, plus Hub context as a GMMA training partner. Ideal for classrooms, media, and organizations.",
       "kit.open": "Open outreach kit",
       "kit.pdf": "Save as PDF",
       "participacion.label": "Your place in the story",
@@ -538,7 +538,7 @@
       "tour.investigacion.title": "Research in Puebla",
       "tour.investigacion.text": "Study on student mobility, interactive graph, cartography, and factors for staying in Puebla.",
       "tour.participacion.title": "Participation",
-      "tour.participacion.text": "The tour closes with an invitation: you can propose projects and join the Hub.",
+      "tour.participacion.text": "The tour closes with the voice map: share your origin, residence and an optional phrase.",
       "tour.encuesta.title": "Voices and locations",
       "tour.encuesta.text": "Answer three questions: your place of origin, where you currently live, and where you are writing from. All three locations appear on the map.",
       "encuesta.responses": "{n} response(s) in this browser (also on the map):",

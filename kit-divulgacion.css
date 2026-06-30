@@ -274,6 +274,72 @@ body {
   color: var(--kit-muted);
 }
 
+.kit-acceso-form {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 36rem;
+  margin: 1rem 0 1.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--kit-linea);
+  border-radius: 10px;
+  background: var(--kit-fondo);
+}
+
+.kit-campo {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.88rem;
+}
+
+.kit-campo span {
+  font-weight: 600;
+  color: var(--kit-texto);
+}
+
+.kit-campo input,
+.kit-campo select {
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--kit-linea);
+  border-radius: 8px;
+  font: inherit;
+  color: var(--kit-texto);
+  background: #fff;
+}
+
+.kit-campo input:focus,
+.kit-campo select:focus {
+  outline: 2px solid var(--kit-acento);
+  outline-offset: 1px;
+}
+
+.kit-acceso-aviso {
+  margin: 0 0 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-left: 3px solid var(--kit-acento);
+  background: #eef2f9;
+  font-size: 0.85rem;
+  color: var(--kit-muted);
+}
+
+.kit-acceso-ok {
+  margin: 0 0 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  background: #e8f4ec;
+  color: #1a4d2e;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.kit-enlaces[hidden] {
+  display: none;
+}
+
+.kit-acceso-form[hidden] {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .kit-pilares {
     grid-template-columns: repeat(2, 1fr);

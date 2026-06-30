@@ -2071,6 +2071,14 @@ main iframe:not(.graphcommons-iframe) {
   background: transparent;
 }
 
+.participacion-encuesta--solo {
+  margin-top: 0;
+}
+
+.participacion-encuesta--solo .participacion-encuesta-cabecera .subtitulo {
+  font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+}
+
 .participacion-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.85fr);

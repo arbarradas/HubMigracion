@@ -74,10 +74,43 @@
         </p>
       </section>
 
-      <section class="kit-seccion">
+      <section class="kit-seccion" id="kit-recursos-oim">
         <h2>Recursos OIM para docencia y divulgación</h2>
-        <p>Conceptos precisos ayudan a leer datos, noticias y políticas migratorias con rigor. Enlaces oficiales recomendados:</p>
-        <ul class="kit-enlaces">
+        <p>Para acceder a los enlaces oficiales de la OIM, indica tu nombre completo, correo electrónico y el motivo de uso de estos materiales.</p>
+
+        <form id="kit-acceso-form" class="kit-acceso-form" novalidate>
+          <label class="kit-campo">
+            <span>Nombre completo</span>
+            <input type="text" name="nombre" id="kit-nombre" required autocomplete="name" placeholder="Ej. María García López">
+          </label>
+          <label class="kit-campo">
+            <span>Correo electrónico</span>
+            <input type="email" name="email" id="kit-email" required autocomplete="email" placeholder="ejemplo@correo.com">
+          </label>
+          <label class="kit-campo">
+            <span>¿Para qué utilizarás esta información?</span>
+            <select name="motivo" id="kit-motivo" required>
+              <option value="">Selecciona una opción</option>
+              <option value="personal">Uso personal / consulta</option>
+              <option value="investigacion">Investigación académica</option>
+              <option value="clases">Clases o docencia</option>
+              <option value="medios">Medios y periodismo</option>
+              <option value="politica">Política pública / sector gubernamental</option>
+              <option value="osc">Organización de la sociedad civil</option>
+              <option value="capacitacion">Capacitación o taller</option>
+              <option value="proyecto">Proyecto del Hub o colaboración institucional</option>
+              <option value="otro">Otro</option>
+            </select>
+          </label>
+          <button type="submit" class="kit-btn">Acceder a los recursos OIM</button>
+        </form>
+
+        <p id="kit-acceso-aviso" class="kit-acceso-aviso">
+          Los enlaces al glosario, al Portal de Datos y al Informe sobre las Migraciones en el Mundo se mostrarán al completar el formulario.
+        </p>
+        <p id="kit-acceso-ok" class="kit-acceso-ok" hidden></p>
+
+        <ul class="kit-enlaces" id="kit-enlaces-oim" hidden>
           <li>
             <a href="https://www.iom.int/key-migration-terms" target="_blank" rel="noopener noreferrer">
               Glosario de términos clave sobre migración (OIM)
@@ -132,6 +165,7 @@
       </footer>
     </div>
 
+    <script src="kit-divulgacion.js"></script>
     <script>
       document.getElementById("btn-imprimir-pdf")?.addEventListener("click", () => window.print());
     </script>
