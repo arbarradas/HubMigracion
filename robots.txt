@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arbarradas.github.io/HubMigracion/sitemap.xml

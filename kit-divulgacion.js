@@ -20,16 +20,38 @@
   const panelEnlaces = document.getElementById("kit-enlaces-oim");
   const avisoBloqueo = document.getElementById("kit-acceso-aviso");
   const mensajeOk = document.getElementById("kit-acceso-ok");
+  const mensajeError = document.getElementById("kit-acceso-error");
+  const btnSubmit = document.getElementById("kit-acceso-submit");
 
   if (!form || !panelEnlaces) return;
+
+  const obtenerKitApiUrl = () => {
+    const url = (typeof window !== "undefined" && window.HUB_KIT_API) || "";
+    return typeof url === "string" ? url.trim() : "";
+  };
+
+  const kitApiActiva = () => obtenerKitApiUrl().length > 0;
+
+  const ocultarError = () => {
+    if (!mensajeError) return;
+    mensajeError.hidden = true;
+    mensajeError.textContent = "";
+  };
+
+  const mostrarError = (texto) => {
+    if (!mensajeError) return;
+    mensajeError.hidden = false;
+    mensajeError.textContent = texto;
+  };
 
   const desbloquear = (datos) => {
     form.hidden = true;
     if (avisoBloqueo) avisoBloqueo.hidden = true;
+    ocultarError();
     panelEnlaces.hidden = false;
     if (mensajeOk && datos) {
       mensajeOk.hidden = false;
-      mensajeOk.textContent = `Acceso habilitado para ${datos.nombre}. Motivo: ${MOTIVOS[datos.motivo] || datos.motivo}.`;
+      mensajeOk.textContent = `Acceso habilitado para ${datos.nombre}. Motivo: ${MOTIVOS[datos.motivo] || datos.motivoEtiqueta || datos.motivo}.`;
     }
   };
 
@@ -42,23 +64,46 @@
     }
   };
 
-  const guardarRegistro = (entrada) => {
+  const guardarRegistroLocal = (entrada) => {
     try {
       const lista = JSON.parse(localStorage.getItem(CLAVE_REGISTROS) || "[]");
       lista.push(entrada);
       localStorage.setItem(CLAVE_REGISTROS, JSON.stringify(lista.slice(-500)));
     } catch {
-      /* registro local opcional */
+      /* respaldo local opcional */
     }
   };
+
+  async function enviarRegistroRemoto(entrada) {
+    const url = obtenerKitApiUrl();
+    if (!url) return { ok: true, omitido: true };
+
+    try {
+      const respuesta = await fetch(url, {
+        method: "POST",
+        mode: "cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(entrada)
+      });
+      if (!respuesta.ok) {
+        return { ok: false, error: "No se pudo conectar con el registro del Hub." };
+      }
+      const datos = await respuesta.json();
+      return datos && datos.ok ? { ok: true } : { ok: false, error: datos?.error || "Registro rechazado." };
+    } catch {
+      return { ok: false, error: "Error de red al enviar el registro. Intenta de nuevo." };
+    }
+  }
 
   const accesoPrevio = leerAcceso();
   if (accesoPrevio?.nombre && accesoPrevio?.email && accesoPrevio?.motivo) {
     desbloquear(accesoPrevio);
   }
 
-  form.addEventListener("submit", (evento) => {
+  form.addEventListener("submit", async (evento) => {
     evento.preventDefault();
+    ocultarError();
+
     const datos = new FormData(form);
     const nombre = String(datos.get("nombre") || "").trim();
     const email = String(datos.get("email") || "").trim();
@@ -74,11 +119,30 @@
       email,
       motivo,
       motivoEtiqueta: MOTIVOS[motivo] || motivo,
-      fecha: new Date().toISOString()
+      fecha: new Date().toISOString(),
+      origen: "kit-divulgacion",
+      id: typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : String(Date.now())
     };
 
+    if (btnSubmit) {
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = kitApiActiva() ? "Enviando registro…" : "Habilitando acceso…";
+    }
+
+    const remoto = await enviarRegistroRemoto(entrada);
+
+    if (btnSubmit) {
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = "Acceder a los recursos OIM";
+    }
+
+    if (!remoto.ok && !remoto.omitido) {
+      mostrarError(remoto.error || "No se pudo registrar el acceso. Revisa tu conexión e inténtalo de nuevo.");
+      return;
+    }
+
     localStorage.setItem(CLAVE_ACCESO, JSON.stringify(entrada));
-    guardarRegistro(entrada);
+    guardarRegistroLocal(entrada);
     desbloquear(entrada);
   });
 })();

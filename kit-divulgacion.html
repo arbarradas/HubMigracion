@@ -4,6 +4,40 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kit de divulgación — Hub de Migración e Impacto Social</title>
+    <meta name="description" content="Kit de divulgación del Hub de Migración e Impacto Social (Tec Puebla): infografía IME/SRE, glosario OIM, Portal de Datos y Informe Mundial 2024 para aulas y organizaciones.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://arbarradas.github.io/HubMigracion/kit-divulgacion.html">
+    <meta name="theme-color" content="#152d5a">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="Hub de Migración e Impacto Social">
+    <meta property="og:title" content="Kit de divulgación — Hub de Migración e Impacto Social">
+    <meta property="og:description" content="Materiales descargables y enlaces OIM para docencia, medios y divulgación sobre migración.">
+    <meta property="og:url" content="https://arbarradas.github.io/HubMigracion/kit-divulgacion.html">
+    <meta property="og:image" content="https://arbarradas.github.io/HubMigracion/HUB_Listón.jpg">
+    <meta property="og:image:alt" content="Kit de divulgación del Hub de Migración e Impacto Social">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kit de divulgación — Hub Migración Tec Puebla">
+    <meta name="twitter:description" content="Infografía, glosario OIM y recursos para aulas sobre migración.">
+    <meta name="twitter:image" content="https://arbarradas.github.io/HubMigracion/HUB_Listón.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Kit de divulgación — Hub de Migración e Impacto Social",
+      "description": "Paquete con infografía de mexicanos en el exterior, acceso registrado a recursos OIM y contexto del Hub como socio formador GMMA.",
+      "url": "https://arbarradas.github.io/HubMigracion/kit-divulgacion.html",
+      "inLanguage": "es-MX",
+      "educationalLevel": "Higher education",
+      "learningResourceType": "Handout",
+      "isAccessibleForFree": true,
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Hub de Migración e Impacto Social — Tec de Monterrey, campus Puebla",
+        "url": "https://arbarradas.github.io/HubMigracion/"
+      }
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
@@ -102,12 +136,17 @@
               <option value="otro">Otro</option>
             </select>
           </label>
-          <button type="submit" class="kit-btn">Acceder a los recursos OIM</button>
+          <p class="kit-acceso-privacidad">
+            Tus datos se usan para estadísticas de uso del kit y mejora de recursos educativos del Hub.
+            Si el sitio está conectado a Google Sheets, se guardará una copia en el registro institucional.
+          </p>
+          <button type="submit" class="kit-btn" id="kit-acceso-submit">Acceder a los recursos OIM</button>
         </form>
 
         <p id="kit-acceso-aviso" class="kit-acceso-aviso">
           Los enlaces al glosario, al Portal de Datos y al Informe sobre las Migraciones en el Mundo se mostrarán al completar el formulario.
         </p>
+        <p id="kit-acceso-error" class="kit-acceso-error" hidden role="alert"></p>
         <p id="kit-acceso-ok" class="kit-acceso-ok" hidden></p>
 
         <ul class="kit-enlaces" id="kit-enlaces-oim" hidden>
@@ -165,6 +204,7 @@
       </footer>
     </div>
 
+    <script src="config-kit.js"></script>
     <script src="kit-divulgacion.js"></script>
     <script>
       document.getElementById("btn-imprimir-pdf")?.addEventListener("click", () => window.print());
