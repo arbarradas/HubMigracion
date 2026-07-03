@@ -134,7 +134,6 @@ function initNavegacion() {
 const capitulosHistoria = [
   { id: "hub", key: "cap.hub" },
   { id: "participacion", key: "cap.participacion" },
-  { id: "historias", key: "cap.historias" },
   { id: "ciudadania-global", key: "cap.oim" },
   { id: "investigacion", key: "cap.investigacion" }
 ];
@@ -143,8 +142,8 @@ const mapaSeccionCapitulo = {
   hub: "hub",
   "recursos-educativos": "participacion",
   "ciudadania-global": "ciudadania-global",
-  historias: "historias",
-  storytelling: "historias",
+  historias: "investigacion",
+  storytelling: "investigacion",
   investigacion: "investigacion",
   participacion: "participacion",
   "encuesta-visitantes": "participacion",
@@ -155,8 +154,8 @@ const mapaNav = {
   hub: "hub",
   "recursos-educativos": "participacion",
   "ciudadania-global": "oim",
-  historias: "historias",
-  storytelling: "historias",
+  historias: "investigacion",
+  storytelling: "investigacion",
   investigacion: "investigacion",
   participacion: "participacion",
   "encuesta-visitantes": "participacion",
@@ -216,7 +215,6 @@ const NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
 const pasosRecorrido = [
   { id: "hub", tituloKey: "tour.hub.title", textoKey: "tour.hub.text" },
   { id: "participacion", tituloKey: "tour.participacion.title", textoKey: "tour.participacion.text" },
-  { id: "historias", tituloKey: "tour.historias.title", textoKey: "tour.historias.text" },
   { id: "ciudadania-global", tituloKey: "tour.oim.title", textoKey: "tour.oim.text" },
   { id: "investigacion", tituloKey: "tour.investigacion.title", textoKey: "tour.investigacion.text" },
   {
@@ -238,8 +236,23 @@ function obtenerMapaApiUrl() {
   return typeof url === "string" ? url.trim() : "";
 }
 
+function obtenerMapaFormConfig() {
+  return (typeof window !== "undefined" && window.HUB_MAPA_FORM) || {};
+}
+
 function mapaApiActiva() {
   return obtenerMapaApiUrl().length > 0;
+}
+
+function mapaFormActivo() {
+  const cfg = obtenerMapaFormConfig();
+  const action = typeof cfg.action === "string" ? cfg.action.trim() : "";
+  const entries = cfg.entries || {};
+  return Boolean(action && entries.origen && entries.residencia && entries.escribe);
+}
+
+function repositorioMapaActivo() {
+  return mapaApiActiva() || mapaFormActivo();
 }
 
 function escapeHtml(texto) {
@@ -298,6 +311,46 @@ async function cargarVisitantesRemotos() {
   }
 }
 
+async function enviarVisitanteGoogleForm(entrada) {
+  if (!mapaFormActivo()) return { ok: true, omitido: true };
+
+  const cfg = obtenerMapaFormConfig();
+  const entries = cfg.entries;
+  const params = new URLSearchParams();
+
+  params.set(entries.origen, entrada.origen);
+  params.set(entries.residencia, entrada.residencia);
+  params.set(entries.escribe, entrada.escribe);
+  if (entries.historia && entrada.historia) params.set(entries.historia, entrada.historia);
+  if (entries.fecha) params.set(entries.fecha, entrada.fecha || new Date().toISOString());
+  if (entries.origenLat && entrada.origenLat != null) params.set(entries.origenLat, String(entrada.origenLat));
+  if (entries.origenLng && entrada.origenLng != null) params.set(entries.origenLng, String(entrada.origenLng));
+  if (entries.residenciaLat && entrada.residenciaLat != null) {
+    params.set(entries.residenciaLat, String(entrada.residenciaLat));
+  }
+  if (entries.residenciaLng && entrada.residenciaLng != null) {
+    params.set(entries.residenciaLng, String(entrada.residenciaLng));
+  }
+  if (entries.escribeLat && entrada.escribeLat != null) params.set(entries.escribeLat, String(entrada.escribeLat));
+  if (entries.escribeLng && entrada.escribeLng != null) params.set(entries.escribeLng, String(entrada.escribeLng));
+  if (entries.id) params.set(entries.id, String(entrada.id));
+
+  try {
+    await fetch(cfg.action.trim(), {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+      body: params.toString()
+    });
+    return { ok: true, via: "google-form" };
+  } catch {
+    return {
+      ok: false,
+      error: "No se pudo enviar a Google Forms. Revisa tu conexión e inténtalo de nuevo."
+    };
+  }
+}
+
 async function enviarVisitanteRemoto(entrada) {
   const url = obtenerMapaApiUrl();
   if (!url) return { ok: false, omitido: true };
@@ -317,21 +370,43 @@ async function enviarVisitanteRemoto(entrada) {
   }
 }
 
+async function enviarVisitanteCompartido(entrada) {
+  const formulario = await enviarVisitanteGoogleForm(entrada);
+  if (!formulario.omitido) {
+    if (formulario.ok && mapaApiActiva()) {
+      await enviarVisitanteRemoto(entrada);
+    }
+    return formulario;
+  }
+  return enviarVisitanteRemoto(entrada);
+}
+
 function actualizarEstadoMapaApi(remotas) {
   const estado = document.querySelector("#mapa-api-estado");
   if (!estado) return;
 
-  if (!mapaApiActiva()) {
+  if (!repositorioMapaActivo()) {
     estado.hidden = true;
     estado.textContent = "";
     return;
   }
 
   estado.hidden = false;
-  estado.textContent =
-    remotas.length > 0
-      ? `Conectado al registro compartido: ${remotas.length} respuesta${remotas.length === 1 ? "" : "s"} desde la hoja del Hub.`
-      : "Registro compartido activo. Las nuevas respuestas se guardan para todo el sitio.";
+  const viaForm = mapaFormActivo();
+  const viaApi = mapaApiActiva();
+
+  if (remotas.length > 0) {
+    estado.textContent = `Conectado al registro compartido: ${remotas.length} respuesta${remotas.length === 1 ? "" : "s"} en el mapa del Hub.`;
+    return;
+  }
+
+  if (viaForm && viaApi) {
+    estado.textContent = "Registro compartido activo (Google Form + hoja del Hub). Las nuevas respuestas aparecen para todo el sitio.";
+  } else if (viaForm) {
+    estado.textContent = "Registro activo vía Google Form. Las respuestas se guardan en la hoja del Hub.";
+  } else {
+    estado.textContent = "Registro compartido activo. Las nuevas respuestas se guardan para todo el sitio.";
+  }
 }
 
 function factorEtiqueta(fila) {
@@ -602,8 +677,8 @@ function actualizarNotaMapa(total, conCoordenadas) {
     return;
   }
 
-  const fuentes = mapaApiActiva()
-    ? "hoja compartida del Hub, archivo del sitio y tu navegador"
+  const fuentes = repositorioMapaActivo()
+    ? "registro compartido del Hub, archivo del sitio y tu navegador"
     : "archivo del sitio y tu navegador";
   nota.textContent = `${conCoordenadas} de ${total} respuesta${total === 1 ? "" : "s"} con al menos una ubicación en el mapa. Fuentes: ${fuentes}. Haz clic en un punto para leer la voz, si la compartieron.`;
 }
@@ -896,9 +971,9 @@ function initEncuestaVisitantes() {
     localStorage.setItem(CLAVE_ENCUESTA, JSON.stringify(respuestas));
 
     let remoto = { ok: false, omitido: true };
-    if (mapaApiActiva()) {
+    if (repositorioMapaActivo()) {
       if (mensaje) mensaje.textContent = "Guardando en el registro compartido del Hub…";
-      remoto = await enviarVisitanteRemoto(entrada);
+      remoto = await enviarVisitanteCompartido(entrada);
       invalidarCacheRemotoVisitantes();
     }
 
@@ -919,10 +994,10 @@ function initEncuestaVisitantes() {
 
       const voz = historia ? " Tu frase aparece al hacer clic en los puntos del mapa." : "";
       const nube =
-        remoto.ok && mapaApiActiva()
+        remoto.ok && repositorioMapaActivo()
           ? " También quedó registrada para todas las personas que visiten el sitio."
-          : mapaApiActiva() && !remoto.ok
-            ? " No se pudo guardar en la hoja compartida; revisa config-mapa.js o la conexión."
+          : repositorioMapaActivo() && !remoto.ok
+            ? " No se pudo guardar en el registro compartido; revisa config-mapa.js o la conexión."
             : "";
 
       mensaje.textContent = base + voz + nube;
@@ -1136,6 +1211,8 @@ function initProgresoHistoria() {
     });
 
     etiqueta.textContent = t("progress.chapter", { name: t(capitulosHistoria[indiceActivo].key) });
+
+    actualizarHubMapaActivo(capituloActivo);
   };
 
   window.actualizarProgresoHistoria = actualizarProgreso;
@@ -1143,6 +1220,40 @@ function initProgresoHistoria() {
   actualizarProgreso();
   window.addEventListener("scroll", actualizarProgreso, { passive: true });
   window.addEventListener("resize", actualizarProgreso, { passive: true });
+}
+
+function actualizarHubMapaActivo(capituloActivo) {
+  const tarjetas = document.querySelectorAll(".hub-mapa-tarjeta[data-capitulo]");
+  if (tarjetas.length === 0) return;
+
+  const activo = capituloActivo || "hub";
+
+  tarjetas.forEach((tarjeta) => {
+    const esActiva = tarjeta.dataset.capitulo === activo;
+    tarjeta.classList.toggle("is-here", esActiva);
+    const aqui = tarjeta.querySelector(".hub-mapa-aqui");
+    if (aqui) aqui.hidden = !esActiva;
+    if (esActiva) {
+      tarjeta.setAttribute("aria-current", "location");
+    } else {
+      tarjeta.removeAttribute("aria-current");
+    }
+  });
+}
+
+function initHubMapaActivo() {
+  const nav = document.querySelector(".nav-hub");
+  if (!nav) return;
+
+  const actualizar = () => {
+    const offset = window.scrollY + nav.offsetHeight + 56;
+    actualizarHubMapaActivo(obtenerCapituloDesdeScroll(offset));
+  };
+
+  actualizar();
+  window.addEventListener("scroll", actualizar, { passive: true });
+  window.addEventListener("resize", actualizar, { passive: true });
+  window.addEventListener("hub:idioma", actualizar);
 }
 
 function initNavegacionCapitulos() {
@@ -1653,6 +1764,7 @@ initNavegacion();
 initNavegacionCapitulos();
 initIndiceFlotante();
 initProgresoHistoria();
+initHubMapaActivo();
 initContacto();
 initVolverArriba();
 initCartografiaInteractiva();

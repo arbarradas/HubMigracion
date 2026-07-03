@@ -1,11 +1,13 @@
 /**
- * Hub de Migración — backend ligero del mapa de visitantes.
- * Guarda respuestas en Google Sheets y expone JSON para el sitio estático.
+ * Hub de Migración — backend del mapa de voces.
+ * GET: lee respuestas del Form y/o hoja «Respuestas» (POST directo).
+ * POST: agrega fila en «Respuestas» (opcional, si no usas solo Google Form).
  *
- * Despliegue: ver SETUP-MAPA.md en esta carpeta.
+ * Despliegue: SETUP-MAPA.md y SETUP-GOOGLE-FORM-MAPA.md
  */
 
 const NOMBRE_HOJA = "Respuestas";
+const NOMBRE_HOJA_FORM = "Respuestas de formulario 1";
 const MAX_HISTORIA = 120;
 
 const COLUMNAS = [
@@ -23,10 +25,10 @@ const COLUMNAS = [
   "id"
 ];
 
-function obtenerHoja_() {
+function obtenerHoja_(nombre) {
   const libro = SpreadsheetApp.getActiveSpreadsheet();
-  let hoja = libro.getSheetByName(NOMBRE_HOJA);
-  if (!hoja) {
+  let hoja = libro.getSheetByName(nombre);
+  if (!hoja && nombre === NOMBRE_HOJA) {
     hoja = libro.insertSheet(NOMBRE_HOJA);
     hoja.appendRow(COLUMNAS);
     hoja.setFrozenRows(1);
@@ -45,6 +47,11 @@ function sanitizarTexto_(valor, maximo) {
 function numero_(valor) {
   const n = Number(valor);
   return Number.isFinite(n) ? n : "";
+}
+
+function numeroOpcional_(valor) {
+  const n = Number(valor);
+  return Number.isFinite(n) ? n : undefined;
 }
 
 function filaAEntrada_(fila) {
@@ -72,6 +79,75 @@ function filaAEntrada_(fila) {
   return entrada;
 }
 
+/**
+ * Google Form vinculado a la hoja (columnas A–M):
+ * A Marca de tiempo, B origen, C residencia, D escribe, E historia,
+ * F fecha ISO, G–L coords, M id
+ */
+function filaFormAEntrada_(fila) {
+  const fechaForm = fila[0] ? new Date(fila[0]).toISOString() : "";
+  const entrada = {
+    fecha: fila[5] || fechaForm,
+    origen: sanitizarTexto_(fila[1], 200),
+    residencia: sanitizarTexto_(fila[2], 200),
+    escribe: sanitizarTexto_(fila[3], 200),
+    historia: sanitizarTexto_(fila[4] || "", MAX_HISTORIA),
+    origenLat: numeroOpcional_(fila[6]),
+    origenLng: numeroOpcional_(fila[7]),
+    residenciaLat: numeroOpcional_(fila[8]),
+    residenciaLng: numeroOpcional_(fila[9]),
+    escribeLat: numeroOpcional_(fila[10]),
+    escribeLng: numeroOpcional_(fila[11]),
+    id: fila[12] ? String(fila[12]) : ""
+  };
+
+  if (!entrada.historia) delete entrada.historia;
+  if (!entrada.id) entrada.id = Utilities.getUuid();
+
+  return entrada;
+}
+
+function claveEntrada_(entrada) {
+  if (entrada.id) return String(entrada.id);
+  return [entrada.origen, entrada.residencia, entrada.escribe, entrada.fecha].join("|");
+}
+
+function leerHojaApi_() {
+  const hoja = obtenerHoja_(NOMBRE_HOJA);
+  if (!hoja) return [];
+
+  const valores = hoja.getDataRange().getValues();
+  if (valores.length < 2) return [];
+
+  return valores
+    .slice(1)
+    .map(filaAEntrada_)
+    .filter((entrada) => entrada.origen && entrada.residencia && entrada.escribe);
+}
+
+function leerHojaForm_() {
+  const hoja = obtenerHoja_(NOMBRE_HOJA_FORM);
+  if (!hoja) return [];
+
+  const valores = hoja.getDataRange().getValues();
+  if (valores.length < 2) return [];
+
+  return valores
+    .slice(1)
+    .map(filaFormAEntrada_)
+    .filter((entrada) => entrada.origen && entrada.residencia && entrada.escribe);
+}
+
+function unificarEntradas_(listas) {
+  const unificadas = new Map();
+  listas.forEach((lista) => {
+    lista.forEach((entrada) => {
+      unificadas.set(claveEntrada_(entrada), entrada);
+    });
+  });
+  return [...unificadas.values()];
+}
+
 function respuestaJson_(datos) {
   return ContentService.createTextOutput(JSON.stringify(datos)).setMimeType(
     ContentService.MimeType.JSON
@@ -79,17 +155,7 @@ function respuestaJson_(datos) {
 }
 
 function doGet() {
-  const hoja = obtenerHoja_();
-  const valores = hoja.getDataRange().getValues();
-  if (valores.length < 2) {
-    return respuestaJson_([]);
-  }
-
-  const entradas = valores
-    .slice(1)
-    .map(filaAEntrada_)
-    .filter((entrada) => entrada.origen && entrada.residencia);
-
+  const entradas = unificarEntradas_([leerHojaApi_(), leerHojaForm_()]);
   return respuestaJson_(entradas);
 }
 
@@ -116,7 +182,7 @@ function doPost(e) {
       return respuestaJson_({ ok: false, error: "Faltan campos obligatorios." });
     }
 
-    const hoja = obtenerHoja_();
+    const hoja = obtenerHoja_(NOMBRE_HOJA);
     hoja.appendRow([
       entrada.fecha,
       entrada.origen,

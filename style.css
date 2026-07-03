@@ -2065,6 +2065,40 @@ main iframe:not(.graphcommons-iframe) {
   color: var(--muted);
 }
 
+.hub-mapa-tarjeta.is-here {
+  border-color: var(--acento);
+  background: var(--panel);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--acento) 35%, transparent), 0 10px 28px var(--sombra);
+}
+
+.hub-mapa-aqui {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: var(--acento);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hub-mapa-tarjeta.is-here .hub-mapa-num {
+  background: var(--acento);
+  color: #fff;
+}
+
+.proyectos-narrativos {
+  margin-bottom: var(--espacio-xl);
+}
+
+.proyectos-investigacion-bloque {
+  margin-top: var(--espacio-lg);
+  padding-top: var(--espacio-lg);
+  border-top: 1px solid var(--linea);
+}
+
 .hub-mapa-capitulos--primero {
   margin-top: var(--espacio-md);
   margin-bottom: var(--espacio-lg);

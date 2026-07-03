@@ -2,6 +2,8 @@
 
 Esta guía conecta el formulario **«¿De dónde nos visitas?»** del sitio del Hub con una hoja de Google. Así, las respuestas del taller quedan visibles para **todas las personas** que abran el mapa, no solo en un navegador.
 
+> **Alternativa con Google Form:** si prefieres crear un Form en lugar de depender solo del POST del script, sigue **`SETUP-GOOGLE-FORM-MAPA.md`** y configura `HUB_MAPA_FORM` en `config-mapa.js`. El Apps Script de este archivo lee también la pestaña de respuestas del Form.
+
 **Tiempo estimado:** 15–20 minutos (una sola vez).  
 **Costo:** gratis (cuenta Google personal o institucional).
 
@@ -86,13 +88,14 @@ Cada vez que edites `MapaVisitantes.gs`, vuelve a **Implementar → Administrar 
 ## Paso 5 — Conectar el sitio (`config-mapa.js`)
 
 1. En el repositorio del sitio, abre el archivo **`config-mapa.js`** (en la raíz del proyecto).
-2. Sustituye la línea vacía por tu URL (entre comillas):
+2. Para lectura/escritura vía Apps Script, sustituye la línea vacía por tu URL (entre comillas):
 
 ```javascript
-window.HUB_MAPA_API = "https://script.google.com/macros/s/TU_ID_AQUI/exec";
+window.HUB_MAPA_API = "https://script.google.com/macros/s/ TU_ID_AQUI/exec";
 ```
 
-3. Guarda el archivo.
+3. Si usas **Google Form** (ver `SETUP-GOOGLE-FORM-MAPA.md`), rellena también `HUB_MAPA_FORM` con `action` y `entries`.
+4. Guarda el archivo.
 4. Sube el cambio a GitHub (`main`), como en los commits anteriores del proyecto.
 5. Espera 1–2 minutos a que GitHub Pages actualice el sitio.
 

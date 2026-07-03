@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hub de Migración e Impacto Social — Tec de Monterrey, campus Puebla</title>
-    <meta name="description" content="Hub de Migración e Impacto Social del Tec de Monterrey, campus Puebla: historias, datos OIM, investigación, mapa de voces y kit de divulgación sobre movilidad humana y ODS 10.">
+    <meta name="description" content="Hub de Migración e Impacto Social del Tec de Monterrey, campus Puebla: proyectos, datos OIM, mapa de voces y kit de divulgación sobre movilidad humana y ODS 10.">
     <meta name="keywords" content="migración, Hub migración, Tec Puebla, OIM, movilidad humana, impacto social, Global Migration Media Academy, investigación migratoria">
     <meta name="author" content="Dr. Andrés Roberto Barradas-Gurruchaga — Tec de Monterrey">
     <meta name="robots" content="index, follow">
@@ -63,7 +63,7 @@
           "name": "Hub de Migración e Impacto Social",
           "isPartOf": { "@id": "https://arbarradas.github.io/HubMigracion/#website" },
           "about": { "@id": "https://arbarradas.github.io/HubMigracion/#organization" },
-          "description": "Sitio del Hub: qué es el Hub, historias, sección OIM, investigación, mapa de voces y recursos educativos.",
+          "description": "Sitio del Hub: qué es el Hub, participación, sección OIM, proyectos del Hub y mapa de voces.",
           "inLanguage": "es-MX"
         }
       ]
@@ -94,9 +94,8 @@
           </li>
           <li><a href="#hub" data-nav="hub" data-i18n="nav.hub">Qué es el Hub</a></li>
           <li><a href="#participacion" data-nav="participacion" data-i18n="nav.participacion">Participación</a></li>
-          <li><a href="#historias" data-nav="historias" data-i18n="nav.historias">Historias</a></li>
           <li><a href="#ciudadania-global" data-nav="oim" data-i18n="nav.oim">OIM</a></li>
-          <li><a href="#investigacion" data-nav="investigacion" data-i18n="nav.investigacion">Avances del Hub</a></li>
+          <li><a href="#investigacion" data-nav="investigacion" data-i18n="nav.investigacion">Proyectos del Hub</a></li>
           <li class="nav-item-preferencias">
             <div class="nav-preferencias" role="group" aria-label="Preferencias de visualización">
               <div id="selector-idioma" class="selector-idioma" role="group" aria-label="Idioma">
@@ -152,6 +151,7 @@
                 <span class="hub-mapa-num" aria-hidden="true">1</span>
                 <span class="hub-mapa-nombre" data-i18n="nav.hub">Qué es el Hub</span>
                 <span class="hub-mapa-desc" data-i18n="navmap.hub.desc">Origen, espacio físico y pilares</span>
+                <span class="hub-mapa-aqui" data-i18n="navmap.here" hidden>Estás aquí</span>
               </a>
             </li>
             <li>
@@ -159,27 +159,23 @@
                 <span class="hub-mapa-num" aria-hidden="true">2</span>
                 <span class="hub-mapa-nombre" data-i18n="nav.participacion">Participación</span>
                 <span class="hub-mapa-desc" data-i18n="navmap.participacion.desc">Mapa de voces, recursos y contacto</span>
-              </a>
-            </li>
-            <li>
-              <a href="#historias" class="hub-mapa-tarjeta" data-capitulo="historias">
-                <span class="hub-mapa-num" aria-hidden="true">3</span>
-                <span class="hub-mapa-nombre" data-i18n="nav.historias">Historias</span>
-                <span class="hub-mapa-desc" data-i18n="navmap.historias.desc">Proyectos narrativos, podcast y divulgación</span>
+                <span class="hub-mapa-aqui" data-i18n="navmap.here" hidden>Estás aquí</span>
               </a>
             </li>
             <li>
               <a href="#ciudadania-global" class="hub-mapa-tarjeta" data-capitulo="ciudadania-global">
-                <span class="hub-mapa-num" aria-hidden="true">4</span>
+                <span class="hub-mapa-num" aria-hidden="true">3</span>
                 <span class="hub-mapa-nombre" data-i18n="nav.oim">OIM</span>
                 <span class="hub-mapa-desc" data-i18n="navmap.oim.desc">Cifras, mapas y alianza institucional</span>
+                <span class="hub-mapa-aqui" data-i18n="navmap.here" hidden>Estás aquí</span>
               </a>
             </li>
             <li>
               <a href="#investigacion" class="hub-mapa-tarjeta" data-capitulo="investigacion">
-                <span class="hub-mapa-num" aria-hidden="true">5</span>
-                <span class="hub-mapa-nombre" data-i18n="nav.investigacion">Avances del Hub</span>
-                <span class="hub-mapa-desc" data-i18n="navmap.investigacion.desc">Estudios, grafos y cartografías</span>
+                <span class="hub-mapa-num" aria-hidden="true">4</span>
+                <span class="hub-mapa-nombre" data-i18n="nav.investigacion">Proyectos del Hub</span>
+                <span class="hub-mapa-desc" data-i18n="navmap.investigacion.desc">Obras, podcast, investigación y cartografías</span>
+                <span class="hub-mapa-aqui" data-i18n="navmap.here" hidden>Estás aquí</span>
               </a>
             </li>
           </ul>
@@ -362,82 +358,9 @@
             </p>
             <div class="participacion-acciones">
               <button type="button" class="btn btn-correo" id="btn-participacion-contacto" data-i18n="participacion.contact">Ir a contacto</button>
-              <a class="btn btn-proyectos" href="#historias" data-i18n="participacion.projects">Ver proyectos del Hub</a>
+              <a class="btn btn-proyectos" href="#investigacion" data-i18n="participacion.projects">Ver proyectos del Hub</a>
             </div>
           </aside>
-        </div>
-      </div>
-    </section>
-
-    <section id="historias" class="seccion-podcast seccion-rubro seccion-rubro--panel seccion-ancla" aria-labelledby="titulo-historias">
-      <div class="ancho-contenido">
-        <p class="etiqueta" data-i18n="historias.label">Historias</p>
-        <h2 id="titulo-historias" class="subtitulo" data-i18n="storytelling.title">Proyectos del Hub</h2>
-        <p class="texto puente-narrativo" data-i18n="storytelling.puente">
-          La investigación y la divulgación se materializan en obras, podcast y narrativas con impacto social.
-        </p>
-
-        <div id="storytelling" class="historias-tres-columnas">
-          <article class="historia-columna proyecto-tarjeta">
-            <figure class="proyecto-figura">
-              <img src="Capaz.png" alt="Proyecto Capaz — pieza de la muestra museográfica sobre migración" loading="lazy">
-            </figure>
-            <div class="proyecto-cuerpo">
-              <h3 class="proyecto-nombre" data-i18n="storytelling.capaz.name">Capaz</h3>
-              <p class="proyecto-tipo" data-i18n="storytelling.capaz.type">Muestra museográfica</p>
-              <p class="texto" data-i18n="storytelling.capaz.body" data-i18n-html="true">
-                Pieza integrada a una exposición museográfica presentada en el
-                <strong>Centro Cultural San Roque</strong>, en la ciudad de Puebla.
-                Elaborada con estudiantes de Comunicación, en diálogo con la obra de
-                <a href="https://jorgecarlos.com/" target="_blank" rel="noopener noreferrer">Jorge Carlos Álvarez</a>.
-              </p>
-            </div>
-          </article>
-
-          <article class="historia-columna proyecto-tarjeta">
-            <figure class="proyecto-figura">
-              <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">
-                <img src="CuandoVuelvas_DocsPue2025.2.png" alt="Cuando vuelvas — selección Docs Puebla 2025" loading="lazy">
-              </a>
-            </figure>
-            <div class="proyecto-cuerpo">
-              <h3 class="proyecto-nombre" data-i18n="storytelling.cuando.name">Cuando vuelvas</h3>
-              <p class="proyecto-tipo" data-i18n="storytelling.cuando.type">Cine · Docs Puebla 2025</p>
-              <p class="texto" data-i18n="storytelling.cuando.body" data-i18n-html="true">
-                Cortometraje exhibido en México y el extranjero; selección oficial Fragmentos Universitarios en
-                <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">Docs Puebla</a>.
-              </p>
-            </div>
-          </article>
-
-          <article class="historia-columna historia-columna--podcast proyecto-tarjeta">
-            <div class="proyecto-cuerpo historia-podcast-cuerpo">
-              <h3 class="proyecto-nombre" data-i18n="historias.title">Divulgación, podcast y narrativas</h3>
-              <p class="proyecto-tipo" data-i18n="creacion.episode">Episodio 1 — Javier Moreno Sánchez</p>
-              <p class="texto" data-i18n="creacion.puente">
-                Sociedad Migrante acerca testimonios y debates desde distintos países para situar la migración con rostro y voz humana.
-              </p>
-              <a
-                class="btn btn-spotify"
-                href="https://open.spotify.com/show/1GOWpD3yzR7r3ui2EHd2HM"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-i18n="creacion.spotify"
-              >
-                Escuchar en Spotify
-              </a>
-              <div class="podcast-reproductor podcast-reproductor--columna">
-                <iframe
-                  class="podcast-embed"
-                  src="https://open.spotify.com/embed/episode/1pZksnI3J2604Y3gl9abbT?utm_source=generator&theme=0"
-                  title="Charla con Javier Moreno Sánchez — Sociedad Migrante"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
-              </div>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -501,18 +424,83 @@
     <main>
       <section id="investigacion" class="seccion-investigacion seccion-rubro seccion-rubro--panel seccion-ancla" aria-labelledby="titulo-investigacion">
         <div class="ancho-contenido">
-          <p id="etiqueta-investigacion" class="etiqueta" data-i18n="investigacion.label">Avances del Hub</p>
-          <h2 id="titulo-investigacion" class="subtitulo" data-i18n="investigacion.title">¿Qué estamos haciendo al respecto?</h2>
+          <p id="etiqueta-investigacion" class="etiqueta" data-i18n="investigacion.label">Proyectos del Hub</p>
+          <h2 id="titulo-investigacion" class="subtitulo" data-i18n="investigacion.title">Proyectos del Hub</h2>
           <p class="texto puente-narrativo" data-i18n="investigacion.puente">
-            Desde el campus Puebla, el Hub convierte la pregunta global en evidencia local: encuestas, grafos y cartografías que describen la movilidad estudiantil.
+            La investigación, la divulgación y las acciones del Hub se materializan en obras, podcast, evidencia local y cartografías con impacto social.
           </p>
 
-          <div class="investigacion-intro texto-flow">
-            <p class="texto" data-i18n="investigacion.study.p1"><strong>Una aproximación a la movilidad estudiantil en el Tec de Monterrey.</strong></p>
-            <p class="texto" data-i18n="investigacion.study.p2">
-              Investigación coordinada por el Dr. Barradas-Gurruchaga con la Mtra. Villa Maciel y la Dra. Castaño Echeverri, a partir de encuestas al estudiantado foráneo en campus Puebla.
-            </p>
+          <div id="storytelling" class="proyectos-narrativos historias-tres-columnas">
+            <article class="historia-columna proyecto-tarjeta">
+              <figure class="proyecto-figura">
+                <img src="Capaz.png" alt="Proyecto Capaz — pieza de la muestra museográfica sobre migración" loading="lazy">
+              </figure>
+              <div class="proyecto-cuerpo">
+                <h3 class="proyecto-nombre" data-i18n="storytelling.capaz.name">Capaz</h3>
+                <p class="proyecto-tipo" data-i18n="storytelling.capaz.type">Muestra museográfica</p>
+                <p class="texto" data-i18n="storytelling.capaz.body" data-i18n-html="true">
+                  Pieza integrada a una exposición museográfica presentada en el
+                  <strong>Centro Cultural San Roque</strong>, en la ciudad de Puebla.
+                  Elaborada con estudiantes de Comunicación, en diálogo con la obra de
+                  <a href="https://jorgecarlos.com/" target="_blank" rel="noopener noreferrer">Jorge Carlos Álvarez</a>.
+                </p>
+              </div>
+            </article>
+
+            <article class="historia-columna proyecto-tarjeta">
+              <figure class="proyecto-figura">
+                <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">
+                  <img src="CuandoVuelvas_DocsPue2025.2.png" alt="Cuando vuelvas — selección Docs Puebla 2025" loading="lazy">
+                </a>
+              </figure>
+              <div class="proyecto-cuerpo">
+                <h3 class="proyecto-nombre" data-i18n="storytelling.cuando.name">Cuando vuelvas</h3>
+                <p class="proyecto-tipo" data-i18n="storytelling.cuando.type">Cine · Docs Puebla 2025</p>
+                <p class="texto" data-i18n="storytelling.cuando.body" data-i18n-html="true">
+                  Cortometraje exhibido en México y el extranjero; selección oficial Fragmentos Universitarios en
+                  <a href="https://docsmx.org" target="_blank" rel="noopener noreferrer">Docs Puebla</a>.
+                </p>
+              </div>
+            </article>
+
+            <article class="historia-columna historia-columna--podcast proyecto-tarjeta">
+              <div class="proyecto-cuerpo historia-podcast-cuerpo">
+                <h3 class="proyecto-nombre" data-i18n="historias.title">Divulgación, podcast y narrativas</h3>
+                <p class="proyecto-tipo" data-i18n="creacion.episode">Episodio 1 — Javier Moreno Sánchez</p>
+                <p class="texto" data-i18n="creacion.puente">
+                  Sociedad Migrante acerca testimonios y debates desde distintos países para situar la migración con rostro y voz humana.
+                </p>
+                <a
+                  class="btn btn-spotify"
+                  href="https://open.spotify.com/show/1GOWpD3yzR7r3ui2EHd2HM"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-i18n="creacion.spotify"
+                >
+                  Escuchar en Spotify
+                </a>
+                <div class="podcast-reproductor podcast-reproductor--columna">
+                  <iframe
+                    class="podcast-embed"
+                    src="https://open.spotify.com/embed/episode/1pZksnI3J2604Y3gl9abbT?utm_source=generator&theme=0"
+                    title="Charla con Javier Moreno Sánchez — Sociedad Migrante"
+                    loading="lazy"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+            </article>
           </div>
+
+          <div class="proyectos-investigacion-bloque">
+            <h3 class="participacion-subtitulo" data-i18n="investigacion.study.heading">Movilidad estudiantil — evidencia e investigación</h3>
+            <div class="investigacion-intro texto-flow">
+              <p class="texto" data-i18n="investigacion.study.p1"><strong>Una aproximación a la movilidad estudiantil en el Tec de Monterrey.</strong></p>
+              <p class="texto" data-i18n="investigacion.study.p2">
+                Investigación coordinada por el Dr. Barradas-Gurruchaga con la Mtra. Villa Maciel y la Dra. Castaño Echeverri, a partir de encuestas al estudiantado foráneo en campus Puebla.
+              </p>
+            </div>
 
           <div class="investigacion-tabs" id="investigacion-tabs">
             <div class="investigacion-tabs-nav" role="tablist" aria-label="Evidencias de investigación">
@@ -607,6 +595,7 @@
               </div>
             </div>
           </div>
+          </div>
         </div>
       </section>
     </main>
@@ -677,9 +666,9 @@
             <li><a href="#hub" data-i18n="nav.hub">Qué es el Hub</a></li>
             <li><a href="#participacion" data-i18n="nav.participacion">Participación</a></li>
             <li><a href="#recursos-educativos" data-i18n="footer.sublink.resources">Recursos educativos</a></li>
-            <li><a href="#historias" data-i18n="nav.historias">Historias</a></li>
             <li><a href="#ciudadania-global" data-i18n="nav.oim">OIM</a></li>
-            <li><a href="#investigacion" data-i18n="nav.investigacion">Avances del Hub</a></li>
+            <li><a href="#investigacion" data-i18n="nav.investigacion">Proyectos del Hub</a></li>
+            <li><a href="#storytelling" data-i18n="footer.sublink.projects">Obras y narrativas</a></li>
             <li><a href="#encuesta-visitantes" data-i18n="footer.sublink.map">Mapa de voces</a></li>
             <li><a href="kit-divulgacion.html" data-i18n="footer.sublink.kit">Kit de divulgación</a></li>
           </ul>
