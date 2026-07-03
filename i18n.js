@@ -14,7 +14,7 @@
       "nav.hub": "Qué es el Hub",
       "nav.oim": "OIM",
       "nav.historias": "Historias",
-      "nav.investigacion": "Investigación",
+      "nav.investigacion": "Avances del Hub",
       "nav.participacion": "Participación",
       "nav.lang.es": "Español",
       "nav.lang.en": "English",
@@ -33,7 +33,7 @@
       "hub.p2.title": "Cuatro pilares estratégicos",
       "hub.p2.body": " — Comunicación, ética, investigación docente y sentido humano.",
       "hub.puente":
-        "Este sitio recorre el Hub en capítulos: quiénes somos, historias, datos OIM, investigación en Puebla y una invitación a participar.",
+        "Este sitio recorre el Hub en capítulos: quiénes somos, participación, historias, datos OIM y avances de investigación en Puebla.",
       "navmap.title": "Explora por capítulos",
       "navmap.hint": "Salta directo al tema que te interese; también puedes usar el índice flotante en cualquier momento.",
       "navmap.hub.desc": "Origen, espacio físico y pilares",
@@ -42,7 +42,7 @@
       "oim.vinculacion":
         "Desde hace más de tres años, el campus Puebla del Tec de Monterrey colabora con la OIM en talleres, formación y proyectos de divulgación. Esta alianza se sustenta en un convenio marco entre el Tecnológico de Monterrey y la Organización Internacional para las Migraciones.",
       "navmap.investigacion.desc": "Estudios, grafos y cartografías",
-      "navmap.participacion.desc": "Mapa de voces y ubicaciones de visitantes",
+      "navmap.participacion.desc": "Mapa de voces, recursos y contacto",
       "indice.open": "Índice",
       "indice.title": "Ir a un capítulo",
       "indice.hint": "Elige una sección para ir directo, sin recorrer toda la página.",
@@ -58,7 +58,10 @@
       "ciudadania.label": "Ciudadanía global",
       "ciudadania.title": "¿Qué está pasando en el mundo?",
       "ciudadania.puente":
-        "Para dimensionar el fenómeno, estas cifras sitúan la migración mexicana en un contexto global antes de escuchar voces y narrativas.",
+        "La alianza con la OIM nos permite leer la migración con datos comparables a escala global. Una referencia mexicana — el corredor hacia Estados Unidos — ayuda a situar el fenómeno antes de explorar el mapa interactivo.",
+      "ciudadania.resumen.pre": "Más de ",
+      "ciudadania.resumen.post":
+        ' mexicanas y mexicanos viven en Estados Unidos — el corredor México–EE. UU. es el más numeroso del mundo (<a href="https://www.gob.mx/ime" target="_blank" rel="noopener noreferrer">IME/SRE</a> · OIM/ONU 2024).',
       "ciudadania.fuente":
         "Estimaciones del Instituto de los Mexicanos en el Exterior (SRE). El corredor México–Estados Unidos es considerado el más numeroso del mundo, de acuerdo con datos de la OIM y la ONU (UN DESA, 2024).",
       "ciudadania.usa": "Estados Unidos",
@@ -74,7 +77,7 @@
         "Estas cifras sitúan la migración mexicana en un contexto planetario: la gran mayoría de quienes viven fuera del país lo hace al norte; Europa y Asia representan comunidades más pequeñas pero crecientes, visibles en la diversidad de la ciudadanía global.",
       "ciudadania.oim.title": "Migración internacional — Portal de Datos OIM",
       "ciudadania.oim.puente":
-        "Ampliamos la mirada: la migración es un fenómeno planetario. Este mapa permite comparar flujos y stocks a escala global.",
+        "El Portal de Datos sobre Migración de la OIM reúne indicadores de stocks y flujos a nivel mundial. Úsalo para contrastar regiones, años y tipos de movilidad — y complementa tu lectura con el glosario y el kit de divulgación en la sección de Participación.",
       "ciudadania.oim.body":
         "Mapa interactivo del Portal de Datos sobre Migración (GMDAC / OIM), con indicadores de stocks migratorios internacionales comparables a nivel global y regional.",
       "ciudadania.oim.help":
@@ -88,7 +91,7 @@
         'El Hub y su equipo académico han participado en espacios internacionales vinculados con la <a href="https://www.iom.int/" target="_blank" rel="noopener noreferrer">Organización Internacional para las Migraciones (OIM)</a> y la <a href="https://www.mediamigrationacademy.org/about" target="_blank" rel="noopener noreferrer">Global Migration Media Academy (GMMA)</a>, iniciativa de la OIM para una cobertura mediática ética y humana sobre migración.',
       "ciudadania.int.p2":
         "Desde 2023, el campus Puebla colabora con la OIM México en talleres, cursos y formación dentro del marco GMMA — vínculo que culminó en la inauguración del Hub en febrero de 2025, con la participación del embajador de buena voluntad de la OIM en México, Samuel Kishi.",
-      "investigacion.label": "Investigación",
+      "investigacion.label": "Avances del Hub",
       "investigacion.title": "¿Qué estamos haciendo al respecto?",
       "investigacion.puente":
         "Desde el campus Puebla, el Hub convierte la pregunta global en evidencia local: encuestas, grafos y cartografías que describen la movilidad estudiantil.",
@@ -154,13 +157,14 @@
         "Paquete descargable con infografía de cifras IME/SRE, acceso registrado al glosario, al Portal de Datos OIM y al Informe Mundial 2024, y contexto del Hub como socio formador de la GMMA. Ideal para aulas, medios y organizaciones.",
       "kit.open": "Abrir kit de divulgación",
       "kit.pdf": "Guardar como PDF",
-      "participacion.label": "Tu lugar en la historia",
-      "participacion.title": "¿Cómo puedes participar?",
+      "participacion.label": "Participación",
+      "participacion.title": "Participación",
       "participacion.puente":
-        "Has recorrido voces, datos, investigación y proyectos con impacto. Ahora puedes formar parte de esta red: proponer una idea, difundir o colaborar desde tu disciplina.",
+        "Comparte tu ubicación en el mapa, usa los recursos educativos del Hub o colabora con una propuesta académica desde tu disciplina.",
       "participacion.p1":
         "Los proyectos del Hub — desde piezas visuales y cortometrajes hasta estudios de datos y conferencias internacionales — nacieron de colaboraciones abiertas. El siguiente puede llevar tu firma.",
       "participacion.lema": "Todos somos migrantes.",
+      "participacion.invite.title": "¿Cómo puedes sumarte?",
       "participacion.p2":
         "¡Súmate a los esfuerzos del Hub de Migración e Impacto Social! Desde el Hub se trabaja en pro del ODS 10 — Reducción de la desigualdad — con proyectos académicos de inmersión e impacto social.",
       "participacion.p3":
@@ -221,7 +225,7 @@
       "footer.contact.write": "Escríbenos por correo.",
       "footer.contact.btn": "Enviar correo electrónico",
       "footer.sitemap": "En esta página",
-      "footer.sublink.map": "Tu voz en el mapa",
+      "footer.sublink.map": "Mapa de voces",
       "footer.sublink.resources": "Recursos educativos",
       "footer.sublink.kit": "Kit de divulgación",
       "footer.legal": "© Hub de Migración e Impacto Social — Tec de Monterrey, campus Puebla.",
@@ -229,7 +233,7 @@
       "cap.hub": "Qué es el Hub",
       "cap.oim": "OIM",
       "cap.historias": "Historias",
-      "cap.investigacion": "Investigación",
+      "cap.investigacion": "Avances del Hub",
       "cap.participacion": "Participación",
       "factor.gusto": "Gusto por la ciudad",
       "factor.gusto.d": "Afinidad con Puebla como lugar de vida, más allá de lo académico.",
@@ -261,14 +265,14 @@
       "tour.summary.close": "Cerrar",
       "tour.hub.title": "Qué es el Hub",
       "tour.hub.text": "Este es el punto de partida: qué es el Hub, quiénes lo impulsan y cómo se articula con la OIM y el campus Puebla.",
+      "tour.participacion.title": "Participación",
+      "tour.participacion.text": "Comparte tu ubicación en el mapa de voces, consulta recursos educativos y descubre cómo colaborar con el Hub.",
       "tour.oim.title": "OIM y datos",
-      "tour.oim.text": "Cifras del IME/SRE, mapa interactivo de la OIM, glosario y presencia internacional del Hub con la GMMA.",
+      "tour.oim.text": "Alianza institucional con la OIM, referencia al corredor México–EE. UU. y mapa interactivo del Portal de Datos sobre Migración.",
       "tour.historias.title": "Historias",
       "tour.historias.text": "Proyectos narrativos del Hub, podcast Sociedad Migrante y obras como Capaz y «Cuando vuelvas».",
-      "tour.investigacion.title": "Investigación en Puebla",
+      "tour.investigacion.title": "Avances del Hub",
       "tour.investigacion.text": "Estudio sobre movilidad estudiantil, grafo interactivo, cartografía y factores para permanecer en Puebla.",
-      "tour.participacion.title": "Participación",
-      "tour.participacion.text": "El recorrido cierra con el mapa de voces: comparte tu origen, residencia y una frase opcional.",
       "tour.encuesta.title": "Voces y ubicaciones",
       "tour.encuesta.text": "Responde tres preguntas: tu lugar de origen, dónde resides actualmente y desde dónde nos escribes. Las tres ubicaciones se reflejan en el mapa.",
       "encuesta.responses": "{n} respuesta(s) en este navegador (también en el mapa):",
@@ -283,7 +287,7 @@
       "nav.hub": "What is the Hub",
       "nav.oim": "IOM",
       "nav.historias": "Stories",
-      "nav.investigacion": "Research",
+      "nav.investigacion": "Hub advances",
       "nav.participacion": "Participation",
       "nav.lang.es": "Spanish",
       "nav.lang.en": "English",
@@ -302,7 +306,7 @@
       "hub.p2.title": "Four strategic pillars",
       "hub.p2.body": " — Communication, ethics, faculty research, and human sense.",
       "hub.puente":
-        "This site tours the Hub in chapters: who we are, stories, IOM data, research in Puebla, and an invitation to participate.",
+        "This site tours the Hub in chapters: who we are, participation, stories, IOM data, and research advances in Puebla.",
       "navmap.title": "Explore by chapter",
       "navmap.hint": "Jump straight to the topic you need; you can also open the floating index at any time.",
       "navmap.hub.desc": "Origin, physical space, and pillars",
@@ -311,7 +315,7 @@
       "oim.vinculacion":
         "For more than three years, the Tec de Monterrey Puebla campus has collaborated with IOM on workshops, training, and outreach projects. This alliance is supported by a framework agreement between Tecnológico de Monterrey and the International Organization for Migration.",
       "navmap.investigacion.desc": "Studies, graphs, and cartographies",
-      "navmap.participacion.desc": "Visitor voice map and locations",
+      "navmap.participacion.desc": "Voice map, resources, and contact",
       "indice.open": "Index",
       "indice.title": "Go to a chapter",
       "indice.hint": "Pick a section to jump there without scrolling the whole page.",
@@ -328,7 +332,10 @@
       "ciudadania.label": "Global citizenship",
       "ciudadania.title": "What is happening in the world?",
       "ciudadania.puente":
-        "To dimension the phenomenon, these figures place Mexican migration in a global context before listening to voices and narratives.",
+        "The alliance with IOM lets us read migration with comparable data at a global scale. A Mexican reference — the corridor to the United States — helps situate the phenomenon before exploring the interactive map.",
+      "ciudadania.resumen.pre": "More than ",
+      "ciudadania.resumen.post":
+        ' Mexicans live in the United States — the Mexico–U.S. corridor is the largest in the world (<a href="https://www.gob.mx/ime" target="_blank" rel="noopener noreferrer">IME/SRE</a> · IOM/UN 2024).',
       "ciudadania.fuente":
         "Estimates from the Institute for Mexicans Abroad (SRE). The Mexico–United States corridor is considered the largest in the world, according to IOM and UN data (UN DESA, 2024).",
       "ciudadania.usa": "United States",
@@ -344,7 +351,7 @@
         "These figures place Mexican migration in a planetary context: the vast majority of those living abroad do so in the north; Europe and Asia represent smaller but growing communities, visible in the diversity of global citizenship.",
       "ciudadania.oim.title": "International migration — IOM Data Portal",
       "ciudadania.oim.puente":
-        "We broaden the view: migration is a planetary phenomenon. This map allows comparing flows and stocks at a global scale.",
+        "The IOM Migration Data Portal brings together stock and flow indicators worldwide. Use it to compare regions, years, and types of mobility — and complement your reading with the glossary and outreach kit in the Participation section.",
       "ciudadania.oim.body":
         "Interactive map from the Migration Data Portal (GMDAC / IOM), with comparable international migrant stock indicators at global and regional levels.",
       "ciudadania.oim.help":
@@ -358,7 +365,7 @@
         'The Hub and its academic team have participated in international spaces linked to the <a href="https://www.iom.int/" target="_blank" rel="noopener noreferrer">International Organization for Migration (IOM)</a> and the <a href="https://www.mediamigrationacademy.org/about" target="_blank" rel="noopener noreferrer">Global Migration Media Academy (GMMA)</a>, an IOM initiative for ethical and humane media coverage of migration.',
       "ciudadania.int.p2":
         "Since 2023, the Puebla campus has collaborated with IOM Mexico in workshops, courses, and training within the GMMA framework — a link that culminated in the Hub's inauguration in February 2025, with the participation of IOM Goodwill Ambassador in Mexico, Samuel Kishi.",
-      "investigacion.label": "Research",
+      "investigacion.label": "Hub advances",
       "investigacion.title": "What are we doing about it?",
       "investigacion.puente":
         "From the Puebla campus, the Hub turns the global question into local evidence: surveys, graphs, and cartographies that describe student mobility.",
@@ -424,13 +431,14 @@
         "Downloadable package with IME/SRE figure infographic, registered access to the glossary, IOM Data Portal and World Migration Report 2024, plus Hub context as a GMMA training partner. Ideal for classrooms, media, and organizations.",
       "kit.open": "Open outreach kit",
       "kit.pdf": "Save as PDF",
-      "participacion.label": "Your place in the story",
-      "participacion.title": "How can you participate?",
+      "participacion.label": "Participation",
+      "participacion.title": "Participation",
       "participacion.puente":
-        "You have explored voices, data, research, and impactful projects. Now you can be part of this network: propose an idea, share, or collaborate from your discipline.",
+        "Share your location on the map, use the Hub's educational resources, or collaborate with an academic proposal from your discipline.",
       "participacion.p1":
         "Hub projects — from visual pieces and short films to data studies and international conferences — were born from open collaborations. The next one could bear your signature.",
       "participacion.lema": "We are all migrants.",
+      "participacion.invite.title": "How can you join?",
       "participacion.p2":
         "Join the efforts of the Migration and Social Impact Hub! The Hub works toward SDG 10 — Reduced inequalities — with academic immersion and social impact projects.",
       "participacion.p3":
@@ -491,7 +499,7 @@
       "footer.contact.write": "Write to us by email.",
       "footer.contact.btn": "Send email",
       "footer.sitemap": "On this page",
-      "footer.sublink.map": "Your voice on the map",
+      "footer.sublink.map": "Voice map",
       "footer.sublink.resources": "Educational resources",
       "footer.sublink.kit": "Outreach kit",
       "footer.legal": "© Migration and Social Impact Hub — Tec de Monterrey, Puebla campus.",
@@ -499,7 +507,7 @@
       "cap.hub": "What is the Hub",
       "cap.oim": "IOM",
       "cap.historias": "Stories",
-      "cap.investigacion": "Research",
+      "cap.investigacion": "Hub advances",
       "cap.participacion": "Participation",
       "factor.gusto": "Enjoyment of the city",
       "factor.gusto.d": "Affinity with Puebla as a place to live, beyond academics.",
@@ -532,13 +540,13 @@
       "tour.hub.title": "What is the Hub",
       "tour.hub.text": "This is the starting point: what the Hub is, who drives it, and how it connects with IOM and the Puebla campus.",
       "tour.oim.title": "IOM and data",
-      "tour.oim.text": "IME/SRE figures, IOM interactive map, glossary, and the Hub's international presence with GMMA.",
+      "tour.oim.text": "Institutional alliance with IOM, reference to the Mexico–U.S. corridor, and interactive map from the Migration Data Portal.",
       "tour.historias.title": "Stories",
       "tour.historias.text": "Hub narrative projects, Sociedad Migrante podcast, and works such as Capaz and «When you return».",
-      "tour.investigacion.title": "Research in Puebla",
-      "tour.investigacion.text": "Study on student mobility, interactive graph, cartography, and factors for staying in Puebla.",
       "tour.participacion.title": "Participation",
-      "tour.participacion.text": "The tour closes with the voice map: share your origin, residence and an optional phrase.",
+      "tour.participacion.text": "Share your location on the voice map, browse educational resources, and discover how to collaborate with the Hub.",
+      "tour.investigacion.title": "Hub advances",
+      "tour.investigacion.text": "Study on student mobility, interactive graph, cartography, and factors for staying in Puebla.",
       "tour.encuesta.title": "Voices and locations",
       "tour.encuesta.text": "Answer three questions: your place of origin, where you currently live, and where you are writing from. All three locations appear on the map.",
       "encuesta.responses": "{n} response(s) in this browser (also on the map):",

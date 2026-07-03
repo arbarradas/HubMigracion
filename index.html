@@ -93,10 +93,10 @@
             </button>
           </li>
           <li><a href="#hub" data-nav="hub" data-i18n="nav.hub">Qué es el Hub</a></li>
+          <li><a href="#participacion" data-nav="participacion" data-i18n="nav.participacion">Participación</a></li>
           <li><a href="#historias" data-nav="historias" data-i18n="nav.historias">Historias</a></li>
           <li><a href="#ciudadania-global" data-nav="oim" data-i18n="nav.oim">OIM</a></li>
-          <li><a href="#investigacion" data-nav="investigacion" data-i18n="nav.investigacion">Investigación</a></li>
-          <li><a href="#participacion" data-nav="participacion" data-i18n="nav.participacion">Participación</a></li>
+          <li><a href="#investigacion" data-nav="investigacion" data-i18n="nav.investigacion">Avances del Hub</a></li>
           <li class="nav-item-preferencias">
             <div class="nav-preferencias" role="group" aria-label="Preferencias de visualización">
               <div id="selector-idioma" class="selector-idioma" role="group" aria-label="Idioma">
@@ -143,19 +143,7 @@
           <span class="hub-titulo-campus subtitulo" data-i18n="hub.subtitle">¿Qué es el Hub de Migración e Impacto Social?</span>
         </h1>
 
-        <div class="hub-descripcion texto-flow">
-          <p data-i18n="hub.p0" data-i18n-html="true">Iniciativa de la <a href="https://tec.mx/es/ehe" target="_blank" rel="noopener noreferrer">Escuela de Humanidades y Educación</a> del Tec de Monterrey, campus Puebla: un espacio de encuentro para proyectos académicos de impacto social sobre movilidad humana.</p>
-          <p data-i18n="hub.p1" data-i18n-html="true">Desde su <a href="https://mediatik.com.mx/inauguran-en-el-tec-de-monterrey-puebla-un-centro-para-el-estudio-de-la-migracion/" target="_blank" rel="noopener noreferrer">inauguración en febrero de 2025</a>, colabora con la OIM y Samuel Kishi, embajador de buena voluntad de la Organización.</p>
-          <p>
-            <strong data-i18n="hub.p2.title">Cuatro pilares estratégicos</strong>
-            <span data-i18n="hub.p2.body"> — Comunicación, ética, investigación docente y sentido humano.</span>
-          </p>
-          <p class="puente-narrativo hub-puente" data-i18n="hub.puente">
-            Este sitio recorre el Hub en capítulos: quiénes somos, datos OIM, historias, investigación en Puebla y una invitación a participar.
-          </p>
-        </div>
-
-        <nav class="hub-mapa-capitulos" aria-labelledby="hub-mapa-titulo">
+        <nav class="hub-mapa-capitulos hub-mapa-capitulos--primero" aria-labelledby="hub-mapa-titulo">
           <h2 id="hub-mapa-titulo" class="hub-mapa-titulo" data-i18n="navmap.title">Explora por capítulos</h2>
           <p class="hub-mapa-ayuda" data-i18n="navmap.hint">Salta directo al tema que te interese; también puedes usar el índice flotante en cualquier momento.</p>
           <ul class="hub-mapa-grid">
@@ -167,89 +155,216 @@
               </a>
             </li>
             <li>
-              <a href="#historias" class="hub-mapa-tarjeta" data-capitulo="historias">
+              <a href="#participacion" class="hub-mapa-tarjeta" data-capitulo="participacion">
                 <span class="hub-mapa-num" aria-hidden="true">2</span>
+                <span class="hub-mapa-nombre" data-i18n="nav.participacion">Participación</span>
+                <span class="hub-mapa-desc" data-i18n="navmap.participacion.desc">Mapa de voces, recursos y contacto</span>
+              </a>
+            </li>
+            <li>
+              <a href="#historias" class="hub-mapa-tarjeta" data-capitulo="historias">
+                <span class="hub-mapa-num" aria-hidden="true">3</span>
                 <span class="hub-mapa-nombre" data-i18n="nav.historias">Historias</span>
                 <span class="hub-mapa-desc" data-i18n="navmap.historias.desc">Proyectos narrativos, podcast y divulgación</span>
               </a>
             </li>
             <li>
               <a href="#ciudadania-global" class="hub-mapa-tarjeta" data-capitulo="ciudadania-global">
-                <span class="hub-mapa-num" aria-hidden="true">3</span>
+                <span class="hub-mapa-num" aria-hidden="true">4</span>
                 <span class="hub-mapa-nombre" data-i18n="nav.oim">OIM</span>
                 <span class="hub-mapa-desc" data-i18n="navmap.oim.desc">Cifras, mapas y alianza institucional</span>
               </a>
             </li>
             <li>
               <a href="#investigacion" class="hub-mapa-tarjeta" data-capitulo="investigacion">
-                <span class="hub-mapa-num" aria-hidden="true">4</span>
-                <span class="hub-mapa-nombre" data-i18n="nav.investigacion">Investigación</span>
-                <span class="hub-mapa-desc" data-i18n="navmap.investigacion.desc">Estudios, grafos y cartografías</span>
-              </a>
-            </li>
-            <li>
-              <a href="#participacion" class="hub-mapa-tarjeta" data-capitulo="participacion">
                 <span class="hub-mapa-num" aria-hidden="true">5</span>
-                <span class="hub-mapa-nombre" data-i18n="nav.participacion">Participación</span>
-                <span class="hub-mapa-desc" data-i18n="navmap.participacion.desc">Sumarte, mapa de voces y contacto</span>
+                <span class="hub-mapa-nombre" data-i18n="nav.investigacion">Avances del Hub</span>
+                <span class="hub-mapa-desc" data-i18n="navmap.investigacion.desc">Estudios, grafos y cartografías</span>
               </a>
             </li>
           </ul>
         </nav>
+
+        <div class="hub-descripcion texto-flow">
+          <p data-i18n="hub.p0" data-i18n-html="true">Iniciativa de la <a href="https://tec.mx/es/ehe" target="_blank" rel="noopener noreferrer">Escuela de Humanidades y Educación</a> del Tec de Monterrey, campus Puebla: un espacio de encuentro para proyectos académicos de impacto social sobre movilidad humana.</p>
+          <p data-i18n="hub.p1" data-i18n-html="true">Desde su <a href="https://mediatik.com.mx/inauguran-en-el-tec-de-monterrey-puebla-un-centro-para-el-estudio-de-la-migracion/" target="_blank" rel="noopener noreferrer">inauguración en febrero de 2025</a>, colabora con la OIM y Samuel Kishi, embajador de buena voluntad de la Organización.</p>
+          <p>
+            <strong data-i18n="hub.p2.title">Cuatro pilares estratégicos</strong>
+            <span data-i18n="hub.p2.body"> — Comunicación, ética, investigación docente y sentido humano.</span>
+          </p>
+          <p class="puente-narrativo hub-puente" data-i18n="hub.puente">
+            Este sitio recorre el Hub en capítulos: quiénes somos, datos OIM, historias, investigación en Puebla y una invitación a participar.
+          </p>
+        </div>
       </div>
     </section>
 
-    <section id="recursos-educativos" class="seccion-recursos seccion-rubro seccion-rubro--clara seccion-ancla" aria-labelledby="titulo-recursos-educativos">
+    <section id="participacion" class="seccion-participacion seccion-rubro seccion-rubro--panel seccion-ancla" aria-labelledby="titulo-participacion">
       <div class="ancho-contenido">
-        <p class="etiqueta" data-i18n="aprendizajes.label">Recursos</p>
-        <h2 id="titulo-recursos-educativos" class="subtitulo" data-i18n="aprendizajes.title">Recursos educativos</h2>
-        <p class="texto puente-narrativo" data-i18n="aprendizajes.puente">
-          Conceptos precisos ayudan a leer datos, noticias y políticas migratorias con rigor. Estos materiales apoyan el trabajo docente y la divulgación del Hub.
-        </p>
+        <header class="participacion-cabecera-seccion">
+          <p class="etiqueta" data-i18n="participacion.label">Participación</p>
+          <h2 id="titulo-participacion" class="subtitulo" data-i18n="participacion.title">Participación</h2>
+          <p class="texto puente-narrativo" data-i18n="participacion.puente">
+            Has recorrido voces, datos, investigación y proyectos con impacto. Ahora puedes formar parte de esta red: comparte tu ubicación, usa los recursos educativos o colabora desde tu disciplina.
+          </p>
+        </header>
 
-        <div class="recursos-grid">
-          <article class="glosario-oim tarjeta-recurso">
-            <div class="tarjeta-recurso-marca" aria-hidden="true">
-              <span class="tarjeta-recurso-sigla">OIM</span>
-            </div>
-            <div class="tarjeta-recurso-cuerpo texto-flow">
-              <h3 class="proyecto-nombre" data-i18n="aprendizajes.glossary.title">Glosario de migración (OIM)</h3>
-              <p class="texto" data-i18n="aprendizajes.glossary.body">
-                La Organización Internacional para las Migraciones mantiene un glosario en línea con definiciones acordadas internacionalmente sobre migración, asilo, trata de personas y términos afines — útil para alinear el lenguaje en aulas, medios y política pública.
-              </p>
-              <a
-                class="btn btn-correo"
-                href="https://www.iom.int/key-migration-terms"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-i18n="aprendizajes.glossary.link"
-              >
-                Consultar el glosario en línea de la OIM
-              </a>
-            </div>
-          </article>
+        <div id="encuesta-visitantes" class="participacion-encuesta participacion-encuesta--solo" aria-labelledby="titulo-encuesta">
+          <header class="participacion-encuesta-cabecera">
+            <h3 id="titulo-encuesta" class="participacion-subtitulo" data-i18n="encuesta.title">¿De dónde nos visitas?</h3>
+            <p class="texto puente-narrativo" data-i18n="encuesta.puente">
+              La migración también se cuenta desde dónde estás. Tus tres respuestas se reflejan en el mapa; si quieres, añade una frase breve que otros podrán leer al hacer clic en tu ubicación.
+            </p>
+          </header>
 
-          <article class="kit-divulgacion tarjeta-recurso" aria-labelledby="titulo-kit-divulgacion">
-            <div class="tarjeta-recurso-marca" aria-hidden="true">
-              <span class="tarjeta-recurso-sigla">KIT</span>
-            </div>
-            <div class="tarjeta-recurso-cuerpo texto-flow">
-              <h3 id="titulo-kit-divulgacion" class="proyecto-nombre" data-i18n="kit.title">Kit de divulgación</h3>
-              <p class="texto" data-i18n="kit.body">
-                Paquete descargable con infografía de cifras IME/SRE, enlaces al glosario y al Portal de Datos OIM, y contexto del Hub como socio formador de la GMMA. Ideal para aulas, medios y organizaciones.
+          <div class="encuesta-layout">
+          <div class="encuesta-panel">
+            <form id="form-visitante" class="encuesta-formulario" novalidate>
+              <label class="encuesta-campo">
+                <span data-i18n="encuesta.origin">¿Cuál es tu lugar de origen?</span>
+                <input type="text" id="visitante-origen" name="origen" required autocomplete="address-level2" data-i18n-placeholder="encuesta.origin.ph" placeholder="Ej. Xalapa, Veracruz, México">
+              </label>
+              <label class="encuesta-campo">
+                <span data-i18n="encuesta.residence">¿En dónde resides actualmente?</span>
+                <input type="text" id="visitante-residencia" name="residencia" required autocomplete="address-level1" data-i18n-placeholder="encuesta.residence.ph" placeholder="Ej. Puebla, México">
+              </label>
+              <label class="encuesta-campo">
+                <span data-i18n="encuesta.write">¿De dónde nos escribes?</span>
+                <input type="text" id="visitante-escribe" name="escribe" required autocomplete="country-name" data-i18n-placeholder="encuesta.write.ph" placeholder="Ej. Bruselas, Bélgica">
+              </label>
+              <label class="encuesta-campo encuesta-campo-historia">
+                <span data-i18n="encuesta.story">Tu voz en una frase (opcional)</span>
+                <textarea
+                  id="visitante-historia"
+                  name="historia"
+                  rows="2"
+                  maxlength="120"
+                  data-i18n-placeholder="encuesta.story.ph"
+                  placeholder="Ej. Estudio en Puebla pero escribo desde Europa por un intercambio temporal."
+                  aria-describedby="historia-ayuda historia-contador"
+                ></textarea>
+                <span class="encuesta-historia-pie">
+                  <span id="historia-ayuda" class="encuesta-historia-ayuda" data-i18n="encuesta.story.help">Aparece en el mapa al hacer clic en tu ubicación (máx. 120 caracteres).</span>
+                  <span id="historia-contador" class="encuesta-historia-contador" aria-live="polite">0 / 120</span>
+                </span>
+              </label>
+              <button type="submit" class="btn btn-correo encuesta-btn-enviar" data-i18n="encuesta.submit">Compartir en el mapa</button>
+            </form>
+
+            <aside class="encuesta-resumen" aria-live="polite">
+              <p class="encuesta-contador-visitas">
+                <span class="encuesta-contador-etiqueta" data-i18n="encuesta.visits">Visitas al sitio</span>
+                <strong id="contador-visitas">—</strong>
               </p>
-              <div class="kit-acciones-sitio">
-                <a
-                  class="btn btn-correo"
-                  href="kit-divulgacion.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-i18n="kit.open"
-                >Abrir kit de divulgación</a>
-                <button type="button" class="btn btn-proyectos" id="btn-kit-pdf" data-i18n="kit.pdf">Guardar como PDF</button>
+              <p class="texto encuesta-mensaje" id="encuesta-mensaje" data-i18n="encuesta.empty">
+                Aún no hay respuestas en este navegador. Sé la primera persona en dejar tu huella.
+              </p>
+              <ul class="encuesta-lista" id="encuesta-lista" hidden></ul>
+            </aside>
+          </div>
+
+          <div class="encuesta-mapa-zona">
+            <div class="mapa-visitantes-bloque">
+              <div class="mapa-visitantes-cabecera">
+                <h4 class="participacion-subtitulo mapa-visitantes-titulo" data-i18n="encuesta.map.title">Mapa de voces y ubicaciones</h4>
+                <div class="mapa-visitantes-herramientas">
+                  <button type="button" class="btn btn-mapa-filtro" id="mapa-filtro-voces" aria-pressed="false" data-i18n="encuesta.map.filter">
+                    Mostrar solo voces con historia
+                  </button>
+                  <p class="texto mapa-api-estado" id="mapa-api-estado" hidden></p>
+                </div>
+              </div>
+
+              <div class="mapa-leyenda-grid">
+                <span class="mapa-leyenda-item mapa-leyenda-origen" data-i18n="encuesta.map.origin">Origen</span>
+                <span class="mapa-leyenda-item mapa-leyenda-residencia" data-i18n="encuesta.map.residence">Residencia actual</span>
+                <span class="mapa-leyenda-item mapa-leyenda-escribe" data-i18n="encuesta.map.write">Desde donde nos escribes</span>
+                <span class="mapa-leyenda-item mapa-leyenda-voz" data-i18n="encuesta.map.voice">Voz con historia</span>
+              </div>
+
+              <div class="mapa-visitantes-grid">
+                <div class="mapa-visitantes-col">
+                  <div id="mapa-visitantes" class="mapa-visitantes" role="application" aria-label="Mapa interactivo de origen y residencia de visitantes" tabindex="0"></div>
+                  <p class="texto mapa-visitantes-nota" id="mapa-visitantes-nota" data-i18n="encuesta.map.loading">
+                    Cargando ubicaciones compartidas…
+                  </p>
+                </div>
+                <aside class="mapa-voces-panel" id="mapa-voces-panel" aria-labelledby="mapa-voces-titulo" hidden>
+                  <h4 id="mapa-voces-titulo" class="mapa-voces-titulo" data-i18n="encuesta.voices.title">Voces en el mapa</h4>
+                  <p class="texto mapa-voces-intro" data-i18n="encuesta.voices.intro">Haz clic en una frase para centrar el mapa en esa ubicación y leer la historia completa.</p>
+                  <ul class="mapa-voces-lista" id="mapa-voces-lista"></ul>
+                </aside>
               </div>
             </div>
-          </article>
+          </div>
+        </div>
+        </div>
+
+        <div id="recursos-educativos" class="participacion-recursos seccion-ancla" aria-labelledby="titulo-recursos-educativos">
+          <h3 id="titulo-recursos-educativos" class="participacion-subtitulo" data-i18n="aprendizajes.title">Recursos educativos</h3>
+          <p class="texto puente-narrativo" data-i18n="aprendizajes.puente">
+            Conceptos precisos ayudan a leer datos, noticias y políticas migratorias con rigor. Estos materiales apoyan el trabajo docente y la divulgación del Hub.
+          </p>
+
+          <div class="recursos-grid">
+            <article class="glosario-oim tarjeta-recurso">
+              <div class="tarjeta-recurso-marca" aria-hidden="true">
+                <span class="tarjeta-recurso-sigla">OIM</span>
+              </div>
+              <div class="tarjeta-recurso-cuerpo texto-flow">
+                <h4 class="proyecto-nombre" data-i18n="aprendizajes.glossary.title">Glosario de migración (OIM)</h4>
+                <p class="texto" data-i18n="aprendizajes.glossary.body">
+                  La Organización Internacional para las Migraciones mantiene un glosario en línea con definiciones acordadas internacionalmente sobre migración, asilo, trata de personas y términos afines — útil para alinear el lenguaje en aulas, medios y política pública.
+                </p>
+                <a
+                  class="btn btn-correo"
+                  href="https://www.iom.int/key-migration-terms"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-i18n="aprendizajes.glossary.link"
+                >
+                  Consultar el glosario en línea de la OIM
+                </a>
+              </div>
+            </article>
+
+            <article class="kit-divulgacion tarjeta-recurso" aria-labelledby="titulo-kit-divulgacion">
+              <div class="tarjeta-recurso-marca" aria-hidden="true">
+                <span class="tarjeta-recurso-sigla">KIT</span>
+              </div>
+              <div class="tarjeta-recurso-cuerpo texto-flow">
+                <h4 id="titulo-kit-divulgacion" class="proyecto-nombre" data-i18n="kit.title">Kit de divulgación</h4>
+                <p class="texto" data-i18n="kit.body">
+                  Paquete descargable con infografía de cifras IME/SRE, enlaces al glosario y al Portal de Datos OIM, y contexto del Hub como socio formador de la GMMA. Ideal para aulas, medios y organizaciones.
+                </p>
+                <div class="kit-acciones-sitio">
+                  <a
+                    class="btn btn-correo"
+                    href="kit-divulgacion.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-i18n="kit.open"
+                  >Abrir kit de divulgación</a>
+                  <button type="button" class="btn btn-proyectos" id="btn-kit-pdf" data-i18n="kit.pdf">Guardar como PDF</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <aside class="participacion-invitacion" aria-labelledby="participacion-invitacion-titulo">
+            <p class="participacion-lema" data-i18n="participacion.lema">Todos somos migrantes.</p>
+            <h4 id="participacion-invitacion-titulo" class="participacion-subtitulo participacion-subtitulo--menor" data-i18n="participacion.invite.title">¿Cómo puedes sumarte?</h4>
+            <p class="texto" data-i18n="participacion.p2">
+              ¡Súmate a los esfuerzos del Hub de Migración e Impacto Social! Desde el Hub se trabaja en pro del ODS 10 — Reducción de la desigualdad — con proyectos académicos de inmersión e impacto social.
+            </p>
+            <p class="texto" data-i18n="participacion.p3">
+              Contáctanos. Escribe con una propuesta de proyecto académico que impacte en nuestra sociedad y, en particular, en el subgrupo de personas en movimiento. ¡Te esperamos!
+            </p>
+            <div class="participacion-acciones">
+              <button type="button" class="btn btn-correo" id="btn-participacion-contacto" data-i18n="participacion.contact">Ir a contacto</button>
+              <a class="btn btn-proyectos" href="#historias" data-i18n="participacion.projects">Ver proyectos del Hub</a>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -337,53 +452,12 @@
         <p class="texto puente-narrativo" data-i18n="ciudadania.puente">
           Para dimensionar el fenómeno, estas cifras sitúan la migración mexicana en un contexto global antes de escuchar voces y narrativas.
         </p>
-        <p class="texto datos-fuente" data-i18n="ciudadania.fuente">
-          Estimaciones del Instituto de los Mexicanos en el Exterior (SRE). El corredor México–Estados Unidos es considerado el más numeroso del mundo, de acuerdo con datos de la OIM y la ONU (UN DESA, 2024).
+
+        <p class="texto ciudadania-resumen-compacto">
+          <span data-i18n="ciudadania.resumen.pre">Más de </span><strong id="migrantes-eua-compacto" data-contador="11654000">—</strong><span data-i18n="ciudadania.resumen.post" data-i18n-html="true"> mexicanas y mexicanos viven en Estados Unidos — el corredor México–EE. UU. es el más numeroso del mundo (<a href="https://www.gob.mx/ime" target="_blank" rel="noopener noreferrer">IME/SRE</a> · OIM/ONU 2024).</span>
         </p>
 
-        <div class="ciudadania-datos-panel">
-          <div class="ciudadania-total-resumen" aria-live="polite">
-            <p class="ciudadania-total-etiqueta" data-i18n="ciudadania.total.label">Mexicanas y mexicanos registrados en el exterior</p>
-            <p id="migrantes-total" class="ciudadania-total-numero">—</p>
-            <p class="ciudadania-total-nota" data-i18n="ciudadania.total.nota">Suma estimada por región · IME/SRE</p>
-          </div>
-
-          <div class="panel-resumen panel-migracion" id="panel-migracion-contadores">
-            <article class="ciudadania-region-card ciudadania-region-card--destacada">
-              <span id="migrantes-eua" class="dato-destacado" data-contador="11654000" data-region="usa">0</span>
-              <p class="texto ciudadania-region-nombre" data-i18n="ciudadania.usa">Estados Unidos</p>
-              <div class="ciudadania-barra" role="presentation" aria-hidden="true">
-                <span class="ciudadania-barra-relleno" data-barra-region="usa"></span>
-              </div>
-              <p class="ciudadania-region-pct" data-pct-region="usa"></p>
-              <p class="ciudadania-region-nota" data-i18n="ciudadania.usa.nota">Corredor México–Estados Unidos: el más numeroso del mundo (OIM/ONU).</p>
-            </article>
-            <article class="ciudadania-region-card">
-              <span id="migrantes-europa" class="dato-destacado" data-contador="103814" data-region="europa">0</span>
-              <p class="texto ciudadania-region-nombre" data-i18n="ciudadania.europe">Europa</p>
-              <div class="ciudadania-barra" role="presentation" aria-hidden="true">
-                <span class="ciudadania-barra-relleno" data-barra-region="europa"></span>
-              </div>
-              <p class="ciudadania-region-pct" data-pct-region="europa"></p>
-              <p class="ciudadania-region-nota" data-i18n="ciudadania.europe.nota">Registro de connacionales en Europa (IME/SRE).</p>
-            </article>
-            <article class="ciudadania-region-card">
-              <span id="migrantes-asia" class="dato-destacado" data-contador="11180" data-region="asia">0</span>
-              <p class="texto ciudadania-region-nombre" data-i18n="ciudadania.asia">Asia</p>
-              <div class="ciudadania-barra" role="presentation" aria-hidden="true">
-                <span class="ciudadania-barra-relleno" data-barra-region="asia"></span>
-              </div>
-              <p class="ciudadania-region-pct" data-pct-region="asia"></p>
-              <p class="ciudadania-region-nota" data-i18n="ciudadania.asia.nota">Mexicanas y mexicanos residentes en Asia (IME/SRE).</p>
-            </article>
-          </div>
-
-          <p class="ciudadania-contexto texto" data-i18n="ciudadania.contexto">
-            Estas cifras sitúan la migración mexicana en un contexto planetario: la gran mayoría de quienes viven fuera del país lo hace al norte; Europa y Asia representan comunidades más pequeñas pero crecientes, visibles en la diversidad de la ciudadanía global.
-          </p>
-        </div>
-
-        <div class="ciudadania-oim-bloque">
+        <div class="ciudadania-oim-bloque ciudadania-oim-bloque--principal">
           <h3 class="subtitulo ciudadania-oim-titulo" data-i18n="ciudadania.oim.title">Migración internacional — Portal de Datos OIM</h3>
           <p class="texto puente-narrativo" data-i18n="ciudadania.oim.puente">
             Ampliamos la mirada: la migración es un fenómeno planetario. Este mapa permite comparar flujos y stocks a escala global.
@@ -427,7 +501,7 @@
     <main>
       <section id="investigacion" class="seccion-investigacion seccion-rubro seccion-rubro--panel seccion-ancla" aria-labelledby="titulo-investigacion">
         <div class="ancho-contenido">
-          <p id="etiqueta-investigacion" class="etiqueta" data-i18n="investigacion.label">Investigación</p>
+          <p id="etiqueta-investigacion" class="etiqueta" data-i18n="investigacion.label">Avances del Hub</p>
           <h2 id="titulo-investigacion" class="subtitulo" data-i18n="investigacion.title">¿Qué estamos haciendo al respecto?</h2>
           <p class="texto puente-narrativo" data-i18n="investigacion.puente">
             Desde el campus Puebla, el Hub convierte la pregunta global en evidencia local: encuestas, grafos y cartografías que describen la movilidad estudiantil.
@@ -537,101 +611,6 @@
       </section>
     </main>
 
-    <section id="participacion" class="seccion-participacion seccion-rubro seccion-rubro--panel seccion-ancla" aria-labelledby="titulo-encuesta">
-      <div class="ancho-contenido">
-        <div id="encuesta-visitantes" class="participacion-encuesta participacion-encuesta--solo" aria-labelledby="titulo-encuesta">
-          <header class="participacion-encuesta-cabecera">
-            <p class="etiqueta" data-i18n="encuesta.label">Tu voz en el mapa</p>
-            <h2 id="titulo-encuesta" class="subtitulo" data-i18n="encuesta.title">¿De dónde nos visitas?</h2>
-            <p class="texto puente-narrativo" data-i18n="encuesta.puente">
-              La migración también se cuenta desde dónde estás. Tus tres respuestas se reflejan en el mapa; si quieres, añade una frase breve que otros podrán leer al hacer clic en tu ubicación.
-            </p>
-          </header>
-
-          <div class="encuesta-layout">
-          <div class="encuesta-panel">
-            <form id="form-visitante" class="encuesta-formulario" novalidate>
-              <label class="encuesta-campo">
-                <span data-i18n="encuesta.origin">¿Cuál es tu lugar de origen?</span>
-                <input type="text" id="visitante-origen" name="origen" required autocomplete="address-level2" data-i18n-placeholder="encuesta.origin.ph" placeholder="Ej. Xalapa, Veracruz, México">
-              </label>
-              <label class="encuesta-campo">
-                <span data-i18n="encuesta.residence">¿En dónde resides actualmente?</span>
-                <input type="text" id="visitante-residencia" name="residencia" required autocomplete="address-level1" data-i18n-placeholder="encuesta.residence.ph" placeholder="Ej. Puebla, México">
-              </label>
-              <label class="encuesta-campo">
-                <span data-i18n="encuesta.write">¿De dónde nos escribes?</span>
-                <input type="text" id="visitante-escribe" name="escribe" required autocomplete="country-name" data-i18n-placeholder="encuesta.write.ph" placeholder="Ej. Bruselas, Bélgica">
-              </label>
-              <label class="encuesta-campo encuesta-campo-historia">
-                <span data-i18n="encuesta.story">Tu voz en una frase (opcional)</span>
-                <textarea
-                  id="visitante-historia"
-                  name="historia"
-                  rows="2"
-                  maxlength="120"
-                  data-i18n-placeholder="encuesta.story.ph"
-                  placeholder="Ej. Estudio en Puebla pero escribo desde Europa por un intercambio temporal."
-                  aria-describedby="historia-ayuda historia-contador"
-                ></textarea>
-                <span class="encuesta-historia-pie">
-                  <span id="historia-ayuda" class="encuesta-historia-ayuda" data-i18n="encuesta.story.help">Aparece en el mapa al hacer clic en tu ubicación (máx. 120 caracteres).</span>
-                  <span id="historia-contador" class="encuesta-historia-contador" aria-live="polite">0 / 120</span>
-                </span>
-              </label>
-              <button type="submit" class="btn btn-correo encuesta-btn-enviar" data-i18n="encuesta.submit">Compartir en el mapa</button>
-            </form>
-
-            <aside class="encuesta-resumen" aria-live="polite">
-              <p class="encuesta-contador-visitas">
-                <span class="encuesta-contador-etiqueta" data-i18n="encuesta.visits">Visitas al sitio</span>
-                <strong id="contador-visitas">—</strong>
-              </p>
-              <p class="texto encuesta-mensaje" id="encuesta-mensaje" data-i18n="encuesta.empty">
-                Aún no hay respuestas en este navegador. Sé la primera persona en dejar tu huella.
-              </p>
-              <ul class="encuesta-lista" id="encuesta-lista" hidden></ul>
-            </aside>
-          </div>
-
-          <div class="encuesta-mapa-zona">
-            <div class="mapa-visitantes-bloque">
-              <div class="mapa-visitantes-cabecera">
-                <h3 class="subtitulo mapa-visitantes-titulo" data-i18n="encuesta.map.title">Mapa de voces y ubicaciones</h3>
-                <div class="mapa-visitantes-herramientas">
-                  <button type="button" class="btn btn-mapa-filtro" id="mapa-filtro-voces" aria-pressed="false" data-i18n="encuesta.map.filter">
-                    Mostrar solo voces con historia
-                  </button>
-                  <p class="texto mapa-api-estado" id="mapa-api-estado" hidden></p>
-                </div>
-              </div>
-
-              <div class="mapa-leyenda-grid">
-                <span class="mapa-leyenda-item mapa-leyenda-origen" data-i18n="encuesta.map.origin">Origen</span>
-                <span class="mapa-leyenda-item mapa-leyenda-residencia" data-i18n="encuesta.map.residence">Residencia actual</span>
-                <span class="mapa-leyenda-item mapa-leyenda-escribe" data-i18n="encuesta.map.write">Desde donde nos escribes</span>
-                <span class="mapa-leyenda-item mapa-leyenda-voz" data-i18n="encuesta.map.voice">Voz con historia</span>
-              </div>
-
-              <div class="mapa-visitantes-grid">
-                <div class="mapa-visitantes-col">
-                  <div id="mapa-visitantes" class="mapa-visitantes" role="application" aria-label="Mapa interactivo de origen y residencia de visitantes" tabindex="0"></div>
-                  <p class="texto mapa-visitantes-nota" id="mapa-visitantes-nota" data-i18n="encuesta.map.loading">
-                    Cargando ubicaciones compartidas…
-                  </p>
-                </div>
-                <aside class="mapa-voces-panel" id="mapa-voces-panel" aria-labelledby="mapa-voces-titulo" hidden>
-                  <h4 id="mapa-voces-titulo" class="mapa-voces-titulo" data-i18n="encuesta.voices.title">Voces en el mapa</h4>
-                  <p class="texto mapa-voces-intro" data-i18n="encuesta.voices.intro">Haz clic en una frase para centrar el mapa en esa ubicación y leer la historia completa.</p>
-                  <ul class="mapa-voces-lista" id="mapa-voces-lista"></ul>
-                </aside>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <div id="recorrido-overlay" class="recorrido-overlay" hidden>
       <div
         id="recorrido-dialogo"
@@ -696,12 +675,12 @@
           <h2 class="subtitulo" data-i18n="footer.sitemap">En esta página</h2>
           <ul class="footer-enlaces">
             <li><a href="#hub" data-i18n="nav.hub">Qué es el Hub</a></li>
+            <li><a href="#participacion" data-i18n="nav.participacion">Participación</a></li>
             <li><a href="#recursos-educativos" data-i18n="footer.sublink.resources">Recursos educativos</a></li>
             <li><a href="#historias" data-i18n="nav.historias">Historias</a></li>
             <li><a href="#ciudadania-global" data-i18n="nav.oim">OIM</a></li>
-            <li><a href="#investigacion" data-i18n="nav.investigacion">Investigación</a></li>
-            <li><a href="#participacion" data-i18n="nav.participacion">Participación</a></li>
-            <li><a href="#encuesta-visitantes" data-i18n="footer.sublink.map">Tu voz en el mapa</a></li>
+            <li><a href="#investigacion" data-i18n="nav.investigacion">Avances del Hub</a></li>
+            <li><a href="#encuesta-visitantes" data-i18n="footer.sublink.map">Mapa de voces</a></li>
             <li><a href="kit-divulgacion.html" data-i18n="footer.sublink.kit">Kit de divulgación</a></li>
           </ul>
         </nav>

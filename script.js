@@ -29,55 +29,22 @@ function formatearNumero(numero) {
 }
 
 function initContadoresAnimados() {
-  const panel = document.querySelector("#panel-migracion-contadores");
-  if (!panel) return;
+  const compacto = document.querySelector("#migrantes-eua-compacto");
+  if (!compacto) return;
 
-  const contadores = panel.querySelectorAll("[data-contador]");
-  if (contadores.length === 0) return;
+  const destino = Number(compacto.dataset.contador);
+  if (!destino || Number.isNaN(destino)) return;
 
-  const totalMigracion = datosMigracion.reduce((suma, fila) => suma + fila.valor, 0);
-  const totalEl = document.querySelector("#migrantes-total");
+  let animado = false;
 
-  const formatearPorcentaje = (valor) => {
-    const pct = (valor / totalMigracion) * 100;
-    return new Intl.NumberFormat(localeActual(), {
-      minimumFractionDigits: pct >= 10 ? 1 : 2,
-      maximumFractionDigits: pct >= 10 ? 1 : 2
-    }).format(pct);
-  };
-
-  const actualizarMetricasCiudadania = () => {
-    if (totalEl) totalEl.textContent = formatearNumero(totalMigracion);
-
-    contadores.forEach((elemento) => {
-      const valor = Number(elemento.dataset.contador);
-      const region = elemento.dataset.region;
-      if (!region || !valor) return;
-
-      const pct = formatearPorcentaje(valor);
-      const pctEl = panel.querySelector(`[data-pct-region="${region}"]`);
-      const barraEl = panel.querySelector(`[data-barra-region="${region}"]`);
-
-      if (pctEl) pctEl.textContent = t("ciudadania.region.pct", { pct });
-      if (barraEl) barraEl.style.width = `${(valor / totalMigracion) * 100}%`;
-    });
-  };
-
-  actualizarMetricasCiudadania();
-
-  let animados = false;
-
-  const animarContador = (elemento) => {
-    const destino = Number(elemento.dataset.contador);
-    if (!destino || Number.isNaN(destino)) return;
-
-    const duracion = 1800;
+  const animar = () => {
+    const duracion = 1400;
     const inicio = performance.now();
 
     const tick = (ahora) => {
       const progreso = Math.min(1, (ahora - inicio) / duracion);
       const ease = 1 - Math.pow(1 - progreso, 3);
-      elemento.textContent = formatearNumero(Math.round(destino * ease));
+      compacto.textContent = formatearNumero(Math.round(destino * ease));
       if (progreso < 1) requestAnimationFrame(tick);
     };
 
@@ -86,15 +53,14 @@ function initContadoresAnimados() {
 
   const observador = new IntersectionObserver(
     (entradas) => {
-      if (!entradas.some((entrada) => entrada.isIntersecting) || animados) return;
-      animados = true;
-      contadores.forEach(animarContador);
+      if (!entradas.some((entrada) => entrada.isIntersecting) || animado) return;
+      animado = true;
+      animar();
     },
     { threshold: 0.35 }
   );
 
-  observador.observe(panel);
-  window.actualizarMetricasCiudadania = actualizarMetricasCiudadania;
+  observador.observe(compacto.closest(".seccion-datos") || compacto);
 }
 
 function escribirLectura() {
@@ -167,15 +133,15 @@ function initNavegacion() {
 
 const capitulosHistoria = [
   { id: "hub", key: "cap.hub" },
+  { id: "participacion", key: "cap.participacion" },
   { id: "historias", key: "cap.historias" },
   { id: "ciudadania-global", key: "cap.oim" },
-  { id: "investigacion", key: "cap.investigacion" },
-  { id: "participacion", key: "cap.participacion" }
+  { id: "investigacion", key: "cap.investigacion" }
 ];
 
 const mapaSeccionCapitulo = {
   hub: "hub",
-  "recursos-educativos": "hub",
+  "recursos-educativos": "participacion",
   "ciudadania-global": "ciudadania-global",
   historias: "historias",
   storytelling: "historias",
@@ -187,7 +153,7 @@ const mapaSeccionCapitulo = {
 
 const mapaNav = {
   hub: "hub",
-  "recursos-educativos": "hub",
+  "recursos-educativos": "participacion",
   "ciudadania-global": "oim",
   historias: "historias",
   storytelling: "historias",
@@ -249,10 +215,10 @@ const NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
 
 const pasosRecorrido = [
   { id: "hub", tituloKey: "tour.hub.title", textoKey: "tour.hub.text" },
+  { id: "participacion", tituloKey: "tour.participacion.title", textoKey: "tour.participacion.text" },
   { id: "historias", tituloKey: "tour.historias.title", textoKey: "tour.historias.text" },
   { id: "ciudadania-global", tituloKey: "tour.oim.title", textoKey: "tour.oim.text" },
   { id: "investigacion", tituloKey: "tour.investigacion.title", textoKey: "tour.investigacion.text" },
-  { id: "participacion", tituloKey: "tour.participacion.title", textoKey: "tour.participacion.text" },
   {
     id: "encuesta-visitantes",
     tituloKey: "tour.encuesta.title",
@@ -1258,14 +1224,15 @@ function initIndiceFlotante() {
 }
 
 function initContacto() {
-  const boton = document.querySelector("#btn-contacto");
-  if (!boton) return;
-
-  boton.addEventListener("click", () => {
+  const abrirCorreo = () => {
     const usuario = "arbarradas";
     const dominio = ["tec", "mx"].join(".");
     const correo = `${usuario}@${dominio}`;
     window.location.href = `mailto:${correo}?subject=${encodeURIComponent("Contacto — Hub de Migración e Impacto Social")}`;
+  };
+
+  document.querySelectorAll("#btn-contacto, #btn-participacion-contacto").forEach((boton) => {
+    boton.addEventListener("click", abrirCorreo);
   });
 }
 
