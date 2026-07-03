@@ -2147,6 +2147,202 @@ main iframe:not(.graphcommons-iframe) {
   border-top: 1px solid var(--linea);
 }
 
+.participacion-recursos {
+  margin-top: var(--espacio-xl);
+  padding-top: var(--espacio-lg);
+  border-top: 1px solid var(--linea);
+}
+
+.muro-comunidad {
+  margin-top: var(--espacio-xl);
+  padding: var(--espacio-lg);
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: 0 8px 24px var(--sombra);
+}
+
+.muro-metricas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--espacio-sm);
+  margin-bottom: var(--espacio-md);
+}
+
+.muro-metrica {
+  padding: var(--espacio-sm);
+  border-radius: 10px;
+  background: var(--seccion-panel);
+  text-align: center;
+}
+
+.muro-metrica-num {
+  display: block;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--acento);
+  line-height: 1.2;
+}
+
+.muro-metrica-etiq {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: var(--fz-pequena);
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.muro-frase-destacada {
+  margin: 0 0 var(--espacio-md);
+  padding: var(--espacio-md);
+  border-left: 4px solid var(--acento);
+  background: var(--seccion-panel);
+  border-radius: 0 10px 10px 0;
+}
+
+.muro-frase-texto {
+  margin: 0 0 var(--espacio-sm);
+  font-family: var(--fuente-serif);
+  font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+  line-height: 1.45;
+}
+
+.muro-frase-pie {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  align-items: center;
+  font-size: var(--fz-pequena);
+  color: var(--muted);
+}
+
+.muro-frase-etiqueta {
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--acento) 18%, transparent);
+  color: var(--acento);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.muro-frase-vacia {
+  margin: 0 0 var(--espacio-md);
+  color: var(--muted);
+}
+
+.muro-voces-lista {
+  display: grid;
+  gap: var(--espacio-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.muro-voz-item {
+  width: 100%;
+  padding: var(--espacio-sm) var(--espacio-md);
+  border: 1px solid var(--linea);
+  border-radius: 10px;
+  background: var(--seccion-panel);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.muro-voz-item:hover {
+  border-color: var(--acento);
+  box-shadow: 0 4px 14px var(--sombra);
+}
+
+.muro-voz-frase {
+  display: block;
+  font-family: var(--fuente-serif);
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 0.25rem;
+}
+
+.muro-voz-meta {
+  display: block;
+  font-size: var(--fz-pequena);
+  color: var(--muted);
+}
+
+.calendario-hub {
+  margin-top: var(--espacio-xl);
+  padding-top: var(--espacio-lg);
+  border-top: 1px solid var(--linea);
+}
+
+.calendario-lista {
+  display: grid;
+  gap: var(--espacio-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.calendario-item {
+  padding: var(--espacio-md);
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: 0 6px 18px var(--sombra);
+}
+
+.calendario-item-cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.calendario-fecha {
+  font-weight: 600;
+  color: var(--acento);
+}
+
+.calendario-tipo {
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--seccion-panel);
+  font-size: var(--fz-pequena);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.calendario-evento-titulo {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+
+.calendario-lugar {
+  margin: 0 0 0.35rem;
+  font-size: var(--fz-pequena);
+  color: var(--muted);
+}
+
+.calendario-desc {
+  margin: 0 0 var(--espacio-sm);
+}
+
+.calendario-enlace {
+  margin-top: 0.35rem;
+}
+
+.calendario-vacio {
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .muro-metricas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .participacion-invitacion {
   margin-top: var(--espacio-lg);
   padding: var(--espacio-md);

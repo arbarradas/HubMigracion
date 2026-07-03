@@ -806,6 +806,210 @@ async function renderizarMapaVisitantes() {
   setTimeout(() => mapaVisitantesInstancia.invalidateSize(), 120);
 }
 
+function coordsEnMexico(lat, lng) {
+  return lat >= 14 && lat <= 33 && lng >= -118 && lng <= -86;
+}
+
+function textoMencionaMexico(texto) {
+  return /méxico|mexico/i.test(String(texto || ""));
+}
+
+function textoMencionaPuebla(texto) {
+  return /puebla/i.test(String(texto || ""));
+}
+
+function entradaVinculoPuebla(entrada) {
+  return (
+    textoMencionaPuebla(entrada.residencia) ||
+    textoMencionaPuebla(entrada.origen) ||
+    textoMencionaPuebla(entrada.escribe) ||
+    (typeof entrada.residenciaLat === "number" &&
+      typeof entrada.residenciaLng === "number" &&
+      entrada.residenciaLat >= 18.5 &&
+      entrada.residenciaLat <= 19.8 &&
+      entrada.residenciaLng >= -98.8 &&
+      entrada.residenciaLng <= -97.8)
+  );
+}
+
+function entradaEscribeDesdeExterior(entrada) {
+  if (typeof entrada.escribeLat === "number" && typeof entrada.escribeLng === "number") {
+    return !coordsEnMexico(entrada.escribeLat, entrada.escribeLng);
+  }
+  return Boolean(entrada.escribe) && !textoMencionaMexico(entrada.escribe);
+}
+
+function ordenarPorFechaReciente(a, b) {
+  const fa = Date.parse(a.fecha || "") || 0;
+  const fb = Date.parse(b.fecha || "") || 0;
+  return fb - fa;
+}
+
+function elegirFraseDestacada(voces) {
+  if (voces.length === 0) return null;
+  const ordenadas = voces.slice().sort(ordenarPorFechaReciente);
+  const semana = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
+  return ordenadas[semana % ordenadas.length];
+}
+
+function renderizarMuroComunidad(respuestas) {
+  const totalEl = document.querySelector("#muro-total-voces");
+  const historiasEl = document.querySelector("#muro-total-historias");
+  const pueblaEl = document.querySelector("#muro-zona-puebla");
+  const exteriorEl = document.querySelector("#muro-zona-exterior");
+  const bloqueDestacada = document.querySelector("#muro-frase-destacada");
+  const textoDestacada = document.querySelector("#muro-frase-texto");
+  const autorDestacada = document.querySelector("#muro-frase-autor");
+  const vaciaDestacada = document.querySelector("#muro-frase-vacia");
+  const lista = document.querySelector("#muro-voces-lista");
+
+  if (!totalEl || !lista) return;
+
+  const total = respuestas.length;
+  const conHistoria = respuestas.filter(entradaTieneHistoria);
+  const vinculoPuebla = respuestas.filter(entradaVinculoPuebla).length;
+  const desdeExterior = respuestas.filter(entradaEscribeDesdeExterior).length;
+
+  totalEl.textContent = formatearNumero(total);
+  if (historiasEl) historiasEl.textContent = formatearNumero(conHistoria.length);
+  if (pueblaEl) pueblaEl.textContent = formatearNumero(vinculoPuebla);
+  if (exteriorEl) exteriorEl.textContent = formatearNumero(desdeExterior);
+
+  const destacada = elegirFraseDestacada(conHistoria);
+  if (destacada && bloqueDestacada && textoDestacada && autorDestacada) {
+    const historia = sanitizarHistoria(destacada.historia);
+    const escribe = destacada.escribe || destacada.residencia;
+    bloqueDestacada.hidden = false;
+    if (vaciaDestacada) vaciaDestacada.hidden = true;
+    textoDestacada.textContent = `«${historia}»`;
+    autorDestacada.textContent = `${destacada.origen} → ${escribe}`;
+  } else {
+    if (bloqueDestacada) bloqueDestacada.hidden = true;
+    if (vaciaDestacada) vaciaDestacada.hidden = false;
+  }
+
+  const recientes = conHistoria.sort(ordenarPorFechaReciente).slice(0, 6);
+  if (recientes.length === 0) {
+    lista.innerHTML = `<li class="muro-voz-vacia texto">${escapeHtml(t("muro.list.empty"))}</li>`;
+    return;
+  }
+
+  lista.innerHTML = recientes
+    .map((entrada) => {
+      const historia = sanitizarHistoria(entrada.historia);
+      const escribe = entrada.escribe || entrada.residencia;
+      const lat = entrada.escribeLat ?? entrada.residenciaLat ?? entrada.origenLat ?? "";
+      const lng = entrada.escribeLng ?? entrada.residenciaLng ?? entrada.origenLng ?? "";
+      return `<li>
+        <button type="button" class="muro-voz-item" data-voz-lat="${lat}" data-voz-lng="${lng}">
+          <span class="muro-voz-frase">«${escapeHtml(historia)}»</span>
+          <span class="muro-voz-meta">${escapeHtml(entrada.origen)} · ${escapeHtml(escribe)}</span>
+        </button>
+      </li>`;
+    })
+    .join("");
+
+  lista.querySelectorAll(".muro-voz-item").forEach((boton) => {
+    boton.addEventListener("click", () => {
+      const lat = Number(boton.dataset.vozLat);
+      const lng = Number(boton.dataset.vozLng);
+      irASeccion("encuesta-visitantes");
+      if (mapaVisitantesInstancia && Number.isFinite(lat) && Number.isFinite(lng)) {
+        setTimeout(() => {
+          mapaVisitantesInstancia.setView([lat, lng], 6, { animate: !prefiereMovimientoReducido() });
+        }, 400);
+      }
+    });
+  });
+}
+
+const TIPOS_CALENDARIO = ["taller", "estreno", "conferencia", "convocatoria", "otro"];
+
+function etiquetaTipoCalendario(tipo) {
+  const clave = TIPOS_CALENDARIO.includes(tipo) ? `calendario.type.${tipo}` : "calendario.type.otro";
+  return t(clave);
+}
+
+function formatearFechaCalendario(fechaIso, hora) {
+  if (!fechaIso) return "";
+  const fecha = new Date(`${fechaIso}T${hora || "12:00"}:00`);
+  if (Number.isNaN(fecha.getTime())) return fechaIso;
+  return new Intl.DateTimeFormat(localeActual(), {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    ...(hora ? { hour: "2-digit", minute: "2-digit" } : {})
+  }).format(fecha);
+}
+
+async function cargarEventosCalendario() {
+  try {
+    const respuesta = await fetch("datos-calendario.json", { cache: "no-store" });
+    if (!respuesta.ok) return [];
+    const datos = await respuesta.json();
+    return Array.isArray(datos) ? datos : [];
+  } catch {
+    return [];
+  }
+}
+
+function renderizarCalendarioHub(eventos) {
+  const lista = document.querySelector("#calendario-lista");
+  const vacio = document.querySelector("#calendario-vacio");
+  if (!lista) return;
+
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  const proximos = eventos
+    .filter((evento) => {
+      if (!evento.fecha) return false;
+      const fecha = new Date(`${evento.fecha}T12:00:00`);
+      return !Number.isNaN(fecha.getTime()) && fecha >= hoy;
+    })
+    .sort((a, b) => a.fecha.localeCompare(b.fecha));
+
+  if (proximos.length === 0) {
+    lista.innerHTML = "";
+    if (vacio) vacio.hidden = false;
+    return;
+  }
+
+  if (vacio) vacio.hidden = true;
+
+  lista.innerHTML = proximos
+    .map((evento) => {
+      const tipo = etiquetaTipoCalendario(evento.tipo || "otro");
+      const fechaTxt = formatearFechaCalendario(evento.fecha, evento.hora);
+      const lugar = evento.lugar ? `<p class="calendario-lugar">${escapeHtml(evento.lugar)}</p>` : "";
+      const desc = evento.descripcion
+        ? `<p class="calendario-desc texto">${escapeHtml(evento.descripcion)}</p>`
+        : "";
+      const enlace = evento.enlace
+        ? `<a class="btn btn-proyectos calendario-enlace" href="${escapeHtml(evento.enlace)}"${String(evento.enlace).startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : ""}>${escapeHtml(t("calendario.cta"))}</a>`
+        : "";
+
+      return `<li class="calendario-item calendario-item--${escapeHtml(evento.tipo || "otro")}">
+        <div class="calendario-item-cabecera">
+          <time class="calendario-fecha" datetime="${escapeHtml(evento.fecha)}">${escapeHtml(fechaTxt)}</time>
+          <span class="calendario-tipo">${escapeHtml(tipo)}</span>
+        </div>
+        <h4 class="calendario-evento-titulo">${escapeHtml(evento.titulo || "")}</h4>
+        ${lugar}
+        ${desc}
+        ${enlace}
+      </li>`;
+    })
+    .join("");
+}
+
+async function initCalendarioHub() {
+  const eventos = await cargarEventosCalendario();
+  renderizarCalendarioHub(eventos);
+  window.addEventListener("hub:idioma", () => renderizarCalendarioHub(eventos));
+}
+
 function pintarEncuestaLocal() {
   const lista = document.querySelector("#encuesta-lista");
   const mensaje = document.querySelector("#encuesta-mensaje");
@@ -915,6 +1119,7 @@ function initMapaVisitantes() {
   if (typeof L === "undefined") {
     const nota = document.querySelector("#mapa-visitantes-nota");
     if (nota) nota.textContent = "El mapa no pudo cargarse. Revisa tu conexión e intenta de nuevo.";
+    obtenerTodasLasRespuestas().then(renderizarMuroComunidad);
     return;
   }
 
@@ -1760,6 +1965,7 @@ function initCambioIdioma() {
     actualizarIframeOim();
     window.actualizarProgresoHistoria?.();
     window.actualizarMetricasCiudadania?.();
+    renderizarMapaVisitantes();
   });
 }
 
@@ -1778,6 +1984,7 @@ initContadorVisitas();
 initEncuestaVisitantes();
 initCampoHistoria();
 initMapaVisitantes();
+initCalendarioHub();
 initMapaVocesControles();
 initRecorridoGuiado();
 initPaleta();

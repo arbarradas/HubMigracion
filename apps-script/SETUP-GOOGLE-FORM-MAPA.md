@@ -15,26 +15,39 @@ Conecta el formulario **«¿De dónde nos visitas?»** del sitio con un **Google
 
 ---
 
-## Paso 2 — Preguntas (en este orden)
+## Paso 2 — Rubros del Form (en este orden exacto)
 
-| # | Pregunta | Tipo | Obligatoria |
-|---|----------|------|-------------|
-| 1 | **¿Cuál es tu lugar de origen?** | Respuesta corta | Sí |
-| 2 | **¿En dónde resides actualmente?** | Respuesta corta | Sí |
-| 3 | **¿De dónde nos escribes?** | Respuesta corta | Sí |
-| 4 | **Tu voz en una frase** | Párrafo | No |
-| 5 | **Fecha (ISO)** | Respuesta corta | No |
-| 6 | **Origen lat** | Respuesta corta | No |
-| 7 | **Origen lng** | Respuesta corta | No |
-| 8 | **Residencia lat** | Respuesta corta | No |
-| 9 | **Residencia lng** | Respuesta corta | No |
-| 10 | **Escribe lat** | Respuesta corta | No |
-| 11 | **Escribe lng** | Respuesta corta | No |
-| 12 | **ID registro** | Respuesta corta | No |
+Crea **exactamente** estas preguntas. El número importa: debe coincidir con la hoja y con `config-mapa.js`.
 
-> Las preguntas 5–12 las rellena el sitio automáticamente (coordenadas y metadatos). La **marca de tiempo** la agrega Google en la hoja.
+| Rubro | Pregunta en el Form | Tipo | Obligatoria | Quién la llena |
+|------|---------------------|------|-------------|----------------|
+| **1** | ¿Cuál es tu lugar de origen? | Respuesta corta | Sí | Visitante / sitio |
+| **2** | ¿En dónde resides actualmente? | Respuesta corta | Sí | Visitante / sitio |
+| **3** | ¿De dónde nos escribes? | Respuesta corta | Sí | Visitante / sitio |
+| **4** | Tu voz en una frase | Párrafo | No | Visitante / sitio (máx. 120 caracteres) |
+| **5** | Fecha (ISO) | Respuesta corta | No | **Sitio** (automático) |
+| **6** | Origen lat | Respuesta corta | No | **Sitio** (geocodificación) |
+| **7** | Origen lng | Respuesta corta | No | **Sitio** |
+| **8** | Residencia lat | Respuesta corta | No | **Sitio** |
+| **9** | Residencia lng | Respuesta corta | No | **Sitio** |
+| **10** | Escribe lat | Respuesta corta | No | **Sitio** |
+| **11** | Escribe lng | Respuesta corta | No | **Sitio** |
+| **12** | ID registro | Respuesta corta | No | **Sitio** (identificador único) |
+
+> **Columna A** de la hoja: marca de tiempo (la agrega Google automáticamente).  
+> Los rubros **5–12** no los ve el usuario en el sitio: el código los envía al guardar para que el mapa tenga coordenadas.
+
+### Consejos por rubro
+
+1. **Origen** — Ciudad y país, ej. «Xalapa, Veracruz, México».
+2. **Residencia** — Dónde vives ahora, ej. «Puebla, México».
+3. **Escribe** — Desde dónde nos lees hoy, ej. «Bruselas, Bélgica» (puede diferir de residencia).
+4. **Frase** — Opcional; alimenta el **muro de la comunidad** y el mapa de voces.
+5–12. Dejar en el Form como respuesta corta; el sitio los rellena al enviar.
 
 ---
+
+## Paso 2 (detalle) — Crear el Google Form
 
 ## Paso 3 — Vincular a Google Sheets
 
