@@ -1,0 +1,32 @@
+[
+  {
+    "fecha": "2026-04-10",
+    "hora": "10:00",
+    "titulo": "Taller de narrativas migratorias — OIM y GMMA",
+    "tipo": "taller",
+    "lugar": "Hub de Migración, campus Puebla",
+    "enlace": "",
+    "abierto": true,
+    "descripcion": "Sesión abierta para estudiantes y docentes: ética, datos y divulgación sobre movilidad humana."
+  },
+  {
+    "fecha": "2026-05-15",
+    "hora": "18:00",
+    "titulo": "Proyección y conversatorio — «Cuando vuelvas»",
+    "tipo": "estreno",
+    "lugar": "Centro Cultural San Roque, Puebla",
+    "enlace": "https://docsmx.org",
+    "abierto": true,
+    "descripcion": "Exhibición del cortometraje del Hub y diálogo con el equipo de producción."
+  },
+  {
+    "fecha": "2026-09-20",
+    "hora": "",
+    "titulo": "Convocatoria abierta — proyectos de impacto social",
+    "tipo": "convocatoria",
+    "lugar": "En línea / campus Puebla",
+    "enlace": "#contacto",
+    "abierto": true,
+    "descripcion": "Invitación a proponer colaboraciones académicas vinculadas al ODS 10 y la movilidad humana."
+  }
+]

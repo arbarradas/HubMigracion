@@ -147,6 +147,8 @@ const mapaSeccionCapitulo = {
   investigacion: "investigacion",
   participacion: "participacion",
   "encuesta-visitantes": "participacion",
+  "muro-comunidad": "participacion",
+  "calendario-hub": "participacion",
   contacto: "participacion"
 };
 
@@ -159,6 +161,8 @@ const mapaNav = {
   investigacion: "investigacion",
   participacion: "participacion",
   "encuesta-visitantes": "participacion",
+  "muro-comunidad": "participacion",
+  "calendario-hub": "participacion",
   contacto: "participacion"
 };
 
@@ -791,6 +795,7 @@ async function renderizarMapaVisitantes() {
 
   actualizarNotaMapa(respuestasTodas.length, conCoordenadas);
   actualizarPanelVoces(respuestasTodas);
+  renderizarMuroComunidad(respuestasTodas);
 
   if (bounds.length > 0) {
     mapaVisitantesInstancia.fitBounds(bounds, { padding: [36, 36], maxZoom: 10 });

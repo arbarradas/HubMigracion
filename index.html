@@ -296,6 +296,56 @@
         </div>
         </div>
 
+        <aside id="muro-comunidad" class="muro-comunidad seccion-ancla" aria-labelledby="muro-titulo">
+          <h3 id="muro-titulo" class="participacion-subtitulo" data-i18n="muro.title">Muro de la comunidad migrante</h3>
+          <p class="texto puente-narrativo" data-i18n="muro.puente">
+            Voces del mapa que conectan al campus Puebla con México y el exterior. Cada frase es una huella de quienes participan en esta red.
+          </p>
+
+          <div class="muro-metricas" id="muro-metricas" aria-live="polite">
+            <article class="muro-metrica">
+              <strong id="muro-total-voces" class="muro-metrica-num">—</strong>
+              <span class="muro-metrica-etiq" data-i18n="muro.stat.total">Voces en el mapa</span>
+            </article>
+            <article class="muro-metrica">
+              <strong id="muro-total-historias" class="muro-metrica-num">—</strong>
+              <span class="muro-metrica-etiq" data-i18n="muro.stat.stories">Con frase compartida</span>
+            </article>
+            <article class="muro-metrica muro-metrica--puebla">
+              <strong id="muro-zona-puebla" class="muro-metrica-num">—</strong>
+              <span class="muro-metrica-etiq" data-i18n="muro.stat.puebla">Vínculo con Puebla</span>
+            </article>
+            <article class="muro-metrica muro-metrica--exterior">
+              <strong id="muro-zona-exterior" class="muro-metrica-num">—</strong>
+              <span class="muro-metrica-etiq" data-i18n="muro.stat.abroad">Escriben desde el exterior</span>
+            </article>
+          </div>
+
+          <blockquote id="muro-frase-destacada" class="muro-frase-destacada" hidden>
+            <p class="muro-frase-texto" id="muro-frase-texto"></p>
+            <footer class="muro-frase-pie">
+              <cite id="muro-frase-autor"></cite>
+              <span class="muro-frase-etiqueta" data-i18n="muro.featured">Frase destacada de la semana</span>
+            </footer>
+          </blockquote>
+          <p id="muro-frase-vacia" class="texto muro-frase-vacia" data-i18n="muro.featured.empty">
+            Aún no hay frases en el muro. Comparte la tuya en el formulario de arriba.
+          </p>
+
+          <ul id="muro-voces-lista" class="muro-voces-lista" aria-label="Voces recientes de la comunidad"></ul>
+        </aside>
+
+        <section id="calendario-hub" class="calendario-hub seccion-ancla" aria-labelledby="calendario-titulo">
+          <h3 id="calendario-titulo" class="participacion-subtitulo" data-i18n="calendario.title">Agenda abierta del Hub</h3>
+          <p class="texto puente-narrativo" data-i18n="calendario.puente">
+            Talleres, estrenos, conferencias y convocatorias para la comunidad Tec y quienes siguen el Hub desde México y el exterior.
+          </p>
+          <ol id="calendario-lista" class="calendario-lista"></ol>
+          <p id="calendario-vacio" class="texto calendario-vacio" hidden data-i18n="calendario.empty">
+            No hay eventos próximos publicados. Vuelve pronto o escríbenos para sumarte a una actividad.
+          </p>
+        </section>
+
         <div id="recursos-educativos" class="participacion-recursos seccion-ancla" aria-labelledby="titulo-recursos-educativos">
           <h3 id="titulo-recursos-educativos" class="participacion-subtitulo" data-i18n="aprendizajes.title">Recursos educativos</h3>
           <p class="texto puente-narrativo" data-i18n="aprendizajes.puente">
@@ -670,6 +720,8 @@
             <li><a href="#investigacion" data-i18n="nav.investigacion">Proyectos del Hub</a></li>
             <li><a href="#storytelling" data-i18n="footer.sublink.projects">Obras y narrativas</a></li>
             <li><a href="#encuesta-visitantes" data-i18n="footer.sublink.map">Mapa de voces</a></li>
+            <li><a href="#muro-comunidad" data-i18n="footer.sublink.wall">Muro de la comunidad</a></li>
+            <li><a href="#calendario-hub" data-i18n="footer.sublink.calendar">Agenda del Hub</a></li>
             <li><a href="kit-divulgacion.html" data-i18n="footer.sublink.kit">Kit de divulgación</a></li>
           </ul>
         </nav>
